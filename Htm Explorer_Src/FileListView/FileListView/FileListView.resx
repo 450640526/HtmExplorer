@@ -137,10 +137,9 @@
   </data>
   <data name="pictureBox1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABNSURBVDhPY6Aa6Orq+gDE/0nAH6BaIQAkCGUSBTDUU9UA
-        IPshiI8FP4QqGXUBEID4UCYEYAgQAHgNANkE4mPBdHIBMWBwGkBGbmRgAACBQM/lyVBR4gAAAABJRU5E
-        rkJggg==
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        wwAADsMBx2+oZAAAAE1JREFUOE9joBro6ur6AMT/ScAfoFohACQIZRIFMNRT1QAg+yGIjwU/hCoZdQEQ
+        gPhQJgRgCBAAeA0A2QTiY8F0cgExYHAaQEZuZGAAAIFAz+XJUFHiAAAAAElFTkSuQmCC
 </value>
   </data>
   <metadata name="fileSystemWatcher1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">

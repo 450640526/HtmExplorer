@@ -49,6 +49,14 @@
     <Compile Include="FontComboBox.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="CustomForm\CustomForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CustomForm\CustomForm.designer.cs">
+      <DependentUpon>CustomForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CustomForm\MyNativeWindow.cs" />
+    <Compile Include="CustomForm\WinApi.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -74,6 +82,9 @@
   <ItemGroup>
     <EmbeddedResource Include="ColorPickerForm.resx">
       <DependentUpon>ColorPickerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomForm\CustomForm.resx">
+      <DependentUpon>CustomForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

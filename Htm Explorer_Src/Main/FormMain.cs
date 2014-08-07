@@ -16,6 +16,10 @@ namespace htmExplorer
         {     
             InitializeComponent();
             Thread.ExecuteRunOnceThread();
+
+            //Rectangle r = ClientRectangle;
+            //r.Inflate(-1, -1);
+            //mainPanel.Bounds = r;
         }
 
         #region FormMain_Load FormMain_FormClosed
@@ -113,20 +117,20 @@ namespace htmExplorer
         private void directoryTreeView1_SelectedIndexChanged(object sender, EventArgs e)
         {
             string path = directoryTreeView1.selpath;
-            Text =  directoryTreeView1.selNodeText;
-
+         
+            customForm1.Caption =  directoryTreeView1.selNodeText;
             if (Directory.Exists(path))
             {
                 btnAttch1.CheckState = CheckState.Unchecked;
 
                 fileListView1.LoadFilesFromDirecotry(path);
-                
+                customForm1.Icon = directoryTreeView1.selImage;
                 win32AddressBar1.ICON1.Image = directoryTreeView1.selImage;
                 win32AddressBar1.DisposeBtns();
                 win32AddressBar1.CreateButtons(path);
                 win32AddressBar1.AddHistory(path);
             }
-            toolStripStatusLabel1.Text = string.Format("{0} 个文件   ", fileListView1.listView1.Items.Count); 
+            toolStripStatusLabel1.Text = string.Format("     {0} 个文件     ", fileListView1.listView1.Items.Count); 
         }
 
         #endregion
@@ -163,7 +167,7 @@ namespace htmExplorer
             if (SelCount > 1)
                 s = string.Format("已选择 {0} 个 ", SelCount);
 
-            toolStripStatusLabel1.Text = string.Format("{0} 个文件   {1}", fileListView1.listView1.Items.Count, s);
+            toolStripStatusLabel1.Text = string.Format("     {0} 个文件   {1}", fileListView1.listView1.Items.Count, s);
 
             UpdateToolTips();
         }
@@ -522,13 +526,7 @@ namespace htmExplorer
 
         }
 
-        private void 文件按钮_Click(object sender, EventArgs e)
-        {
-            Point pt = PointToScreen(btnFile1.Location);
-            pt.Y += btnFile1.Height;
-            文件MenuStrip1.Show(pt);
-        }
-
+ 
         #endregion
 
         #region winTextBox1

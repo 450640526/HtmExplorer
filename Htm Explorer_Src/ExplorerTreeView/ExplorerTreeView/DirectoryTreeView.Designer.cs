@@ -490,14 +490,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.White;
+            this.BackColor = System.Drawing.Color.Transparent;
             this.Controls.Add(this.winTextBox1);
             this.Controls.Add(this.plusPictureBox2);
             this.Controls.Add(this.minusPictureBox2);
             this.Controls.Add(this.minusPictureBox1);
             this.Controls.Add(this.plusPictureBox1);
             this.Controls.Add(this.treeView1);
-            this.DoubleBuffered = true;
             this.Name = "DirectoryTreeView";
             this.Size = new System.Drawing.Size(307, 325);
             this.Load += new System.EventHandler(this.DirectoryTreeView_Load);

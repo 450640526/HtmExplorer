@@ -385,7 +385,7 @@
             this.listView1.Name = "listView1";
             this.listView1.OwnerDraw = true;
             this.listView1.ShowItemToolTips = true;
-            this.listView1.Size = new System.Drawing.Size(687, 260);
+            this.listView1.Size = new System.Drawing.Size(578, 268);
             this.listView1.SmallImageList = this.imageList1;
             this.listView1.Sorting = System.Windows.Forms.SortOrder.Ascending;
             this.listView1.TabIndex = 2;
@@ -432,13 +432,12 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.BackColor = System.Drawing.Color.White;
+            this.BackColor = System.Drawing.Color.Transparent;
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.listView1);
-            this.DoubleBuffered = true;
             this.Name = "FileListView";
-            this.Size = new System.Drawing.Size(687, 260);
+            this.Size = new System.Drawing.Size(578, 268);
             this.Load += new System.EventHandler(this.FileListView_Load);
             this.ContextMenuStrip1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();

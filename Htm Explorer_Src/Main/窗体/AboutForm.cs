@@ -61,7 +61,7 @@ namespace htmExplorer
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            System.Diagnostics.Process.Start("http://www.cnblogs.com/xe2011/p/3859801.html");
+            System.Diagnostics.Process.Start("https://github.com/450640526/HtmExplorer");
 
         }
     }
