@@ -1,0 +1,1584 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Data;
+using System.Text;
+using mshtml;
+using System.Runtime.InteropServices;
+using System.IO;
+
+namespace System.Windows.Forms
+{
+    public partial class HtmlEdit : UserControl
+    {
+        public HtmlEdit()
+        {
+            InitializeComponent();
+
+            #region 初始化WEBBROWSER 必须放这里
+            webBrowser1.DocumentText = "";
+            webBrowser1.Document.OpenNew(true);
+            webBrowser1.Document.Write(HTML_TEXT);
+            webBrowser1.Document.Focus();
+            webBrowser1.Document.ExecCommand("EditMode", false, true);
+            doc = (IHTMLDocument2)webBrowser1.Document.DomDocument;
+
+            __EditMode = true;
+            IsModified = false;
+            
+            #endregion
+
+            fontComboBox1.Initialize();
+            hr = new HtmReplaceDialog(webBrowser1);
+        }
+
+        #region ToolStripDropDown
+        ToolStripDropDown dropdown1 = new ToolStripDropDown();
+        ToolStripControlHost host1;
+        ColorPickerForm foreColorForm1 = new ColorPickerForm();
+        ColorPickerForm foreColorForm2 = new ColorPickerForm();
+
+        ToolStripDropDown dropdown2 = new ToolStripDropDown();
+        ToolStripControlHost host2;
+        #endregion
+
+        private void HtmlEdit_Load(object sender, EventArgs e)
+        {
+          
+            #region ToolStripDropDown
+            host1 = new ToolStripControlHost(foreColorForm1);
+            dropdown1.Margin = Padding.Empty;
+            dropdown1.Padding = Padding.Empty;
+            host1.Margin = Padding.Empty;
+            host1.Padding = Padding.Empty;
+            dropdown1.Items.Add(host1);
+            dropdown1.Closed += new ToolStripDropDownClosedEventHandler(dropdown1_Closed);
+
+
+            foreColorForm2.Color = Color.White;
+            host2 = new ToolStripControlHost(foreColorForm2);
+            dropdown2.Margin = Padding.Empty;
+            dropdown2.Padding = Padding.Empty;
+            host2.Margin = Padding.Empty;
+            host2.Padding = Padding.Empty;
+            dropdown2.Items.Add(host2);
+            dropdown2.Closed += new ToolStripDropDownClosedEventHandler(dropdown2_Closed);
+
+            #endregion
+            navigated = true; 
+        }
+ 
+
+
+
+
+
+        #region 字体名称 和大小
+        private void fontComboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (fontComboBox1.Focused && SelectionLength > 0)
+            {
+                webBrowser1.Document.ExecCommand("FontName", false, fontComboBox1.Text);
+                SetFocus();
+            }
+        }
+
+        private void fontSizeComboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (fontSizeComboBox1.Focused && SelectionLength > 0)
+            {
+                int fontSize = 0;
+                switch (fontSizeComboBox1.SelectedIndex)
+                {
+                    case 0:
+                        fontSize = 1;
+                        break;
+                    case 1:
+                        fontSize = 2;
+                        break;
+                    case 2:
+                        fontSize = 3;
+                        break;
+                    case 3:
+                        fontSize = 4;
+                        break;
+                    case 4:
+                        fontSize = 5;
+                        break;
+                    case 5:
+                        fontSize = 6;
+                        break;
+                    case 6:
+                        fontSize = 7;
+                        break;
+                }
+
+                webBrowser1.Document.ExecCommand("FontSize", false, fontSize);
+                SetFocus();
+            }
+        }
+        #endregion
+
+        private void 工具栏按钮们_Click(object sender, EventArgs e)
+        {
+            switch (((ToolStripButton)sender).Name)
+            {
+                case "saveFile1":
+                    SaveDocument();
+                    break;
+
+                case "btnBold1":
+                    ToggleBold();
+                    break;
+
+                case "btnItalic1":
+                    ToggleItalic();
+                    break;
+
+                case "btnUnderLine1":
+                    ToggleUnderLine();
+                    break;
+
+                case "btnStrike1":
+                    ToggleStrikeThrough();
+                    break;
+
+                case "subScript1":
+                    ToggleSubScript();
+                    break;
+
+                case "btnSuperScript1":
+                    ToggleSuperScript();
+                    break;
+
+                case "btnOrderlist1":
+                    ToggleInsertOrderedList();
+                    break;
+
+                case "btnUnOrderlist1":
+                    ToggleInsertUnorderedList();
+                    break;
+
+                case "btnAlignLeft1":
+                    ToggleJustifyLeft();
+                    break;
+
+                case "btnAlignCenter1":
+                    ToggleJustifyCenter();
+                    break;
+
+                case "btnAlignRight1":
+                    ToggleJustifyRight();
+                    break;
+
+                case "horizontal1":
+                    InsertHorizontalRule();
+                    break;
+                case "btnBookMark1":
+                    //htmlEditView1.ShowBookMarkDialog();
+                    break;
+
+                case "btnHyperLink1":
+                    webBrowser1.Document.ExecCommand("CreateLink", true, null);
+                    break;
+
+                case "btnInsertPicture1":
+                    ShowImageDialog();
+                    break;
+
+                case "btnTable1":
+                    ShowTableDialog();
+                    break;
+
+                case "removeFormat1":
+                    RemoveFormat();
+                    break;
+
+                case "viewsource1":
+                    ShowViewSourceDialog();
+                    break;
+            }
+        }
+
+        private void 右键菜单们_Click(object sender, EventArgs e)
+        {
+            switch (((ToolStripMenuItem)sender).Name)
+            {
+                case "Undo1":
+                    UnDo();
+                    break;
+                case "Redo1":
+                    ReDo();
+                    break;
+                case "Cut1":
+                    Cut();
+                    break;
+                case "Copy1":
+                    Copy();
+                    break;
+                case "Paste1":
+                    Paste();
+                    break;
+                case "PasteAsText1":
+                    PasteText();
+                    break;
+                case "Delete1":
+                    Delete();
+                    break;
+                case "SelectAll1":
+                    SelectAll();
+                    break;
+                case "viewsource2":
+
+                    HtmlSourceForm htm = new HtmlSourceForm();
+
+                    //IHTMLDocument2 doc = (IHTMLDocument2)webBrowser1.Document.DomDocument;
+                    IHTMLTxtRange range1 = (IHTMLTxtRange)doc.selection.createRange();
+                    htm.richTextBox1.Text = range1.htmlText;
+                    htm.ShowDialog();
+                    break;
+            }
+        }
+
+        private void webBrowser1_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            if (EditMode == true)
+            {
+                if(e.KeyData == Keys.F5)
+                {
+                    PasteHtml(DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss"));
+                    e.IsInputKey = true;
+                }
+                if (e.KeyData == Keys.Tab)
+                {
+                    if (SelectionLength == 0)
+                        PasteHtml("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+                    else
+                        Indent();
+                    e.IsInputKey = true;
+                }
+
+                if (e.KeyData == (Keys.Shift | Keys.Tab))
+                {
+                    Outdent();
+                    e.IsInputKey = true;
+                }
+
+
+                if (e.KeyData == (Keys.Control | Keys.H))
+                {
+                    e.IsInputKey = true;
+                    ShowReplaceDialog();
+
+                          e.IsInputKey = true;
+                    
+                }
+
+                if (e.KeyData == (Keys.Control | Keys.Z))
+                {
+                    UnDo();
+                    e.IsInputKey = true;
+                }
+
+                if (e.KeyData == (Keys.Control | Keys.Y))
+                {
+                    ReDo();
+                    e.IsInputKey = true;
+                }
+
+                if (e.KeyData == (Keys.Control | Keys.X))
+                {
+                    Cut();
+                    e.IsInputKey = true;
+                }
+
+                if (e.KeyData == (Keys.Control | Keys.V))
+                {
+                    Paste();
+                    e.IsInputKey = true;
+                }
+
+                if (e.KeyData == (Keys.Control | Keys.Shift | Keys.V))
+                {
+                    PasteText();
+                    e.IsInputKey = true;
+                }
+
+                if (e.KeyData == (Keys.Control | Keys.B))
+                {
+                    ToggleBold();
+                    e.IsInputKey = true;
+                }
+
+                if (e.KeyData == (Keys.Control | Keys.I))
+                {
+                    ToggleItalic();
+                    e.IsInputKey = true;
+                }
+
+                if (e.KeyData == (Keys.Control | Keys.U))
+                {
+                    ToggleUnderLine();
+                    e.IsInputKey = true;
+                }
+
+                if (e.KeyData == (Keys.Control | Keys.L))
+                {
+                    InsertHorizontalRule();
+                    e.IsInputKey = true;
+                }
+
+                if (e.KeyData == (Keys.Delete))
+                {
+                    Delete();
+                    e.IsInputKey = true;
+                }
+            }
+
+            if (e.KeyData == (Keys.Control | Keys.C))
+            {
+                Copy();
+                e.IsInputKey = true;
+            }
+
+            if (e.KeyData == (Keys.Control | Keys.S))
+            {
+                SaveDocument();
+                e.IsInputKey = true;
+            }
+
+            if (e.KeyData == (Keys.Control | Keys.Shift | Keys.S))
+            {
+                ShowSaveAsDialog();
+                e.IsInputKey = true;
+            }
+
+            if (e.KeyData == (Keys.Control | Keys.P))
+            {
+                webBrowser1.ShowPrintDialog();
+                e.IsInputKey = true;
+            }
+
+            if (e.KeyData == (Keys.Control | Keys.A))
+            {
+                SelectAll();
+                e.IsInputKey = true;
+            }
+
+            if (e.KeyData == (Keys.Control | Keys.F))
+            {
+                //FIND
+                ShowFindDialog();
+                e.IsInputKey = true;
+            }
+
+            if(e.KeyData == (Keys.Control|Keys.D0))
+            {
+                Zoom(100);
+                e.IsInputKey = true;
+            }
+
+
+
+            //if (e.KeyData == (Keys.Control | Keys.Enter))
+            //{
+            //    //这会引起数字序列出现问题
+            //    //按回车键就自动换行
+            //    //http://www.tek-tips.com/viewthread.cfm?qid=1685840
+            //    PasteHtml("<br />");
+            //    //SetFocus();
+            //    //MessageBox.Show("Enter");
+            //    e.IsInputKey = true;
+            //}
+        }
+
+
+        #region Command...
+
+        #region Document...
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public HtmlDocument Document
+        {
+            get
+            {
+               
+                return webBrowser1.Document;
+            }
+        }
+
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public string DocumentText
+        {
+            get
+            {
+                return webBrowser1.DocumentText;
+            }
+            set
+            {
+                webBrowser1.DocumentText = value;
+            }
+        }
+
+        /// <summary>
+        /// Webbrowser文档内容是否被修改
+        /// 用来检测文档内容是否改变
+        /// </summary>
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool IsModified
+        {
+            get
+            {
+                return __modified;
+            }
+            set
+            {
+                __modified = value;
+                if (value == false)
+                    lastModifyText = webBrowser1.DocumentText;
+            }
+        }
+
+        //DefaultValue(true),
+        private bool __EditMode = false;
+        //[Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool EditMode
+        {
+            get
+            {
+                try
+                {
+                    return doc.designMode == "On";
+                }
+                catch
+                {
+                    return false;
+                }
+            }
+            set
+            {
+                try
+                {
+                    if (value)
+                        webBrowser1.Document.ExecCommand("EditMode", false, null);
+                    else
+                        webBrowser1.Document.ExecCommand("BrowseMode", false, null);
+                    __EditMode = value;
+                }
+                catch { }
+            }
+        }
+
+        public void SetFocus()
+        {
+           
+            //doc.parentWindow.focus();
+            webBrowser1.Document.Focus();
+
+            //webBrowser1.Document.Body.Focus();
+        }
+
+        public void CheckFileSave()
+        {
+            if (IsModified)
+            {
+                string s = string.Format("文件: {0}   已修改是否保存?", Path.GetFileNameWithoutExtension(htmlfilename));
+                DialogResult d = MessageBox.Show(s, "编辑器", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (d == DialogResult.Yes)
+                {
+                    SaveDocument();
+                }
+            }
+        }
+        //程序关闭时清空临时文件夹
+
+        public void NewDocument()
+        {
+            CheckFileSave();
+
+            webBrowser1.Document.OpenNew(true);
+            webBrowser1.Document.Write(HTML_TEXT);
+            webBrowser1.Document.Focus();
+            webBrowser1.Document.ExecCommand("EditMode", false, true);
+            IsModified = false;
+            htmlfilename = "";
+        }
+
+
+        public void OpenDocument(string filename)
+        {
+            CheckFileSave();            
+            webBrowser1.Document.OpenNew(true);
+            string html = FileCore.HtmlImgSrcFullPath(filename);
+            webBrowser1.Document.Write(html);
+
+            htmlfilename = filename;
+            IsModified = false;
+        }
+
+
+        public void LoadString(string text)
+        {
+            webBrowser1.Document.OpenNew(true);
+            webBrowser1.Document.Write(text);
+            IsModified = false;
+        }
+ 
+        public void SaveDocument()
+        {
+            if (File.Exists(htmlfilename))
+            {
+                SaveDocument(htmlfilename);
+                IsModified = false;
+            }
+            else
+                ShowSaveAsDialog();
+        }
+
+
+        public void SaveDocument(string filename)
+        {
+            //转换      <img src="D:\Administrator\Desktop\MySpace\我的文件夹\这台电脑\和\新建 HTMLClass 文档_files\1.png">
+            //成这样    <img src="新建 HTMLClass 文档_files\1.png">
+            string s = "src=\"" + Path.GetDirectoryName(filename) + "\\" + Path.GetFileNameWithoutExtension(filename) + "_files";
+            string s1 = "src=\"" + Path.GetFileNameWithoutExtension(filename) + "_files";
+
+            string html = webBrowser1.DocumentText;
+            html = html.Replace(s, s1);
+            html = html.Replace("_files\\", "_files/");
+
+            File.WriteAllText(filename, html, Encoding.UTF8);
+
+            htmlfilename = filename;
+            IsModified = false;
+        }
+
+        /// <summary>
+        /// 我希望另存文件后 htmlfilename任然是原来的文件名
+        /// </summary>
+        /// <param name="filename"></param>
+        private void SaveAsDocument(string filename)
+        {
+            if (htmlfilename == "")
+                htmlfilename = filename;
+            //转换      <img src="D:\Administrator\Desktop\MySpace\我的文件夹\这台电脑\和\新建 HTML文档_files\1.png">
+            //成这样    <img src="新建 HTMLClass 文档_files\1.png">
+            string s = "src=\"" + Path.GetDirectoryName(htmlfilename) + "\\" + Path.GetFileNameWithoutExtension(htmlfilename) + "_files";
+            string s1 = "src=\"" + Path.GetFileNameWithoutExtension(filename) + "_files";
+
+            string html = webBrowser1.DocumentText;
+            html = html.Replace(s, s1);
+            html = html.Replace("_files\\", "_files/");
+
+            html = FileCore.HtmlImgSrcSimplePath(htmlfilename, filename);
+            //修改网页标题
+            //<title>filetitle</title>
+            string title = HtmlClass.GetHTMLTitleTag(html);
+            if (title != "")
+                html = html.Replace(title, Path.GetFileNameWithoutExtension(filename));
+            //MessageBox.Show(html);
+
+            //另写一个文件
+            File.WriteAllText(filename, html, Encoding.UTF8);
+
+            string source_files = DirectoryCore.Get_FilesDirectory(htmlfilename);
+            string dest_files = DirectoryCore.Get_FilesDirectory(filename);
+
+            if (Directory.Exists(dest_files))
+                Directory.Delete(dest_files,true);
+
+            //移动_files
+            if (Directory.Exists(source_files) && !DirectoryCore.IsEmptyDirectory(source_files))
+                DirectoryCore.CopyDir(source_files, dest_files);
+
+        }
+
+        //得到HTM中的所有链接如果是文件的话 只复制已存在的文件
+        public void ShowSaveAsDialog()
+        {
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+            saveFileDialog1.Filter = "网页，全部|*.htm;*.html|文本文件|*.txt";
+            saveFileDialog1.FileName = Path.GetFileNameWithoutExtension(htmlfilename);
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                switch (saveFileDialog1.FilterIndex)
+                {
+                    case 1:
+                        //*.htm;*.HTML     
+                        //if (htmlfilename == "")
+                        //    return;
+
+                        //未命名_files/1312312.jpg
+                        SaveAsDocument(saveFileDialog1.FileName);
+                        break;
+
+                    case 2:
+                        //*.txt
+
+                        SaveToTextFile(saveFileDialog1.FileName);
+                        break;
+                }
+                this.SetFocus();
+            }
+        }
+
+
+        public void SaveToTextFile(string fileName)
+        {
+            ////产生 80个 - 字符
+            //string s = "";
+            //for (int i = 0; i < 80; i++)
+            //{
+            //    s += "-";
+            //}
+
+            //WebBrowser web = new WebBrowser();
+            //web.Navigate("about:blank");
+            //web.DocumentText = webBrowser1.DocumentText;
+
+            ////水平线转  <HR> 替换成80个 - 
+            //string s1 = web.DocumentText;
+            //s1 = s1.Replace("<hr>", s);
+            //s1 = s1.Replace("<HR>", s);
+            //web.DocumentText = s1;
+            ////web.Document.Body.InnerText NULL
+
+            File.WriteAllText(fileName, webBrowser1.Document.Body.InnerText, Encoding.UTF8);
+        }
+        #endregion
+
+        #region 常用命令
+        
+       
+        public void UnDo()
+        {
+            webBrowser1.Document.ExecCommand("Undo", false, null);
+        }
+
+        public void ReDo()
+        {
+            webBrowser1.Document.ExecCommand("Redo", false, null);
+        }
+
+        public void Cut()
+        {
+            webBrowser1.Document.ExecCommand("Cut", false, null);
+        }
+
+        public void Copy()
+        {
+            webBrowser1.Document.ExecCommand("Copy", false, null);
+        }
+
+        //对于剪切版上的图片都是粘贴PNG 
+        //完美是GIF也能粘贴
+        public void Paste()
+        {
+            //粘贴RTF内容
+            //if(Clipboard.ContainsText(TextDataFormat.Rtf))
+            //{
+            //    string rtf = Clipboard.GetText(TextDataFormat.Rtf);
+            //    string html = RtfToHtmlConverter.ConvertRtfToHtml(rtf);
+
+            //    PasteHtml(html);
+
+            //}
+            //相同的图片 链接 用同一个 ????
+            //else 
+
+            if (Clipboard.ContainsImage())
+            {
+                string html = "<img src=\"" + "data:image/png;base64," + HtmlClass.ImageToBase64(Clipboard.GetImage(), Drawing.Imaging.ImageFormat.Png) + "\">";
+                PasteHtml(html);
+            }
+            else
+                webBrowser1.Document.ExecCommand("Paste", false, null);
+        }
+
+        public void Delete()
+        {
+            webBrowser1.Document.ExecCommand("Delete", false, null);
+        }
+
+        public void SelectAll()
+        {
+            webBrowser1.Document.ExecCommand("SelectAll", false, null);
+        }
+
+        public void Unselect()
+        {
+            webBrowser1.Document.ExecCommand("Unselect", false, null);
+        }
+
+        public void PasteText()
+        {
+            ////粘贴纯文本
+            IHTMLTxtRange range = doc.selection.createRange() as IHTMLTxtRange;
+            string text = Clipboard.GetText();//TextDataFormat.UnicodeText
+            PasteHtml(HtmlClass.TextToHtml(text));
+        }
+
+        public void PasteRtf()
+        {
+
+
+        }
+
+        public void PasteHtml(string html)
+        {
+            IHTMLTxtRange range = (IHTMLTxtRange)doc.selection.createRange();
+            range.pasteHTML(html);
+            range.collapse(false);
+
+            range.select();
+        }
+
+        public void RemoveFormat()
+        {
+            //
+
+            string s = "清除字体样式选项\r\n1  选 \"是(Y)\" 清除当前选中的字符的样式\r\n2  选 \"否(N)\" 清除整个文档的字符样式\r\n3  选 \"取消\" 退出";
+            DialogResult d = MessageBox.Show(s, "", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+            if (d == DialogResult.Yes)
+            {
+                Cut();
+                PasteText();
+                //webBrowser1.Document.ExecCommand("RemoveFormat", false, null);
+            }
+
+            if (d == DialogResult.No)
+            {
+                //webBrowser1.Document.ExecCommand("RemoveFormat", false, null);
+                SelectAll();
+                Cut();
+                PasteText();
+            }
+        }
+
+        public void ToggleBold()
+        {
+            webBrowser1.Document.ExecCommand("Bold", false, null);
+        }
+
+        public void ToggleUnderLine()
+        {
+            webBrowser1.Document.ExecCommand("UnderLine", false, null);
+        }
+
+        public void ToggleItalic()
+        {
+            webBrowser1.Document.ExecCommand("Italic", false, null);
+        }
+
+        public void ToggleStrikeThrough()
+        {
+            webBrowser1.Document.ExecCommand("StrikeThrough", false, null);
+        }
+        public void ToggleSubScript()
+        {
+            webBrowser1.Document.ExecCommand("SubScript", false, null);
+        }
+        public void ToggleSuperScript()
+        {
+            webBrowser1.Document.ExecCommand("SuperScript", false, null);
+        }
+        public void ToggleJustifyLeft()
+        {
+            webBrowser1.Document.ExecCommand("JustifyLeft", false, null);
+        }
+        public void ToggleJustifyCenter()
+        {
+            webBrowser1.Document.ExecCommand("JustifyCenter", false, null);
+        }
+        public void ToggleJustifyRight()
+        {
+            webBrowser1.Document.ExecCommand("JustifyRight", false, null);
+        }
+        public void ToggleJustifyFull()
+        {
+            webBrowser1.Document.ExecCommand("JustifyFull", false, null);
+        }
+        public void ToggleInsertOrderedList()
+        {
+            webBrowser1.Document.ExecCommand("InsertOrderedList", false, null);
+        }
+
+        public void ToggleInsertUnorderedList()
+        {
+            webBrowser1.Document.ExecCommand("InsertUnorderedList", false, null);
+        }
+
+        public void Outdent()
+        {
+            webBrowser1.Document.ExecCommand("Outdent", false, null);
+        }
+
+        //RIGHT
+        public void Indent()
+        {
+            webBrowser1.Document.ExecCommand("Indent", false, null);
+        }
+        #endregion
+
+        #region 颜色 背景色 字体 大小
+
+
+        /// <summary>
+        /// overwrite ForeColor会导致删除这个控件出现严重的错误
+        /// </summary>
+         
+
+        [EditorBrowsable(EditorBrowsableState.Never), Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public new Color ForeColor
+        {
+            get
+            {
+                return webBrowser1.Document.ForeColor;
+            }
+            set
+            {
+                webBrowser1.Document.ForeColor = value;
+            }
+        }
+
+        [EditorBrowsable(EditorBrowsableState.Never), Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public new Color BackColor
+        {
+            get
+            {
+                return webBrowser1.Document.BackColor;
+            }
+            set
+            {
+                if (webBrowser1.Document!=null)
+                webBrowser1.Document.BackColor = value;
+            }
+        }
+
+        [EditorBrowsable(EditorBrowsableState.Never), Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public string BackImageFileName
+        {
+            get
+            {
+                return "";// webBrowser1.Document.Body.Style;
+            }
+            set
+            {
+                webBrowser1.Document.Body.Style = string.Format("background-image: url({0});", value);
+            }
+        }
+
+        [EditorBrowsable(EditorBrowsableState.Never), Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public Color SelectionForeColor
+        {
+            get
+            {
+                try
+                {
+                    return HtmlClass.StringToColor(doc.queryCommandValue("ForeColor").ToString());
+                }
+                catch
+                {
+                    //多选的时候出现
+                    return Color.Black;
+                }
+            }
+            set
+            {
+                string colorStr = String.Format("#{0:X2}{1:X2}{2:X2}", value.R, value.G, value.B);
+                webBrowser1.Document.ExecCommand("ForeColor", false, colorStr);
+            }
+        }
+
+        [EditorBrowsable(EditorBrowsableState.Never), Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public Color SelectionBackColor
+        {
+            get
+            {
+                try
+                {
+                    return HtmlClass.StringToColor(doc.queryCommandValue("BackColor").ToString());
+                }
+                catch
+                {
+                    return Color.White;
+                }
+            }
+            set
+            {
+                string colorStr = String.Format("#{0:X2}{1:X2}{2:X2}", value.R, value.G, value.B);
+                webBrowser1.Document.ExecCommand("BackColor", false, colorStr);
+            }
+        }
+        #endregion
+
+
+        public void InsertImage(string imagefilename)
+        {
+            webBrowser1.Document.ExecCommand("InsertImage", false, imagefilename);
+        }
+
+        public void ShowImageDialog1()
+        {
+            //"D:\Administrator\Desktop\未命名_files"
+
+            if (htmlfilename == "")
+                return;
+            string __filesDir = DirectoryCore.Get_FilesDirectory(htmlfilename);
+
+
+            if (Directory.Exists(__filesDir))
+                Directory.CreateDirectory(__filesDir);
+
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            openFileDialog1.Filter = "图片文件|*.jpg;*.bmp;*gif;*.png|所有文件|*.*";
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+
+                string imgfilename1 = openFileDialog1.FileName;
+                string imgfilename2 = __filesDir + "\\" + DateTime.Now.ToString("yyyyMMddhhmmss") + Path.GetExtension(imgfilename1);
+
+                File.Copy(imgfilename1, imgfilename2, true);
+
+                //未命名_files/1312312.jpg
+                // webBrowser1.DocumentText 对相对的路径不认
+                //imgfilename = Path.GetFileName(Path.GetDirectoryName(imgfilename)) + "/" + Path.GetFileName(imgfilename);
+
+                //D:\Administrator\Desktop\未命名_files\1.jpg
+                imgfilename2 = __filesDir + "\\" + Path.GetFileName(imgfilename2);
+
+                InsertImage(imgfilename2);
+                this.SetFocus();
+            }
+        }
+
+
+        public string ConvertImgUrlScriptToBase64String(string imagefilename)
+        {
+            Image img = Image.FromFile(imagefilename);
+            //string fileExt=
+            string imgType = "image/png";
+            System.Drawing.Imaging.ImageFormat format = Drawing.Imaging.ImageFormat.Png;
+
+            if (img.RawFormat.Equals(Drawing.Imaging.ImageFormat.Jpeg))
+            {
+                imgType = "image/jpeg";
+                format = Drawing.Imaging.ImageFormat.Jpeg;
+            }
+
+            if (img.RawFormat.Equals(Drawing.Imaging.ImageFormat.Png))
+            {
+                imgType = "image/png";
+                format = Drawing.Imaging.ImageFormat.Png;
+            }
+
+            if (img.RawFormat.Equals(Drawing.Imaging.ImageFormat.Bmp))
+            {
+                imgType = "image/bmp";
+                format = Drawing.Imaging.ImageFormat.Bmp;
+            }
+
+            if (img.RawFormat.Equals(Drawing.Imaging.ImageFormat.Gif))
+            {
+                imgType = "image/gif";
+                format = Drawing.Imaging.ImageFormat.Gif;
+            }
+
+
+  
+            return  "<img src=\"" + "data:" + imgType + ";base64,"
+                                         + HtmlClass.ImageToBase64(img, format) + "\">";
+        }
+
+
+
+        public void ShowImageDialog()
+        {
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            openFileDialog1.Filter = "图片文件|*.jpg;*.bmp;*gif;*.png|所有文件|*.*";
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                Image img = Image.FromFile(openFileDialog1.FileName);
+                
+                string imgtype = "image/png";
+                System.Drawing.Imaging.ImageFormat format = Drawing.Imaging.ImageFormat.Png;
+
+                if (img.RawFormat.Equals(Drawing.Imaging.ImageFormat.Jpeg))
+                {
+                     imgtype = "image/jpeg";
+                     format = Drawing.Imaging.ImageFormat.Jpeg;
+                }
+
+                if (img.RawFormat.Equals(Drawing.Imaging.ImageFormat.Png))
+                {
+                        imgtype = "image/png";
+                   format = Drawing.Imaging.ImageFormat.Png;
+
+                }
+
+                if (img.RawFormat.Equals(Drawing.Imaging.ImageFormat.Bmp))
+                {
+                     imgtype = "image/bmp";
+                       format = Drawing.Imaging.ImageFormat.Bmp;
+                }
+
+                if (img.RawFormat.Equals(Drawing.Imaging.ImageFormat.Gif))
+                {
+                     imgtype = "image/gif";
+                     format = Drawing.Imaging.ImageFormat.Gif;
+                }
+
+
+                string html = "<img src=\"" + "data:" + imgtype +";base64,"
+                                             + HtmlClass.ImageToBase64(img, format) + "\">";
+                           
+                PasteHtml(html);
+                this.SetFocus();
+            }
+        }
+
+        public void ShowBackImageDialog()
+        {
+            if (htmlfilename == "")
+                return;
+
+            //"D:\Administrator\Desktop\未命名_files"
+            string __filesDir = DirectoryCore.Get_FilesDirectory(htmlfilename);
+
+            if (!Directory.Exists(__filesDir))
+                Directory.CreateDirectory(__filesDir);
+
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            openFileDialog1.Filter = "图片文件|*.jpg;*.bmp;*gif;*.png|所有文件|*.*";
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+
+                string imgfilename1 = openFileDialog1.FileName;
+                string imgfilename2 = __filesDir + "\\" + DateTime.Now.ToString("yyyyMMddhhmmss") + Path.GetExtension(imgfilename1);
+
+                File.Copy(imgfilename1, imgfilename2, true);
+
+                //未命名_files/1312312.jpg
+
+                //D:\Administrator\Desktop\未命名_files\1.jpg
+                imgfilename2 = __filesDir + "\\" + Path.GetFileName(imgfilename2);
+
+                //<BODY STYLE="background-image: url(123.jpg);"> 
+                webBrowser1.Document.Body.Style = string.Format("background-image: url({0});", imgfilename2);
+                this.SetFocus();
+            }
+        }
+
+
+        //网格特效就用PasteHTML现
+        public void ShowTableDialog()
+        {
+            
+            HtmlTableDialog dlg = new HtmlTableDialog();
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                PasteHtml(HtmlClass.HtmlTableText((int)dlg.column1.Value, (int)dlg.row1.Value));
+                this.SetFocus();
+            }
+        }
+        public void ShowViewSourceDialog()
+        {
+            HtmlSourceForm htm = new HtmlSourceForm();
+            htm.richTextBox1.Text = webBrowser1.DocumentText;
+            htm.Text = Title + " 的源码";
+            if (htm.ShowDialog() == DialogResult.OK)
+            {
+                webBrowser1.Document.OpenNew(true);
+                webBrowser1.Document.Write(htm.richTextBox1.Text);
+            }
+        }
+        //public void CreateBookmark(string bookmark)
+        //{
+        //    webBrowser1.Document.ExecCommand("CreateBookmark", false, bookmark);
+        //}
+
+        public void UnBookmark()
+        {
+            webBrowser1.Document.ExecCommand("UnBookmark", false, null);
+        }
+
+        public void ShowBookMarkDialog()
+        {
+        }
+
+        public void CreateLink(string url)
+        {
+            webBrowser1.Document.ExecCommand("CreateLink", false, url);
+        }
+
+        public void Unlink()
+        {
+            webBrowser1.Document.ExecCommand("Unlink", false, null);
+        }
+
+        public void ShowHyperLinkDialog()
+        {
+            webBrowser1.Document.ExecCommand("CreateLink", true, null);
+        }
+
+        public void InsertHorizontalRule()
+        {
+            webBrowser1.Document.ExecCommand("InsertHorizontalRule", true, null);
+        }
+
+        private const int OLECMDID_FIND = 32;
+        private const int OLECMDID_ZOOM = 63;
+        private const int OLECMDEXECOPT_DONTPROMPTUSER = 2;
+        public void ShowFindDialog()
+        {
+            dynamic obj = webBrowser1.ActiveXInstance;
+            obj.ExecWB(OLECMDID_FIND, 1);
+        }
+
+        //数值为百分比如100 就是不缩放
+        private void Zoom(int zoom)
+        {
+            dynamic obj = webBrowser1.ActiveXInstance;
+            obj.ExecWB(OLECMDID_ZOOM, OLECMDEXECOPT_DONTPROMPTUSER, zoom, IntPtr.Zero);
+        }
+
+
+        private HtmReplaceDialog hr;//hr = new HtmReplaceDialog(webBrowser1);
+        public void ShowReplaceDialog()
+        {
+            if (hr.Visible == false)
+                hr.Visible = true;
+            else
+                hr.Visible = false;
+            this.SetFocus();
+        }
+              
+        #region Selection
+        public void SetSelection(int start, int length)
+        {
+            try
+            {
+                IHTMLDocument2 doc = (IHTMLDocument2)webBrowser1.Document.DomDocument;
+                IHTMLTxtRange range = (IHTMLTxtRange)doc.selection.createRange();
+                range.collapse(true);
+                range.moveStart("character", start);
+                range.moveEnd("character", length);
+                range.select();
+            }
+            catch
+            {
+
+            }
+        }
+
+        //[Browsable(false)]
+        //public Point CaretPosition
+        //{
+        //    get {  }
+        //    set { }
+        //}
+
+        public string Title
+        {
+            get { return webBrowser1.DocumentTitle; }
+            set
+            {
+                try
+                {
+                    webBrowser1.Document.Title = value;
+                }
+                catch { }
+            }
+        }
+
+        /// <summary>
+        /// 返回选中的字符串开始位置
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never), Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public int SelectionStart
+        {
+            get
+            {
+                try
+                {
+                    IHTMLDocument2 doc = (IHTMLDocument2)webBrowser1.Document.DomDocument;
+                    IHTMLTxtRange range = (IHTMLTxtRange)doc.selection.createRange();
+                    range.moveStart("character", -webBrowser1.Document.Body.InnerText.Length);
+                    return range.text.Length;
+
+                }
+                catch
+                {
+                    return 0;
+                }
+            }
+        }
+
+        /// <summary>
+        /// 返回和设置选中的文本字符串
+        /// </summary>
+        /// <returns></returns>
+        [EditorBrowsable(EditorBrowsableState.Never), Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public string SelectionText
+        {
+            get
+            {
+                try
+                {
+                    IHTMLDocument2 doc = (IHTMLDocument2)webBrowser1.Document.DomDocument;
+                    IHTMLTxtRange range = (IHTMLTxtRange)doc.selection.createRange();
+                    return range.text;
+                }
+                catch
+                {
+                    return "";
+                }
+            }
+            set
+            {
+                //粘贴字符串
+                PasteHtml(HtmlClass.TextToHtml(value));
+            }
+        }
+
+        /// <summary>
+        /// 返回选中的HTML字符串
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never), Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public string SelectionHtml
+        {
+            get
+            {
+                try
+                {
+                    IHTMLDocument2 doc = (IHTMLDocument2)webBrowser1.Document.DomDocument;
+                    IHTMLTxtRange range = (IHTMLTxtRange)doc.selection.createRange();
+                    return range.htmlText;
+                }
+                catch
+                {
+                    return "";
+                }
+            }
+            set
+            {
+                PasteHtml(value);
+            }
+        }
+        [EditorBrowsable(EditorBrowsableState.Never), Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public int SelectionLength
+        {
+            get
+            {
+                try
+                {
+                    IHTMLDocument2 doc = (IHTMLDocument2)webBrowser1.Document.DomDocument;
+                    IHTMLTxtRange range = (IHTMLTxtRange)doc.selection.createRange();
+                    return range.text.Length;
+                }
+                catch
+                {
+                    return 0;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Search the document from the current selection, and reset the 
+        /// the selection to the text found, if successful.
+        /// </summary>
+        /// <param name="text">the text for which to search</param>
+        /// <param name="forward">true for forward search, false for backward</param>
+        /// <param name="matchWholeWord1">true to match whole word, false otherwise</param>
+        /// <param name="matchCase1">true to match case, false otherwise</param>
+        /// <returns></returns>
+        public bool Search(string text, bool forward, bool matchWholeWord, bool matchCase)
+        {
+            bool success = false;
+            if (webBrowser1.Document != null)
+            {
+                IHTMLDocument2 doc = webBrowser1.Document.DomDocument as IHTMLDocument2;
+                IHTMLBodyElement body = doc.body as IHTMLBodyElement;
+                if (body != null)
+                {
+                    IHTMLTxtRange range;
+                    if (doc.selection != null)
+                    {
+                        range = doc.selection.createRange() as IHTMLTxtRange;
+                        IHTMLTxtRange dup = range.duplicate();
+                        dup.collapse(true);
+                        // if selection is degenerate, then search whole body
+                        if (range.isEqual(dup))
+                        {
+                            range = body.createTextRange();
+                        }
+                        else
+                        {
+                            if (forward)
+                                range.moveStart("character", 1);
+                            else
+                                range.moveEnd("character", -1);
+                        }
+                    }
+                    else
+                        range = body.createTextRange();
+                    int flags = 0;
+                    if (matchWholeWord) flags += 2;
+                    if (matchCase) flags += 4;
+                    success =
+                        range.findText(text, forward ? 999999 : -999999, flags);
+                    if (success)
+                    {
+                        range.select();
+                        range.scrollIntoView(!forward);
+                    }
+                }
+            }
+            return success;
+        }
+
+        #endregion
+
+        #endregion
+
+        #region 字体颜色和背景颜色
+
+        private void toolStripSplitButton1_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.DrawLine(new Pen(foreColorForm1.Color, 4), new PointF(3, 18), new PointF(18, 18));
+        }
+
+        private void toolStripSplitButton1_DropDownOpening(object sender, EventArgs e)
+        {
+            //System.Drawing.Point location = PointToScreen(toolStrip1.Location);
+            //location.X += 210;
+            //location.Y += toolStripSplitButton1.Height + 52;
+            //dropdown1.Show(location);
+            //MessageBox.Show(SelectionForeColor.ToArgb().ToString());
+            foreColorForm1.selColor = SelectionForeColor;// ;
+            Rectangle r = toolStripSplitButton1.Bounds;          
+            Point location = PointToScreen(new Point(toolStrip1.Location.X + r.X, toolStrip1.Location.Y + r.Y + r.Height));
+            dropdown1.Show(location);
+        }
+
+        private void SetForeColor()
+        {
+            toolStripSplitButton1.Invalidate();
+            Color c = foreColorForm1.Color;
+            string colorStr = String.Format("#{0:X2}{1:X2}{2:X2}", c.R, c.G, c.B);
+            webBrowser1.Document.ExecCommand("ForeColor", false, colorStr);
+            webBrowser1.Focus();
+        }
+
+        private void toolStripSplitButton1_ButtonClick(object sender, EventArgs e)
+        {
+            SetForeColor();
+        }
+      
+        private void dropdown1_Closed(object sender, EventArgs e)
+        {
+            if (foreColorForm1.ColorSelected && SelectionLength > 0)
+                SetForeColor();
+        }
+
+        private void toolStripSplitButton2_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.DrawLine(new Pen(foreColorForm2.Color, 4), new PointF(3, 18), new PointF(18, 18));
+        }
+
+        private void SetForeBackColor()
+        {
+            toolStripSplitButton2.Invalidate();
+            Color c = foreColorForm2.Color;
+            string colorStr = String.Format("#{0:X2}{1:X2}{2:X2}", c.R, c.G, c.B);
+            webBrowser1.Document.ExecCommand("BackColor", false, colorStr);
+            webBrowser1.Focus();
+        }
+
+        private void toolStripSplitButton2_DropDownOpening(object sender, EventArgs e)
+        {
+            //System.Drawing.Point location = PointToScreen(toolStrip1.Location);
+
+            //location.X += 242;
+            //location.Y += toolStripSplitButton1.Height + 52;
+            //dropdown2.Show(location);
+        
+            foreColorForm2.selColor = SelectionBackColor; 
+            Rectangle r = toolStripSplitButton2.Bounds;
+            Point location = PointToScreen(new Point(toolStrip1.Location.X + r.X, toolStrip1.Location.Y + r.Y + r.Height));
+            dropdown2.Show(location);
+        }
+        private void toolStripSplitButton2_ButtonClick(object sender, EventArgs e)
+        {
+            SetForeBackColor();
+        }
+        private void dropdown2_Closed(object sender, EventArgs e)
+        {
+            if (foreColorForm2.ColorSelected && SelectionLength > 0)
+                SetForeBackColor();
+        }
+
+
+        #endregion
+
+        private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
+        {
+            bool bEdit = EditMode == true;
+            Cut1.Enabled = doc.queryCommandEnabled("Cut") && bEdit;
+            Copy1.Enabled = doc.queryCommandEnabled("Copy");
+            Paste1.Enabled = (doc.queryCommandEnabled("Paste") || Clipboard.ContainsImage() || Clipboard.ContainsText(TextDataFormat.Rtf)) && bEdit;
+            PasteAsText1.Enabled = Clipboard.ContainsText() && bEdit;
+            Delete1.Enabled = EditMode == true;
+            SelectAll1.Enabled = doc.queryCommandEnabled("SelectAll");
+            Redo1.Enabled = doc.queryCommandEnabled("Redo") && bEdit;
+            Undo1.Enabled = doc.queryCommandEnabled("Undo") && bEdit;
+        }
+
+        //// Navigating the first time not open in new window
+        public bool navigated = false;  
+        private void webBrowser1_Navigating(object sender, WebBrowserNavigatingEventArgs e)
+        {
+            if (navigated == true)
+            {
+                // url is not bookmark format  open in new  Browser
+                string url = webBrowser1.StatusText.Replace("about:blank", "").Replace("file:///", "");
+                if (!e.Url.ToString().Contains("#"))
+                {
+                    e.Cancel = true;
+                    System.Diagnostics.Process.Start(url);
+                }
+            }
+        }
+        private void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        {
+        
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            #region Html文档是否改变了
+            //没 try catc 在CLASS  每运行一次 timer VS2013停止工作一次
+            try
+            {
+
+                #region firsttime 说明
+                /*
+            这是我的给的HTML
+            
+            html><head><title>未命名</title></head><body style=\"margin: 5px\"></body></html>
+            
+            而实际出来的HTML是这样
+            <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+            <HTML><HEAD><TITLE>未命名</TITLE>
+            <META content="text/html; charset=unicode" http-equiv=Content-Type>
+            <META name=GENERATOR content="MSHTML 11.00.9600.16384"></HEAD>
+            <BODY style="MARGIN: 5px"></BODY></HTML>
+            */
+                #endregion
+                if (firsttime == true)
+                {
+                    lastModifyText = webBrowser1.DocumentText;
+                    firsttime = false;
+                }
+                __modified = (webBrowser1.DocumentText != lastModifyText);
+                saveFile1.Enabled = __modified;
+            }
+            catch
+            {
+                //无法访问已释放的对象
+            }
+            #endregion
+
+            webBrowser1.IsWebBrowserContextMenuEnabled = !EditMode;
+            panel1.Visible = EditMode == true;
+            viewsource2.Enabled = SelectionHtml != "";
+
+            #region 工具栏按钮状态
+
+            try
+            {
+                btnBold1.Checked = doc.queryCommandState("Bold");
+                btnItalic1.Checked = doc.queryCommandState("Italic");
+                btnUnderLine1.Checked = doc.queryCommandState("Underline");
+                btnStrike1.Checked = doc.queryCommandState("StrikeThrough");
+
+                subScript1.Checked = doc.queryCommandState("SubScript");
+                btnSuperScript1.Checked = doc.queryCommandState("SuperScript");
+
+                btnOrderlist1.Checked = doc.queryCommandState("InsertOrderedList");
+                btnUnOrderlist1.Checked = doc.queryCommandState("InsertUnorderedList");
+
+                btnAlignLeft1.Checked = doc.queryCommandState("JustifyLeft");
+                btnAlignCenter1.Checked = doc.queryCommandState("JustifyCenter");
+                btnAlignRight1.Checked = doc.queryCommandState("JustifyRight");
+
+                PasteAsText1.Enabled = Clipboard.ContainsText();
+
+
+                //if (!foreColorPicker1.Focused)
+                //    foreColorPicker1.Color = htmlEditView1.SelectionForeColor;
+
+                //if (!backColorPicker1.Focused)
+                //    backColorPicker1.Color = htmlEditView1.SelectionBackColor;
+
+                if (!fontComboBox1.Focused)
+                    fontComboBox1.Text = (string)doc.queryCommandValue("FontName");
+
+                if (!fontSizeComboBox1.Focused)
+                {
+                    int index = 0;
+                    int fontsize = (int)doc.queryCommandValue("FontSize");
+                    switch (fontsize)
+                    {
+                        case 1:
+                            index = 0;
+                            break;
+                        case 2:
+                            index = 1;
+                            break;
+                        case 3:
+                            index = 2;
+                            break;
+                        case 4:
+                            index = 3;
+                            break;
+                        case 5:
+                            index = 4;
+                            break;
+                        case 6:
+                            index = 5;
+                            break;
+                        case 7:
+                            index = 6;
+                            break;
+                    }
+                    fontSizeComboBox1.SelectedIndex = index;
+                }
+            }
+            catch { }
+            #endregion
+        }
+    
+        private mshtml.IHTMLDocument2 doc;
+        public string HTML_TEXT = "<html><head><title>未命名</title></head><body style=\"margin: 5px\"></body></html>";
+
+        //当前这个网页的文件路径
+        public string htmlfilename = "";
+        private bool __modified = false;
+        private bool firsttime = true;
+        private string lastModifyText = "";
+
+
+
+        //窗体的标题
+        //public string title = "";
+        //public string tmpfolder = "";
+        //public string _files = "";
+
+    }
+}
