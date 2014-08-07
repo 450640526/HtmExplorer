@@ -596,7 +596,7 @@
             this.label1.Location = new System.Drawing.Point(1, 51);
             this.label1.Margin = new System.Windows.Forms.Padding(0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(342, 1);
+            this.label1.Size = new System.Drawing.Size(344, 1);
             this.label1.TabIndex = 39;
             this.label1.Text = "label1";
             // 
@@ -609,7 +609,7 @@
             this.panel1.Controls.Add(this.htmEdit1);
             this.panel1.Location = new System.Drawing.Point(1, 53);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(293, 300);
+            this.panel1.Size = new System.Drawing.Size(295, 300);
             this.panel1.TabIndex = 37;
             // 
             // htmEdit1
@@ -620,7 +620,7 @@
             this.htmEdit1.Location = new System.Drawing.Point(0, 0);
             this.htmEdit1.MinimumSize = new System.Drawing.Size(163, 64);
             this.htmEdit1.Name = "htmEdit1";
-            this.htmEdit1.Size = new System.Drawing.Size(293, 300);
+            this.htmEdit1.Size = new System.Drawing.Size(295, 300);
             this.htmEdit1.TabIndex = 0;
             this.htmEdit1.TabStop = false;
             this.htmEdit1.Title = "未命名";
@@ -632,13 +632,14 @@
             // 
             this.winTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.winTextBox1.BackColor = System.Drawing.Color.White;
             this.winTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.winTextBox1.Font = new System.Drawing.Font("Times New Roman", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.winTextBox1.ForeColor = System.Drawing.SystemColors.Highlight;
             this.winTextBox1.Location = new System.Drawing.Point(5, 32);
             this.winTextBox1.MaxLength = 250;
             this.winTextBox1.Name = "winTextBox1";
-            this.winTextBox1.Size = new System.Drawing.Size(289, 17);
+            this.winTextBox1.Size = new System.Drawing.Size(291, 17);
             this.winTextBox1.TabIndex = 35;
             this.winTextBox1.TabStop = false;
             this.winTextBox1.LostFocus += new System.EventHandler(this.重命名文件winTextBox1_LostFocus);
