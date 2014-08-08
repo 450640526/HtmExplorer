@@ -16,10 +16,7 @@ namespace htmExplorer
         {     
             InitializeComponent();
             Thread.ExecuteRunOnceThread();
-
-            //Rectangle r = ClientRectangle;
-            //r.Inflate(-1, -1);
-            //mainPanel.Bounds = r;
+            loadSkinINI();
         }
 
         #region FormMain_Load FormMain_FormClosed
@@ -77,6 +74,12 @@ namespace htmExplorer
             htmEdit1.CheckFileSave();
             SaveIniFiles();
             directoryTreeView1.SaveXml(treeViewXml);
+
+            if (notifyIcon1 != null)
+            {
+                notifyIcon1.Visible = false;
+                notifyIcon1.Dispose();
+            }
         }
 
         private void 定时清理内存_Tick(object sender, EventArgs e)
@@ -125,10 +128,10 @@ namespace htmExplorer
 
                 fileListView1.LoadFilesFromDirecotry(path);
                 customForm1.Icon = directoryTreeView1.selImage;
-                win32AddressBar1.ICON1.Image = directoryTreeView1.selImage;
-                win32AddressBar1.DisposeBtns();
+                //win32AddressBar1.ICON1.Image = directoryTreeView1.selImage;
+                win32AddressBar1.DisposeButtons();
                 win32AddressBar1.CreateButtons(path);
-                win32AddressBar1.AddHistory(path);
+                win32AddressBar1.AddPathToListBox(path);
             }
             toolStripStatusLabel1.Text = string.Format("     {0} 个文件     ", fileListView1.listView1.Items.Count); 
         }
@@ -499,10 +502,13 @@ namespace htmExplorer
                 frmAttach1.workpath = DirectoryCore.Get_AttachmentsDirectory(fileListView1.selfilename);
                 //frmAttach1.label1.Text = Path.GetFileName(fileListView1.selfilename) + "  的附件";
                 frmAttach1.TopLevel = false;
-                frmAttach1.Parent = panel1;
-                frmAttach1.Location = htmEdit1.Location;
-                frmAttach1.Dock = DockStyle.Fill;
-                frmAttach1.Size = htmEdit1.Size;
+                frmAttach1.Bounds = htmEdit1.Bounds;
+                frmAttach1.Parent = splitContainer1.Panel2;
+                frmAttach1.Anchor = ((AnchorStyles)((((AnchorStyles.Top | AnchorStyles.Bottom) | AnchorStyles.Left) | AnchorStyles.Right)));
+
+                //frmAttach1.Location = htmEdit1.Location;
+                //frmAttach1.Dock = DockStyle.Fill;
+                //frmAttach1.Size = htmEdit1.Size;
                 frmAttach1.Show();
             }
             else
@@ -635,7 +641,7 @@ namespace htmExplorer
 
         #endregion
 
-        #region 保存和读取splitContainer1.SplitterDistance
+        #region 保存和读取INI
 
         //和EXE在同一个目录下
         /// <summary>
@@ -656,7 +662,7 @@ namespace htmExplorer
 
             if (path.IndexOf(workSpacePath) != -1)
             {
-                win32AddressBar1.DisposeBtns();
+                win32AddressBar1.DisposeButtons();
                 win32AddressBar1.CreateButtons(path);
                 fileListView1.LoadFilesFromDirecotry(path);
 
@@ -667,7 +673,38 @@ namespace htmExplorer
             {
                 directoryTreeView1.SelectMainNode();
             }
+
+          
+             
+               
          }
+
+        private void loadSkinINI()
+        {
+
+            graySkin.Checked = INI.ReadBool("皮肤", "graySkin", true);
+            whiteSkin.Checked = INI.ReadBool("皮肤", "whiteSkin", false);
+            whiteSmokeSkin.Checked = INI.ReadBool("皮肤", "whiteSmokeSkin", false);
+
+            Color c = Color.FromArgb(238, 238, 242);
+            if (graySkin.Checked == true)
+            {
+                c = Color.FromArgb(238, 238, 242);
+            }
+
+            if (whiteSkin.Checked == true)
+            {
+                c = Color.White;
+            }
+
+            if (whiteSmokeSkin.Checked == true)
+            {
+                c = Color.WhiteSmoke;
+            }
+
+            SetupSkin(c);
+        }
+
 
         private void SaveIniFiles()
         {
@@ -684,6 +721,11 @@ namespace htmExplorer
           
             if(directoryTreeView1.selpath!="")
                 INI.WriteString("TreeView", "最后选择", directoryTreeView1.selpath);
+
+
+            INI.WriteBool("皮肤", "graySkin", graySkin.Checked);
+            INI.WriteBool("皮肤", "whiteSkin", whiteSkin.Checked);
+            INI.WriteBool("皮肤", "whiteSmokeSkin", whiteSmokeSkin.Checked);
         }
 
         #endregion
@@ -739,7 +781,52 @@ namespace htmExplorer
     
         #endregion
 
+        #region 皮肤
+        private void graySkin_Click(object sender, EventArgs e)
+        {
+            Color c = Color.FromArgb(238, 238, 242);
+            bool bgray = false;
+            bool bwhite = false;
+            bool bsmoke = false;
 
+            switch (((ToolStripMenuItem)sender).Name)
+            {
+                case "graySkin":
+                    c = Color.FromArgb(238, 238, 242);
+                    bgray = true;
+                    break;
+
+                case "whiteSkin":
+                    c = Color.White;
+                    bwhite = true;          
+                    break;
+
+                case "whiteSmokeSkin":
+                    c = Color.WhiteSmoke;
+                    bsmoke = true;
+                    break;
+            }
+
+            graySkin.Checked = bgray;
+            whiteSkin.Checked = bwhite;
+            whiteSmokeSkin.Checked = bsmoke;
+            SetupSkin(c);
+
+        }
+
+        private void SetupSkin(Color color)
+        {
+            BackColor = color;
+            customForm1.CaptionColor = color;
+           
+            directoryTreeView1.treeView1.BackColor = color;
+            fileListView1.listView1.BackColor = color;
+            winTextBox1.BackColor = color;
+
+
+        }
+
+        #endregion
 
         /// <summary>
         /// 所有HTML文件都存放在这个目录下
@@ -765,5 +852,7 @@ namespace htmExplorer
         /// </summary>
         string treeViewXml ="";
         private string _htm = ".htm";
+
+       
     }
 }

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DirectoryTreeView));
             System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("", 1, 1);
             System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("文档", 3, 3);
@@ -37,21 +38,21 @@
             System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("回收站", 5, 5);
             System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("", 1, 1);
             System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("", 1, 1);
-            this.文档contextMenuStrip = new System.Windows.Forms.ContextMenuStrip();
+            this.文档contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.新建文件夹ToolStrip = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.在文件资源管理器中打开ToolStrip = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.属性PToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.这台电脑contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip();
+            this.这台电脑contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem9 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItem10 = new System.Windows.Forms.ToolStripMenuItem();
-            this.回收站contextMenuStrip = new System.Windows.Forms.ContextMenuStrip();
+            this.回收站contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.清空回收站MenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem7 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
-            this.文件夹contextMenuStrip = new System.Windows.Forms.ContextMenuStrip();
+            this.文件夹contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.新键文件夹WToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
             this.在文件资源管理器中打开ToolStrip1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -66,10 +67,10 @@
             this.下移MenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
             this.属性RToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.imageList1 = new System.Windows.Forms.ImageList();
-            this.空白contextMenuStrip = new System.Windows.Forms.ContextMenuStrip();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.空白contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.刷新MenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.arrowImageList = new System.Windows.Forms.ImageList();
+            this.arrowImageList = new System.Windows.Forms.ImageList(this.components);
             this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
             this.minusPictureBox1 = new System.Windows.Forms.PictureBox();
             this.plusPictureBox1 = new System.Windows.Forms.PictureBox();
@@ -417,7 +418,7 @@
             // treeView1
             // 
             this.treeView1.AllowDrop = true;
-            this.treeView1.BackColor = System.Drawing.Color.White;
+            this.treeView1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(242)))));
             this.treeView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeView1.Font = new System.Drawing.Font("微软雅黑", 9.7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -540,7 +541,6 @@
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.ContextMenuStrip 空白contextMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem 刷新MenuItem;
-        private System.Windows.Forms.TreeViewEx treeView1;
         private System.Windows.Forms.ImageList arrowImageList;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem7;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem6;
@@ -557,5 +557,6 @@
         private System.Windows.Forms.ToolStripMenuItem 下移MenuItem;
         private System.Windows.Forms.PictureBox plusPictureBox2;
         private System.Windows.Forms.PictureBox minusPictureBox2;
+        public TreeViewEx treeView1;
     }
 }

@@ -33,14 +33,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CustomForm));
             this.label1 = new System.Windows.Forms.Label();
             this.icon1 = new System.Windows.Forms.Label();
-            this.btnClose = new System.Windows.Forms.Button();
-            this.imageList1 = new System.Windows.Forms.ImageList();
-            this.btnMinimum = new System.Windows.Forms.Button();
-            this.btnMaximum = new System.Windows.Forms.Button();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.restoreWindow = new System.Windows.Forms.ToolStripMenuItem();
             this.移动MToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.大小SToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -48,11 +46,14 @@
             this.maxWindow = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.close = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolTip1 = new System.Windows.Forms.ToolTip();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.sizeGrid1 = new System.Windows.Forms.Label();
-            this.btnMenu = new System.Windows.Forms.Button();
-            this.btnSkin = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnClose = new System.Windows.Forms.ImageButton();
+            this.btnMinimum = new System.Windows.Forms.ImageButton();
+            this.btnMaximum = new System.Windows.Forms.ImageButton();
+            this.btnMenu = new System.Windows.Forms.ImageButton();
+            this.btnSkin = new System.Windows.Forms.ImageButton();
             this.contextMenuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -64,10 +65,10 @@
             this.label1.AutoEllipsis = true;
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(25, 3);
+            this.label1.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label1.Location = new System.Drawing.Point(25, 2);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(401, 17);
+            this.label1.Size = new System.Drawing.Size(466, 23);
             this.label1.TabIndex = 7;
             this.label1.Text = "WindowsFormsApplication1";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -87,95 +88,14 @@
             this.icon1.DoubleClick += new System.EventHandler(this.icon1_DoubleClick);
             this.icon1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.icon1_MouseDown);
             // 
-            // btnClose
-            // 
-            this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnClose.BackColor = System.Drawing.Color.Transparent;
-            this.btnClose.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btnClose.FlatAppearance.BorderSize = 0;
-            this.btnClose.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.btnClose.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(67)))), ((int)(((byte)(67)))));
-            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnClose.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnClose.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnClose.ImageIndex = 6;
-            this.btnClose.ImageList = this.imageList1;
-            this.btnClose.Location = new System.Drawing.Point(519, 1);
-            this.btnClose.Margin = new System.Windows.Forms.Padding(0);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(32, 20);
-            this.btnClose.TabIndex = 5;
-            this.btnClose.TabStop = false;
-            this.btnClose.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
-            this.toolTip1.SetToolTip(this.btnClose, "关闭");
-            this.btnClose.UseVisualStyleBackColor = false;
-            this.btnClose.Click += new System.EventHandler(this.SystemCommand_Click);
-            this.btnClose.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnClose_MouseDown);
-            this.btnClose.MouseEnter += new System.EventHandler(this.btnClose_MouseEnter);
-            this.btnClose.MouseLeave += new System.EventHandler(this.btnClose_MouseLeave);
-            // 
             // imageList1
             // 
             this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList1.Images.SetKeyName(0, "m1.png");
-            this.imageList1.Images.SetKeyName(1, "DOWN1.png");
-            this.imageList1.Images.SetKeyName(2, "MAX.png");
-            this.imageList1.Images.SetKeyName(3, "MAX0.png");
-            this.imageList1.Images.SetKeyName(4, "MAX1.png");
-            this.imageList1.Images.SetKeyName(5, "MAX2.png");
-            this.imageList1.Images.SetKeyName(6, "X1.png");
-            this.imageList1.Images.SetKeyName(7, "X.png");
-            // 
-            // btnMinimum
-            // 
-            this.btnMinimum.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnMinimum.BackColor = System.Drawing.Color.Transparent;
-            this.btnMinimum.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btnMinimum.FlatAppearance.BorderSize = 0;
-            this.btnMinimum.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(54)))), ((int)(((byte)(101)))), ((int)(((byte)(179)))));
-            this.btnMinimum.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gainsboro;
-            this.btnMinimum.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnMinimum.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnMinimum.ImageIndex = 0;
-            this.btnMinimum.ImageList = this.imageList1;
-            this.btnMinimum.Location = new System.Drawing.Point(475, 1);
-            this.btnMinimum.Margin = new System.Windows.Forms.Padding(0);
-            this.btnMinimum.Name = "btnMinimum";
-            this.btnMinimum.Size = new System.Drawing.Size(22, 20);
-            this.btnMinimum.TabIndex = 4;
-            this.btnMinimum.TabStop = false;
-            this.toolTip1.SetToolTip(this.btnMinimum, "最小化");
-            this.btnMinimum.UseVisualStyleBackColor = false;
-            this.btnMinimum.Click += new System.EventHandler(this.SystemCommand_Click);
-            this.btnMinimum.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnClose_MouseDown);
-            this.btnMinimum.MouseEnter += new System.EventHandler(this.btnClose_MouseEnter);
-            this.btnMinimum.MouseLeave += new System.EventHandler(this.btnClose_MouseLeave);
-            // 
-            // btnMaximum
-            // 
-            this.btnMaximum.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnMaximum.BackColor = System.Drawing.Color.Transparent;
-            this.btnMaximum.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btnMaximum.FlatAppearance.BorderSize = 0;
-            this.btnMaximum.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(54)))), ((int)(((byte)(101)))), ((int)(((byte)(179)))));
-            this.btnMaximum.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gainsboro;
-            this.btnMaximum.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnMaximum.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnMaximum.ImageIndex = 2;
-            this.btnMaximum.ImageList = this.imageList1;
-            this.btnMaximum.Location = new System.Drawing.Point(497, 1);
-            this.btnMaximum.Margin = new System.Windows.Forms.Padding(0);
-            this.btnMaximum.Name = "btnMaximum";
-            this.btnMaximum.Size = new System.Drawing.Size(22, 20);
-            this.btnMaximum.TabIndex = 3;
-            this.btnMaximum.TabStop = false;
-            this.toolTip1.SetToolTip(this.btnMaximum, "最大化");
-            this.btnMaximum.UseVisualStyleBackColor = false;
-            this.btnMaximum.Click += new System.EventHandler(this.SystemCommand_Click);
-            this.btnMaximum.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnClose_MouseDown);
-            this.btnMaximum.MouseEnter += new System.EventHandler(this.btnClose_MouseEnter);
-            this.btnMaximum.MouseLeave += new System.EventHandler(this.btnClose_MouseLeave);
+            this.imageList1.Images.SetKeyName(0, "MAX.png");
+            this.imageList1.Images.SetKeyName(1, "MAX0.png");
+            this.imageList1.Images.SetKeyName(2, "MAX1.png");
+            this.imageList1.Images.SetKeyName(3, "MAX2.png");
             // 
             // contextMenuStrip1
             // 
@@ -256,48 +176,11 @@
             // 
             this.sizeGrid1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.sizeGrid1.Image = ((System.Drawing.Image)(resources.GetObject("sizeGrid1.Image")));
-            this.sizeGrid1.Location = new System.Drawing.Point(539, 228);
+            this.sizeGrid1.Location = new System.Drawing.Point(604, 282);
             this.sizeGrid1.Name = "sizeGrid1";
             this.sizeGrid1.Size = new System.Drawing.Size(12, 12);
             this.sizeGrid1.TabIndex = 9;
-            // 
-            // btnMenu
-            // 
-            this.btnMenu.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnMenu.BackColor = System.Drawing.Color.Transparent;
-            this.btnMenu.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btnMenu.FlatAppearance.BorderSize = 0;
-            this.btnMenu.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gainsboro;
-            this.btnMenu.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnMenu.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnMenu.Image = ((System.Drawing.Image)(resources.GetObject("btnMenu.Image")));
-            this.btnMenu.Location = new System.Drawing.Point(451, 1);
-            this.btnMenu.Margin = new System.Windows.Forms.Padding(0);
-            this.btnMenu.Name = "btnMenu";
-            this.btnMenu.Size = new System.Drawing.Size(24, 20);
-            this.btnMenu.TabIndex = 4;
-            this.btnMenu.TabStop = false;
-            this.btnMenu.UseVisualStyleBackColor = false;
-            this.btnMenu.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnMenu_MouseDown);
-            // 
-            // btnSkin
-            // 
-            this.btnSkin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSkin.BackColor = System.Drawing.Color.Transparent;
-            this.btnSkin.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btnSkin.FlatAppearance.BorderSize = 0;
-            this.btnSkin.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gainsboro;
-            this.btnSkin.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnSkin.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnSkin.Image = ((System.Drawing.Image)(resources.GetObject("btnSkin.Image")));
-            this.btnSkin.Location = new System.Drawing.Point(427, 1);
-            this.btnSkin.Margin = new System.Windows.Forms.Padding(0);
-            this.btnSkin.Name = "btnSkin";
-            this.btnSkin.Size = new System.Drawing.Size(24, 20);
-            this.btnSkin.TabIndex = 4;
-            this.btnSkin.TabStop = false;
-            this.btnSkin.UseVisualStyleBackColor = false;
-            this.btnSkin.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnSkin_MouseDown);
+            this.sizeGrid1.Visible = false;
             // 
             // panel1
             // 
@@ -312,23 +195,139 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(551, 23);
+            this.panel1.Size = new System.Drawing.Size(616, 27);
             this.panel1.TabIndex = 10;
             this.panel1.DoubleClick += new System.EventHandler(this.caption_DoubleClick);
             this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.caption_MouseDown);
+            // 
+            // btnClose
+            // 
+            this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnClose.BackColor = System.Drawing.Color.Transparent;
+            this.btnClose.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnClose.DefautColor = System.Drawing.Color.Transparent;
+            this.btnClose.DefautImage = ((System.Drawing.Image)(resources.GetObject("btnClose.DefautImage")));
+            this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnClose.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnClose.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnClose.Image = ((System.Drawing.Image)(resources.GetObject("btnClose.Image")));
+            this.btnClose.Location = new System.Drawing.Point(584, 1);
+            this.btnClose.Margin = new System.Windows.Forms.Padding(0);
+            this.btnClose.MouseDownColor = System.Drawing.Color.Red;
+            this.btnClose.MouseDownImage = ((System.Drawing.Image)(resources.GetObject("btnClose.MouseDownImage")));
+            this.btnClose.MouseEnterColor = System.Drawing.Color.LightGray;
+            this.btnClose.MouseEnterImage = null;
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(32, 20);
+            this.btnClose.TabIndex = 5;
+            this.btnClose.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
+            this.toolTip1.SetToolTip(this.btnClose, "关闭");
+            this.btnClose.Click += new System.EventHandler(this.SystemCommand_Click);
+            // 
+            // btnMinimum
+            // 
+            this.btnMinimum.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnMinimum.BackColor = System.Drawing.Color.Transparent;
+            this.btnMinimum.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnMinimum.DefautColor = System.Drawing.Color.Transparent;
+            this.btnMinimum.DefautImage = ((System.Drawing.Image)(resources.GetObject("btnMinimum.DefautImage")));
+            this.btnMinimum.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnMinimum.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnMinimum.Image = ((System.Drawing.Image)(resources.GetObject("btnMinimum.Image")));
+            this.btnMinimum.Location = new System.Drawing.Point(540, 1);
+            this.btnMinimum.Margin = new System.Windows.Forms.Padding(0);
+            this.btnMinimum.MouseDownColor = System.Drawing.Color.FromArgb(((int)(((byte)(54)))), ((int)(((byte)(101)))), ((int)(((byte)(179)))));
+            this.btnMinimum.MouseDownImage = ((System.Drawing.Image)(resources.GetObject("btnMinimum.MouseDownImage")));
+            this.btnMinimum.MouseEnterColor = System.Drawing.Color.LightGray;
+            this.btnMinimum.MouseEnterImage = null;
+            this.btnMinimum.Name = "btnMinimum";
+            this.btnMinimum.Size = new System.Drawing.Size(22, 20);
+            this.btnMinimum.TabIndex = 4;
+            this.toolTip1.SetToolTip(this.btnMinimum, "最小化");
+            this.btnMinimum.Click += new System.EventHandler(this.SystemCommand_Click);
+            // 
+            // btnMaximum
+            // 
+            this.btnMaximum.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnMaximum.BackColor = System.Drawing.Color.Transparent;
+            this.btnMaximum.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnMaximum.DefautColor = System.Drawing.Color.Transparent;
+            this.btnMaximum.DefautImage = ((System.Drawing.Image)(resources.GetObject("btnMaximum.DefautImage")));
+            this.btnMaximum.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnMaximum.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnMaximum.Image = ((System.Drawing.Image)(resources.GetObject("btnMaximum.Image")));
+            this.btnMaximum.Location = new System.Drawing.Point(562, 1);
+            this.btnMaximum.Margin = new System.Windows.Forms.Padding(0);
+            this.btnMaximum.MouseDownColor = System.Drawing.Color.FromArgb(((int)(((byte)(54)))), ((int)(((byte)(101)))), ((int)(((byte)(179)))));
+            this.btnMaximum.MouseDownImage = ((System.Drawing.Image)(resources.GetObject("btnMaximum.MouseDownImage")));
+            this.btnMaximum.MouseEnterColor = System.Drawing.Color.LightGray;
+            this.btnMaximum.MouseEnterImage = null;
+            this.btnMaximum.Name = "btnMaximum";
+            this.btnMaximum.Size = new System.Drawing.Size(22, 20);
+            this.btnMaximum.TabIndex = 3;
+            this.toolTip1.SetToolTip(this.btnMaximum, "最大化");
+            this.btnMaximum.Click += new System.EventHandler(this.SystemCommand_Click);
+            this.btnMaximum.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnMaximum_MouseDown);
+            this.btnMaximum.MouseEnter += new System.EventHandler(this.btnMaximum_MouseEnter);
+            this.btnMaximum.MouseLeave += new System.EventHandler(this.btnMaximum_MouseLeave);
+            // 
+            // btnMenu
+            // 
+            this.btnMenu.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnMenu.BackColor = System.Drawing.Color.Transparent;
+            this.btnMenu.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnMenu.DefautColor = System.Drawing.Color.Transparent;
+            this.btnMenu.DefautImage = ((System.Drawing.Image)(resources.GetObject("btnMenu.DefautImage")));
+            this.btnMenu.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnMenu.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnMenu.Image = ((System.Drawing.Image)(resources.GetObject("btnMenu.Image")));
+            this.btnMenu.Location = new System.Drawing.Point(516, 1);
+            this.btnMenu.Margin = new System.Windows.Forms.Padding(0);
+            this.btnMenu.MouseDownColor = System.Drawing.Color.FromArgb(((int)(((byte)(54)))), ((int)(((byte)(101)))), ((int)(((byte)(179)))));
+            this.btnMenu.MouseDownImage = ((System.Drawing.Image)(resources.GetObject("btnMenu.MouseDownImage")));
+            this.btnMenu.MouseEnterColor = System.Drawing.Color.LightGray;
+            this.btnMenu.MouseEnterImage = null;
+            this.btnMenu.Name = "btnMenu";
+            this.btnMenu.Size = new System.Drawing.Size(24, 20);
+            this.btnMenu.TabIndex = 4;
+            this.btnMenu.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnMenu_MouseDown);
+            // 
+            // btnSkin
+            // 
+            this.btnSkin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSkin.BackColor = System.Drawing.Color.Transparent;
+            this.btnSkin.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnSkin.DefautColor = System.Drawing.Color.Transparent;
+            this.btnSkin.DefautImage = ((System.Drawing.Image)(resources.GetObject("btnSkin.DefautImage")));
+            this.btnSkin.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnSkin.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnSkin.Image = ((System.Drawing.Image)(resources.GetObject("btnSkin.Image")));
+            this.btnSkin.Location = new System.Drawing.Point(492, 1);
+            this.btnSkin.Margin = new System.Windows.Forms.Padding(0);
+            this.btnSkin.MouseDownColor = System.Drawing.Color.FromArgb(((int)(((byte)(54)))), ((int)(((byte)(101)))), ((int)(((byte)(179)))));
+            this.btnSkin.MouseDownImage = ((System.Drawing.Image)(resources.GetObject("btnSkin.MouseDownImage")));
+            this.btnSkin.MouseEnterColor = System.Drawing.Color.LightGray;
+            this.btnSkin.MouseEnterImage = null;
+            this.btnSkin.Name = "btnSkin";
+            this.btnSkin.Size = new System.Drawing.Size(24, 20);
+            this.btnSkin.TabIndex = 4;
+            this.btnSkin.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnSkin_MouseDown);
             // 
             // CustomForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Transparent;
+            this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.sizeGrid1);
             this.MinimumSize = new System.Drawing.Size(203, 28);
             this.Name = "CustomForm";
-            this.Size = new System.Drawing.Size(551, 240);
+            this.Size = new System.Drawing.Size(616, 294);
             this.Load += new System.EventHandler(this.CustomForm_Load);
             this.SizeChanged += new System.EventHandler(this.CustomForm_SizeChanged);
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.CustomForm_Paint);
+            this.Resize += new System.EventHandler(this.CustomForm_Resize);
             this.contextMenuStrip1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -339,9 +338,9 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label icon1;
-        private System.Windows.Forms.Button btnClose;
-        private System.Windows.Forms.Button btnMinimum;
-        private System.Windows.Forms.Button btnMaximum;
+        private System.Windows.Forms.ImageButton btnClose;
+        private System.Windows.Forms.ImageButton btnMinimum;
+        private System.Windows.Forms.ImageButton btnMaximum;
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem restoreWindow;
@@ -353,8 +352,8 @@
         private System.Windows.Forms.Label sizeGrid1;
         private System.Windows.Forms.ToolStripMenuItem 移动MToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 大小SToolStripMenuItem;
-        private System.Windows.Forms.Button btnMenu;
-        private System.Windows.Forms.Button btnSkin;
+        private System.Windows.Forms.ImageButton btnMenu;
+        private System.Windows.Forms.ImageButton btnSkin;
         private System.Windows.Forms.Panel panel1;
     }
 }

@@ -9,8 +9,7 @@ using System.ComponentModel.Design;
 
 namespace TitleBar
 {
-    //增加了这句后 在上面添加控件 布局就错误了
-    //[Designer("System.Windows.Forms.Design.ParentControlDesigner, System.Design", typeof(IDesigner))]
+    [Designer("System.Windows.Forms.Design.ParentControlDesigner, System.Design", typeof(IDesigner))]
     public partial class CustomForm : UserControl
     {
         public CustomForm()
@@ -24,11 +23,17 @@ namespace TitleBar
             btnClose.FlatStyle = FlatStyle.Flat;
             btnMenu.FlatStyle = FlatStyle.Flat;
             btnSkin.FlatStyle = FlatStyle.Flat;
-            this.Anchor = ((System.Windows.Forms.AnchorStyles)((((AnchorStyles.Top | AnchorStyles.Bottom) | AnchorStyles.Left) | AnchorStyles.Right)));
+            BorderStyle = System.Windows.Forms.BorderStyle.None;
 
+            this.Anchor = ((System.Windows.Forms.AnchorStyles)((((AnchorStyles.Top | AnchorStyles.Bottom) | AnchorStyles.Left) | AnchorStyles.Right)));
+            DoubleBuffered = true;
+            this.SetStyle(ControlStyles.AllPaintingInWmPaint, true);
+            this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
+            this.SetStyle(ControlStyles.UserPaint, true);  
             //panel1.BackColor = Color.FromArgb(238, 238, 242);
 
         }
+
         MyNativeWindow nativeWindow1;
         private void CustomForm_Load(object sender, EventArgs e)
         {
@@ -44,14 +49,6 @@ namespace TitleBar
             this.Bounds = nativeWindow1.Bounds;
         }
 
-        
-        //~CustomForm()
-        //{
-        //    MainForm.MaximumSize = new System.Drawing.Size(0, 0);
-        //    MainForm.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Sizable;
-        //    MainForm.Refresh();
-        //}
-
         #region 属性
         
        
@@ -60,6 +57,12 @@ namespace TitleBar
         {
             get { return label1.Text; }
             set { label1.Text = value; }
+        }
+        
+        public Color CaptionColor
+        {
+            get { return panel1.BackColor; }
+            set { panel1.BackColor = value; }
         }
 
         public Image Icon
@@ -162,28 +165,10 @@ namespace TitleBar
         }
         #endregion
 
-
-        //public Color BorderColor
-        //{
-        //    get {
-        //        if (nativeWindow1 == null)
-        //            return SystemColors.Control;
-        //        return nativeWindow1.borderColor; 
-        //    }
-        //    set {
-        //        if (nativeWindow1 != null)
-        //        {
-        //            nativeWindow1.borderColor = value;
-        //            nativeWindow1.form.Refresh();
-        //        } 
-        //    }
-        //}
-
-
         #region MyRegion
         private void SystemCommand_Click(object sender, EventArgs e)
         {
-            switch (((Button)sender).Name)
+            switch (((Label)sender).Name)
             {
                 case "btnMinimum":
                     MainForm.WindowState = FormWindowState.Minimized;
@@ -260,100 +245,118 @@ namespace TitleBar
             minWindow.Enabled = MainForm.WindowState != FormWindowState.Minimized;
             maxWindow.Enabled = MainForm.WindowState != FormWindowState.Maximized;
         }
-
-        private void btnClose_MouseEnter(object sender, EventArgs e)
+        private void btnMaximum_MouseEnter(object sender, EventArgs e)
         {
-            switch (((Button)sender).Name)
-            {
-                case "btnMinimum":
-                    break;
-
-                case "btnMaximum":
-                    break;
-
-                case "btnClose":
-                    btnClose.ImageIndex = 7;
-                    break;
-            }
+            if (MainForm.WindowState == FormWindowState.Maximized)
+                btnMaximum.Image = imageList1.Images[2];
+            else
+                btnMaximum.Image = imageList1.Images[0];
         }
 
         private void btnClose_MouseLeave(object sender, EventArgs e)
         {
-            switch (((Button)sender).Name)
-            {
-                case "btnMinimum":
-                    btnMinimum.ImageIndex = 0;
-                    break;
-                case "btnMaximum":
-                    {
-                        if (MainForm.WindowState == FormWindowState.Maximized)
-                        {
-                            btnMaximum.ImageIndex = 4;
-                        }
-                        else
-                        {
-                            btnMaximum.ImageIndex = 2;
-                        }
-                    }
-                    break;
-                case "btnClose":
-                    btnClose.ImageIndex = 6;
-                    break;
-            }
+            //if(((Label)sender).Name =="btnMaximum")
+            //{
+            //    if (MainForm.WindowState == FormWindowState.Maximized)
+            //        btnMaximum.ImageIndex = 0;
+            //    else
+            //        btnMaximum.ImageIndex = 2;
+            //}
+
+ 
+
+            
         }
 
-        private void btnClose_MouseDown(object sender, MouseEventArgs e)
+        private void btnMaximum_MouseLeave(object sender, EventArgs e)
         {
-            switch (((Button)sender).Name)
-            {
-                case "btnMinimum":
-                    btnMinimum.ImageIndex = 1;
-                    break;
-                case "btnMaximum":
-                    {
-                        if (MainForm.WindowState == FormWindowState.Maximized)
-                        {
-                            btnMaximum.ImageIndex = 5;
-                        }
-                        else
-                        {
-                            btnMaximum.ImageIndex = 3;
-                        }
-                    }
-                    break;
-                case "btnClose":
-                    btnClose.ImageIndex = 7;
-                    break;
-            }
+            if (MainForm.WindowState == FormWindowState.Maximized)
+                btnMaximum.Image = imageList1.Images[2];
+            else
+                btnMaximum.Image = imageList1.Images[0];
         }
-  
+
+
+        private void btnMaximum_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (MainForm.WindowState == FormWindowState.Maximized)
+                btnMaximum.Image = imageList1.Images[3];
+            else
+                btnMaximum.Image = imageList1.Images[1];
+        }
+ 
         private void CustomForm_SizeChanged(object sender, EventArgs e)
         {
-            //bool Maximized = this.
             if (MainForm == null)
                 return;
 
             if (MainForm.WindowState == FormWindowState.Maximized)
             {
-                btnMaximum.ImageIndex = 4;
+                btnMaximum.Image = imageList1.Images[2];
                 toolTip1.SetToolTip(btnMaximum, "最大化");
-                //MainForm.Top = 0;
-                //MainForm.Left = 0;
-                //MainForm.Size = Screen.PrimaryScreen.WorkingArea.Size;
             }
             else
             {
-                btnMaximum.ImageIndex = 2;
+                btnMaximum.Image = imageList1.Images[0];
                 toolTip1.SetToolTip(btnMaximum, "还原");
             }
         }
 
         #endregion
 
+        private void CustomForm_Paint(object sender, PaintEventArgs e)
+        {
+            //int btnWidth = 24;
+            //int btnHeight = 20;
+
+            ////关闭
+            //Rectangle closeRect = new Rectangle(ClientRectangle.Right - 30, 0, 24, 20);
+            //e.Graphics.DrawRectangle(new Pen(new SolidBrush(Color.Red)), closeRect);
+            
+            ////最大化
+            //Rectangle maxRect = new Rectangle(ClientRectangle.Right - 30 - btnWidth, 0, 24, 20);
+            //e.Graphics.DrawRectangle(new Pen(new SolidBrush(Color.Red)), maxRect);
+
+            ////最小化
+            //Rectangle minRect = new Rectangle(ClientRectangle.Right - 30 - btnWidth *2, 0, 24, 20);
+            //e.Graphics.DrawRectangle(new Pen(new SolidBrush(Color.Red)), minRect);
+
+            ////菜单按钮
+            //Rectangle menuRect = new Rectangle(ClientRectangle.Right - 30 - btnWidth * 3, 0, 24, 20);
+            //e.Graphics.DrawRectangle(new Pen(new SolidBrush(Color.Blue)), menuRect);
+
+            ////皮肤按钮
+            //Rectangle skinRect = new Rectangle(ClientRectangle.Right - 30 - btnWidth * 4, 0, 24, 20);
+            //e.Graphics.DrawRectangle(new Pen(new SolidBrush(Color.Blue)), skinRect);
+
+            ////图标
+            //Rectangle iconRect = new Rectangle(ClientRectangle.Left + 6, 8, 16, 16);
+            //e.Graphics.DrawRectangle(new Pen(new SolidBrush(Color.Blue)), iconRect);
+
+            ////文本
+            //Rectangle textRect = new Rectangle(iconRect.Right + 4, 4, ClientRectangle.Width - iconRect.Right -120 -16, 24);
+            //e.Graphics.DrawRectangle(new Pen(new SolidBrush(Color.Red)), textRect);
+
+            ////标题栏
+            //Rectangle titleRect = new Rectangle(0, 0, ClientRectangle.Width - 1, 32);
+            //e.Graphics.DrawRectangle(new Pen(new SolidBrush(Color.Green)), titleRect);
+
+            ////边框
+            //Rectangle borderRect = ClientRectangle;
+            ////borderRect.Width -= 1;
+            ////borderRect.Height -= 1;
+            //e.Graphics.DrawRectangle(new Pen(new SolidBrush(Color.Blue), 2), borderRect);
+
+        }
+
+        private void CustomForm_Resize(object sender, EventArgs e)
+        {
+            //Refresh();
+        }
 
 
-   
+
+
+
     }
-
-   
 }
