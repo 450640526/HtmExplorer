@@ -38,21 +38,21 @@
             System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("回收站", 5, 5);
             System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("", 1, 1);
             System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("", 1, 1);
-            this.文档contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.文档contextMenuStrip = new System.Windows.Forms.ClassicContextMenuStrip(this.components);
             this.新建文件夹ToolStrip = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.在文件资源管理器中打开ToolStrip = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.属性PToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.这台电脑contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.这台电脑contextMenuStrip1 = new System.Windows.Forms.ClassicContextMenuStrip(this.components);
             this.toolStripMenuItem9 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItem10 = new System.Windows.Forms.ToolStripMenuItem();
-            this.回收站contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.回收站contextMenuStrip = new System.Windows.Forms.ClassicContextMenuStrip(this.components);
             this.清空回收站MenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem7 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
-            this.文件夹contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.文件夹contextMenuStrip = new System.Windows.Forms.ClassicContextMenuStrip(this.components);
             this.新键文件夹WToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
             this.在文件资源管理器中打开ToolStrip1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -68,7 +68,7 @@
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
             this.属性RToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.空白contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.空白contextMenuStrip = new System.Windows.Forms.ClassicContextMenuStrip(this.components);
             this.刷新MenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.arrowImageList = new System.Windows.Forms.ImageList(this.components);
             this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
@@ -99,8 +99,7 @@
             this.toolStripMenuItem1,
             this.属性PToolStripMenuItem});
             this.文档contextMenuStrip.Name = "contextMenuStrip1";
-            this.文档contextMenuStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.文档contextMenuStrip.Size = new System.Drawing.Size(225, 82);
+             this.文档contextMenuStrip.Size = new System.Drawing.Size(225, 82);
             this.文档contextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.这台电脑_Opening);
             // 
             // 新建文件夹ToolStrip
@@ -141,8 +140,7 @@
             this.toolStripSeparator2,
             this.toolStripMenuItem10});
             this.这台电脑contextMenuStrip1.Name = "contextMenuStrip1";
-            this.这台电脑contextMenuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.这台电脑contextMenuStrip1.Size = new System.Drawing.Size(225, 54);
+             this.这台电脑contextMenuStrip1.Size = new System.Drawing.Size(225, 54);
             // 
             // toolStripMenuItem9
             // 
@@ -169,8 +167,7 @@
             this.toolStripMenuItem7,
             this.toolStripMenuItem6});
             this.回收站contextMenuStrip.Name = "contextMenuStrip2";
-            this.回收站contextMenuStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.回收站contextMenuStrip.Size = new System.Drawing.Size(225, 54);
+             this.回收站contextMenuStrip.Size = new System.Drawing.Size(225, 54);
             this.回收站contextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.回收站_Opening);
             // 
             // 清空回收站MenuItem
@@ -208,8 +205,7 @@
             this.toolStripMenuItem4,
             this.属性RToolStripMenuItem});
             this.文件夹contextMenuStrip.Name = "文件夹contextMenuStrip";
-            this.文件夹contextMenuStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.文件夹contextMenuStrip.Size = new System.Drawing.Size(225, 220);
+             this.文件夹contextMenuStrip.Size = new System.Drawing.Size(225, 220);
             this.文件夹contextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.文件夹_Opening);
             // 
             // 新键文件夹WToolStripMenuItem
@@ -330,8 +326,7 @@
             this.空白contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.刷新MenuItem});
             this.空白contextMenuStrip.Name = "contextMenuStrip3";
-            this.空白contextMenuStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.空白contextMenuStrip.Size = new System.Drawing.Size(138, 26);
+             this.空白contextMenuStrip.Size = new System.Drawing.Size(138, 26);
             this.空白contextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.空白_Opening);
             // 
             // 刷新MenuItem
@@ -518,15 +513,15 @@
 
         #endregion
 
-        private System.Windows.Forms.ContextMenuStrip 文档contextMenuStrip;
+        private System.Windows.Forms.ClassicContextMenuStrip 文档contextMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem 新建文件夹ToolStrip;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem 在文件资源管理器中打开ToolStrip;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem 属性PToolStripMenuItem;
-        private System.Windows.Forms.ContextMenuStrip 回收站contextMenuStrip;
+        private System.Windows.Forms.ClassicContextMenuStrip 回收站contextMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem 清空回收站MenuItem;
-        private System.Windows.Forms.ContextMenuStrip 文件夹contextMenuStrip;
+        private System.Windows.Forms.ClassicContextMenuStrip 文件夹contextMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem 新键文件夹WToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem3;
         private System.Windows.Forms.ToolStripMenuItem 在文件资源管理器中打开ToolStrip1;
@@ -539,12 +534,12 @@
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem4;
         private System.Windows.Forms.ToolStripMenuItem 属性RToolStripMenuItem;
         private System.Windows.Forms.ImageList imageList1;
-        private System.Windows.Forms.ContextMenuStrip 空白contextMenuStrip;
+        private System.Windows.Forms.ClassicContextMenuStrip 空白contextMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem 刷新MenuItem;
         private System.Windows.Forms.ImageList arrowImageList;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem7;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem6;
-        private System.Windows.Forms.ContextMenuStrip 这台电脑contextMenuStrip1;
+        private System.Windows.Forms.ClassicContextMenuStrip 这台电脑contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem9;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem10;

@@ -38,7 +38,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.icon1 = new System.Windows.Forms.Label();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.contextMenuStrip1 = new System.Windows.Forms.ClassicContextMenuStrip(this.components);
             this.restoreWindow = new System.Windows.Forms.ToolStripMenuItem();
             this.移动MToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.大小SToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -108,8 +108,7 @@
             this.toolStripMenuItem1,
             this.close});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.contextMenuStrip1.Size = new System.Drawing.Size(168, 142);
+             this.contextMenuStrip1.Size = new System.Drawing.Size(168, 142);
             this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             // 
             // restoreWindow
@@ -342,7 +341,7 @@
         private System.Windows.Forms.ImageButton btnMinimum;
         private System.Windows.Forms.ImageButton btnMaximum;
         private System.Windows.Forms.ImageList imageList1;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ClassicContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem restoreWindow;
         private System.Windows.Forms.ToolStripMenuItem minWindow;
         private System.Windows.Forms.ToolStripMenuItem maxWindow;

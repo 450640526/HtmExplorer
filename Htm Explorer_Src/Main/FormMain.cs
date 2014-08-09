@@ -25,6 +25,13 @@ namespace htmExplorer
         {
             Thread.ExecuteRunOnceThread();
 
+            //文件MenuStrip1.Renderer = new System.Windows.Forms.CustomMenuStripRenderer();
+            //notifyIconcontextMenuStrip1.Renderer = new System.Windows.Forms.CustomMenuStripRenderer();
+            //skinContextMenuStrip.Renderer = new System.Windows.Forms.CustomMenuStripRenderer();
+            //searchContextMenuStrip.Renderer = new System.Windows.Forms.CustomMenuStripRenderer();
+
+
+
             #region 1 加载工作目录
             //配置文件存在则加载配置文件中的
             //不存在则自动创建相对程序的 我的文件夹
@@ -279,30 +286,6 @@ namespace htmExplorer
         #endregion
 
         #region searchBox1
-        private void searchKeyWord1_Click(object sender, EventArgs e)
-        {
-            switch (((ToolStripMenuItem)sender).Name)
-            {
-                case "searchAll1":
-                    searchAll1.Checked = true;
-                    searchFileName1.Checked = false;
-                    searchKeyWord1.Checked = false;
-                    break;
-
-                case "searchFileName1":
-                    searchFileName1.Checked = true;
-                    searchAll1.Checked = false;
-                    searchKeyWord1.Checked = false;
-                    break;
-
-                case "searchKeyWord1":
-                    searchKeyWord1.Checked = true;
-                    searchAll1.Checked = false;
-                    searchFileName1.Checked = false;
-                    break;
-            }
-        }
-
         
         private void searchBox1_TypingFinished(object sender, EventArgs e)
         {
@@ -580,6 +563,31 @@ namespace htmExplorer
 
         #endregion
 
+        #region splitContainer
+        private void splitContainer2_SplitterMoved(object sender, SplitterEventArgs e)
+        {
+            RemoveFocus();
+        }
+
+        private void splitContainer3_SplitterMoved(object sender, SplitterEventArgs e)
+        {
+            RemoveFocus();
+        }
+
+        public void RemoveFocus()
+        {
+            Button btn = new Button();
+            btn.Parent = this;
+            btn.Left = -9999;
+            btn.Top = -9999;
+            btn.Focus();
+            btn.Dispose();
+        }
+
+       
+        #endregion
+
+
         #region  菜单
 
 
@@ -672,37 +680,45 @@ namespace htmExplorer
             else
             {
                 directoryTreeView1.SelectMainNode();
-            }
-
-          
-             
-               
+            }     
          }
 
         private void loadSkinINI()
         {
 
-            graySkin.Checked = INI.ReadBool("皮肤", "graySkin", true);
+            graySkin.Checked = INI.ReadBool("皮肤", "graySkin", false);
+            graySkin1.Checked = INI.ReadBool("皮肤", "graySkin1", true);
             whiteSkin.Checked = INI.ReadBool("皮肤", "whiteSkin", false);
             whiteSmokeSkin.Checked = INI.ReadBool("皮肤", "whiteSmokeSkin", false);
 
             Color c = Color.FromArgb(238, 238, 242);
+            Color c1 = c;
+
             if (graySkin.Checked == true)
             {
                 c = Color.FromArgb(238, 238, 242);
+                c1 = c;
+            }
+
+            if (graySkin1.Checked == true)
+            {
+                c = Color.FromArgb(238, 238, 242);
+                c1 = Color.WhiteSmoke;
             }
 
             if (whiteSkin.Checked == true)
             {
                 c = Color.White;
+                c1 = c;
             }
 
             if (whiteSmokeSkin.Checked == true)
             {
                 c = Color.WhiteSmoke;
+                c1 = c;
             }
 
-            SetupSkin(c);
+            SetupSkin(c, c1);
         }
 
 
@@ -724,6 +740,7 @@ namespace htmExplorer
 
 
             INI.WriteBool("皮肤", "graySkin", graySkin.Checked);
+            INI.WriteBool("皮肤", "graySkin1", graySkin1.Checked);
             INI.WriteBool("皮肤", "whiteSkin", whiteSkin.Checked);
             INI.WriteBool("皮肤", "whiteSmokeSkin", whiteSmokeSkin.Checked);
         }
@@ -785,45 +802,57 @@ namespace htmExplorer
         private void graySkin_Click(object sender, EventArgs e)
         {
             Color c = Color.FromArgb(238, 238, 242);
-            bool bgray = false;
-            bool bwhite = false;
-            bool bsmoke = false;
+            Color c1 = c;
 
             switch (((ToolStripMenuItem)sender).Name)
             {
                 case "graySkin":
                     c = Color.FromArgb(238, 238, 242);
-                    bgray = true;
+                    c1 = c;
+                     
+                    break;
+
+                case "graySkin1":
+                    c = Color.FromArgb(238, 238, 242);
+                    c1 = Color.WhiteSmoke;
+                    
                     break;
 
                 case "whiteSkin":
                     c = Color.White;
-                    bwhite = true;          
+                    c1 = c;
+                     
                     break;
 
                 case "whiteSmokeSkin":
                     c = Color.WhiteSmoke;
-                    bsmoke = true;
+                    c1 = c;
+                    
                     break;
             }
 
-            graySkin.Checked = bgray;
-            whiteSkin.Checked = bwhite;
-            whiteSmokeSkin.Checked = bsmoke;
-            SetupSkin(c);
-
+            SetupSkin(c, c1);
         }
 
-        private void SetupSkin(Color color)
+        private void SetupSkin(Color color,Color color1)
         {
+            //Color color = Color.FromArgb(238, 238, 242);
+            //Color color1 = Color.WhiteSmoke;
+
             BackColor = color;
             customForm1.CaptionColor = color;
-           
-            directoryTreeView1.treeView1.BackColor = color;
-            fileListView1.listView1.BackColor = color;
-            winTextBox1.BackColor = color;
+            header1.BackColor = color;
+            statusStrip1.BackColor = color;
+
+            panel2.BackColor = color1;
+            splitContainer1.BackColor = color1;
+            splitContainer2.BackColor = color1;
 
 
+            htmEdit1.SetupToolStripRender(color1, color1);
+            directoryTreeView1.treeView1.BackColor = color1;
+            fileListView1.listView1.BackColor = color1;
+            winTextBox1.BackColor = color1;
         }
 
         #endregion
@@ -853,6 +882,6 @@ namespace htmExplorer
         string treeViewXml ="";
         private string _htm = ".htm";
 
-       
+
     }
 }

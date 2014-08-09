@@ -55,45 +55,18 @@ namespace System.Windows.Forms
             {
                 case "largeIcon1":
                     listView1.View = View.LargeIcon;
-                    largeIcon1.Checked = true;
-                    smallIcon1.Checked = false;
-                    list1.Checked = false;
-                    tile1.Checked = false;
-                    details1.Checked = false;
-
                     break;
                 case "smallIcon1":
                     listView1.View = View.SmallIcon;
-                    largeIcon1.Checked = false;
-                    smallIcon1.Checked = true;
-                    list1.Checked = false;
-                    tile1.Checked = false;
-                    details1.Checked = false;
                     break;
                 case "list1":
                     listView1.View = View.List;
-                    largeIcon1.Checked = false;
-                    smallIcon1.Checked = false;
-                    list1.Checked = true;
-                    tile1.Checked = false;
-                    details1.Checked = false;
                     break;
                 case "tile1":
                     listView1.View = View.Tile;
-                    largeIcon1.Checked = false;
-                    smallIcon1.Checked = false;
-                    list1.Checked = false;
-                    tile1.Checked = true;
-                    details1.Checked = false;
-
                     break;
                 case "details1":
                     listView1.View = View.Details;
-                    largeIcon1.Checked = false;
-                    smallIcon1.Checked = false;
-                    list1.Checked = false;
-                    tile1.Checked = false;
-                    details1.Checked = true;
                     break;
 
             }

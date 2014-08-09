@@ -22,12 +22,12 @@ namespace System.Windows.Forms
             pictureBox1.Parent = comboBox1;
             pictureBox1.Bounds = comboBox1.ClientRectangle;
             pictureBox1.Left = 1;
-             pictureBox1.Top = 1;
+            pictureBox1.Top = 1;
             pictureBox1.Width -= 20;
-
+            pictureBox1.Height += 2;
             label1.Parent = pictureBox1;
             label1.Left = 2;
-             label1.Top = 1;
+            label1.Top = 1;
         }
 
 
@@ -217,7 +217,7 @@ namespace System.Windows.Forms
 
 
             int LEFT = 24;
-            int TOP = 2;
+            int TOP = 1;
 
             for (int i = 0; i < arr.Length; i++)
             {

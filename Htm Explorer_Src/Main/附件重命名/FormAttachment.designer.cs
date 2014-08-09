@@ -42,7 +42,7 @@
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.contextMenuStrip1 = new System.Windows.Forms.ClassicContextMenuStrip(this.components);
             this.ts_OpenFile = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.OpenWithNotePad = new System.Windows.Forms.ToolStripMenuItem();
@@ -54,13 +54,13 @@
             this.cms_ReNameFile = new System.Windows.Forms.ToolStripMenuItem();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.contextMenuStrip2 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.contextMenuStrip2 = new System.Windows.Forms.ClassicContextMenuStrip(this.components);
             this.查看VToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.largeIcon1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.smallIcon1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.list1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.tile1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.details1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.largeIcon1 = new System.Windows.Forms.RadioMenuItem();
+            this.smallIcon1 = new System.Windows.Forms.RadioMenuItem();
+            this.list1 = new System.Windows.Forms.RadioMenuItem();
+            this.tile1 = new System.Windows.Forms.RadioMenuItem();
+            this.details1 = new System.Windows.Forms.RadioMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.添加附件AToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openCurrentDir = new System.Windows.Forms.ToolStripMenuItem();
@@ -241,8 +241,7 @@
             this.toolStripSeparator5,
             this.cms_SelectAll});
             this.contextMenuStrip2.Name = "contextMenuStrip_ListView";
-            this.contextMenuStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.contextMenuStrip2.Size = new System.Drawing.Size(177, 132);
+             this.contextMenuStrip2.Size = new System.Drawing.Size(177, 132);
             // 
             // 查看VToolStripMenuItem
             // 
@@ -385,7 +384,7 @@
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ToolTip toolTip1;
         private ColumnHeader columnHeader5;
-        private ContextMenuStrip contextMenuStrip2;
+        private ClassicContextMenuStrip contextMenuStrip2;
         private ToolStripSeparator toolStripSeparator2;
         private ToolStripMenuItem openCurrentDir;
         private ToolStripMenuItem 添加附件AToolStripMenuItem;

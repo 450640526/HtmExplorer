@@ -28,21 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FileListView));
-            this.ContextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip();
+            this.ContextMenuStrip1 = new System.Windows.Forms.ClassicContextMenuStrip(this.components);
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
-            this.largeIcon1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.smallIcon1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.list1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.tile1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.details1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.largeIcon1 = new System.Windows.Forms.RadioMenuItem();
+            this.smallIcon1 = new System.Windows.Forms.RadioMenuItem();
+            this.list1 = new System.Windows.Forms.RadioMenuItem();
+            this.tile1 = new System.Windows.Forms.RadioMenuItem();
+            this.details1 = new System.Windows.Forms.RadioMenuItem();
             this.排序方式OToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.名称MenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.修改日期MenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.大小MenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sortByName1 = new System.Windows.Forms.RadioMenuItem();
+            this.sortByDate1 = new System.Windows.Forms.RadioMenuItem();
+            this.sortBySize = new System.Windows.Forms.RadioMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
-            this.递增MenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.递减MenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sortBydesending1 = new System.Windows.Forms.RadioMenuItem();
+            this.sortByAsending1 = new System.Windows.Forms.RadioMenuItem();
             this.刷新RToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.在浏览器中打开ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -54,14 +55,13 @@
             this.删除选中的文件MenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.重命名MToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripDivider2 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
             this.tms_Other = new System.Windows.Forms.ToolStripMenuItem();
             this.复制文件标题_MenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.复制文件路径_MenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
-            this.imageList1 = new System.Windows.Forms.ImageList();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.listView1 = new System.Windows.Forms.ListViewEx();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -90,11 +90,9 @@
             this.删除选中的文件MenuItem,
             this.重命名MToolStripMenuItem,
             this.toolStripDivider2,
-            this.toolStripMenuItem4,
             this.tms_Other});
             this.ContextMenuStrip1.Name = "contextMenuStrip_ListView";
-            this.ContextMenuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.ContextMenuStrip1.Size = new System.Drawing.Size(189, 270);
+            this.ContextMenuStrip1.Size = new System.Drawing.Size(189, 286);
             this.ContextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.ListViewMenuStrip_Opening);
             // 
             // toolStripMenuItem3
@@ -113,32 +111,36 @@
             // largeIcon1
             // 
             this.largeIcon1.CheckOnClick = true;
+            this.largeIcon1.GroupIndex = 11;
             this.largeIcon1.Name = "largeIcon1";
-            this.largeIcon1.Size = new System.Drawing.Size(141, 22);
+            this.largeIcon1.Size = new System.Drawing.Size(152, 22);
             this.largeIcon1.Text = "大图标(&R)";
             this.largeIcon1.Click += new System.EventHandler(this.largeIcon1_Click);
             // 
             // smallIcon1
             // 
             this.smallIcon1.CheckOnClick = true;
+            this.smallIcon1.GroupIndex = 11;
             this.smallIcon1.Name = "smallIcon1";
-            this.smallIcon1.Size = new System.Drawing.Size(141, 22);
+            this.smallIcon1.Size = new System.Drawing.Size(152, 22);
             this.smallIcon1.Text = "小图标(&N)";
             this.smallIcon1.Click += new System.EventHandler(this.largeIcon1_Click);
             // 
             // list1
             // 
             this.list1.CheckOnClick = true;
+            this.list1.GroupIndex = 11;
             this.list1.Name = "list1";
-            this.list1.Size = new System.Drawing.Size(141, 22);
+            this.list1.Size = new System.Drawing.Size(152, 22);
             this.list1.Text = "列表(&T)";
             this.list1.Click += new System.EventHandler(this.largeIcon1_Click);
             // 
             // tile1
             // 
             this.tile1.CheckOnClick = true;
+            this.tile1.GroupIndex = 11;
             this.tile1.Name = "tile1";
-            this.tile1.Size = new System.Drawing.Size(141, 22);
+            this.tile1.Size = new System.Drawing.Size(152, 22);
             this.tile1.Text = "平铺(&S)";
             this.tile1.Click += new System.EventHandler(this.largeIcon1_Click);
             // 
@@ -147,75 +149,82 @@
             this.details1.Checked = true;
             this.details1.CheckOnClick = true;
             this.details1.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.details1.GroupIndex = 11;
             this.details1.Name = "details1";
-            this.details1.Size = new System.Drawing.Size(141, 22);
+            this.details1.Size = new System.Drawing.Size(152, 22);
             this.details1.Text = "详细信息(&D)";
             this.details1.Click += new System.EventHandler(this.largeIcon1_Click);
             // 
             // 排序方式OToolStripMenuItem
             // 
             this.排序方式OToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.名称MenuItem,
-            this.修改日期MenuItem,
-            this.大小MenuItem,
+            this.sortByName1,
+            this.sortByDate1,
+            this.sortBySize,
             this.toolStripMenuItem2,
-            this.递增MenuItem,
-            this.递减MenuItem});
+            this.sortBydesending1,
+            this.sortByAsending1});
             this.排序方式OToolStripMenuItem.Name = "排序方式OToolStripMenuItem";
             this.排序方式OToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
             this.排序方式OToolStripMenuItem.Text = "排序方式(&O)";
+            this.排序方式OToolStripMenuItem.Visible = false;
             // 
-            // 名称MenuItem
+            // sortByName1
             // 
-            this.名称MenuItem.Checked = true;
-            this.名称MenuItem.CheckOnClick = true;
-            this.名称MenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.名称MenuItem.Name = "名称MenuItem";
-            this.名称MenuItem.Size = new System.Drawing.Size(124, 22);
-            this.名称MenuItem.Text = "名称";
-            this.名称MenuItem.Click += new System.EventHandler(this.名称MenuItem_Click);
+            this.sortByName1.Checked = true;
+            this.sortByName1.CheckOnClick = true;
+            this.sortByName1.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.sortByName1.GroupIndex = 44;
+            this.sortByName1.Name = "sortByName1";
+            this.sortByName1.Size = new System.Drawing.Size(152, 22);
+            this.sortByName1.Text = "名称";
+            this.sortByName1.Click += new System.EventHandler(this.名称MenuItem_Click);
             // 
-            // 修改日期MenuItem
+            // sortByDate1
             // 
-            this.修改日期MenuItem.CheckOnClick = true;
-            this.修改日期MenuItem.Name = "修改日期MenuItem";
-            this.修改日期MenuItem.Size = new System.Drawing.Size(124, 22);
-            this.修改日期MenuItem.Text = "修改日期";
-            this.修改日期MenuItem.Click += new System.EventHandler(this.名称MenuItem_Click);
+            this.sortByDate1.CheckOnClick = true;
+            this.sortByDate1.GroupIndex = 44;
+            this.sortByDate1.Name = "sortByDate1";
+            this.sortByDate1.Size = new System.Drawing.Size(152, 22);
+            this.sortByDate1.Text = "修改日期";
+            this.sortByDate1.Click += new System.EventHandler(this.名称MenuItem_Click);
             // 
-            // 大小MenuItem
+            // sortBySize
             // 
-            this.大小MenuItem.CheckOnClick = true;
-            this.大小MenuItem.Name = "大小MenuItem";
-            this.大小MenuItem.Size = new System.Drawing.Size(124, 22);
-            this.大小MenuItem.Text = "大小";
-            this.大小MenuItem.Visible = false;
-            this.大小MenuItem.Click += new System.EventHandler(this.名称MenuItem_Click);
+            this.sortBySize.CheckOnClick = true;
+            this.sortBySize.GroupIndex = 44;
+            this.sortBySize.Name = "sortBySize";
+            this.sortBySize.Size = new System.Drawing.Size(152, 22);
+            this.sortBySize.Text = "大小";
+            this.sortBySize.Visible = false;
+            this.sortBySize.Click += new System.EventHandler(this.名称MenuItem_Click);
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(121, 6);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(149, 6);
             // 
-            // 递增MenuItem
+            // sortBydesending1
             // 
-            this.递增MenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.递增MenuItem.Checked = true;
-            this.递增MenuItem.CheckOnClick = true;
-            this.递增MenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.递增MenuItem.Name = "递增MenuItem";
-            this.递增MenuItem.Size = new System.Drawing.Size(124, 22);
-            this.递增MenuItem.Text = "递增(&A)";
-            this.递增MenuItem.Click += new System.EventHandler(this.名称MenuItem_Click);
+            this.sortBydesending1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.sortBydesending1.Checked = true;
+            this.sortBydesending1.CheckOnClick = true;
+            this.sortBydesending1.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.sortBydesending1.GroupIndex = 3;
+            this.sortBydesending1.Name = "sortBydesending1";
+            this.sortBydesending1.Size = new System.Drawing.Size(152, 22);
+            this.sortBydesending1.Text = "递增(&A)";
+            this.sortBydesending1.Click += new System.EventHandler(this.名称MenuItem_Click);
             // 
-            // 递减MenuItem
+            // sortByAsending1
             // 
-            this.递减MenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.递减MenuItem.CheckOnClick = true;
-            this.递减MenuItem.Name = "递减MenuItem";
-            this.递减MenuItem.Size = new System.Drawing.Size(124, 22);
-            this.递减MenuItem.Text = "递减(&D)";
-            this.递减MenuItem.Click += new System.EventHandler(this.名称MenuItem_Click);
+            this.sortByAsending1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.sortByAsending1.CheckOnClick = true;
+            this.sortByAsending1.GroupIndex = 3;
+            this.sortByAsending1.Name = "sortByAsending1";
+            this.sortByAsending1.Size = new System.Drawing.Size(152, 22);
+            this.sortByAsending1.Text = "递减(&D)";
+            this.sortByAsending1.Click += new System.EventHandler(this.名称MenuItem_Click);
             // 
             // 刷新RToolStripMenuItem
             // 
@@ -293,12 +302,6 @@
             // 
             this.toolStripDivider2.Name = "toolStripDivider2";
             this.toolStripDivider2.Size = new System.Drawing.Size(185, 6);
-            // 
-            // toolStripMenuItem4
-            // 
-            this.toolStripMenuItem4.Name = "toolStripMenuItem4";
-            this.toolStripMenuItem4.Size = new System.Drawing.Size(185, 6);
-            this.toolStripMenuItem4.Visible = false;
             // 
             // tms_Other
             // 
@@ -449,10 +452,9 @@
 
         #endregion
 
-        private ContextMenuStrip ContextMenuStrip1;
+        private ClassicContextMenuStrip ContextMenuStrip1;
         private ToolStripSeparator toolStripMenuItem9;
         private ToolStripSeparator toolStripDivider2;
-        private ToolStripSeparator toolStripMenuItem4;
         private ToolStripMenuItem tms_Other;
         private ToolStripMenuItem 复制文件标题_MenuItem;
         private ToolStripMenuItem 复制文件路径_MenuItem;
@@ -473,20 +475,20 @@
         private ToolStripMenuItem 重命名MToolStripMenuItem;
         public IO.FileSystemWatcher fileSystemWatcher1;
         private ToolStripMenuItem 排序方式OToolStripMenuItem;
-        private ToolStripMenuItem 名称MenuItem;
-        private ToolStripMenuItem 修改日期MenuItem;
-        private ToolStripMenuItem 大小MenuItem;
-        private ToolStripSeparator toolStripMenuItem2;
-        private ToolStripMenuItem 递增MenuItem;
-        private ToolStripMenuItem 递减MenuItem;
         private ToolStripMenuItem toolStripMenuItem3;
-        private ToolStripMenuItem largeIcon1;
-        private ToolStripMenuItem smallIcon1;
-        private ToolStripMenuItem list1;
-        private ToolStripMenuItem tile1;
-        private ToolStripMenuItem details1;
         private ToolStripMenuItem 复制文件_MenuItem;
         private ToolStripMenuItem 新建文件ToolStripMenuItem;
         private ImageList imageList1;
+        private RadioMenuItem largeIcon1;
+        private RadioMenuItem smallIcon1;
+        private RadioMenuItem list1;
+        private RadioMenuItem tile1;
+        private RadioMenuItem details1;
+        private ToolStripSeparator toolStripMenuItem2;
+        private RadioMenuItem sortByName1;
+        private RadioMenuItem sortByDate1;
+        private RadioMenuItem sortBySize;
+        private RadioMenuItem sortBydesending1;
+        private RadioMenuItem sortByAsending1;
     }
 }

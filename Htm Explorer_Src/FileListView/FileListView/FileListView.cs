@@ -435,8 +435,9 @@ namespace System.Windows.Forms
 
 
             //ATTACH IMG
-            string filename = path + "\\" + e.Item.Text + fileExt;
-            string attachdir = DirectoryCore.Get_AttachmentsDirectory(filename);
+            //string filename = path + "\\" + e.Item.Text + fileExt;
+            //listView1.Items[Index].SubItems[1].Text = filename;
+            string attachdir = DirectoryCore.Get_AttachmentsDirectory(e.Item.SubItems[1].Text);
             if (Directory.Exists(attachdir))
             {
               
@@ -473,46 +474,23 @@ namespace System.Windows.Forms
             {
                 case "largeIcon1":
                     listView1.View = View.LargeIcon;
-                    largeIcon1.Checked = true;
-                    smallIcon1.Checked = false;
-                    list1.Checked = false;
-                    tile1.Checked = false;
-                    details1.Checked = false;
-
                     break;
                 case "smallIcon1":
                     listView1.View = View.SmallIcon;
-                    largeIcon1.Checked = false;
-                    smallIcon1.Checked = true;
-                    list1.Checked = false;
-                    tile1.Checked = false;
-                    details1.Checked = false;
+   
                     break;
                 case "list1":
                     listView1.View = View.List;
-                    largeIcon1.Checked = false;
-                    smallIcon1.Checked = false;
-                    list1.Checked = true;
-                    tile1.Checked = false;
-                    details1.Checked = false;
+
                     break;
                 case "tile1":
                     listView1.View = View.Tile;
-                    largeIcon1.Checked = false;
-                    smallIcon1.Checked = false;
-                    list1.Checked = false;
-                    tile1.Checked = true;
-                    details1.Checked = false;
+
 
                     break;
                 case "details1":
                      
                     listView1.View = View.Details;
-                    largeIcon1.Checked = false;
-                    smallIcon1.Checked = false;
-                    list1.Checked = false;
-                    tile1.Checked = false;
-                    details1.Checked = true;
                     listView1_Resize(sender, e);
                     break;
             }
@@ -681,31 +659,27 @@ namespace System.Windows.Forms
 
         private void 名称MenuItem_Click(object sender, EventArgs e)
         {
-            //名称MenuItem.Checked = !修改日期MenuItem.Checked && !大小MenuItem.Checked;
-            //修改日期MenuItem.Checked = !名称MenuItem.Checked && !大小MenuItem.Checked;
-            //大小MenuItem.Checked = !名称MenuItem.Checked && !修改日期MenuItem.Checked;
-
             switch (((ToolStripMenuItem)sender).Name)
             {
                 case "名称MenuItem":
                     listView1Sort(0);
-                    名称MenuItem.Checked = true;
-                    修改日期MenuItem.Checked = false;
-                    大小MenuItem.Checked = false;
+                    //sortByName1.Checked = true;
+                    //sortByDate1.Checked = false;
+                    //sortBySize.Checked = false;
                     break;
 
                 case "修改日期MenuItem":
                     listView1Sort(3);
-                    修改日期MenuItem.Checked = true;
-                    名称MenuItem.Checked = false;
-                    大小MenuItem.Checked = false;
+                    //sortByDate1.Checked = true;
+                    //sortByName1.Checked = false;
+                    //sortBySize.Checked = false;
                     break;
 
                 case "大小MenuItem":
                     listView1Sort(4);
-                    大小MenuItem.Checked = true;
-                    名称MenuItem.Checked = false;
-                    修改日期MenuItem.Checked = false;
+                    //sortBySize.Checked = true;
+                    //sortByName1.Checked = false;
+                    //sortByDate1.Checked = false;
                     break;
 
 
@@ -713,16 +687,16 @@ namespace System.Windows.Forms
                     listView1.Sorting = SortOrder.None;
                     listView1.Sorting = SortOrder.Ascending;
 
-                    递增MenuItem.Checked = true;
-                    递减MenuItem.Checked = false;
+                    //sortBydesending1.Checked = true;
+                    //sortByAsending1.Checked = false;
                     break;
 
                 case "递减MenuItem":
                     listView1.Sorting = SortOrder.None;
                     listView1.Sorting = SortOrder.Descending;
 
-                    递减MenuItem.Checked = true;
-                    递增MenuItem.Checked = false;
+                    //sortByAsending1.Checked = true;
+                    //sortBydesending1.Checked = false;
                     break;
             }
         }

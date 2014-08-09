@@ -40,9 +40,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Win32AddressBar\AddressButtonClass.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="ColorPickerForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -55,6 +52,14 @@
     <Compile Include="CustomForm\CustomForm.designer.cs">
       <DependentUpon>CustomForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="CustomMenuStrip\ClassicContextMenuStrip.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CustomMenuStrip\RadioMenuItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CustomMenuStrip\CustomMenuStripRenderer.cs" />
+    <Compile Include="CustomMenuStrip\CustomToolStripRenderer.cs" />
     <Compile Include="ImageButton.cs">
       <SubType>Component</SubType>
     </Compile>

@@ -31,7 +31,10 @@ namespace System.Windows.Forms
          }
 
         private void HtmlEdit_Load(object sender, EventArgs e)
-        {      
+        {
+            Color c = Color.FromArgb(238, 238, 242);
+            SetupToolStripRender(c, c);
+
             #region ToolStripDropDown
             host1 = new ToolStripControlHost(foreColorForm1);
             dropdown1.Margin = Padding.Empty;
@@ -72,6 +75,16 @@ namespace System.Windows.Forms
             #endregion
         }
 
+        public void SetupToolStripRender(Color back,Color border)
+        {         
+            //toolStrip1.Renderer = new System.Drawing.CustomToolStripRenderer();
+            CustomToolStripRenderer tr = new System.Drawing.CustomToolStripRenderer();
+            tr.bgColor = back;
+            tr.borderColor = border;
+            toolStrip1.Renderer = tr;
+
+            toolStrip1.Invalidate();
+        }
 
 
         #region 属性

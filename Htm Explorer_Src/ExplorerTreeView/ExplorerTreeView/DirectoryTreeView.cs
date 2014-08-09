@@ -30,6 +30,7 @@ namespace System.Windows.Forms
             selImage = imageList1.Images[0];
             treeView1.SelectedNode = myPcNode;
             winTextBox1.Parent = treeView1;
+
         }
 
         private void Initialize()
