@@ -1,4 +1,4 @@
-﻿namespace TitleBar
+﻿namespace CustomFormStyle
 {
     partial class CustomForm
     {
@@ -68,7 +68,7 @@
             this.label1.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label1.Location = new System.Drawing.Point(25, 2);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(466, 23);
+            this.label1.Size = new System.Drawing.Size(464, 23);
             this.label1.TabIndex = 7;
             this.label1.Text = "WindowsFormsApplication1";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -108,7 +108,7 @@
             this.toolStripMenuItem1,
             this.close});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-             this.contextMenuStrip1.Size = new System.Drawing.Size(168, 142);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(168, 142);
             this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             // 
             // restoreWindow
@@ -183,7 +183,7 @@
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.Color.Transparent;
+            this.panel1.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.panel1.Controls.Add(this.btnClose);
             this.panel1.Controls.Add(this.btnMinimum);
             this.panel1.Controls.Add(this.btnMaximum);
@@ -193,6 +193,7 @@
             this.panel1.Controls.Add(this.label1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(616, 27);
             this.panel1.TabIndex = 10;
@@ -204,13 +205,14 @@
             this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnClose.BackColor = System.Drawing.Color.Transparent;
             this.btnClose.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnClose.BorderColor = System.Drawing.Color.Transparent;
             this.btnClose.DefautColor = System.Drawing.Color.Transparent;
             this.btnClose.DefautImage = ((System.Drawing.Image)(resources.GetObject("btnClose.DefautImage")));
             this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnClose.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnClose.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btnClose.Image = ((System.Drawing.Image)(resources.GetObject("btnClose.Image")));
-            this.btnClose.Location = new System.Drawing.Point(584, 1);
+            this.btnClose.Location = new System.Drawing.Point(584, 0);
             this.btnClose.Margin = new System.Windows.Forms.Padding(0);
             this.btnClose.MouseDownColor = System.Drawing.Color.Red;
             this.btnClose.MouseDownImage = ((System.Drawing.Image)(resources.GetObject("btnClose.MouseDownImage")));
@@ -228,12 +230,13 @@
             this.btnMinimum.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnMinimum.BackColor = System.Drawing.Color.Transparent;
             this.btnMinimum.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnMinimum.BorderColor = System.Drawing.Color.Transparent;
             this.btnMinimum.DefautColor = System.Drawing.Color.Transparent;
             this.btnMinimum.DefautImage = ((System.Drawing.Image)(resources.GetObject("btnMinimum.DefautImage")));
             this.btnMinimum.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnMinimum.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnMinimum.Image = ((System.Drawing.Image)(resources.GetObject("btnMinimum.Image")));
-            this.btnMinimum.Location = new System.Drawing.Point(540, 1);
+            this.btnMinimum.Location = new System.Drawing.Point(540, 0);
             this.btnMinimum.Margin = new System.Windows.Forms.Padding(0);
             this.btnMinimum.MouseDownColor = System.Drawing.Color.FromArgb(((int)(((byte)(54)))), ((int)(((byte)(101)))), ((int)(((byte)(179)))));
             this.btnMinimum.MouseDownImage = ((System.Drawing.Image)(resources.GetObject("btnMinimum.MouseDownImage")));
@@ -250,12 +253,13 @@
             this.btnMaximum.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnMaximum.BackColor = System.Drawing.Color.Transparent;
             this.btnMaximum.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnMaximum.BorderColor = System.Drawing.Color.Transparent;
             this.btnMaximum.DefautColor = System.Drawing.Color.Transparent;
             this.btnMaximum.DefautImage = ((System.Drawing.Image)(resources.GetObject("btnMaximum.DefautImage")));
             this.btnMaximum.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnMaximum.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnMaximum.Image = ((System.Drawing.Image)(resources.GetObject("btnMaximum.Image")));
-            this.btnMaximum.Location = new System.Drawing.Point(562, 1);
+            this.btnMaximum.Location = new System.Drawing.Point(562, 0);
             this.btnMaximum.Margin = new System.Windows.Forms.Padding(0);
             this.btnMaximum.MouseDownColor = System.Drawing.Color.FromArgb(((int)(((byte)(54)))), ((int)(((byte)(101)))), ((int)(((byte)(179)))));
             this.btnMaximum.MouseDownImage = ((System.Drawing.Image)(resources.GetObject("btnMaximum.MouseDownImage")));
@@ -275,12 +279,13 @@
             this.btnMenu.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnMenu.BackColor = System.Drawing.Color.Transparent;
             this.btnMenu.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnMenu.BorderColor = System.Drawing.Color.Transparent;
             this.btnMenu.DefautColor = System.Drawing.Color.Transparent;
             this.btnMenu.DefautImage = ((System.Drawing.Image)(resources.GetObject("btnMenu.DefautImage")));
             this.btnMenu.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnMenu.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnMenu.Image = ((System.Drawing.Image)(resources.GetObject("btnMenu.Image")));
-            this.btnMenu.Location = new System.Drawing.Point(516, 1);
+            this.btnMenu.Location = new System.Drawing.Point(516, 0);
             this.btnMenu.Margin = new System.Windows.Forms.Padding(0);
             this.btnMenu.MouseDownColor = System.Drawing.Color.FromArgb(((int)(((byte)(54)))), ((int)(((byte)(101)))), ((int)(((byte)(179)))));
             this.btnMenu.MouseDownImage = ((System.Drawing.Image)(resources.GetObject("btnMenu.MouseDownImage")));
@@ -296,12 +301,13 @@
             this.btnSkin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSkin.BackColor = System.Drawing.Color.Transparent;
             this.btnSkin.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnSkin.BorderColor = System.Drawing.Color.Transparent;
             this.btnSkin.DefautColor = System.Drawing.Color.Transparent;
             this.btnSkin.DefautImage = ((System.Drawing.Image)(resources.GetObject("btnSkin.DefautImage")));
             this.btnSkin.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnSkin.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnSkin.Image = ((System.Drawing.Image)(resources.GetObject("btnSkin.Image")));
-            this.btnSkin.Location = new System.Drawing.Point(492, 1);
+            this.btnSkin.Location = new System.Drawing.Point(492, 0);
             this.btnSkin.Margin = new System.Windows.Forms.Padding(0);
             this.btnSkin.MouseDownColor = System.Drawing.Color.FromArgb(((int)(((byte)(54)))), ((int)(((byte)(101)))), ((int)(((byte)(179)))));
             this.btnSkin.MouseDownImage = ((System.Drawing.Image)(resources.GetObject("btnSkin.MouseDownImage")));
@@ -325,8 +331,6 @@
             this.Size = new System.Drawing.Size(616, 294);
             this.Load += new System.EventHandler(this.CustomForm_Load);
             this.SizeChanged += new System.EventHandler(this.CustomForm_SizeChanged);
-            this.Paint += new System.Windows.Forms.PaintEventHandler(this.CustomForm_Paint);
-            this.Resize += new System.EventHandler(this.CustomForm_Resize);
             this.contextMenuStrip1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);

@@ -707,7 +707,17 @@ namespace System.Windows.Forms
 
         private void listView1_SizeChanged(object sender, EventArgs e)
         {
-            listView1.Refresh();
+            //Refresh会导致主窗体大小 改变时很卡
+
+            //if (DesignMode)
+            //    return;
+            
+            //if(this.FindForm().WindowState == FormWindowState.Maximized)
+            //{
+            //    listView1.Refresh();
+            //    listView1.Invalidate();
+            //}
+
             int WIDTH = listView1.Width - 2 - HWidth;
             if (WIDTH > 2)
                 columnHeader1.Width = WIDTH;

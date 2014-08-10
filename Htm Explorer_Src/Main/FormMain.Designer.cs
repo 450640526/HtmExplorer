@@ -30,17 +30,19 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
-            this.header1 = new System.Windows.Forms.Panel();
-            this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.btnReadMode1 = new System.Windows.Forms.ImageButton();
             this.fullView1 = new System.Windows.Forms.CheckBox();
             this.btnAttch1 = new System.Windows.Forms.CheckBox();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
+            this.customForm1 = new CustomFormStyle.CustomForm();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.winTextBox1 = new System.Windows.Forms.WinTextBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripSplitButton1 = new System.Windows.Forms.ToolStripSplitButton();
@@ -54,7 +56,8 @@
             this.toolStripMenuItem8 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem7 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
-            this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
+            this.header1 = new System.Windows.Forms.Panel();
+            this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.win32AddressBar1 = new System.Windows.Forms.Win32AddressBar();
             this.searchBox1 = new System.Windows.Forms.SearchBox();
             this.searchContextMenuStrip = new System.Windows.Forms.ClassicContextMenuStrip(this.components);
@@ -62,12 +65,6 @@
             this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripSeparator();
             this.searchFileName1 = new System.Windows.Forms.RadioMenuItem();
             this.searchKeyWord1 = new System.Windows.Forms.RadioMenuItem();
-            this.directoryTreeView1 = new System.Windows.Forms.DirectoryTreeView();
-            this.fileListView1 = new System.Windows.Forms.FileListView();
-            this.htmEdit1 = new System.Windows.Forms.HtmEdit();
-            this.btnReadMode1 = new System.Windows.Forms.ImageButton();
-            this.winTextBox1 = new System.Windows.Forms.WinTextBox();
-            this.customForm1 = new TitleBar.CustomForm();
             this.文件MenuStrip1 = new System.Windows.Forms.ClassicContextMenuStrip(this.components);
             this.文件FToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.导入IToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -89,11 +86,11 @@
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.notifyIconcontextMenuStrip1 = new System.Windows.Forms.ClassicContextMenuStrip(this.components);
             this.退出ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.header1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
-            this.splitContainer3.Panel1.SuspendLayout();
-            this.splitContainer3.Panel2.SuspendLayout();
-            this.splitContainer3.SuspendLayout();
+            this.directoryTreeView1 = new System.Windows.Forms.DirectoryTreeView();
+            this.fileListView1 = new System.Windows.Forms.FileListView();
+            this.htmEdit1 = new System.Windows.Forms.HtmEdit();
+            ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
+            this.customForm1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -104,52 +101,16 @@
             this.splitContainer2.SuspendLayout();
             this.panel2.SuspendLayout();
             this.statusStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
+            this.header1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
+            this.splitContainer3.Panel1.SuspendLayout();
+            this.splitContainer3.Panel2.SuspendLayout();
+            this.splitContainer3.SuspendLayout();
             this.searchContextMenuStrip.SuspendLayout();
             this.文件MenuStrip1.SuspendLayout();
             this.skinContextMenuStrip.SuspendLayout();
             this.notifyIconcontextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // header1
-            // 
-            this.header1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.header1.BackColor = System.Drawing.Color.Transparent;
-            this.header1.Controls.Add(this.splitContainer3);
-            this.header1.Location = new System.Drawing.Point(1, 27);
-            this.header1.Name = "header1";
-            this.header1.Size = new System.Drawing.Size(1034, 29);
-            this.header1.TabIndex = 20;
-            // 
-            // splitContainer3
-            // 
-            this.splitContainer3.BackColor = System.Drawing.Color.Transparent;
-            this.splitContainer3.Cursor = System.Windows.Forms.Cursors.SizeWE;
-            this.splitContainer3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.splitContainer3.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
-            this.splitContainer3.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer3.Name = "splitContainer3";
-            // 
-            // splitContainer3.Panel1
-            // 
-            this.splitContainer3.Panel1.BackColor = System.Drawing.Color.Transparent;
-            this.splitContainer3.Panel1.Controls.Add(this.win32AddressBar1);
-            this.splitContainer3.Panel1.Cursor = System.Windows.Forms.Cursors.Default;
-            this.splitContainer3.Panel1MinSize = 300;
-            // 
-            // splitContainer3.Panel2
-            // 
-            this.splitContainer3.Panel2.BackColor = System.Drawing.Color.Transparent;
-            this.splitContainer3.Panel2.Controls.Add(this.searchBox1);
-            this.splitContainer3.Panel2.Cursor = System.Windows.Forms.Cursors.Default;
-            this.splitContainer3.Panel2MinSize = 150;
-            this.splitContainer3.Size = new System.Drawing.Size(1034, 32);
-            this.splitContainer3.SplitterDistance = 841;
-            this.splitContainer3.TabIndex = 20;
-            this.splitContainer3.TabStop = false;
-            this.splitContainer3.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainer3_SplitterMoved);
-            this.splitContainer3.Resize += new System.EventHandler(this.splitContainer3_Resize);
             // 
             // toolTip1
             // 
@@ -157,6 +118,30 @@
             this.toolTip1.InitialDelay = 500;
             this.toolTip1.ReshowDelay = 100;
             this.toolTip1.ShowAlways = true;
+            // 
+            // btnReadMode1
+            // 
+            this.btnReadMode1.BackColor = System.Drawing.Color.Transparent;
+            this.btnReadMode1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnReadMode1.BorderColor = System.Drawing.Color.Transparent;
+            this.btnReadMode1.DefautColor = System.Drawing.Color.Transparent;
+            this.btnReadMode1.DefautImage = null;
+            this.btnReadMode1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnReadMode1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnReadMode1.Image = ((System.Drawing.Image)(resources.GetObject("btnReadMode1.Image")));
+            this.btnReadMode1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnReadMode1.Location = new System.Drawing.Point(3, 3);
+            this.btnReadMode1.MouseDownColor = System.Drawing.SystemColors.ActiveCaption;
+            this.btnReadMode1.MouseDownImage = null;
+            this.btnReadMode1.MouseEnterColor = System.Drawing.Color.LightGray;
+            this.btnReadMode1.MouseEnterImage = null;
+            this.btnReadMode1.Name = "btnReadMode1";
+            this.btnReadMode1.Size = new System.Drawing.Size(62, 23);
+            this.btnReadMode1.TabIndex = 34;
+            this.btnReadMode1.Text = "编辑";
+            this.btnReadMode1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.toolTip1.SetToolTip(this.btnReadMode1, "编辑文档");
+            this.btnReadMode1.Click += new System.EventHandler(this.阅读按钮_Click);
             // 
             // fullView1
             // 
@@ -201,6 +186,48 @@
             this.btnAttch1.UseVisualStyleBackColor = false;
             this.btnAttch1.CheckedChanged += new System.EventHandler(this.附件按钮_CheckedChanged);
             // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.定时清理内存_Tick);
+            // 
+            // imageList1
+            // 
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList1.Images.SetKeyName(0, "2.png");
+            this.imageList1.Images.SetKeyName(1, "full.png");
+            // 
+            // fileSystemWatcher1
+            // 
+            this.fileSystemWatcher1.EnableRaisingEvents = true;
+            this.fileSystemWatcher1.SynchronizingObject = this;
+            this.fileSystemWatcher1.Changed += new System.IO.FileSystemEventHandler(this.fileSystemWatcher1_Created);
+            this.fileSystemWatcher1.Created += new System.IO.FileSystemEventHandler(this.fileSystemWatcher1_Created);
+            this.fileSystemWatcher1.Deleted += new System.IO.FileSystemEventHandler(this.fileSystemWatcher1_Created);
+            // 
+            // customForm1
+            // 
+            this.customForm1.BackColor = System.Drawing.Color.Transparent;
+            this.customForm1.Caption = "";
+            this.customForm1.CaptionColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(242)))));
+            this.customForm1.Controls.Add(this.splitContainer1);
+            this.customForm1.Controls.Add(this.statusStrip1);
+            this.customForm1.Controls.Add(this.header1);
+            this.customForm1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.customForm1.Icon = ((System.Drawing.Image)(resources.GetObject("customForm1.Icon")));
+            this.customForm1.Location = new System.Drawing.Point(0, 0);
+            this.customForm1.MenuButtonContextMenuStrip = this.文件MenuStrip1;
+            this.customForm1.MinimumSize = new System.Drawing.Size(203, 28);
+            this.customForm1.Name = "customForm1";
+            this.customForm1.ShowMenuButton = true;
+            this.customForm1.ShowSizeGrid = false;
+            this.customForm1.ShowSkinButton = true;
+            this.customForm1.Size = new System.Drawing.Size(826, 399);
+            this.customForm1.SkinButtonContextMenuStrip = this.skinContextMenuStrip;
+            this.customForm1.TabIndex = 24;
+            // 
             // splitContainer1
             // 
             this.splitContainer1.AllowDrop = true;
@@ -226,7 +253,7 @@
             this.splitContainer1.Panel2.Controls.Add(this.panel2);
             this.splitContainer1.Panel2.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.splitContainer1.Panel2MinSize = 0;
-            this.splitContainer1.Size = new System.Drawing.Size(1034, 389);
+            this.splitContainer1.Size = new System.Drawing.Size(822, 319);
             this.splitContainer1.SplitterDistance = 500;
             this.splitContainer1.SplitterWidth = 2;
             this.splitContainer1.TabIndex = 18;
@@ -254,7 +281,7 @@
             this.splitContainer2.Panel2.Controls.Add(this.fileListView1);
             this.splitContainer2.Panel2.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.splitContainer2.Panel2MinSize = 50;
-            this.splitContainer2.Size = new System.Drawing.Size(500, 389);
+            this.splitContainer2.Size = new System.Drawing.Size(500, 319);
             this.splitContainer2.SplitterDistance = 208;
             this.splitContainer2.SplitterWidth = 2;
             this.splitContainer2.TabIndex = 0;
@@ -273,7 +300,7 @@
             this.panel2.Controls.Add(this.winTextBox1);
             this.panel2.Location = new System.Drawing.Point(0, 3);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(532, 49);
+            this.panel2.Size = new System.Drawing.Size(321, 49);
             this.panel2.TabIndex = 40;
             // 
             // label1
@@ -284,22 +311,25 @@
             this.label1.Location = new System.Drawing.Point(-3, 48);
             this.label1.Margin = new System.Windows.Forms.Padding(0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(603, 1);
+            this.label1.Size = new System.Drawing.Size(392, 1);
             this.label1.TabIndex = 39;
             this.label1.Text = "label1";
             // 
-            // timer1
+            // winTextBox1
             // 
-            this.timer1.Enabled = true;
-            this.timer1.Interval = 1000;
-            this.timer1.Tick += new System.EventHandler(this.定时清理内存_Tick);
-            // 
-            // imageList1
-            // 
-            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList1.Images.SetKeyName(0, "2.png");
-            this.imageList1.Images.SetKeyName(1, "full.png");
+            this.winTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.winTextBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(242)))));
+            this.winTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.winTextBox1.Font = new System.Drawing.Font("Times New Roman", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.winTextBox1.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.winTextBox1.Location = new System.Drawing.Point(5, 27);
+            this.winTextBox1.MaxLength = 250;
+            this.winTextBox1.Name = "winTextBox1";
+            this.winTextBox1.Size = new System.Drawing.Size(312, 17);
+            this.winTextBox1.TabIndex = 35;
+            this.winTextBox1.TabStop = false;
+            this.winTextBox1.LostFocus += new System.EventHandler(this.重命名文件winTextBox1_LostFocus);
             // 
             // statusStrip1
             // 
@@ -311,17 +341,16 @@
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1,
             this.toolStripSplitButton1});
-            this.statusStrip1.Location = new System.Drawing.Point(1, 448);
+            this.statusStrip1.Location = new System.Drawing.Point(1, 378);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1018, 20);
-            this.statusStrip1.SizingGrip = false;
+            this.statusStrip1.Size = new System.Drawing.Size(825, 20);
             this.statusStrip1.TabIndex = 22;
             this.statusStrip1.Text = "statusStrip1";
             // 
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(931, 15);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(738, 15);
             this.toolStripStatusLabel1.Spring = true;
             this.toolStripStatusLabel1.Text = "0 个文件";
             this.toolStripStatusLabel1.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
@@ -422,25 +451,58 @@
             this.toolStripMenuItem6.Text = "50%";
             this.toolStripMenuItem6.Click += new System.EventHandler(this.网页缩放菜单_Click);
             // 
-            // fileSystemWatcher1
+            // header1
             // 
-            this.fileSystemWatcher1.EnableRaisingEvents = true;
-            this.fileSystemWatcher1.SynchronizingObject = this;
-            this.fileSystemWatcher1.Changed += new System.IO.FileSystemEventHandler(this.fileSystemWatcher1_Created);
-            this.fileSystemWatcher1.Created += new System.IO.FileSystemEventHandler(this.fileSystemWatcher1_Created);
-            this.fileSystemWatcher1.Deleted += new System.IO.FileSystemEventHandler(this.fileSystemWatcher1_Created);
+            this.header1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.header1.BackColor = System.Drawing.Color.Transparent;
+            this.header1.Controls.Add(this.splitContainer3);
+            this.header1.Location = new System.Drawing.Point(1, 28);
+            this.header1.Name = "header1";
+            this.header1.Size = new System.Drawing.Size(825, 28);
+            this.header1.TabIndex = 20;
+            // 
+            // splitContainer3
+            // 
+            this.splitContainer3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.splitContainer3.BackColor = System.Drawing.Color.Transparent;
+            this.splitContainer3.Cursor = System.Windows.Forms.Cursors.SizeWE;
+            this.splitContainer3.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
+            this.splitContainer3.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer3.Name = "splitContainer3";
+            // 
+            // splitContainer3.Panel1
+            // 
+            this.splitContainer3.Panel1.BackColor = System.Drawing.Color.Transparent;
+            this.splitContainer3.Panel1.Controls.Add(this.win32AddressBar1);
+            this.splitContainer3.Panel1.Cursor = System.Windows.Forms.Cursors.Default;
+            this.splitContainer3.Panel1MinSize = 300;
+            // 
+            // splitContainer3.Panel2
+            // 
+            this.splitContainer3.Panel2.BackColor = System.Drawing.Color.Transparent;
+            this.splitContainer3.Panel2.Controls.Add(this.searchBox1);
+            this.splitContainer3.Panel2.Cursor = System.Windows.Forms.Cursors.Default;
+            this.splitContainer3.Panel2MinSize = 150;
+            this.splitContainer3.Size = new System.Drawing.Size(823, 32);
+            this.splitContainer3.SplitterDistance = 648;
+            this.splitContainer3.TabIndex = 20;
+            this.splitContainer3.TabStop = false;
+            this.splitContainer3.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainer3_SplitterMoved);
+            this.splitContainer3.Resize += new System.EventHandler(this.splitContainer3_Resize);
             // 
             // win32AddressBar1
             // 
             this.win32AddressBar1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.win32AddressBar1.BackColor = System.Drawing.Color.Transparent;
-            this.win32AddressBar1.Location = new System.Drawing.Point(3, 4);
+            this.win32AddressBar1.Location = new System.Drawing.Point(3, 2);
             this.win32AddressBar1.Name = "win32AddressBar1";
             this.win32AddressBar1.progressBarBackColor = System.Drawing.Color.White;
             this.win32AddressBar1.ProgressBarMax = 100;
             this.win32AddressBar1.ProgressBarValue = 0;
-            this.win32AddressBar1.Size = new System.Drawing.Size(835, 26);
+            this.win32AddressBar1.Size = new System.Drawing.Size(642, 26);
             this.win32AddressBar1.TabIndex = 2;
             this.win32AddressBar1.ButtonsClick += new System.Windows.Forms.Win32AddressBar.EventHandler(this.win32AddressBar1_ButtonsClick);
             this.win32AddressBar1.LeftClick += new System.Windows.Forms.Win32AddressBar.EventHandler(this.win32AddressBar1_BackClick);
@@ -454,11 +516,11 @@
             this.searchBox1.DelayedTextChangedTimeout = 1500;
             this.searchBox1.DisplayText = " 搜索 \"这台电脑\" ";
             this.searchBox1.IndexFile = null;
-            this.searchBox1.Location = new System.Drawing.Point(6, 5);
+            this.searchBox1.Location = new System.Drawing.Point(6, 3);
             this.searchBox1.MinimumSize = new System.Drawing.Size(100, 22);
             this.searchBox1.Name = "searchBox1";
             this.searchBox1.SearchContextMenuStrip = this.searchContextMenuStrip;
-            this.searchBox1.Size = new System.Drawing.Size(176, 24);
+            this.searchBox1.Size = new System.Drawing.Size(158, 24);
             this.searchBox1.TabIndex = 0;
             this.searchBox1.TabStop = false;
             this.searchBox1.TypingFinished += new System.EventHandler(this.searchBox1_TypingFinished);
@@ -503,118 +565,6 @@
             this.searchKeyWord1.Name = "searchKeyWord1";
             this.searchKeyWord1.Size = new System.Drawing.Size(128, 22);
             this.searchKeyWord1.Text = "关键字(&K)";
-            // 
-            // directoryTreeView1
-            // 
-            this.directoryTreeView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.directoryTreeView1.BackColor = System.Drawing.Color.Transparent;
-            this.directoryTreeView1.Location = new System.Drawing.Point(3, 3);
-            this.directoryTreeView1.MinimumSize = new System.Drawing.Size(50, 50);
-            this.directoryTreeView1.Name = "directoryTreeView1";
-            this.directoryTreeView1.Size = new System.Drawing.Size(202, 383);
-            this.directoryTreeView1.TabIndex = 0;
-            this.directoryTreeView1.TabStop = false;
-            this.directoryTreeView1.SelectedIndexChanged += new System.Windows.Forms.DirectoryTreeView.EventHandler(this.directoryTreeView1_SelectedIndexChanged);
-            // 
-            // fileListView1
-            // 
-            this.fileListView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.fileListView1.AutoSize = true;
-            this.fileListView1.BackColor = System.Drawing.Color.Transparent;
-            this.fileListView1.Location = new System.Drawing.Point(3, 3);
-            this.fileListView1.Name = "fileListView1";
-            this.fileListView1.selfilename = "";
-            this.fileListView1.Size = new System.Drawing.Size(283, 383);
-            this.fileListView1.TabIndex = 0;
-            this.fileListView1.TabStop = false;
-            this.fileListView1.ItemClick += new System.EventHandler(this.fileListView1_ItemClick);
-            this.fileListView1.SaveAsClick += new System.EventHandler(this.另存为_Click);
-            this.fileListView1.NewFileClick += new System.EventHandler(this.新建_Click);
-            this.fileListView1.RenameFileClick += new System.EventHandler(this.重命名_Click);
-            this.fileListView1.ItemActive += new System.EventHandler(this.阅读按钮_Click);
-            this.fileListView1.CopyFile += new System.EventHandler(this.fileListView1_CopyFile);
-            // 
-            // htmEdit1
-            // 
-            this.htmEdit1.AllowDrop = true;
-            this.htmEdit1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.htmEdit1.EditMode = false;
-            this.htmEdit1.Location = new System.Drawing.Point(3, 51);
-            this.htmEdit1.MinimumSize = new System.Drawing.Size(163, 64);
-            this.htmEdit1.Name = "htmEdit1";
-            this.htmEdit1.Size = new System.Drawing.Size(530, 335);
-            this.htmEdit1.TabIndex = 0;
-            this.htmEdit1.TabStop = false;
-            this.htmEdit1.Title = "未命名";
-            this.htmEdit1.GetFocus += new System.EventHandler(this.htmEdit1_GetFocus);
-            this.htmEdit1.ViewSourceChecked += new System.EventHandler(this.htmEdit1_ViewSourceChecked);
-            this.htmEdit1.NewDoucument += new System.EventHandler(this.htmEdit1_NewDoucument);
-            // 
-            // btnReadMode1
-            // 
-            this.btnReadMode1.BackColor = System.Drawing.Color.Transparent;
-            this.btnReadMode1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btnReadMode1.BorderColor = System.Drawing.Color.Transparent;
-            this.btnReadMode1.DefautColor = System.Drawing.Color.Transparent;
-            this.btnReadMode1.DefautImage = null;
-            this.btnReadMode1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnReadMode1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnReadMode1.Image = ((System.Drawing.Image)(resources.GetObject("btnReadMode1.Image")));
-            this.btnReadMode1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnReadMode1.Location = new System.Drawing.Point(3, 3);
-            this.btnReadMode1.MouseDownColor = System.Drawing.SystemColors.ActiveCaption;
-            this.btnReadMode1.MouseDownImage = null;
-            this.btnReadMode1.MouseEnterColor = System.Drawing.Color.LightGray;
-            this.btnReadMode1.MouseEnterImage = null;
-            this.btnReadMode1.Name = "btnReadMode1";
-            this.btnReadMode1.Size = new System.Drawing.Size(62, 23);
-            this.btnReadMode1.TabIndex = 34;
-            this.btnReadMode1.Text = "编辑";
-            this.btnReadMode1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.toolTip1.SetToolTip(this.btnReadMode1, "编辑文档");
-            this.btnReadMode1.Click += new System.EventHandler(this.阅读按钮_Click);
-            // 
-            // winTextBox1
-            // 
-            this.winTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.winTextBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(242)))));
-            this.winTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.winTextBox1.Font = new System.Drawing.Font("Times New Roman", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.winTextBox1.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.winTextBox1.Location = new System.Drawing.Point(5, 26);
-            this.winTextBox1.MaxLength = 250;
-            this.winTextBox1.Name = "winTextBox1";
-            this.winTextBox1.Size = new System.Drawing.Size(519, 17);
-            this.winTextBox1.TabIndex = 35;
-            this.winTextBox1.TabStop = false;
-            this.winTextBox1.LostFocus += new System.EventHandler(this.重命名文件winTextBox1_LostFocus);
-            // 
-            // customForm1
-            // 
-            this.customForm1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.customForm1.BackColor = System.Drawing.Color.Transparent;
-            this.customForm1.Caption = "";
-            this.customForm1.CaptionColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(242)))));
-            this.customForm1.Icon = ((System.Drawing.Image)(resources.GetObject("customForm1.Icon")));
-            this.customForm1.Location = new System.Drawing.Point(1, 1);
-            this.customForm1.MenuButtonContextMenuStrip = this.文件MenuStrip1;
-            this.customForm1.MinimumSize = new System.Drawing.Size(203, 28);
-            this.customForm1.Name = "customForm1";
-            this.customForm1.ShowMenuButton = true;
-            this.customForm1.ShowSizeGrid = true;
-            this.customForm1.ShowSkinButton = true;
-            this.customForm1.Size = new System.Drawing.Size(1035, 469);
-            this.customForm1.SkinButtonContextMenuStrip = this.skinContextMenuStrip;
-            this.customForm1.TabIndex = 24;
             // 
             // 文件MenuStrip1
             // 
@@ -761,6 +711,7 @@
             // 
             this.notifyIcon1.ContextMenuStrip = this.notifyIconcontextMenuStrip1;
             this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
+            this.notifyIcon1.Visible = true;
             this.notifyIcon1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.托盘_MouseClick);
             // 
             // notifyIconcontextMenuStrip1
@@ -777,20 +728,69 @@
             this.退出ToolStripMenuItem.Text = "退出(&X)";
             this.退出ToolStripMenuItem.Click += new System.EventHandler(this.退出_Click);
             // 
+            // directoryTreeView1
+            // 
+            this.directoryTreeView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.directoryTreeView1.BackColor = System.Drawing.Color.Transparent;
+            this.directoryTreeView1.Location = new System.Drawing.Point(3, 3);
+            this.directoryTreeView1.MinimumSize = new System.Drawing.Size(50, 50);
+            this.directoryTreeView1.Name = "directoryTreeView1";
+            this.directoryTreeView1.Size = new System.Drawing.Size(202, 313);
+            this.directoryTreeView1.TabIndex = 0;
+            this.directoryTreeView1.TabStop = false;
+            this.directoryTreeView1.SelectedIndexChanged += new System.Windows.Forms.DirectoryTreeView.EventHandler(this.directoryTreeView1_SelectedIndexChanged);
+            // 
+            // fileListView1
+            // 
+            this.fileListView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.fileListView1.AutoSize = true;
+            this.fileListView1.BackColor = System.Drawing.Color.Transparent;
+            this.fileListView1.Location = new System.Drawing.Point(3, 3);
+            this.fileListView1.Name = "fileListView1";
+            this.fileListView1.selfilename = "";
+            this.fileListView1.Size = new System.Drawing.Size(286, 313);
+            this.fileListView1.TabIndex = 0;
+            this.fileListView1.TabStop = false;
+            this.fileListView1.ItemClick += new System.EventHandler(this.fileListView1_ItemClick);
+            this.fileListView1.SaveAsClick += new System.EventHandler(this.另存为_Click);
+            this.fileListView1.NewFileClick += new System.EventHandler(this.新建_Click);
+            this.fileListView1.RenameFileClick += new System.EventHandler(this.重命名_Click);
+            this.fileListView1.ItemActive += new System.EventHandler(this.阅读按钮_Click);
+            this.fileListView1.CopyFile += new System.EventHandler(this.fileListView1_CopyFile);
+            // 
+            // htmEdit1
+            // 
+            this.htmEdit1.AllowDrop = true;
+            this.htmEdit1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.htmEdit1.EditMode = false;
+            this.htmEdit1.Location = new System.Drawing.Point(3, 51);
+            this.htmEdit1.MinimumSize = new System.Drawing.Size(163, 64);
+            this.htmEdit1.Name = "htmEdit1";
+            this.htmEdit1.Size = new System.Drawing.Size(315, 265);
+            this.htmEdit1.TabIndex = 0;
+            this.htmEdit1.TabStop = false;
+            this.htmEdit1.Title = "未命名";
+            this.htmEdit1.GetFocus += new System.EventHandler(this.htmEdit1_GetFocus);
+            this.htmEdit1.ViewSourceChecked += new System.EventHandler(this.htmEdit1_ViewSourceChecked);
+            this.htmEdit1.NewDoucument += new System.EventHandler(this.htmEdit1_NewDoucument);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(242)))));
-            this.ClientSize = new System.Drawing.Size(1037, 471);
-            this.Controls.Add(this.header1);
-            this.Controls.Add(this.splitContainer1);
-            this.Controls.Add(this.statusStrip1);
+            this.ClientSize = new System.Drawing.Size(826, 399);
             this.Controls.Add(this.customForm1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximumSize = new System.Drawing.Size(1366, 728);
-            this.MinimumSize = new System.Drawing.Size(207, 64);
+            this.MinimumSize = new System.Drawing.Size(207, 80);
             this.Name = "FormMain";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -798,11 +798,8 @@
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormMain_FormClosed);
             this.Load += new System.EventHandler(this.FormMain_Load);
             this.LocationChanged += new System.EventHandler(this.splitContainer3_Resize);
-            this.header1.ResumeLayout(false);
-            this.splitContainer3.Panel1.ResumeLayout(false);
-            this.splitContainer3.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
-            this.splitContainer3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).EndInit();
+            this.customForm1.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
@@ -816,7 +813,11 @@
             this.panel2.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).EndInit();
+            this.header1.ResumeLayout(false);
+            this.splitContainer3.Panel1.ResumeLayout(false);
+            this.splitContainer3.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
+            this.splitContainer3.ResumeLayout(false);
             this.searchContextMenuStrip.ResumeLayout(false);
             this.文件MenuStrip1.ResumeLayout(false);
             this.skinContextMenuStrip.ResumeLayout(false);
@@ -870,7 +871,7 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem7;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem6;
         private System.IO.FileSystemWatcher fileSystemWatcher1;
-        private TitleBar.CustomForm customForm1;
+        private CustomFormStyle.CustomForm customForm1;
         private System.Windows.Forms.ToolStripMenuItem 帮助HToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 关于AToolStripMenuItem;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;

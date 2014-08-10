@@ -16,7 +16,7 @@ namespace htmExplorer
         {     
             InitializeComponent();
             Thread.ExecuteRunOnceThread();
-            loadSkinINI();
+           
         }
 
         #region FormMain_Load FormMain_FormClosed
@@ -71,9 +71,9 @@ namespace htmExplorer
 
             fileListView1.path = directoryTreeView1.selpath;
             fileListView1.recylebin = recyleBinDirecoty;
-
+            
             LoadIniFiles();
-            notifyIcon1.Visible = true;
+            
         }
 
         private void FormMain_FormClosed(object sender, FormClosedEventArgs e)
@@ -506,9 +506,9 @@ namespace htmExplorer
 
         private void 最大化显示_Click(object sender, EventArgs e)
         {
-            splitContainer1.Panel1Collapsed = fullView1.Checked;
+            splitContainer1.Panel1Collapsed = !splitContainer1.Panel1Collapsed;
 
-            if (fullView1.Checked)
+            if (splitContainer1.Panel1Collapsed)
                 fullView1.Image = imageList1.Images[1];
             else
                 fullView1.Image = imageList1.Images[0];
@@ -680,48 +680,11 @@ namespace htmExplorer
             else
             {
                 directoryTreeView1.SelectMainNode();
-            }     
+            }
+            loadSkinINI();
          }
 
-        private void loadSkinINI()
-        {
-
-            graySkin.Checked = INI.ReadBool("皮肤", "graySkin", false);
-            graySkin1.Checked = INI.ReadBool("皮肤", "graySkin1", true);
-            whiteSkin.Checked = INI.ReadBool("皮肤", "whiteSkin", false);
-            whiteSmokeSkin.Checked = INI.ReadBool("皮肤", "whiteSmokeSkin", false);
-
-            Color c = Color.FromArgb(238, 238, 242);
-            Color c1 = c;
-
-            if (graySkin.Checked == true)
-            {
-                c = Color.FromArgb(238, 238, 242);
-                c1 = c;
-            }
-
-            if (graySkin1.Checked == true)
-            {
-                c = Color.FromArgb(238, 238, 242);
-                c1 = Color.WhiteSmoke;
-            }
-
-            if (whiteSkin.Checked == true)
-            {
-                c = Color.White;
-                c1 = c;
-            }
-
-            if (whiteSmokeSkin.Checked == true)
-            {
-                c = Color.WhiteSmoke;
-                c1 = c;
-            }
-
-            SetupSkin(c, c1);
-        }
-
-
+ 
         private void SaveIniFiles()
         {
             INI.SaveWindowStateIni(this);
@@ -738,11 +701,7 @@ namespace htmExplorer
             if(directoryTreeView1.selpath!="")
                 INI.WriteString("TreeView", "最后选择", directoryTreeView1.selpath);
 
-
-            INI.WriteBool("皮肤", "graySkin", graySkin.Checked);
-            INI.WriteBool("皮肤", "graySkin1", graySkin1.Checked);
-            INI.WriteBool("皮肤", "whiteSkin", whiteSkin.Checked);
-            INI.WriteBool("皮肤", "whiteSmokeSkin", whiteSmokeSkin.Checked);
+            SaveSkinINI();
         }
 
         #endregion
@@ -838,7 +797,7 @@ namespace htmExplorer
         {
             //Color color = Color.FromArgb(238, 238, 242);
             //Color color1 = Color.WhiteSmoke;
-
+            //Visible = false;
             BackColor = color;
             customForm1.CaptionColor = color;
             header1.BackColor = color;
@@ -853,6 +812,55 @@ namespace htmExplorer
             directoryTreeView1.treeView1.BackColor = color1;
             fileListView1.listView1.BackColor = color1;
             winTextBox1.BackColor = color1;
+
+            customForm1.Refresh();
+            customForm1.Invalidate();
+        }
+
+        private void loadSkinINI()
+        {
+            graySkin.Checked = INI.ReadBool("皮肤", "graySkin", false);
+            graySkin1.Checked = INI.ReadBool("皮肤", "graySkin1", true);
+            whiteSkin.Checked = INI.ReadBool("皮肤", "whiteSkin", false);
+            whiteSmokeSkin.Checked = INI.ReadBool("皮肤", "whiteSmokeSkin", false);
+
+            Color c = Color.FromArgb(238, 238, 242);
+            Color c1 = c;
+
+            if (graySkin.Checked == true)
+            {
+                c = Color.FromArgb(238, 238, 242);
+                c1 = c;
+            }
+
+            if (graySkin1.Checked == true)
+            {
+                c = Color.FromArgb(238, 238, 242);
+                c1 = Color.WhiteSmoke;
+            }
+
+            if (whiteSkin.Checked == true)
+            {
+                c = Color.White;
+                c1 = c;
+            }
+
+            if (whiteSmokeSkin.Checked == true)
+            {
+                c = Color.WhiteSmoke;
+                c1 = c;
+            }
+
+            SetupSkin(c, c1);
+        }
+
+        private void SaveSkinINI()
+        {
+            INI.WriteBool("皮肤", "graySkin", graySkin.Checked);
+            INI.WriteBool("皮肤", "graySkin1", graySkin1.Checked);
+            INI.WriteBool("皮肤", "whiteSkin", whiteSkin.Checked);
+            INI.WriteBool("皮肤", "whiteSmokeSkin", whiteSmokeSkin.Checked);
+
         }
 
         #endregion

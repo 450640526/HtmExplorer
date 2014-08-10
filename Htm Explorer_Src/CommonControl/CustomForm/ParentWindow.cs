@@ -6,38 +6,84 @@ using System.Text;
 using System.Windows.Forms;
 using System.ComponentModel.Design;
 
-namespace TitleBar
+namespace CustomFormStyle
 {
-
-    public class MyNativeWindow : NativeWindow
+    public class ParentWindow : NativeWindow
     {
-        public Form form;//ParentForm
-        public Rectangle Bounds;//ParentForm Bounds
-        public Color borderColor = SystemColors.Control;
-        public MyNativeWindow(UserControl userCtrl)
+        public ParentWindow(UserControl userCtrl)
         {
             form = userCtrl.FindForm();
             AssignHandle(form.Handle);
-            form.Paint += new System.Windows.Forms.PaintEventHandler(Form1_Paint);
-            form.SizeChanged += new System.EventHandler(Form1_SizeChanged);
             InitializeComponent();
+        }
 
+        private void InitializeComponent()
+        {
+            form.MaximumSize = Screen.PrimaryScreen.WorkingArea.Size;
+            form.FormBorderStyle = FormBorderStyle.None;
+            //form.ShowIcon = false;
+            form.Text = "";
+            Rectangle r = form.ClientRectangle;
+            r.Inflate(-3, -3);
+            bounds1 = r;
+
+            form.SizeChanged += new System.EventHandler(Form1_SizeChanged);
+            form.Paint += new System.Windows.Forms.PaintEventHandler(Form1_Paint);
+            form.VisibleChanged += new System.EventHandler(Form1_VisibleChanged);
+            form.FormClosing += new System.Windows.Forms.FormClosingEventHandler(Form1_FormClosing);
+            WinApi.SetWindowLong(form.Handle, WinApi.GWL_STYLE, WinApi.WS_MINIMIZEBOX);
+        }
+
+
+        public Form form;//ParentForm
+        private Rectangle bounds1;//ParentForm Bounds
+        public bool ShowShadow
+        {
+            get;
+            set;
+        }
+
+        public Rectangle Bounds
+        {
+            get { return bounds1; }
+            set { bounds1 = value; }
+        }
+  
+        public Color borderColor = SystemColors.Control;
+
+
+        private void Form1_VisibleChanged(object sender, EventArgs e)
+        {
+            if (form.Visible  )
+            {
+                form = new ShadowForm(form);
+                form.Show(this);
+            }
+        }
+
+        ShadowForm shadowForm1 = null;
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (shadowForm1 != null)
+            {
+                shadowForm1.Close();
+            }
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
-            //最外边
-            Pen pen1 = new Pen(new SolidBrush(Color.FromArgb(204, 206, 219)));
+            ////最外边
+            //Pen pen1 = new Pen(new SolidBrush(Color.FromArgb(204, 206, 219)));
 
 
-            //最外边缩小1个像素
-            Pen pen2 = new Pen(new SolidBrush(borderColor));
+            ////最外边缩小1个像素
+            //Pen pen2 = new Pen(new SolidBrush(borderColor));
 
-            Rectangle r = form.ClientRectangle;
-            r.Width -= 1;
-            r.Height -= 1;
+            //Rectangle r = form.ClientRectangle;
+            //r.Width -= 5;
+            //r.Height -= 5;
 
-            e.Graphics.DrawRectangle(pen1, r);
+            //e.Graphics.DrawRectangle(pen1, r);
 
             //r.Inflate(-1, -1);
             //e.Graphics.DrawRectangle(pen2, r);
@@ -51,38 +97,18 @@ namespace TitleBar
             form.Refresh();
         }
 
-
-        private void InitializeComponent()
-        {
-            form.MaximumSize = Screen.PrimaryScreen.WorkingArea.Size;
-            form.FormBorderStyle = FormBorderStyle.None;
-            Rectangle r = form.ClientRectangle;
-            r.Inflate(-1, -1);
-            Bounds = r;
-            //form.BackColor = Color.FromArgb(204, 206, 219);
-            //form.BackColor = Color.Red;
-        }
-
-
-        const int wmNcHitTest = 0x84;
-        const int htLeft = 10;
-        const int htRight = 11;
-        const int htTop = 12;
-        const int htTopLeft = 13;
-        const int htTopRight = 14;
-        const int htBottom = 15;
-        const int htBottomLeft = 16;
-        const int htBottomRight = 17;
-
-        /// <summary>
-        ///光标距离窗体边距的数值
-        /// </summary>
-        int border = 8;
+       public int border = 8;
 
         protected override void WndProc(ref Message m)
         {
-            if (m.Msg == wmNcHitTest && form.WindowState != FormWindowState.Maximized)
+            //if (form.WindowState == FormWindowState.Maximized)
+            //    border = 0;
+            //else
+            //    border = 8;
+            if (m.Msg == wmNcHitTest)
             {
+
+
                 int x = (int)(m.LParam.ToInt64() & 0xFFFF);
                 int y = (int)((m.LParam.ToInt64() & 0xFFFF0000) >> 16);
                 Point pt = new Point(x, y);
@@ -158,8 +184,15 @@ namespace TitleBar
             base.WndProc(ref m);
         }
 
-
-        // dispose, etc.
+        const int wmNcHitTest = 0x84;
+        const int htLeft = 10;
+        const int htRight = 11;
+        const int htTop = 12;
+        const int htTopLeft = 13;
+        const int htTopRight = 14;
+        const int htBottom = 15;
+        const int htBottomLeft = 16;
+        const int htBottomRight = 17;
     }
 
 

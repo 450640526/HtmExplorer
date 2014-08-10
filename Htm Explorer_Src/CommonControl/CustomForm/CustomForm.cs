@@ -7,9 +7,9 @@ using System.Text;
 using System.Windows.Forms;
 using System.ComponentModel.Design;
 
-namespace TitleBar
+namespace CustomFormStyle
 {
-    [Designer("System.Windows.Forms.Design.ParentControlDesigner, System.Design", typeof(IDesigner))]
+    //[Designer("System.Windows.Forms.Design.ParentControlDesigner, System.Design", typeof(IDesigner))]
     public partial class CustomForm : UserControl
     {
         public CustomForm()
@@ -24,8 +24,7 @@ namespace TitleBar
             btnMenu.FlatStyle = FlatStyle.Flat;
             btnSkin.FlatStyle = FlatStyle.Flat;
             BorderStyle = System.Windows.Forms.BorderStyle.None;
-
-            this.Anchor = ((System.Windows.Forms.AnchorStyles)((((AnchorStyles.Top | AnchorStyles.Bottom) | AnchorStyles.Left) | AnchorStyles.Right)));
+           
             DoubleBuffered = true;
             this.SetStyle(ControlStyles.AllPaintingInWmPaint, true);
             this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
@@ -34,19 +33,37 @@ namespace TitleBar
 
         }
 
-        MyNativeWindow nativeWindow1;
+    
+        ParentWindow nativeWindow1;
         private void CustomForm_Load(object sender, EventArgs e)
         {
-            //if (DesignMode)
-            //    return;
-            nativeWindow1 = new MyNativeWindow(this);
-            Size size = MinimumSize;
-            size.Width += 4;
-            size.Height += 4;
-            if (nativeWindow1.form.MinimumSize == new Size(0, 0))
-                nativeWindow1.form.MinimumSize = size;
+            //button1.Text = MainForm.Text;
+            if (DesignMode)
+            {
+                Dock = DockStyle.Fill;
+            }
 
-            this.Bounds = nativeWindow1.Bounds;
+            if (!DesignMode)
+            {
+                panel1.BackColor = panel1.BackColor;
+
+                Dock = DockStyle.None;
+                this.Anchor = ((System.Windows.Forms.AnchorStyles)((((AnchorStyles.Top | AnchorStyles.Bottom) | AnchorStyles.Left) | AnchorStyles.Right)));
+
+                nativeWindow1 = new ParentWindow(this);
+                Size size = MinimumSize;
+                size.Width += 4;
+                size.Height += 4;
+                if (nativeWindow1.form.MinimumSize == new Size(0, 0))
+                    nativeWindow1.form.MinimumSize = size;
+
+                this.Left = 3;
+                this.Top = 3;
+                this.Width = nativeWindow1.Bounds.Width;
+                this.Height = nativeWindow1.Bounds.Height;
+              
+            }
+          
         }
 
         #region 属性
@@ -76,6 +93,23 @@ namespace TitleBar
             get { return sizeGrid1.Visible; }
             set { sizeGrid1.Visible = value; }
         }
+
+        //public bool ShowShadow
+        //{
+        //    get {
+        //        if (nativeWindow1 == null)
+        //            return false;
+        //        else
+        //        return nativeWindow1.ShowShadow; 
+        //    }
+        //    set
+        //    {
+        //        if (nativeWindow1 != null)
+        //        nativeWindow1.ShowShadow = value;
+            
+        //    }
+        //}
+
         public bool ShowSkinButton
         {
             get { return btnSkin.Visible; }
@@ -245,6 +279,7 @@ namespace TitleBar
             minWindow.Enabled = MainForm.WindowState != FormWindowState.Minimized;
             maxWindow.Enabled = MainForm.WindowState != FormWindowState.Maximized;
         }
+
         private void btnMaximum_MouseEnter(object sender, EventArgs e)
         {
             if (MainForm.WindowState == FormWindowState.Maximized)
@@ -252,22 +287,7 @@ namespace TitleBar
             else
                 btnMaximum.Image = imageList1.Images[0];
         }
-
-        private void btnClose_MouseLeave(object sender, EventArgs e)
-        {
-            //if(((Label)sender).Name =="btnMaximum")
-            //{
-            //    if (MainForm.WindowState == FormWindowState.Maximized)
-            //        btnMaximum.ImageIndex = 0;
-            //    else
-            //        btnMaximum.ImageIndex = 2;
-            //}
-
  
-
-            
-        }
-
         private void btnMaximum_MouseLeave(object sender, EventArgs e)
         {
             if (MainForm.WindowState == FormWindowState.Maximized)
@@ -275,7 +295,6 @@ namespace TitleBar
             else
                 btnMaximum.Image = imageList1.Images[0];
         }
-
 
         private void btnMaximum_MouseDown(object sender, MouseEventArgs e)
         {
@@ -287,76 +306,27 @@ namespace TitleBar
  
         private void CustomForm_SizeChanged(object sender, EventArgs e)
         {
-            if (MainForm == null)
-                return;
+            if (!DesignMode && MainForm!=null)
+            {
 
-            if (MainForm.WindowState == FormWindowState.Maximized)
-            {
-                btnMaximum.Image = imageList1.Images[2];
-                toolTip1.SetToolTip(btnMaximum, "最大化");
-            }
-            else
-            {
-                btnMaximum.Image = imageList1.Images[0];
-                toolTip1.SetToolTip(btnMaximum, "还原");
+                if (MainForm.WindowState == FormWindowState.Maximized)
+                {
+                    btnMaximum.Image = imageList1.Images[2];
+                    toolTip1.SetToolTip(btnMaximum, "最大化");
+                    if (!DesignMode && nativeWindow1 != null)
+                        nativeWindow1.border = 0;
+                }
+                else
+                {
+                    btnMaximum.Image = imageList1.Images[0];
+                    toolTip1.SetToolTip(btnMaximum, "还原");
+                    if (!DesignMode && nativeWindow1 != null)
+                        nativeWindow1.border = 8;
+                }
             }
         }
 
         #endregion
-
-        private void CustomForm_Paint(object sender, PaintEventArgs e)
-        {
-            //int btnWidth = 24;
-            //int btnHeight = 20;
-
-            ////关闭
-            //Rectangle closeRect = new Rectangle(ClientRectangle.Right - 30, 0, 24, 20);
-            //e.Graphics.DrawRectangle(new Pen(new SolidBrush(Color.Red)), closeRect);
-            
-            ////最大化
-            //Rectangle maxRect = new Rectangle(ClientRectangle.Right - 30 - btnWidth, 0, 24, 20);
-            //e.Graphics.DrawRectangle(new Pen(new SolidBrush(Color.Red)), maxRect);
-
-            ////最小化
-            //Rectangle minRect = new Rectangle(ClientRectangle.Right - 30 - btnWidth *2, 0, 24, 20);
-            //e.Graphics.DrawRectangle(new Pen(new SolidBrush(Color.Red)), minRect);
-
-            ////菜单按钮
-            //Rectangle menuRect = new Rectangle(ClientRectangle.Right - 30 - btnWidth * 3, 0, 24, 20);
-            //e.Graphics.DrawRectangle(new Pen(new SolidBrush(Color.Blue)), menuRect);
-
-            ////皮肤按钮
-            //Rectangle skinRect = new Rectangle(ClientRectangle.Right - 30 - btnWidth * 4, 0, 24, 20);
-            //e.Graphics.DrawRectangle(new Pen(new SolidBrush(Color.Blue)), skinRect);
-
-            ////图标
-            //Rectangle iconRect = new Rectangle(ClientRectangle.Left + 6, 8, 16, 16);
-            //e.Graphics.DrawRectangle(new Pen(new SolidBrush(Color.Blue)), iconRect);
-
-            ////文本
-            //Rectangle textRect = new Rectangle(iconRect.Right + 4, 4, ClientRectangle.Width - iconRect.Right -120 -16, 24);
-            //e.Graphics.DrawRectangle(new Pen(new SolidBrush(Color.Red)), textRect);
-
-            ////标题栏
-            //Rectangle titleRect = new Rectangle(0, 0, ClientRectangle.Width - 1, 32);
-            //e.Graphics.DrawRectangle(new Pen(new SolidBrush(Color.Green)), titleRect);
-
-            ////边框
-            //Rectangle borderRect = ClientRectangle;
-            ////borderRect.Width -= 1;
-            ////borderRect.Height -= 1;
-            //e.Graphics.DrawRectangle(new Pen(new SolidBrush(Color.Blue), 2), borderRect);
-
-        }
-
-        private void CustomForm_Resize(object sender, EventArgs e)
-        {
-            //Refresh();
-        }
-
-
-
-
 
     }
 }
