@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Explorer", "Main\Explorer.csproj", "{17F2CCBF-9E9E-4696-BD34-984514EE17F8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Main", "Main\Main.csproj", "{17F2CCBF-9E9E-4696-BD34-984514EE17F8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DirectoryTreeView", "ExplorerTreeView\ExplorerTreeView\DirectoryTreeView.csproj", "{DA25FF4F-9FF6-433F-BC87-217DB0A064D6}"
 EndProject

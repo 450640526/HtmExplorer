@@ -31,9 +31,6 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.btnReadMode1 = new System.Windows.Forms.ImageButton();
-            this.fullView1 = new System.Windows.Forms.CheckBox();
-            this.btnAttch1 = new System.Windows.Forms.CheckBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
@@ -41,7 +38,10 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.btnReadMode1 = new System.Windows.Forms.ImageButton();
             this.label1 = new System.Windows.Forms.Label();
+            this.fullView1 = new System.Windows.Forms.CheckBox();
+            this.btnAttch1 = new System.Windows.Forms.CheckBox();
             this.winTextBox1 = new System.Windows.Forms.WinTextBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -119,73 +119,6 @@
             this.toolTip1.ReshowDelay = 100;
             this.toolTip1.ShowAlways = true;
             // 
-            // btnReadMode1
-            // 
-            this.btnReadMode1.BackColor = System.Drawing.Color.Transparent;
-            this.btnReadMode1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btnReadMode1.BorderColor = System.Drawing.Color.Transparent;
-            this.btnReadMode1.DefautColor = System.Drawing.Color.Transparent;
-            this.btnReadMode1.DefautImage = null;
-            this.btnReadMode1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnReadMode1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnReadMode1.Image = ((System.Drawing.Image)(resources.GetObject("btnReadMode1.Image")));
-            this.btnReadMode1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnReadMode1.Location = new System.Drawing.Point(3, 3);
-            this.btnReadMode1.MouseDownColor = System.Drawing.SystemColors.ActiveCaption;
-            this.btnReadMode1.MouseDownImage = null;
-            this.btnReadMode1.MouseEnterColor = System.Drawing.Color.LightGray;
-            this.btnReadMode1.MouseEnterImage = null;
-            this.btnReadMode1.Name = "btnReadMode1";
-            this.btnReadMode1.Size = new System.Drawing.Size(62, 23);
-            this.btnReadMode1.TabIndex = 34;
-            this.btnReadMode1.Text = "编辑";
-            this.btnReadMode1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.toolTip1.SetToolTip(this.btnReadMode1, "编辑文档");
-            this.btnReadMode1.Click += new System.EventHandler(this.阅读按钮_Click);
-            // 
-            // fullView1
-            // 
-            this.fullView1.Appearance = System.Windows.Forms.Appearance.Button;
-            this.fullView1.BackColor = System.Drawing.Color.Transparent;
-            this.fullView1.FlatAppearance.BorderSize = 0;
-            this.fullView1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.fullView1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.fullView1.Image = ((System.Drawing.Image)(resources.GetObject("fullView1.Image")));
-            this.fullView1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.fullView1.Location = new System.Drawing.Point(132, 3);
-            this.fullView1.Name = "fullView1";
-            this.fullView1.Size = new System.Drawing.Size(62, 23);
-            this.fullView1.TabIndex = 35;
-            this.fullView1.TabStop = false;
-            this.fullView1.Text = "全屏";
-            this.fullView1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.toolTip1.SetToolTip(this.fullView1, "最大化浏览");
-            this.fullView1.UseVisualStyleBackColor = false;
-            this.fullView1.Click += new System.EventHandler(this.最大化显示_Click);
-            // 
-            // btnAttch1
-            // 
-            this.btnAttch1.Appearance = System.Windows.Forms.Appearance.Button;
-            this.btnAttch1.BackColor = System.Drawing.Color.Transparent;
-            this.btnAttch1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnAttch1.FlatAppearance.BorderSize = 0;
-            this.btnAttch1.FlatAppearance.CheckedBackColor = System.Drawing.Color.DodgerBlue;
-            this.btnAttch1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAttch1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnAttch1.ForeColor = System.Drawing.Color.Black;
-            this.btnAttch1.Image = ((System.Drawing.Image)(resources.GetObject("btnAttch1.Image")));
-            this.btnAttch1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAttch1.Location = new System.Drawing.Point(67, 3);
-            this.btnAttch1.Name = "btnAttch1";
-            this.btnAttch1.Size = new System.Drawing.Size(62, 23);
-            this.btnAttch1.TabIndex = 33;
-            this.btnAttch1.TabStop = false;
-            this.btnAttch1.Text = "   附件";
-            this.btnAttch1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.toolTip1.SetToolTip(this.btnAttch1, "添加一个附件");
-            this.btnAttch1.UseVisualStyleBackColor = false;
-            this.btnAttch1.CheckedChanged += new System.EventHandler(this.附件按钮_CheckedChanged);
-            // 
             // timer1
             // 
             this.timer1.Enabled = true;
@@ -221,7 +154,10 @@
             this.customForm1.MenuButtonContextMenuStrip = this.文件MenuStrip1;
             this.customForm1.MinimumSize = new System.Drawing.Size(203, 28);
             this.customForm1.Name = "customForm1";
+            this.customForm1.ShowIcon = true;
+            this.customForm1.ShowMaximumButton = true;
             this.customForm1.ShowMenuButton = true;
+            this.customForm1.ShowMinimumButton = true;
             this.customForm1.ShowSizeGrid = false;
             this.customForm1.ShowSkinButton = true;
             this.customForm1.Size = new System.Drawing.Size(826, 399);
@@ -300,8 +236,32 @@
             this.panel2.Controls.Add(this.winTextBox1);
             this.panel2.Location = new System.Drawing.Point(0, 3);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(321, 49);
+            this.panel2.Size = new System.Drawing.Size(317, 49);
             this.panel2.TabIndex = 40;
+            // 
+            // btnReadMode1
+            // 
+            this.btnReadMode1.BackColor = System.Drawing.Color.Transparent;
+            this.btnReadMode1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnReadMode1.BorderColor = System.Drawing.Color.Transparent;
+            this.btnReadMode1.DefautColor = System.Drawing.Color.Transparent;
+            this.btnReadMode1.DefautImage = null;
+            this.btnReadMode1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnReadMode1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnReadMode1.Image = ((System.Drawing.Image)(resources.GetObject("btnReadMode1.Image")));
+            this.btnReadMode1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnReadMode1.Location = new System.Drawing.Point(3, 3);
+            this.btnReadMode1.MouseDownColor = System.Drawing.SystemColors.ActiveCaption;
+            this.btnReadMode1.MouseDownImage = null;
+            this.btnReadMode1.MouseEnterColor = System.Drawing.Color.LightGray;
+            this.btnReadMode1.MouseEnterImage = null;
+            this.btnReadMode1.Name = "btnReadMode1";
+            this.btnReadMode1.Size = new System.Drawing.Size(62, 23);
+            this.btnReadMode1.TabIndex = 34;
+            this.btnReadMode1.Text = "编辑";
+            this.btnReadMode1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.toolTip1.SetToolTip(this.btnReadMode1, "编辑文档");
+            this.btnReadMode1.Click += new System.EventHandler(this.阅读按钮_Click);
             // 
             // label1
             // 
@@ -311,9 +271,52 @@
             this.label1.Location = new System.Drawing.Point(-3, 48);
             this.label1.Margin = new System.Windows.Forms.Padding(0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(392, 1);
+            this.label1.Size = new System.Drawing.Size(388, 1);
             this.label1.TabIndex = 39;
             this.label1.Text = "label1";
+            // 
+            // fullView1
+            // 
+            this.fullView1.Appearance = System.Windows.Forms.Appearance.Button;
+            this.fullView1.BackColor = System.Drawing.Color.Transparent;
+            this.fullView1.FlatAppearance.BorderSize = 0;
+            this.fullView1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.fullView1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.fullView1.Image = ((System.Drawing.Image)(resources.GetObject("fullView1.Image")));
+            this.fullView1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.fullView1.Location = new System.Drawing.Point(132, 3);
+            this.fullView1.Name = "fullView1";
+            this.fullView1.Size = new System.Drawing.Size(62, 23);
+            this.fullView1.TabIndex = 35;
+            this.fullView1.TabStop = false;
+            this.fullView1.Text = "全屏";
+            this.fullView1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.toolTip1.SetToolTip(this.fullView1, "最大化浏览");
+            this.fullView1.UseVisualStyleBackColor = false;
+            this.fullView1.Click += new System.EventHandler(this.最大化显示_Click);
+            // 
+            // btnAttch1
+            // 
+            this.btnAttch1.Appearance = System.Windows.Forms.Appearance.Button;
+            this.btnAttch1.BackColor = System.Drawing.Color.Transparent;
+            this.btnAttch1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnAttch1.FlatAppearance.BorderSize = 0;
+            this.btnAttch1.FlatAppearance.CheckedBackColor = System.Drawing.Color.DodgerBlue;
+            this.btnAttch1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAttch1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnAttch1.ForeColor = System.Drawing.Color.Black;
+            this.btnAttch1.Image = ((System.Drawing.Image)(resources.GetObject("btnAttch1.Image")));
+            this.btnAttch1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAttch1.Location = new System.Drawing.Point(67, 3);
+            this.btnAttch1.Name = "btnAttch1";
+            this.btnAttch1.Size = new System.Drawing.Size(62, 23);
+            this.btnAttch1.TabIndex = 33;
+            this.btnAttch1.TabStop = false;
+            this.btnAttch1.Text = "   附件";
+            this.btnAttch1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolTip1.SetToolTip(this.btnAttch1, "添加一个附件");
+            this.btnAttch1.UseVisualStyleBackColor = false;
+            this.btnAttch1.CheckedChanged += new System.EventHandler(this.附件按钮_CheckedChanged);
             // 
             // winTextBox1
             // 
@@ -343,14 +346,14 @@
             this.toolStripSplitButton1});
             this.statusStrip1.Location = new System.Drawing.Point(1, 378);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(825, 20);
+            this.statusStrip1.Size = new System.Drawing.Size(822, 20);
             this.statusStrip1.TabIndex = 22;
             this.statusStrip1.Text = "statusStrip1";
             // 
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(738, 15);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(735, 15);
             this.toolStripStatusLabel1.Spring = true;
             this.toolStripStatusLabel1.Text = "0 个文件";
             this.toolStripStatusLabel1.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
@@ -737,7 +740,7 @@
             this.directoryTreeView1.Location = new System.Drawing.Point(3, 3);
             this.directoryTreeView1.MinimumSize = new System.Drawing.Size(50, 50);
             this.directoryTreeView1.Name = "directoryTreeView1";
-            this.directoryTreeView1.Size = new System.Drawing.Size(202, 313);
+            this.directoryTreeView1.Size = new System.Drawing.Size(204, 313);
             this.directoryTreeView1.TabIndex = 0;
             this.directoryTreeView1.TabStop = false;
             this.directoryTreeView1.SelectedIndexChanged += new System.Windows.Forms.DirectoryTreeView.EventHandler(this.directoryTreeView1_SelectedIndexChanged);
@@ -752,7 +755,7 @@
             this.fileListView1.Location = new System.Drawing.Point(3, 3);
             this.fileListView1.Name = "fileListView1";
             this.fileListView1.selfilename = "";
-            this.fileListView1.Size = new System.Drawing.Size(286, 313);
+            this.fileListView1.Size = new System.Drawing.Size(283, 313);
             this.fileListView1.TabIndex = 0;
             this.fileListView1.TabStop = false;
             this.fileListView1.ItemClick += new System.EventHandler(this.fileListView1_ItemClick);
@@ -769,10 +772,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.htmEdit1.EditMode = false;
-            this.htmEdit1.Location = new System.Drawing.Point(3, 51);
+            this.htmEdit1.Location = new System.Drawing.Point(3, 55);
             this.htmEdit1.MinimumSize = new System.Drawing.Size(163, 64);
             this.htmEdit1.Name = "htmEdit1";
-            this.htmEdit1.Size = new System.Drawing.Size(315, 265);
+            this.htmEdit1.Size = new System.Drawing.Size(311, 261);
             this.htmEdit1.TabIndex = 0;
             this.htmEdit1.TabStop = false;
             this.htmEdit1.Title = "未命名";

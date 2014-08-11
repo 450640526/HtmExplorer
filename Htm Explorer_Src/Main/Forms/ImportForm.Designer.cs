@@ -229,6 +229,7 @@
             this.textBox2.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBox2.Location = new System.Drawing.Point(65, 63);
             this.textBox2.Name = "textBox2";
+            this.textBox2.ReadOnly = true;
             this.textBox2.Size = new System.Drawing.Size(904, 23);
             this.textBox2.TabIndex = 8;
             this.textBox2.Text = "D:\\Administrator\\Desktop\\新建文件夹";

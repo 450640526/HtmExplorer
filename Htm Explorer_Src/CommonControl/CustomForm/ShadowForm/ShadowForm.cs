@@ -21,10 +21,12 @@ namespace CustomFormStyle
 
             TopMost = form.TopMost;
             this.Location = new Point(mainForm.Location.X - 5, mainForm.Location.Y - 5);
+
             form.BringToFront();
             Width = form.Width + 10;
             Height = form.Height + 10;
 
+ 
             form.LocationChanged += new EventHandler(Main_LocationChanged);
             form.SizeChanged += new EventHandler(Main_SizeChanged);
             form.VisibleChanged += new EventHandler(Main_VisibleChanged);
@@ -39,26 +41,22 @@ namespace CustomFormStyle
         void Main_SizeChanged(object sender, EventArgs e)
         {
             Visible = mainForm.WindowState != FormWindowState.Maximized;
-            mainForm.BringToFront();
+
             Width = mainForm.Width + 10;
             Height = mainForm.Height + 10;
             SetBitmap();
         }
 
+
+        public const Int32 AW_ACTIVATE = 0x00020000;
+        public const Int32 AW_SLIDE = 0x00040000;
+        public const Int32 AW_BLEND = 0x00080000;
+
         void Main_VisibleChanged(object sender, EventArgs e)
         {
-            //Width = mainForm.Width + 10;
-            //Height = mainForm.Height + 10;
-            //SetBitmap();
-
             this.Visible = mainForm.Visible;
-            //Refresh();
-            //Invalidate();
-            //mainForm.Refresh();
-            //mainForm.Invalidate();
-            //mainForm.BringToFront();
         }
-
+ 
 
 
         public const int GWL_EXSTYLE = -20;
@@ -90,17 +88,15 @@ namespace CustomFormStyle
         public void SetBitmap()
         {
 
-            Bitmap bitmap = new Bitmap(mainForm.Width + 10, mainForm.Height + 10);
-            Rectangle _BacklightLTRB = new Rectangle(20, 20, 20, 20);
-
-
-
-            Graphics g = Graphics.FromImage(bitmap);
-            g.SmoothingMode = SmoothingMode.HighQuality;
-            g.PixelOffsetMode = PixelOffsetMode.HighQuality;
-            DrawRect(g, (Bitmap)pictureBox1.Image, new Rectangle(0, 0, ClientRectangle.Width, ClientRectangle.Height),
-                Rectangle.FromLTRB(_BacklightLTRB.X, _BacklightLTRB.Y, _BacklightLTRB.Width, _BacklightLTRB.Height), 1, 1);
-
+            Bitmap bmp = new Bitmap(mainForm.Width + 10, mainForm.Height + 10);
+            Rectangle rect = new Rectangle(20, 20, 20, 20);
+            Graphics g = Graphics.FromImage(bmp);
+            g.SmoothingMode = SmoothingMode.HighQuality;  
+            g.PixelOffsetMode = PixelOffsetMode.HighQuality;  
+            DrawRect(g, (Bitmap)pictureBox1.Image,
+                ClientRectangle,
+                Rectangle.FromLTRB(rect.X, rect.Y, rect.Width, rect.Height), 1, 1);
+ 
             IntPtr oldBits = IntPtr.Zero;
             IntPtr screenDC = Win32.GetDC(IntPtr.Zero);
             IntPtr hBitmap = IntPtr.Zero;
@@ -108,13 +104,12 @@ namespace CustomFormStyle
 
             try
             {
-                Point topLoc = new Point(Left, Top);
-                Size bmpSize = new Size(Width, Height);
+                Point topLoc = new  Point(Left, Top);
+                Size bitMapSize = new Size(Width, Height);
                 Win32.BLENDFUNCTION blendFunc = new Win32.BLENDFUNCTION();
-                Point srcLoc = new Point(0, 0);
+                Point srcLoc = new  Point(0, 0);
 
-
-                hBitmap = bitmap.GetHbitmap(Color.FromArgb(0));
+                hBitmap = bmp.GetHbitmap(Color.FromArgb(0));
                 oldBits = Win32.SelectObject(memDc, hBitmap);
 
                 blendFunc.BlendOp = AC_SRC_OVER;
@@ -122,7 +117,7 @@ namespace CustomFormStyle
                 blendFunc.AlphaFormat = AC_SRC_ALPHA;
                 blendFunc.BlendFlags = 0;
 
-                Win32.UpdateLayeredWindow(Handle, screenDC, ref topLoc, ref bmpSize, memDc, ref srcLoc, 0, ref blendFunc, ULW_ALPHA);
+                Win32.UpdateLayeredWindow(Handle, screenDC, ref topLoc, ref bitMapSize, memDc, ref srcLoc, 0, ref blendFunc, ULW_ALPHA);
             }
             finally
             {
@@ -136,7 +131,7 @@ namespace CustomFormStyle
             }
         }
 
-
+ 
         public static void DrawRect(Graphics g, Bitmap img, Rectangle r, Rectangle lr, int index, int Totalindex)
         {
             if (img == null) return;

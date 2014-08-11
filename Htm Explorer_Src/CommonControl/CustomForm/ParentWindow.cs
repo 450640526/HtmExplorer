@@ -32,10 +32,13 @@ namespace CustomFormStyle
             form.VisibleChanged += new System.EventHandler(Form1_VisibleChanged);
             form.FormClosing += new System.Windows.Forms.FormClosingEventHandler(Form1_FormClosing);
             WinApi.SetWindowLong(form.Handle, WinApi.GWL_STYLE, WinApi.WS_MINIMIZEBOX);
+            //form.UpdateStyles();
+           
         }
 
 
         public Form form;//ParentForm
+ 
         private Rectangle bounds1;//ParentForm Bounds
         public bool ShowShadow
         {
@@ -54,14 +57,15 @@ namespace CustomFormStyle
 
         private void Form1_VisibleChanged(object sender, EventArgs e)
         {
-            if (form.Visible  )
+            if (form.Visible && shadowForm1 == null)
             {
-                form = new ShadowForm(form);
-                form.Show(this);
+                shadowForm1 = new ShadowForm(form);
+                shadowForm1.Show(form);
+                //form.BringToFront();
             }
         }
 
-        ShadowForm shadowForm1 = null;
+        ShadowForm shadowForm1;
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (shadowForm1 != null)
@@ -94,7 +98,7 @@ namespace CustomFormStyle
 
         private void Form1_SizeChanged(object sender, EventArgs e)
         {
-            form.Refresh();
+            //form.Refresh();
         }
 
        public int border = 8;

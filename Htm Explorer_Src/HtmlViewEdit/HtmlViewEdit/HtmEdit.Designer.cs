@@ -31,7 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HtmEdit));
             this.webBrowser1 = new System.Windows.Forms.WebBrowser();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.contextMenuStrip1 = new System.Windows.Forms.ClassicContextMenuStrip(this.components);
             this.Undo1 = new System.Windows.Forms.ToolStripMenuItem();
             this.Redo1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
@@ -115,8 +115,7 @@
             this.SelectAll1,
             this.viewsource2});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.contextMenuStrip1.Size = new System.Drawing.Size(176, 214);
+             this.contextMenuStrip1.Size = new System.Drawing.Size(176, 214);
             this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             // 
             // Undo1
@@ -685,7 +684,7 @@
 
         #endregion
 
-        private ContextMenuStrip contextMenuStrip1;
+        private ClassicContextMenuStrip contextMenuStrip1;
         private ToolStripMenuItem Undo1;
         private ToolStripMenuItem Redo1;
         private ToolStripSeparator toolStripMenuItem2;

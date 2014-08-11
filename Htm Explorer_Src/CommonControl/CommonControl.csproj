@@ -40,10 +40,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ColorPickerForm.cs">
+    <Compile Include="ColorPickerForm\ColorPickerForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ColorPickerForm.designer.cs">
+    <Compile Include="ColorPickerForm\ColorPickerForm.designer.cs">
       <DependentUpon>ColorPickerForm.cs</DependentUpon>
     </Compile>
     <Compile Include="CustomForm\CustomForm.cs">
@@ -69,10 +69,10 @@
     </Compile>
     <Compile Include="CustomMenuStrip\CustomMenuStripRenderer.cs" />
     <Compile Include="CustomMenuStrip\CustomToolStripRenderer.cs" />
-    <Compile Include="ImageButton.cs">
+    <Compile Include="ImageButton\ImageButton.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="FontComboBox.cs">
+    <Compile Include="FontComboBox\FontComboBox.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -81,10 +81,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="SearchBox.cs">
+    <Compile Include="SearchBox\SearchBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="SearchBox.designer.cs">
+    <Compile Include="SearchBox\SearchBox.designer.cs">
       <DependentUpon>SearchBox.cs</DependentUpon>
     </Compile>
     <Compile Include="Win32AddressBar\Win32AddressBar.cs">
@@ -93,12 +93,12 @@
     <Compile Include="Win32AddressBar\Win32AddressBar.designer.cs">
       <DependentUpon>Win32AddressBar.cs</DependentUpon>
     </Compile>
-    <Compile Include="WinTextBox.cs">
+    <Compile Include="WinTextBox\WinTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="ColorPickerForm.resx">
+    <EmbeddedResource Include="ColorPickerForm\ColorPickerForm.resx">
       <DependentUpon>ColorPickerForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CustomForm\CustomForm.resx">
@@ -111,7 +111,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="SearchBox.resx">
+    <EmbeddedResource Include="SearchBox\SearchBox.resx">
       <DependentUpon>SearchBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Win32AddressBar\Win32AddressBar.resx">
@@ -124,6 +124,7 @@
       <Name>IOUnity</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

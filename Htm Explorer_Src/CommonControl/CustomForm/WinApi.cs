@@ -25,5 +25,7 @@ namespace CustomFormStyle
         [DllImport("USER32.DLL")]
         public static extern int GetWindowLong(IntPtr hWnd, int nIndex);
 
+      
+
     }
 }

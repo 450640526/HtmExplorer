@@ -33,20 +33,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CustomForm));
             this.label1 = new System.Windows.Forms.Label();
             this.icon1 = new System.Windows.Forms.Label();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.contextMenuStrip1 = new System.Windows.Forms.ClassicContextMenuStrip(this.components);
-            this.restoreWindow = new System.Windows.Forms.ToolStripMenuItem();
-            this.移动MToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.大小SToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.minWindow = new System.Windows.Forms.ToolStripMenuItem();
-            this.maxWindow = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
-            this.close = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.imageList1 = new System.Windows.Forms.ImageList();
+            this.toolTip1 = new System.Windows.Forms.ToolTip();
             this.sizeGrid1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnClose = new System.Windows.Forms.ImageButton();
@@ -54,8 +45,16 @@
             this.btnMaximum = new System.Windows.Forms.ImageButton();
             this.btnMenu = new System.Windows.Forms.ImageButton();
             this.btnSkin = new System.Windows.Forms.ImageButton();
-            this.contextMenuStrip1.SuspendLayout();
+            this.contextMenuStrip1 = new System.Windows.Forms.ClassicContextMenuStrip();
+            this.restoreWindow = new System.Windows.Forms.ToolStripMenuItem();
+            this.移动MToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.大小SToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.minWindow = new System.Windows.Forms.ToolStripMenuItem();
+            this.maxWindow = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.close = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -97,80 +96,6 @@
             this.imageList1.Images.SetKeyName(2, "MAX1.png");
             this.imageList1.Images.SetKeyName(3, "MAX2.png");
             // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.restoreWindow,
-            this.移动MToolStripMenuItem,
-            this.大小SToolStripMenuItem,
-            this.minWindow,
-            this.maxWindow,
-            this.toolStripMenuItem1,
-            this.close});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(168, 142);
-            this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
-            // 
-            // restoreWindow
-            // 
-            this.restoreWindow.Image = ((System.Drawing.Image)(resources.GetObject("restoreWindow.Image")));
-            this.restoreWindow.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.restoreWindow.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.restoreWindow.Name = "restoreWindow";
-            this.restoreWindow.Size = new System.Drawing.Size(167, 22);
-            this.restoreWindow.Text = "还原(&R)";
-            this.restoreWindow.Click += new System.EventHandler(this.SystemMenu_Click);
-            // 
-            // 移动MToolStripMenuItem
-            // 
-            this.移动MToolStripMenuItem.Enabled = false;
-            this.移动MToolStripMenuItem.Name = "移动MToolStripMenuItem";
-            this.移动MToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
-            this.移动MToolStripMenuItem.Text = "移动(&M)";
-            // 
-            // 大小SToolStripMenuItem
-            // 
-            this.大小SToolStripMenuItem.Enabled = false;
-            this.大小SToolStripMenuItem.Name = "大小SToolStripMenuItem";
-            this.大小SToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
-            this.大小SToolStripMenuItem.Text = "大小(S)";
-            // 
-            // minWindow
-            // 
-            this.minWindow.Image = ((System.Drawing.Image)(resources.GetObject("minWindow.Image")));
-            this.minWindow.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.minWindow.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.minWindow.Name = "minWindow";
-            this.minWindow.Size = new System.Drawing.Size(167, 22);
-            this.minWindow.Text = "最小化(&N)";
-            this.minWindow.Click += new System.EventHandler(this.SystemMenu_Click);
-            // 
-            // maxWindow
-            // 
-            this.maxWindow.Image = ((System.Drawing.Image)(resources.GetObject("maxWindow.Image")));
-            this.maxWindow.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.maxWindow.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.maxWindow.Name = "maxWindow";
-            this.maxWindow.Size = new System.Drawing.Size(167, 22);
-            this.maxWindow.Text = "最大化(&X)";
-            this.maxWindow.Click += new System.EventHandler(this.SystemMenu_Click);
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(164, 6);
-            // 
-            // close
-            // 
-            this.close.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Bold);
-            this.close.Image = ((System.Drawing.Image)(resources.GetObject("close.Image")));
-            this.close.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.close.Name = "close";
-            this.close.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
-            this.close.Size = new System.Drawing.Size(167, 22);
-            this.close.Text = "关闭(&C)";
-            this.close.Click += new System.EventHandler(this.SystemMenu_Click);
-            // 
             // sizeGrid1
             // 
             this.sizeGrid1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -183,7 +108,7 @@
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.panel1.BackColor = System.Drawing.Color.Transparent;
             this.panel1.Controls.Add(this.btnClose);
             this.panel1.Controls.Add(this.btnMinimum);
             this.panel1.Controls.Add(this.btnMaximum);
@@ -198,6 +123,7 @@
             this.panel1.Size = new System.Drawing.Size(616, 27);
             this.panel1.TabIndex = 10;
             this.panel1.DoubleClick += new System.EventHandler(this.caption_DoubleClick);
+            this.panel1.Layout += new System.Windows.Forms.LayoutEventHandler(this.panel1_Layout);
             this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.caption_MouseDown);
             // 
             // btnClose
@@ -318,10 +244,83 @@
             this.btnSkin.TabIndex = 4;
             this.btnSkin.MouseDown += new System.Windows.Forms.MouseEventHandler(this.btnSkin_MouseDown);
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.restoreWindow,
+            this.移动MToolStripMenuItem,
+            this.大小SToolStripMenuItem,
+            this.minWindow,
+            this.maxWindow,
+            this.toolStripMenuItem1,
+            this.close});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(168, 142);
+            this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
+            // 
+            // restoreWindow
+            // 
+            this.restoreWindow.Image = ((System.Drawing.Image)(resources.GetObject("restoreWindow.Image")));
+            this.restoreWindow.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.restoreWindow.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.restoreWindow.Name = "restoreWindow";
+            this.restoreWindow.Size = new System.Drawing.Size(167, 22);
+            this.restoreWindow.Text = "还原(&R)";
+            this.restoreWindow.Click += new System.EventHandler(this.SystemMenu_Click);
+            // 
+            // 移动MToolStripMenuItem
+            // 
+            this.移动MToolStripMenuItem.Enabled = false;
+            this.移动MToolStripMenuItem.Name = "移动MToolStripMenuItem";
+            this.移动MToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.移动MToolStripMenuItem.Text = "移动(&M)";
+            // 
+            // 大小SToolStripMenuItem
+            // 
+            this.大小SToolStripMenuItem.Enabled = false;
+            this.大小SToolStripMenuItem.Name = "大小SToolStripMenuItem";
+            this.大小SToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.大小SToolStripMenuItem.Text = "大小(S)";
+            // 
+            // minWindow
+            // 
+            this.minWindow.Image = ((System.Drawing.Image)(resources.GetObject("minWindow.Image")));
+            this.minWindow.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.minWindow.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.minWindow.Name = "minWindow";
+            this.minWindow.Size = new System.Drawing.Size(167, 22);
+            this.minWindow.Text = "最小化(&N)";
+            this.minWindow.Click += new System.EventHandler(this.SystemMenu_Click);
+            // 
+            // maxWindow
+            // 
+            this.maxWindow.Image = ((System.Drawing.Image)(resources.GetObject("maxWindow.Image")));
+            this.maxWindow.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.maxWindow.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.maxWindow.Name = "maxWindow";
+            this.maxWindow.Size = new System.Drawing.Size(167, 22);
+            this.maxWindow.Text = "最大化(&X)";
+            this.maxWindow.Click += new System.EventHandler(this.SystemMenu_Click);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(164, 6);
+            // 
+            // close
+            // 
+            this.close.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Bold);
+            this.close.Image = ((System.Drawing.Image)(resources.GetObject("close.Image")));
+            this.close.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.close.Name = "close";
+            this.close.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
+            this.close.Size = new System.Drawing.Size(167, 22);
+            this.close.Text = "关闭(&C)";
+            this.close.Click += new System.EventHandler(this.SystemMenu_Click);
+            // 
             // CustomForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.Transparent;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Controls.Add(this.panel1);
@@ -331,8 +330,10 @@
             this.Size = new System.Drawing.Size(616, 294);
             this.Load += new System.EventHandler(this.CustomForm_Load);
             this.SizeChanged += new System.EventHandler(this.CustomForm_SizeChanged);
-            this.contextMenuStrip1.ResumeLayout(false);
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.CustomForm_Paint);
+            this.Resize += new System.EventHandler(this.CustomForm_Resize);
             this.panel1.ResumeLayout(false);
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

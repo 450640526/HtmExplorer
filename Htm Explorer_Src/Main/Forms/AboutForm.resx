@@ -288,4 +288,17 @@
   8.修复 当HtmEdit的内容巨大时 阅读文档会感觉卡(文档内容是否修改不停的判断引起的) 
   9.+ ListView复制文件功能</value>
   </data>
+  <data name="customForm1.Icon" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        wwAADsMBx2+oZAAAAYZJREFUOE+tjU0og3Ecx3cyhuZlNls77CCZqxy81I6Ori4KYUVDWWriQpLD80xP
+        ZIoerxe0pWRemh7UqEeNgx2w4uBguTk+z+Pr2f95rGWTGb/61v/l+/n8NP8yHMchl6i4IlCPyUm83W5Y
+        krlZNYNfMiHsM+KEMWQveH89VPLih/S8AumJwu50aXaCCFupgqwM0pAePJCi3dgYL04XZEp4wUg2Svej
+        EKM9EK9bIV41YdFdQP5VXBFc1uaDq9EhWF0If5Wy4YAqkzcqoMA3Q7iwQzizYNYld78Kjqt1eNsLID43
+        C9amJ4XtST1Evgli2A7x3AKBKyGh+rTpgh15a3zei1hvJ7zWMlJgPUXwDevADOaD7tcSkOrLyyxYtpXg
+        wdmJSEMdJswVpPBTVFwR0NZyTFkMGKs0YthoIoXRwGMyI1sxDK3fJcE0QaYkoLUzgN4H3JtA2wxP3j8Z
+        Aicm9ZJa6GBu4FXhdkaEwxX6naBl5BSOgRAanUeo7wqSfCvIJSr+l9FoPgC1SP1viqjNdwAAAABJRU5E
+        rkJggg==
+</value>
+  </data>
 </root>

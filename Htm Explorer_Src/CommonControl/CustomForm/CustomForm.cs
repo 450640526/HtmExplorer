@@ -15,7 +15,6 @@ namespace CustomFormStyle
         public CustomForm()
         {
             InitializeComponent();
-
             icon1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             label1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             btnMinimum.FlatStyle = FlatStyle.Flat;
@@ -24,44 +23,25 @@ namespace CustomFormStyle
             btnMenu.FlatStyle = FlatStyle.Flat;
             btnSkin.FlatStyle = FlatStyle.Flat;
             BorderStyle = System.Windows.Forms.BorderStyle.None;
-           
-            DoubleBuffered = true;
-            this.SetStyle(ControlStyles.AllPaintingInWmPaint, true);
-            this.SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
-            this.SetStyle(ControlStyles.UserPaint, true);  
-            //panel1.BackColor = Color.FromArgb(238, 238, 242);
-
         }
 
     
         ParentWindow nativeWindow1;
         private void CustomForm_Load(object sender, EventArgs e)
         {
-            //button1.Text = MainForm.Text;
+             if (MainForm != null)
+                MainForm.FormBorderStyle = FormBorderStyle.None;
+            SendToBack();
             if (DesignMode)
             {
                 Dock = DockStyle.Fill;
-            }
-
+             }
+ 
             if (!DesignMode)
             {
                 panel1.BackColor = panel1.BackColor;
-
                 Dock = DockStyle.None;
-                this.Anchor = ((System.Windows.Forms.AnchorStyles)((((AnchorStyles.Top | AnchorStyles.Bottom) | AnchorStyles.Left) | AnchorStyles.Right)));
-
                 nativeWindow1 = new ParentWindow(this);
-                Size size = MinimumSize;
-                size.Width += 4;
-                size.Height += 4;
-                if (nativeWindow1.form.MinimumSize == new Size(0, 0))
-                    nativeWindow1.form.MinimumSize = size;
-
-                this.Left = 3;
-                this.Top = 3;
-                this.Width = nativeWindow1.Bounds.Width;
-                this.Height = nativeWindow1.Bounds.Height;
-              
             }
           
         }
@@ -88,28 +68,37 @@ namespace CustomFormStyle
             set { icon1.Image = value; }
         }
 
+        public bool ShowIcon
+        {
+            get { return icon1.Visible; }
+            set { icon1.Visible = value; }
+        }
+
+        //public bool CanResize
+        //{
+        //    get { return icon1.Visible; }
+        //    set { icon1.Visible = value; }
+        //}
+
+
         public bool ShowSizeGrid
         {
             get { return sizeGrid1.Visible; }
             set { sizeGrid1.Visible = value; }
         }
 
-        //public bool ShowShadow
-        //{
-        //    get {
-        //        if (nativeWindow1 == null)
-        //            return false;
-        //        else
-        //        return nativeWindow1.ShowShadow; 
-        //    }
-        //    set
-        //    {
-        //        if (nativeWindow1 != null)
-        //        nativeWindow1.ShowShadow = value;
-            
-        //    }
-        //}
+        public bool ShowMinimumButton
+        {
+            get { return btnMinimum.Visible; }
+            set { btnMinimum.Visible = value; }
+        }
 
+        public bool ShowMaximumButton
+        {
+            get { return btnMaximum.Visible; }
+            set { btnMaximum.Visible = value; }
+        }
+ 
         public bool ShowSkinButton
         {
             get { return btnSkin.Visible; }
@@ -198,7 +187,7 @@ namespace CustomFormStyle
             }  
         }
         #endregion
-
+ 
         #region MyRegion
         private void SystemCommand_Click(object sender, EventArgs e)
         {
@@ -306,27 +295,70 @@ namespace CustomFormStyle
  
         private void CustomForm_SizeChanged(object sender, EventArgs e)
         {
-            if (!DesignMode && MainForm!=null)
-            {
-
-                if (MainForm.WindowState == FormWindowState.Maximized)
-                {
-                    btnMaximum.Image = imageList1.Images[2];
-                    toolTip1.SetToolTip(btnMaximum, "最大化");
-                    if (!DesignMode && nativeWindow1 != null)
-                        nativeWindow1.border = 0;
-                }
-                else
-                {
-                    btnMaximum.Image = imageList1.Images[0];
-                    toolTip1.SetToolTip(btnMaximum, "还原");
-                    if (!DesignMode && nativeWindow1 != null)
-                        nativeWindow1.border = 8;
-                }
-            }
+    
+            //if (!DesignMode && MainForm != null)
+            //{
+                
+            //}
         }
 
         #endregion
 
+        private void CustomForm_Paint(object sender, PaintEventArgs e)
+        {
+            if (DesignMode)
+            {
+                Rectangle r =
+                         new Rectangle(0,
+                                       panel1.Bounds.Bottom, 
+                                       e.ClipRectangle.Width - 1,
+                                       e.ClipRectangle.Height  -1);
+               
+                e.Graphics.DrawRectangle(new Pen(new SolidBrush(Color.Red), 1), r);
+            }
+        }
+
+        private void CustomForm_Resize(object sender, EventArgs e)
+        {
+            if (DesignMode)
+                Refresh();
+            if (MainForm != null)
+            {
+                if (MainForm.WindowState == FormWindowState.Maximized)
+                {
+                    btnMaximum.Image = imageList1.Images[2];
+                    toolTip1.SetToolTip(btnMaximum, "最大化");
+
+                    Dock = DockStyle.Fill;
+                    Bounds = MainForm.Bounds;
+                }
+
+                if (MainForm.WindowState == FormWindowState.Normal)
+                {
+                    btnMaximum.Image = imageList1.Images[0];
+                    toolTip1.SetToolTip(btnMaximum, "还原");
+
+                    Dock = DockStyle.None;
+
+                    Rectangle r = MainForm.ClientRectangle;
+                    r.Inflate(-3, -3);
+                    this.Bounds = r;
+                    this.Anchor = ((System.Windows.Forms.AnchorStyles)((((AnchorStyles.Top | AnchorStyles.Bottom) | AnchorStyles.Left) | AnchorStyles.Right)));
+                }
+
+
+                Size size = MinimumSize;
+                size.Width += 6;
+                size.Height += 6;
+                if (MainForm.MinimumSize == new Size(0, 0))
+                    MainForm.MinimumSize = size;
+            }
+        }
+
+        private void panel1_Layout(object sender, LayoutEventArgs e)
+        {
+            if (DesignMode)
+                Refresh();
+        }
     }
 }

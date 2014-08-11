@@ -644,6 +644,7 @@ namespace htmExplorer
         private void help1_Click(object sender, EventArgs e)
         {
             AboutForm abt = new AboutForm();
+            abt.BackColor = BackColor;
             abt.ShowDialog();
         }
 
