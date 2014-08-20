@@ -99,7 +99,7 @@
             this.toolStripMenuItem1,
             this.属性PToolStripMenuItem});
             this.文档contextMenuStrip.Name = "contextMenuStrip1";
-             this.文档contextMenuStrip.Size = new System.Drawing.Size(225, 82);
+            this.文档contextMenuStrip.Size = new System.Drawing.Size(225, 82);
             this.文档contextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.这台电脑_Opening);
             // 
             // 新建文件夹ToolStrip
@@ -140,7 +140,7 @@
             this.toolStripSeparator2,
             this.toolStripMenuItem10});
             this.这台电脑contextMenuStrip1.Name = "contextMenuStrip1";
-             this.这台电脑contextMenuStrip1.Size = new System.Drawing.Size(225, 54);
+            this.这台电脑contextMenuStrip1.Size = new System.Drawing.Size(225, 54);
             // 
             // toolStripMenuItem9
             // 
@@ -167,7 +167,7 @@
             this.toolStripMenuItem7,
             this.toolStripMenuItem6});
             this.回收站contextMenuStrip.Name = "contextMenuStrip2";
-             this.回收站contextMenuStrip.Size = new System.Drawing.Size(225, 54);
+            this.回收站contextMenuStrip.Size = new System.Drawing.Size(225, 54);
             this.回收站contextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.回收站_Opening);
             // 
             // 清空回收站MenuItem
@@ -205,7 +205,7 @@
             this.toolStripMenuItem4,
             this.属性RToolStripMenuItem});
             this.文件夹contextMenuStrip.Name = "文件夹contextMenuStrip";
-             this.文件夹contextMenuStrip.Size = new System.Drawing.Size(225, 220);
+            this.文件夹contextMenuStrip.Size = new System.Drawing.Size(225, 220);
             this.文件夹contextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.文件夹_Opening);
             // 
             // 新键文件夹WToolStripMenuItem
@@ -326,7 +326,7 @@
             this.空白contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.刷新MenuItem});
             this.空白contextMenuStrip.Name = "contextMenuStrip3";
-             this.空白contextMenuStrip.Size = new System.Drawing.Size(138, 26);
+            this.空白contextMenuStrip.Size = new System.Drawing.Size(138, 26);
             this.空白contextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.空白_Opening);
             // 
             // 刷新MenuItem
@@ -401,10 +401,10 @@
             // winTextBox1
             // 
             this.winTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.winTextBox1.Font = new System.Drawing.Font("微软雅黑", 8F);
+            this.winTextBox1.Font = new System.Drawing.Font("微软雅黑", 9F);
             this.winTextBox1.Location = new System.Drawing.Point(117, 143);
             this.winTextBox1.Name = "winTextBox1";
-            this.winTextBox1.Size = new System.Drawing.Size(100, 22);
+            this.winTextBox1.Size = new System.Drawing.Size(100, 23);
             this.winTextBox1.TabIndex = 10;
             this.winTextBox1.Visible = false;
             this.winTextBox1._LostFocus += new System.Windows.Forms.WinTextBox.EventHandler(this.winTextBox1__LostFocus);
@@ -413,7 +413,7 @@
             // treeView1
             // 
             this.treeView1.AllowDrop = true;
-            this.treeView1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(242)))));
+            this.treeView1.BackColor = System.Drawing.Color.White;
             this.treeView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeView1.Font = new System.Drawing.Font("微软雅黑", 9.7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));

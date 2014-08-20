@@ -6,9 +6,9 @@ using System.ComponentModel;
 
 namespace System.Windows.Forms
 {
-    public class ImageButton:Label
+    public class LabelButton:Label
     {
-        public ImageButton()
+        public LabelButton()
         {
             MouseLeave += new System.EventHandler(label1_MouseLeave);
             MouseDown += new System.Windows.Forms.MouseEventHandler(this.label1_MouseDown);

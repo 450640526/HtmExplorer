@@ -46,16 +46,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="对话框\HtmFindDialog.cs">
+    <Compile Include="Forms\HtmFindDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="对话框\HtmFindDialog.designer.cs">
+    <Compile Include="Forms\HtmFindDialog.designer.cs">
       <DependentUpon>HtmFindDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="对话框\HtmOpionsForm.cs">
+    <Compile Include="Forms\HtmOpionsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="对话框\HtmOpionsForm.Designer.cs">
+    <Compile Include="Forms\HtmOpionsForm.Designer.cs">
       <DependentUpon>HtmOpionsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="RichTextBox\Dialogs\FindDialog.cs">
@@ -80,28 +80,28 @@
     <Compile Include="RichTextBox\RichTextBoxEx.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="对话框\TableForm.cs">
+    <Compile Include="Forms\TableForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="对话框\TableForm.designer.cs">
+    <Compile Include="Forms\TableForm.designer.cs">
       <DependentUpon>TableForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="对话框\CaptureForm.cs">
+    <Compile Include="Forms\CaptureForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="对话框\CaptureForm.designer.cs">
+    <Compile Include="Forms\CaptureForm.designer.cs">
       <DependentUpon>CaptureForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="对话框\HyperLinkDialog.cs">
+    <Compile Include="Forms\HyperLinkDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="对话框\HyperLinkDialog.Designer.cs">
+    <Compile Include="Forms\HyperLinkDialog.Designer.cs">
       <DependentUpon>HyperLinkDialog.cs</DependentUpon>
     </Compile>
-    <Compile Include="对话框\InputBox.cs">
+    <Compile Include="Forms\InputBox.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="对话框\InputBox.designer.cs">
+    <Compile Include="Forms\InputBox.designer.cs">
       <DependentUpon>InputBox.cs</DependentUpon>
     </Compile>
     <Compile Include="HtmEdit.cs">
@@ -116,10 +116,10 @@
     <Compile Include="RichTextBox\HtmlSourceForm.Designer.cs">
       <DependentUpon>HtmlSourceForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="对话框\HtmReplaceDialog.cs">
+    <Compile Include="Forms\HtmReplaceDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="对话框\HtmReplaceDialog.designer.cs">
+    <Compile Include="Forms\HtmReplaceDialog.designer.cs">
       <DependentUpon>HtmReplaceDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
@@ -130,10 +130,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="对话框\HtmFindDialog.resx">
+    <EmbeddedResource Include="Forms\HtmFindDialog.resx">
       <DependentUpon>HtmFindDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="对话框\HtmOpionsForm.resx">
+    <EmbeddedResource Include="Forms\HtmOpionsForm.resx">
       <DependentUpon>HtmOpionsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="RichTextBox\Dialogs\FindDialog.resx">
@@ -145,16 +145,16 @@
     <EmbeddedResource Include="RichTextBox\Dialogs\ReplaceDialog.resx">
       <DependentUpon>ReplaceDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="对话框\TableForm.resx">
+    <EmbeddedResource Include="Forms\TableForm.resx">
       <DependentUpon>TableForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="对话框\CaptureForm.resx">
+    <EmbeddedResource Include="Forms\CaptureForm.resx">
       <DependentUpon>CaptureForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="对话框\HyperLinkDialog.resx">
+    <EmbeddedResource Include="Forms\HyperLinkDialog.resx">
       <DependentUpon>HyperLinkDialog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="对话框\InputBox.resx">
+    <EmbeddedResource Include="Forms\InputBox.resx">
       <DependentUpon>InputBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HtmEdit.resx">
@@ -163,7 +163,7 @@
     <EmbeddedResource Include="RichTextBox\HtmlSourceForm.resx">
       <DependentUpon>HtmlSourceForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="对话框\HtmReplaceDialog.resx">
+    <EmbeddedResource Include="Forms\HtmReplaceDialog.resx">
       <DependentUpon>HtmReplaceDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -182,7 +182,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="对话框\capture.cur" />
+    <Content Include="Forms\capture.cur" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

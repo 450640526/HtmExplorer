@@ -15,9 +15,9 @@ namespace System.Windows.Forms
 
         protected override void OnRenderImageMargin(ToolStripRenderEventArgs e)
         {
-            base.OnRenderImageMargin(e);
+            //base.OnRenderImageMargin(e);
 
-            e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(240, 240, 240)), e.AffectedBounds);
+            //e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(240, 240, 240)), e.AffectedBounds);
 
             e.Graphics.DrawLine(new Pen(new SolidBrush(Color.FromArgb(215, 215, 215))),//
                 new Point(e.AffectedBounds.Right + 6, e.AffectedBounds.Top + 3),
@@ -26,7 +26,7 @@ namespace System.Windows.Forms
 
         protected override void OnRenderToolStripBackground(ToolStripRenderEventArgs e)
         {
-            base.OnRenderToolStripBackground(e);
+            //base.OnRenderToolStripBackground(e);
             Brush b = new SolidBrush(Color.FromArgb(240, 240, 240));
             e.Graphics.FillRectangle(b, e.AffectedBounds);
         }

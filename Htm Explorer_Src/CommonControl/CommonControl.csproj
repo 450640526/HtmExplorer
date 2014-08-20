@@ -46,21 +46,6 @@
     <Compile Include="ColorPickerForm\ColorPickerForm.designer.cs">
       <DependentUpon>ColorPickerForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="CustomForm\CustomForm.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="CustomForm\CustomForm.designer.cs">
-      <DependentUpon>CustomForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="CustomForm\ParentWindow.cs" />
-    <Compile Include="CustomForm\ShadowForm\ShadowForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="CustomForm\ShadowForm\ShadowForm.Designer.cs">
-      <DependentUpon>ShadowForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="CustomForm\ShadowForm\Win32.cs" />
-    <Compile Include="CustomForm\WinApi.cs" />
     <Compile Include="CustomMenuStrip\ClassicContextMenuStrip.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -69,7 +54,7 @@
     </Compile>
     <Compile Include="CustomMenuStrip\CustomMenuStripRenderer.cs" />
     <Compile Include="CustomMenuStrip\CustomToolStripRenderer.cs" />
-    <Compile Include="ImageButton\ImageButton.cs">
+    <Compile Include="LabelButton\LabelButton.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="FontComboBox\FontComboBox.cs">
@@ -87,6 +72,11 @@
     <Compile Include="SearchBox\SearchBox.designer.cs">
       <DependentUpon>SearchBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="TABControl\TabControlContextMenuStrip.cs" />
+    <Compile Include="TABControl\TabControlDragDrop.cs" />
+    <Compile Include="TABControl\TabControlExt.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Win32AddressBar\Win32AddressBar.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -100,12 +90,6 @@
   <ItemGroup>
     <EmbeddedResource Include="ColorPickerForm\ColorPickerForm.resx">
       <DependentUpon>ColorPickerForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="CustomForm\CustomForm.resx">
-      <DependentUpon>CustomForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="CustomForm\ShadowForm\ShadowForm.resx">
-      <DependentUpon>ShadowForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -61,6 +61,7 @@
     <Compile Include="SHELLFILE\ShellEnums.cs" />
     <Compile Include="SHELLFILE\ShellFileOperation.cs" />
     <Compile Include="SHELLFILE\ShellNameMapping.cs" />
+    <Compile Include="System.cs" />
     <Compile Include="Win32API.cs" />
   </ItemGroup>
   <ItemGroup>

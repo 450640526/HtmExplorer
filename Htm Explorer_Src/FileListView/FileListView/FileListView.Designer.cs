@@ -44,20 +44,21 @@
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.sortBydesending1 = new System.Windows.Forms.RadioMenuItem();
             this.sortByAsending1 = new System.Windows.Forms.RadioMenuItem();
-            this.刷新RToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
-            this.在浏览器中打开ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.用资源管理器打开_MenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.另存为_MenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.OpenWithNewTab1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.OpenWithInternet = new System.Windows.Forms.ToolStripMenuItem();
+            this.OpenWithExplorer = new System.Windows.Forms.ToolStripMenuItem();
+            this.SaveAs = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem9 = new System.Windows.Forms.ToolStripSeparator();
-            this.新建文件ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.复制文件_MenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.删除选中的文件MenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.重命名MToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.NewFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.CopyAFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.DeleteFiles = new System.Windows.Forms.ToolStripMenuItem();
+            this.RenameFile = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripDivider2 = new System.Windows.Forms.ToolStripSeparator();
+            this.Refresh1 = new System.Windows.Forms.ToolStripMenuItem();
             this.tms_Other = new System.Windows.Forms.ToolStripMenuItem();
-            this.复制文件标题_MenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.复制文件路径_MenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.CopyTitle = new System.Windows.Forms.ToolStripMenuItem();
+            this.CopyFileName = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
@@ -79,17 +80,18 @@
             this.ContextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem3,
             this.排序方式OToolStripMenuItem,
-            this.刷新RToolStripMenuItem,
             this.toolStripMenuItem1,
-            this.在浏览器中打开ToolStripMenuItem,
-            this.用资源管理器打开_MenuItem,
-            this.另存为_MenuItem,
+            this.OpenWithNewTab1,
+            this.OpenWithInternet,
+            this.OpenWithExplorer,
+            this.SaveAs,
             this.toolStripMenuItem9,
-            this.新建文件ToolStripMenuItem,
-            this.复制文件_MenuItem,
-            this.删除选中的文件MenuItem,
-            this.重命名MToolStripMenuItem,
+            this.NewFile,
+            this.CopyAFile,
+            this.DeleteFiles,
+            this.RenameFile,
             this.toolStripDivider2,
+            this.Refresh1,
             this.tms_Other});
             this.ContextMenuStrip1.Name = "contextMenuStrip_ListView";
             this.ContextMenuStrip1.Size = new System.Drawing.Size(189, 286);
@@ -113,7 +115,7 @@
             this.largeIcon1.CheckOnClick = true;
             this.largeIcon1.GroupIndex = 11;
             this.largeIcon1.Name = "largeIcon1";
-            this.largeIcon1.Size = new System.Drawing.Size(152, 22);
+            this.largeIcon1.Size = new System.Drawing.Size(141, 22);
             this.largeIcon1.Text = "大图标(&R)";
             this.largeIcon1.Click += new System.EventHandler(this.largeIcon1_Click);
             // 
@@ -122,7 +124,7 @@
             this.smallIcon1.CheckOnClick = true;
             this.smallIcon1.GroupIndex = 11;
             this.smallIcon1.Name = "smallIcon1";
-            this.smallIcon1.Size = new System.Drawing.Size(152, 22);
+            this.smallIcon1.Size = new System.Drawing.Size(141, 22);
             this.smallIcon1.Text = "小图标(&N)";
             this.smallIcon1.Click += new System.EventHandler(this.largeIcon1_Click);
             // 
@@ -131,7 +133,7 @@
             this.list1.CheckOnClick = true;
             this.list1.GroupIndex = 11;
             this.list1.Name = "list1";
-            this.list1.Size = new System.Drawing.Size(152, 22);
+            this.list1.Size = new System.Drawing.Size(141, 22);
             this.list1.Text = "列表(&T)";
             this.list1.Click += new System.EventHandler(this.largeIcon1_Click);
             // 
@@ -140,7 +142,7 @@
             this.tile1.CheckOnClick = true;
             this.tile1.GroupIndex = 11;
             this.tile1.Name = "tile1";
-            this.tile1.Size = new System.Drawing.Size(152, 22);
+            this.tile1.Size = new System.Drawing.Size(141, 22);
             this.tile1.Text = "平铺(&S)";
             this.tile1.Click += new System.EventHandler(this.largeIcon1_Click);
             // 
@@ -151,7 +153,7 @@
             this.details1.CheckState = System.Windows.Forms.CheckState.Checked;
             this.details1.GroupIndex = 11;
             this.details1.Name = "details1";
-            this.details1.Size = new System.Drawing.Size(152, 22);
+            this.details1.Size = new System.Drawing.Size(141, 22);
             this.details1.Text = "详细信息(&D)";
             this.details1.Click += new System.EventHandler(this.largeIcon1_Click);
             // 
@@ -176,7 +178,7 @@
             this.sortByName1.CheckState = System.Windows.Forms.CheckState.Checked;
             this.sortByName1.GroupIndex = 44;
             this.sortByName1.Name = "sortByName1";
-            this.sortByName1.Size = new System.Drawing.Size(152, 22);
+            this.sortByName1.Size = new System.Drawing.Size(124, 22);
             this.sortByName1.Text = "名称";
             this.sortByName1.Click += new System.EventHandler(this.名称MenuItem_Click);
             // 
@@ -185,7 +187,7 @@
             this.sortByDate1.CheckOnClick = true;
             this.sortByDate1.GroupIndex = 44;
             this.sortByDate1.Name = "sortByDate1";
-            this.sortByDate1.Size = new System.Drawing.Size(152, 22);
+            this.sortByDate1.Size = new System.Drawing.Size(124, 22);
             this.sortByDate1.Text = "修改日期";
             this.sortByDate1.Click += new System.EventHandler(this.名称MenuItem_Click);
             // 
@@ -194,7 +196,7 @@
             this.sortBySize.CheckOnClick = true;
             this.sortBySize.GroupIndex = 44;
             this.sortBySize.Name = "sortBySize";
-            this.sortBySize.Size = new System.Drawing.Size(152, 22);
+            this.sortBySize.Size = new System.Drawing.Size(124, 22);
             this.sortBySize.Text = "大小";
             this.sortBySize.Visible = false;
             this.sortBySize.Click += new System.EventHandler(this.名称MenuItem_Click);
@@ -202,7 +204,7 @@
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(149, 6);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(121, 6);
             // 
             // sortBydesending1
             // 
@@ -212,7 +214,7 @@
             this.sortBydesending1.CheckState = System.Windows.Forms.CheckState.Checked;
             this.sortBydesending1.GroupIndex = 3;
             this.sortBydesending1.Name = "sortBydesending1";
-            this.sortBydesending1.Size = new System.Drawing.Size(152, 22);
+            this.sortBydesending1.Size = new System.Drawing.Size(124, 22);
             this.sortBydesending1.Text = "递增(&A)";
             this.sortBydesending1.Click += new System.EventHandler(this.名称MenuItem_Click);
             // 
@@ -222,109 +224,119 @@
             this.sortByAsending1.CheckOnClick = true;
             this.sortByAsending1.GroupIndex = 3;
             this.sortByAsending1.Name = "sortByAsending1";
-            this.sortByAsending1.Size = new System.Drawing.Size(152, 22);
+            this.sortByAsending1.Size = new System.Drawing.Size(124, 22);
             this.sortByAsending1.Text = "递减(&D)";
             this.sortByAsending1.Click += new System.EventHandler(this.名称MenuItem_Click);
-            // 
-            // 刷新RToolStripMenuItem
-            // 
-            this.刷新RToolStripMenuItem.Name = "刷新RToolStripMenuItem";
-            this.刷新RToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F5;
-            this.刷新RToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
-            this.刷新RToolStripMenuItem.Text = "刷新(&E)";
-            this.刷新RToolStripMenuItem.Click += new System.EventHandler(this.刷新_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(185, 6);
+            this.toolStripMenuItem1.Visible = false;
             // 
-            // 在浏览器中打开ToolStripMenuItem
+            // OpenWithNewTab1
             // 
-            this.在浏览器中打开ToolStripMenuItem.Name = "在浏览器中打开ToolStripMenuItem";
-            this.在浏览器中打开ToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
-            this.在浏览器中打开ToolStripMenuItem.Text = "在浏览器中打开(&E)";
-            this.在浏览器中打开ToolStripMenuItem.Click += new System.EventHandler(this.在浏览器中打开ToolStripMenuItem_Click);
+            this.OpenWithNewTab1.Name = "OpenWithNewTab1";
+            this.OpenWithNewTab1.Size = new System.Drawing.Size(188, 22);
+            this.OpenWithNewTab1.Text = "在新标签中打开(&L)";
+            this.OpenWithNewTab1.Click += new System.EventHandler(this.ToolStripMenuItems_Click);
             // 
-            // 用资源管理器打开_MenuItem
+            // OpenWithInternet
             // 
-            this.用资源管理器打开_MenuItem.Name = "用资源管理器打开_MenuItem";
-            this.用资源管理器打开_MenuItem.Size = new System.Drawing.Size(188, 22);
-            this.用资源管理器打开_MenuItem.Text = "用资源管理器打开(&X)";
-            this.用资源管理器打开_MenuItem.Click += new System.EventHandler(this.在资源管理器中打开_Click);
+            this.OpenWithInternet.Name = "OpenWithInternet";
+            this.OpenWithInternet.Size = new System.Drawing.Size(188, 22);
+            this.OpenWithInternet.Text = "在浏览器中打开(&E)";
+            this.OpenWithInternet.Click += new System.EventHandler(this.ToolStripMenuItems_Click);
             // 
-            // 另存为_MenuItem
+            // OpenWithExplorer
             // 
-            this.另存为_MenuItem.Name = "另存为_MenuItem";
-            this.另存为_MenuItem.Size = new System.Drawing.Size(188, 22);
-            this.另存为_MenuItem.Text = "另存为(&A)...";
-            this.另存为_MenuItem.Click += new System.EventHandler(this.另存为_MenuItem_Click);
+            this.OpenWithExplorer.Name = "OpenWithExplorer";
+            this.OpenWithExplorer.Size = new System.Drawing.Size(188, 22);
+            this.OpenWithExplorer.Text = "用资源管理器打开(&X)";
+            this.OpenWithExplorer.Click += new System.EventHandler(this.ToolStripMenuItems_Click);
+            // 
+            // SaveAs
+            // 
+            this.SaveAs.Name = "SaveAs";
+            this.SaveAs.Size = new System.Drawing.Size(188, 22);
+            this.SaveAs.Text = "另存为(&A)...";
+            this.SaveAs.Click += new System.EventHandler(this.ToolStripMenuItems_Click);
             // 
             // toolStripMenuItem9
             // 
             this.toolStripMenuItem9.Name = "toolStripMenuItem9";
             this.toolStripMenuItem9.Size = new System.Drawing.Size(185, 6);
             // 
-            // 新建文件ToolStripMenuItem
+            // NewFile
             // 
-            this.新建文件ToolStripMenuItem.Name = "新建文件ToolStripMenuItem";
-            this.新建文件ToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.新建文件ToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
-            this.新建文件ToolStripMenuItem.Text = "新建(&F)";
-            this.新建文件ToolStripMenuItem.Click += new System.EventHandler(this.新建文件ToolStripMenuItem_Click);
+            this.NewFile.Name = "NewFile";
+            this.NewFile.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
+            this.NewFile.Size = new System.Drawing.Size(188, 22);
+            this.NewFile.Text = "新建(&F)";
+            this.NewFile.Click += new System.EventHandler(this.ToolStripMenuItems_Click);
             // 
-            // 复制文件_MenuItem
+            // CopyAFile
             // 
-            this.复制文件_MenuItem.Name = "复制文件_MenuItem";
-            this.复制文件_MenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
-            this.复制文件_MenuItem.Size = new System.Drawing.Size(188, 22);
-            this.复制文件_MenuItem.Text = "复制(&C)";
-            this.复制文件_MenuItem.Click += new System.EventHandler(this.复制文件_MenuItem_Click);
+            this.CopyAFile.Name = "CopyAFile";
+            this.CopyAFile.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C)));
+            this.CopyAFile.Size = new System.Drawing.Size(188, 22);
+            this.CopyAFile.Text = "复制(&C)";
+            this.CopyAFile.Click += new System.EventHandler(this.ToolStripMenuItems_Click);
             // 
-            // 删除选中的文件MenuItem
+            // DeleteFiles
             // 
-            this.删除选中的文件MenuItem.Name = "删除选中的文件MenuItem";
-            this.删除选中的文件MenuItem.ShortcutKeyDisplayString = "";
-            this.删除选中的文件MenuItem.ShortcutKeys = System.Windows.Forms.Keys.Delete;
-            this.删除选中的文件MenuItem.Size = new System.Drawing.Size(188, 22);
-            this.删除选中的文件MenuItem.Text = "删除(&D)";
-            this.删除选中的文件MenuItem.Click += new System.EventHandler(this.删除选中的文件_Click);
+            this.DeleteFiles.Name = "DeleteFiles";
+            this.DeleteFiles.ShortcutKeyDisplayString = "";
+            this.DeleteFiles.ShortcutKeys = System.Windows.Forms.Keys.Delete;
+            this.DeleteFiles.Size = new System.Drawing.Size(188, 22);
+            this.DeleteFiles.Text = "删除(&D)";
+            this.DeleteFiles.Click += new System.EventHandler(this.ToolStripMenuItems_Click);
             // 
-            // 重命名MToolStripMenuItem
+            // RenameFile
             // 
-            this.重命名MToolStripMenuItem.Name = "重命名MToolStripMenuItem";
-            this.重命名MToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F2;
-            this.重命名MToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
-            this.重命名MToolStripMenuItem.Text = "重命名(&M)";
-            this.重命名MToolStripMenuItem.Click += new System.EventHandler(this.重命名MenuItem_Click);
+            this.RenameFile.Enabled = false;
+            this.RenameFile.Name = "RenameFile";
+            this.RenameFile.ShortcutKeys = System.Windows.Forms.Keys.F2;
+            this.RenameFile.Size = new System.Drawing.Size(188, 22);
+            this.RenameFile.Text = "重命名(&M)";
+            this.RenameFile.Visible = false;
+            this.RenameFile.Click += new System.EventHandler(this.ToolStripMenuItems_Click);
             // 
             // toolStripDivider2
             // 
             this.toolStripDivider2.Name = "toolStripDivider2";
             this.toolStripDivider2.Size = new System.Drawing.Size(185, 6);
             // 
+            // Refresh1
+            // 
+            this.Refresh1.Name = "Refresh1";
+            this.Refresh1.ShortcutKeys = System.Windows.Forms.Keys.F5;
+            this.Refresh1.Size = new System.Drawing.Size(188, 22);
+            this.Refresh1.Text = "刷新(&E)";
+            this.Refresh1.Click += new System.EventHandler(this.ToolStripMenuItems_Click);
+            // 
             // tms_Other
             // 
             this.tms_Other.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.复制文件标题_MenuItem,
-            this.复制文件路径_MenuItem});
+            this.CopyTitle,
+            this.CopyFileName});
             this.tms_Other.Name = "tms_Other";
             this.tms_Other.Size = new System.Drawing.Size(188, 22);
             this.tms_Other.Text = "其他";
             // 
-            // 复制文件标题_MenuItem
+            // CopyTitle
             // 
-            this.复制文件标题_MenuItem.Name = "复制文件标题_MenuItem";
-            this.复制文件标题_MenuItem.Size = new System.Drawing.Size(165, 22);
-            this.复制文件标题_MenuItem.Text = "复制标题(&T)";
-            this.复制文件标题_MenuItem.Click += new System.EventHandler(this.复制选中的标题_Click);
+            this.CopyTitle.Name = "CopyTitle";
+            this.CopyTitle.Size = new System.Drawing.Size(165, 22);
+            this.CopyTitle.Text = "复制标题(&T)";
+            this.CopyTitle.Click += new System.EventHandler(this.ToolStripMenuItems_Click);
             // 
-            // 复制文件路径_MenuItem
+            // CopyFileName
             // 
-            this.复制文件路径_MenuItem.Name = "复制文件路径_MenuItem";
-            this.复制文件路径_MenuItem.Size = new System.Drawing.Size(165, 22);
-            this.复制文件路径_MenuItem.Text = "复制完整路径(&U)";
-            this.复制文件路径_MenuItem.Click += new System.EventHandler(this.复制完整路径_Click);
+            this.CopyFileName.Name = "CopyFileName";
+            this.CopyFileName.Size = new System.Drawing.Size(165, 22);
+            this.CopyFileName.Text = "复制完整路径(&U)";
+            this.CopyFileName.Click += new System.EventHandler(this.ToolStripMenuItems_Click);
             // 
             // pictureBox2
             // 
@@ -366,7 +378,7 @@
             // listView1
             // 
             this.listView1.Alignment = System.Windows.Forms.ListViewAlignment.SnapToGrid;
-            this.listView1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(238)))), ((int)(((byte)(242)))));
+            this.listView1.BackColor = System.Drawing.Color.White;
             this.listView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
@@ -456,28 +468,28 @@
         private ToolStripSeparator toolStripMenuItem9;
         private ToolStripSeparator toolStripDivider2;
         private ToolStripMenuItem tms_Other;
-        private ToolStripMenuItem 复制文件标题_MenuItem;
-        private ToolStripMenuItem 复制文件路径_MenuItem;
-        private ToolStripMenuItem 在浏览器中打开ToolStripMenuItem;
+        private ToolStripMenuItem CopyTitle;
+        private ToolStripMenuItem CopyFileName;
+        private ToolStripMenuItem OpenWithInternet;
         private ToolStripSeparator toolStripMenuItem1;
-        public ToolStripMenuItem 删除选中的文件MenuItem;
+        public ToolStripMenuItem DeleteFiles;
         private ColumnHeader columnHeader1;
         private ColumnHeader columnHeader2;
         private ColumnHeader columnHeader3;
         private ColumnHeader columnHeader4;
         private ColumnHeader columnHeader5;
         public ListViewEx listView1;
-        private ToolStripMenuItem 刷新RToolStripMenuItem;
+        private ToolStripMenuItem Refresh1;
         private PictureBox pictureBox2;
         private PictureBox pictureBox1;
-        private ToolStripMenuItem 用资源管理器打开_MenuItem;
-        public ToolStripMenuItem 另存为_MenuItem;
-        private ToolStripMenuItem 重命名MToolStripMenuItem;
+        private ToolStripMenuItem OpenWithExplorer;
+        public ToolStripMenuItem SaveAs;
+        private ToolStripMenuItem RenameFile;
         public IO.FileSystemWatcher fileSystemWatcher1;
         private ToolStripMenuItem 排序方式OToolStripMenuItem;
         private ToolStripMenuItem toolStripMenuItem3;
-        private ToolStripMenuItem 复制文件_MenuItem;
-        private ToolStripMenuItem 新建文件ToolStripMenuItem;
+        private ToolStripMenuItem CopyAFile;
+        private ToolStripMenuItem NewFile;
         private ImageList imageList1;
         private RadioMenuItem largeIcon1;
         private RadioMenuItem smallIcon1;
@@ -490,5 +502,6 @@
         private RadioMenuItem sortBySize;
         private RadioMenuItem sortBydesending1;
         private RadioMenuItem sortByAsending1;
+        private ToolStripMenuItem OpenWithNewTab1;
     }
 }

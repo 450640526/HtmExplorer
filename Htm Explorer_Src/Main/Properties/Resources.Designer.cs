@@ -59,5 +59,32 @@ namespace htmExplorer.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   查找类似 &lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0 Transitional//EN&quot;&gt;
+        ///&lt;HTML&gt;&lt;HEAD&gt;&lt;TITLE&gt;关于&lt;/TITLE&gt;
+        ///&lt;META content=&quot;text/html; charset=unicode&quot; http-equiv=Content-Type&gt;
+        ///&lt;META name=GENERATOR content=&quot;MSHTML 11.00.9600.16384&quot;&gt;&lt;/HEAD&gt;
+        ///&lt;BODY style=&quot;MARGIN: 5px&quot;&gt;
+        ///&lt;P&gt;&amp;nbsp;&lt;/P&gt;
+        ///&lt;P&gt;【2014年8月7日】&lt;/P&gt;
+        ///&lt;OL&gt;
+        ///  &lt;LI&gt;美化了主界面&lt;/LI&gt;&lt;/OL&gt;
+        ///&lt;P&gt;【2014年8月6日】&lt;/P&gt;
+        ///&lt;OL&gt;
+        ///  &lt;LI&gt;+ 美化文件列表画线的功能&lt;/LI&gt;&lt;/OL&gt;
+        ///&lt;P&gt;&amp;nbsp;&lt;/P&gt;
+        ///&lt;P&gt;【2014年8月5日】&lt;/P&gt;
+        ///&lt;OL&gt;
+        ///  &lt;LI&gt;修复新建立一个文件当先重命名文件时时再粘贴文件名变成HTMLEDIT中的第一行字符&lt;/LI&gt;&lt;/OL&gt;
+        ///&lt;P&gt;【2014年7月29日】&lt;/P&gt;
+        ///&lt;OL&gt;
+        ///  &lt;LI&gt;修 [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        /// </summary>
+        internal static string 关于 {
+            get {
+                return ResourceManager.GetString("关于", resourceCulture);
+            }
+        }
     }
 }

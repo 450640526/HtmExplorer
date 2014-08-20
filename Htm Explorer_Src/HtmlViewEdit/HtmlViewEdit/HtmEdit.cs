@@ -33,7 +33,7 @@ namespace System.Windows.Forms
         private void HtmlEdit_Load(object sender, EventArgs e)
         {
             Color c = Color.FromArgb(238, 238, 242);
-            SetupToolStripRender(c, c);
+            SetupToolStripRender(Color.White, c);
 
             #region ToolStripDropDown
             host1 = new ToolStripControlHost(foreColorForm1);
@@ -467,13 +467,13 @@ namespace System.Windows.Forms
         public event EventHandler ViewSourceChecked;
 
         [Description("新建一个空文件 然后文件内容改变后发生")]
-        public event EventHandler NewDoucument;
+        public event EventHandler OnNewDocument;
 
 
         protected void OnNewDoucument(object sender, EventArgs e)
         {
-            if (NewDoucument != null)
-                NewDoucument(sender, e);
+            if (OnNewDocument != null)
+                OnNewDocument(sender, e);
         }
 
         protected void OnViewSourceChecked(object sender, EventArgs e)

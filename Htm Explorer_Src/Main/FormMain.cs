@@ -16,7 +16,8 @@ namespace htmExplorer
         {     
             InitializeComponent();
             Thread.ExecuteRunOnceThread();
-           
+            menuStrip1.Renderer = new CustomMenuStripRenderer();
+            documentView1.filelistview1 = fileListView1;
         }
 
         #region FormMain_Load FormMain_FormClosed
@@ -24,13 +25,6 @@ namespace htmExplorer
         private void FormMain_Load(object sender, EventArgs e)
         {
             Thread.ExecuteRunOnceThread();
-
-            //文件MenuStrip1.Renderer = new System.Windows.Forms.CustomMenuStripRenderer();
-            //notifyIconcontextMenuStrip1.Renderer = new System.Windows.Forms.CustomMenuStripRenderer();
-            //skinContextMenuStrip.Renderer = new System.Windows.Forms.CustomMenuStripRenderer();
-            //searchContextMenuStrip.Renderer = new System.Windows.Forms.CustomMenuStripRenderer();
-
-
 
             #region 1 加载工作目录
             //配置文件存在则加载配置文件中的
@@ -72,13 +66,12 @@ namespace htmExplorer
             fileListView1.path = directoryTreeView1.selpath;
             fileListView1.recylebin = recyleBinDirecoty;
             
-            LoadIniFiles();
-            
+            LoadIniFiles(); 
         }
 
         private void FormMain_FormClosed(object sender, FormClosedEventArgs e)
         {
-            htmEdit1.CheckFileSave();
+            //htmEdit1.CheckFileSave();
             SaveIniFiles();
             directoryTreeView1.SaveXml(treeViewXml);
 
@@ -128,14 +121,10 @@ namespace htmExplorer
         {
             string path = directoryTreeView1.selpath;
          
-            customForm1.Caption =  directoryTreeView1.selNodeText;
+            //customForm1.Caption =  directoryTreeView1.selNodeText;
             if (Directory.Exists(path))
             {
-                btnAttch1.CheckState = CheckState.Unchecked;
-
                 fileListView1.LoadFilesFromDirecotry(path);
-                customForm1.Icon = directoryTreeView1.selImage;
-                //win32AddressBar1.ICON1.Image = directoryTreeView1.selImage;
                 win32AddressBar1.DisposeButtons();
                 win32AddressBar1.CreateButtons(path);
                 win32AddressBar1.AddPathToListBox(path);
@@ -146,28 +135,29 @@ namespace htmExplorer
         #endregion
 
         #region fileListView1
-        private void fileListView1_ItemClick(object sender, EventArgs e)
+        private void fileListView1_OpenWithNewTab(object sender, EventArgs e)
         {
-            htmEdit1.viewsource1.Checked = false;
+            documentView1.OpenDocumentWithNewTab(fileListView1.selfilename);
+          
+        }
 
+        private void fileListView1_ItemClick(object sender, MouseEventArgs e)
+        {
             //选中的文件路径存在 打开
             //选中文件数量==1 打开
             //选中的文件是不是当前已经打开的文件， 打开
-            int SelCount = fileListView1.SelItemsCount;
-            if (File.Exists(fileListView1.selfilename) &&
-               fileListView1.selfilename != htmEdit1.htmlfilename)
-            {
-               
-                htmEdit1.OpenDocument(fileListView1.selfilename);
 
-                winTextBox1.Text = Path.GetFileNameWithoutExtension(fileListView1.selfilename);
+            int SelCount = fileListView1.SelItemsCount;
+
+            if (File.Exists(fileListView1.selfilename)
+                && SelCount == 1
+                && fileListView1.selfilename != documentView1.Filename)
+            {
+                documentView1.OpenDocument(fileListView1.selfilename);
+                documentView1.document1.ShowEditor();
 
                 if (searchBox1.Text != "" && searchBox1.Text != searchBox1.DisplayText)
-                    htmEdit1.Search(searchBox1.Text, true, false, false);
-              
-                btnAttch1.CheckState = CheckState.Unchecked;
-                fileSystemWatcher1.Path = Path.GetDirectoryName(fileListView1.selfilename);
-                updateAttachTitle(); 
+                    documentView1.document1.htmEdit1.Search(searchBox1.Text, true, false, false);
             }
 
             string s = "";
@@ -178,109 +168,31 @@ namespace htmExplorer
                 s = string.Format("已选择 {0} 个 ", SelCount);
 
             toolStripStatusLabel1.Text = string.Format("     {0} 个文件   {1}", fileListView1.listView1.Items.Count, s);
+            
+        }
 
-            UpdateToolTips();
+        private void fileListView1_ItemActive(object sender, EventArgs e)
+        {
+            fileListView1_ItemClick(null, null);
+            documentView1.document1.ToggleReadMode();
         }
 
         private void 另存为_Click(object sender, EventArgs e)
         {
-            htmEdit1.ShowSaveAsDialog();
+            documentView1.document1.htmEdit1.ShowSaveAsDialog();
         }
 
         private void 新建_Click(object sender, EventArgs e)
         {
-            btnAttch1.CheckState = CheckState.Unchecked;
-            htmEdit1.viewsource1.Checked = false;
-
-            string filename = FileCore.NewFileName(fileListView1.path + "\\新建HTML文档.htm");
-            htmEdit1.NewDocument(filename);
-            fileListView1.AddItem(filename);
-            fileListView1.selfilename = filename;
-
-            btnReadMode1.Text = "阅读";
-            winTextBox1.Text = Path.GetFileNameWithoutExtension(fileListView1.selfilename);
-
-            //Text = fileListView1.selfilename;
-            //winTextBox1.Focus();
-            //winTextBox1.SelectAll();
-            UpdateToolTips();
-            winTextBox1.Modified = false;
+            string s = FileCore.NewFileName(fileListView1.path + "\\新建HTML文档.htm");
+            documentView1.NewDocument(s);
+            fileListView1.AddItem(s);
         }
 
         private void 重命名_Click(object sender, EventArgs e)
         {
-            winTextBox1.SelectAll();
-            winTextBox1.Focus();
-        }
-
-        private void fileListView1_CopyFile(object sender, EventArgs e)
-        {
-            winTextBox1.Text = Path.GetFileNameWithoutExtension(fileListView1.selfilename);
-            htmEdit1.htmlfilename = fileListView1.selfilename;
-
-            btnAttch1.Text = "   附件";
-            btnAttch1.ForeColor = Color.Black;
-            btnAttch1.Font = new System.Drawing.Font(btnAttch1.Font, FontStyle.Regular);
-            UpdateToolTips();
-            附件按钮_CheckedChanged(sender, e);
-        }
-
-
-        #endregion
-
-        #region  htmEdit1
-
-        private void htmEdit1_NewDoucument(object sender, EventArgs e)
-        {
-            if (winTextBox1.Modified == false)
-            {
-                //新建立的文件名自动重命名
-                RichTextBox tmpRichTextBox1 = new RichTextBox();
-                tmpRichTextBox1.Text = htmEdit1.webBrowser1.Document.Body.InnerText;
-
-                //移动空行
-                string s = "";
-                for (int i = 0; i < tmpRichTextBox1.Lines.Length; i++)
-                {
-                    if (tmpRichTextBox1.Lines[i].Trim() != "\r\n")
-                        s += tmpRichTextBox1.Lines[i] + "\r\n";
-                }
-                tmpRichTextBox1.Text = tmpRichTextBox1.Text.Trim();
-
-
-                WinTextBox tmpWinTextBox1 = new WinTextBox();
-                tmpWinTextBox1.Text = tmpRichTextBox1.Lines[0];
-
-                string filename = Path.GetDirectoryName(fileListView1.selfilename) + "\\" + tmpWinTextBox1.Text + _htm;
-                filename = FileCore.NewFileName(filename);
-                if (!File.Exists(filename))
-                {
-                    string name1 = Path.GetFileNameWithoutExtension(filename);
-                    if (name1.Length <= winTextBox1.MaxLength)
-                    {
-                        winTextBox1.Text = name1;
-                        重命名文件winTextBox1_LostFocus(sender, e);
-                    }
-                }
-
-                tmpRichTextBox1.Dispose();
-                tmpWinTextBox1.Dispose();
-            }
-        }
-
-
-        private void htmEdit1_ViewSourceChecked(object sender, EventArgs e)
-        {
-            winTextBox1.ReadOnly = htmEdit1.viewsource1.Checked;
-            btnReadMode1.Enabled = !htmEdit1.viewsource1.Checked;
-            btnAttch1.Enabled = !htmEdit1.viewsource1.Checked;
-            htmEdit1.EnabledToolButton();
-        }
-
-        private void htmEdit1_GetFocus(object sender, EventArgs e)
-        {
-            if (htmEdit1.EditMode == false)
-                fileListView1.Focus();
+            //documentView1.document1.winTextBox1.SelectAll();
+            //documentView1.document1.winTextBox1.Focus();
         }
 
         #endregion
@@ -311,7 +223,7 @@ namespace htmExplorer
                 //列出所有HTM文件
                 if (searchBox1.Text.Trim() == "*")
                 {
-                    fileListView1.AddItem1(filelist[i]);
+                    fileListView1.AddSearchItem(filelist[i]);
                 }
                 else
                 {
@@ -319,7 +231,7 @@ namespace htmExplorer
                     if (searchAll1.Checked || searchFileName1.Checked)
                     {
                         if (Path.GetFileName(filelist[i]).Contains(searchBox1.Text.ToUpper()))
-                            fileListView1.AddItem1(filelist[i]);
+                            fileListView1.AddSearchItem(filelist[i]);
                     }
 
                     //关键字搜索
@@ -329,7 +241,7 @@ namespace htmExplorer
                         s = h.HtmlToText(s).ToUpper();
 
                         if (s.Contains(searchBox1.Text.ToUpper()))
-                            fileListView1.AddItem1(filelist[i]);
+                            fileListView1.AddSearchItem(filelist[i]);
                     }
                 }
 
@@ -399,197 +311,20 @@ namespace htmExplorer
         }
         #endregion
 
-        #region FormAttachment
-
-        private void updateAttachTitle()
+        #region splitContainer
+        private void splitContainer2_SplitterMoved(object sender, SplitterEventArgs e)
         {
-            string atta = DirectoryCore.Get_AttachmentsDirectory(fileListView1.selfilename);
-
-            //附件文件夹
-            //if (Directory.Exists(atta))
-            //{
-            //    string[] files = Directory.GetFiles(atta, "*.*");
-            //    if (files.Length > 0)
-            //    {
-            //        btnAttch1.Text = files.Length.ToString();
-            //        btnAttch1.Font = new System.Drawing.Font(btnAttch1.Font, FontStyle.Bold);
-            //        btnAttch1.ForeColor = Color.Red;
-            //    }
-            //}
-            //else
-            //{
-            //    btnAttch1.Text = "   附件";
-            //    btnAttch1.ForeColor = Color.Black;
-            //    btnAttch1.Font = new System.Drawing.Font(btnAttch1.Font, FontStyle.Regular);
-            //}
-
-            //删除空附件的文件夹
-            
-            if (Directory.Exists(atta) && 
-                btnAttch1.Checked == false &&
-                DirectoryCore.IsEmpty(atta))
-            {
-                Directory.Delete(atta);
-            }
-
+            WinForm.RemoveFocus(this);
         }
+  
+        #endregion
 
-        private void fileSystemWatcher1_Created(object sender, FileSystemEventArgs e)
-        {
-            updateAttachTitle();
-        }
-
-
-        private void UpdateToolTips()
-        {
-            toolTip1.SetToolTip(btnReadMode1, "编辑文档\r\n" + fileListView1.selfilename);
-            toolTip1.SetToolTip(btnAttch1, "\"" + Path.GetFileName(fileListView1.selfilename) + "\" 的附件\r\n");
-        }
-
-        private void 阅读按钮_Click(object sender, EventArgs e)
-        {
-            if (!File.Exists(fileListView1.selfilename))
-                return;
-
-            if (htmEdit1.EditMode == true)
-            {
-                htmEdit1.SaveDocument();
-                htmEdit1.EditMode = false;
-
-                if (File.Exists(htmEdit1.htmlfilename))
-                    htmEdit1.OpenDocument(htmEdit1.htmlfilename);
-
-                btnReadMode1.Text = "编辑";
-            }
-            else
-            {
-                btnReadMode1.Text = "阅读";
-                htmEdit1.EditMode = true;
-            }
-
-              //去掉readMode1FOCUS
-            label1.Focus();    
-        }
-
-        FormAttachment frmAttach1 = new FormAttachment();
-        private void 附件按钮_CheckedChanged(object sender, EventArgs e)
-        {
-            if (!File.Exists(fileListView1.selfilename))
-                return;
-
-            if (frmAttach1.IsDisposed)
-                frmAttach1 = new FormAttachment();
-
-            if (btnAttch1.CheckState == CheckState.Checked)
-            {
-                frmAttach1.workpath = DirectoryCore.Get_AttachmentsDirectory(fileListView1.selfilename);
-                //frmAttach1.label1.Text = Path.GetFileName(fileListView1.selfilename) + "  的附件";
-                frmAttach1.TopLevel = false;
-                frmAttach1.Bounds = htmEdit1.Bounds;
-                frmAttach1.Parent = splitContainer1.Panel2;
-                frmAttach1.Anchor = ((AnchorStyles)((((AnchorStyles.Top | AnchorStyles.Bottom) | AnchorStyles.Left) | AnchorStyles.Right)));
-
-                //frmAttach1.Location = htmEdit1.Location;
-                //frmAttach1.Dock = DockStyle.Fill;
-                //frmAttach1.Size = htmEdit1.Size;
-                frmAttach1.Show();
-            }
-            else
-            {
-                frmAttach1.Close();
-            }
-            updateAttachTitle();
-            htmEdit1.Visible = !btnAttch1.Checked;
-            btnReadMode1.Enabled = !btnAttch1.Checked;
-            winTextBox1.ReadOnly = btnAttch1.Checked;
-        }
+        #region  菜单
 
         private void 最大化显示_Click(object sender, EventArgs e)
         {
             splitContainer1.Panel1Collapsed = !splitContainer1.Panel1Collapsed;
-
-            if (splitContainer1.Panel1Collapsed)
-                fullView1.Image = imageList1.Images[1];
-            else
-                fullView1.Image = imageList1.Images[0];
-
         }
-
- 
-        #endregion
-
-        #region winTextBox1
-
-        private void 重命名文件winTextBox1_LostFocus(object sender, EventArgs e)
-        {
-            //RENAME
-            if (fileListView1.listView1.SelectedItems.Count == 1 && File.Exists(fileListView1.selfilename))
-            {
-                string source = fileListView1.selfilename;
-                string dest = Path.GetDirectoryName(source) + "\\" + winTextBox1.Text;
-
-                if (!dest.EndsWith(_htm))
-                    dest += _htm;
-                //dest = FileCore.NewFileName(dest);
-
-                if (!File.Exists(dest))
-                {
-                    string source_attachments = DirectoryCore.Get_AttachmentsDirectory(source);
-                    string dest_attachments = DirectoryCore.Get_AttachmentsDirectory(dest);
-
-                    string html = htmEdit1.DocumentText;
-                    string title = HtmlClass.GetHTMLTitleTag(html);
-                    if (title != "")
-                        html = html.Replace(title, winTextBox1.Text);
-
-                    File.WriteAllText(source, html, Encoding.UTF8);
-                    File.Move(source, dest);
-
-                    //移动_attachments
-                    if (Directory.Exists(source_attachments))
-                        Directory.Move(source_attachments, dest_attachments);
-
-
-                    //重命名选中的项目
-                    fileListView1.listView1.SelectedItems[0].Text = winTextBox1.Text;
-                    fileListView1.selfilename = dest;
-                    htmEdit1.htmlfilename = dest;
-                    //Text = dest;
-                    toolStripStatusLabel1.Text = string.Format("{0} 个文件   ", fileListView1.listView1.Items.Count);
-                    UpdateToolTips();
-                }
-            }
-        }
-
-        #endregion
-
-        #region splitContainer
-        private void splitContainer2_SplitterMoved(object sender, SplitterEventArgs e)
-        {
-            RemoveFocus();
-        }
-
-        private void splitContainer3_SplitterMoved(object sender, SplitterEventArgs e)
-        {
-            RemoveFocus();
-        }
-
-        public void RemoveFocus()
-        {
-            Button btn = new Button();
-            btn.Parent = this;
-            btn.Left = -9999;
-            btn.Top = -9999;
-            btn.Focus();
-            btn.Dispose();
-        }
-
-       
-        #endregion
-
-
-        #region  菜单
-
 
 
         private void 选项_Click(object sender, EventArgs e)
@@ -641,10 +376,10 @@ namespace htmExplorer
                 }
             }
         }
+
         private void help1_Click(object sender, EventArgs e)
         {
             AboutForm abt = new AboutForm();
-            abt.BackColor = BackColor;
             abt.ShowDialog();
         }
 
@@ -677,13 +412,13 @@ namespace htmExplorer
 
                 int index = INI.ReadInteger("ListView", "SelectedIndex", 0);
                 fileListView1.Select(index);
+                fileListView1_ItemClick(null, null);
             }
             else
             {
                 directoryTreeView1.SelectMainNode();
             }
-            loadSkinINI();
-         }
+          }
 
  
         private void SaveIniFiles()
@@ -702,170 +437,14 @@ namespace htmExplorer
             if(directoryTreeView1.selpath!="")
                 INI.WriteString("TreeView", "最后选择", directoryTreeView1.selpath);
 
-            SaveSkinINI();
-        }
-
-        #endregion
-          
-        #region 网页缩放
-
-        private void 网页缩放菜单_Click(object sender, EventArgs e)
-        {
-            int value = 100;
-            switch (((ToolStripMenuItem)sender).Text)
-            {
-                case "400%":
-                    value = 400;
-                    break;
-                case "300%":
-                    value = 300;
-                    break;
-                case "250%":
-                    value = 250;
-                    break;
-                case "200%":
-                    value = 200;
-                    break;
-                case "175%":
-                    value = 175;
-                    break;
-                case "150%":
-                    value = 150;
-                    break;
-                case "125%":
-                    break;
-                case "100%":
-                    value = 100;
-                    break;
-                case "75%":
-                    value = 75;
-                    break;
-                case "50%":
-                    value = 50;
-                    break;
-            }
-            htmEdit1.Zoom(value);
-            toolStripSplitButton1.Text = ((ToolStripMenuItem)sender).Text;
-            string s = ((ToolStripMenuItem)sender).Text;
-            toolStripSplitButton1.Tag = Convert.ToInt32(s.Remove(s.Length - 1, 1));
-        }
-
-        private void 网页缩放按钮_Click(object sender, EventArgs e)
-        {
-            htmEdit1.Zoom(Convert.ToInt32(toolStripSplitButton1.Tag));
-        }
-
-    
-        #endregion
-
-        #region 皮肤
-        private void graySkin_Click(object sender, EventArgs e)
-        {
-            Color c = Color.FromArgb(238, 238, 242);
-            Color c1 = c;
-
-            switch (((ToolStripMenuItem)sender).Name)
-            {
-                case "graySkin":
-                    c = Color.FromArgb(238, 238, 242);
-                    c1 = c;
-                     
-                    break;
-
-                case "graySkin1":
-                    c = Color.FromArgb(238, 238, 242);
-                    c1 = Color.WhiteSmoke;
-                    
-                    break;
-
-                case "whiteSkin":
-                    c = Color.White;
-                    c1 = c;
-                     
-                    break;
-
-                case "whiteSmokeSkin":
-                    c = Color.WhiteSmoke;
-                    c1 = c;
-                    
-                    break;
-            }
-
-            SetupSkin(c, c1);
-        }
-
-        private void SetupSkin(Color color,Color color1)
-        {
-            //Color color = Color.FromArgb(238, 238, 242);
-            //Color color1 = Color.WhiteSmoke;
-            //Visible = false;
-            BackColor = color;
-            customForm1.CaptionColor = color;
-            header1.BackColor = color;
-            statusStrip1.BackColor = color;
-
-            panel2.BackColor = color1;
-            splitContainer1.BackColor = color1;
-            splitContainer2.BackColor = color1;
-
-
-            htmEdit1.SetupToolStripRender(color1, color1);
-            directoryTreeView1.treeView1.BackColor = color1;
-            fileListView1.listView1.BackColor = color1;
-            winTextBox1.BackColor = color1;
-
-            customForm1.Refresh();
-            customForm1.Invalidate();
-        }
-
-        private void loadSkinINI()
-        {
-            graySkin.Checked = INI.ReadBool("皮肤", "graySkin", false);
-            graySkin1.Checked = INI.ReadBool("皮肤", "graySkin1", true);
-            whiteSkin.Checked = INI.ReadBool("皮肤", "whiteSkin", false);
-            whiteSmokeSkin.Checked = INI.ReadBool("皮肤", "whiteSmokeSkin", false);
-
-            Color c = Color.FromArgb(238, 238, 242);
-            Color c1 = c;
-
-            if (graySkin.Checked == true)
-            {
-                c = Color.FromArgb(238, 238, 242);
-                c1 = c;
-            }
-
-            if (graySkin1.Checked == true)
-            {
-                c = Color.FromArgb(238, 238, 242);
-                c1 = Color.WhiteSmoke;
-            }
-
-            if (whiteSkin.Checked == true)
-            {
-                c = Color.White;
-                c1 = c;
-            }
-
-            if (whiteSmokeSkin.Checked == true)
-            {
-                c = Color.WhiteSmoke;
-                c1 = c;
-            }
-
-            SetupSkin(c, c1);
-        }
-
-        private void SaveSkinINI()
-        {
-            INI.WriteBool("皮肤", "graySkin", graySkin.Checked);
-            INI.WriteBool("皮肤", "graySkin1", graySkin1.Checked);
-            INI.WriteBool("皮肤", "whiteSkin", whiteSkin.Checked);
-            INI.WriteBool("皮肤", "whiteSmokeSkin", whiteSmokeSkin.Checked);
-
-        }
+         }
 
         #endregion
 
+        #region 变量
+        
+      
+ 
         /// <summary>
         /// 所有HTML文件都存放在这个目录下
         /// 一般为和程序相对路径  
@@ -890,7 +469,6 @@ namespace htmExplorer
         /// </summary>
         string treeViewXml ="";
         private string _htm = ".htm";
-
-
+        #endregion
     }
 }

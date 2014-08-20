@@ -51,6 +51,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Document\Document.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Document\Document.Designer.cs">
+      <DependentUpon>Document.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Document\TabContextMenuStrip.cs" />
     <Compile Include="Thread.cs" />
     <Compile Include="Forms\AboutForm.cs">
       <SubType>Form</SubType>
@@ -76,16 +83,16 @@
     <Compile Include="Forms\OptionsForm.Designer.cs">
       <DependentUpon>OptionsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="attachmentForm\attachRename.cs">
+    <Compile Include="Forms\AttachmentForm\attachRename.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="attachmentForm\attachRename.designer.cs">
+    <Compile Include="Forms\AttachmentForm\attachRename.designer.cs">
       <DependentUpon>attachRename.cs</DependentUpon>
     </Compile>
-    <Compile Include="attachmentForm\FormAttachment.cs">
+    <Compile Include="Forms\AttachmentForm\FormAttachment.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="attachmentForm\FormAttachment.designer.cs">
+    <Compile Include="Forms\AttachmentForm\FormAttachment.designer.cs">
       <DependentUpon>FormAttachment.cs</DependentUpon>
     </Compile>
     <Compile Include="FormMain.cs">
@@ -94,10 +101,22 @@
     <Compile Include="FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="attachmentForm\ListViewColumnSorter.cs" />
+    <Compile Include="Forms\AttachmentForm\ListViewColumnSorter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="attachmentForm\win32SHGetFile.cs" />
+    <Compile Include="Forms\AttachmentForm\win32SHGetFile.cs" />
+    <Compile Include="Document\DocumentView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Document\DocumentView.Designer.cs">
+      <DependentUpon>DocumentView.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Document\Document.resx">
+      <DependentUpon>Document.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Document\DocumentView.resx">
+      <DependentUpon>DocumentView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\AboutForm.resx">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -110,10 +129,10 @@
     <EmbeddedResource Include="Forms\OptionsForm.resx">
       <DependentUpon>OptionsForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="attachmentForm\attachRename.resx">
+    <EmbeddedResource Include="Forms\AttachmentForm\attachRename.resx">
       <DependentUpon>attachRename.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="attachmentForm\FormAttachment.resx">
+    <EmbeddedResource Include="Forms\AttachmentForm\FormAttachment.resx">
       <DependentUpon>FormAttachment.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormMain.resx">
@@ -142,6 +161,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="1.ico" />
+    <Content Include="Document\TextFile1.txt" />
+    <None Include="Resources\关于.htm" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CommonControl\CommonControl.csproj">

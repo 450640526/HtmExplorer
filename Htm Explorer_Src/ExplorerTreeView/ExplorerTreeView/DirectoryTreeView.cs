@@ -58,52 +58,55 @@ namespace System.Windows.Forms
         }
 
         #region TreeView查获节点并选中节点
-        private List<TreeNode> CurrentNodeMatches = new List<TreeNode>();
-        private int LastNodeIndex = 0;
-        private string LastSearchText;
+        //private List<TreeNode> CurrentNodeMatches = new List<TreeNode>();
+        //private int LastNodeIndex = 0;
+        //private string LastSearchText;
 
-        private void SearchNodes(string SearchText, TreeNode node)
-        {
-            while (node != null)
-            {
-                if (node.FullPath.ToLower() == SearchText.ToLower())
-                {
-                    CurrentNodeMatches.Add(node);
-                }
+        //private void SearchNodes(string SearchText, TreeNode node)
+        //{
+        //    while (node != null)
+        //    {
+        //        if (node.FullPath.ToLower() == SearchText.ToLower())
+        //        {
+        //            CurrentNodeMatches.Add(node);
+        //        }
 
-                if (node.Nodes.Count != 0)
-                {
-                    SearchNodes(SearchText, node.Nodes[0]);//Recursive Search 
-                }
-                node = node.NextNode;
-            }
-        }
+        //        if (node.Nodes.Count != 0)
+        //        {
+        //            SearchNodes(SearchText, node.Nodes[0]);//Recursive Search 
+        //        }
+        //        node = node.NextNode;
+        //    }
+        //}
 
         /// <summary>
         /// TreeNode.FullPath
         /// </summary>
         /// <param name="searchText">TreeNode.FullPath</param>
-        public void SelectByNodeFullPath(string searchText)
+        public void SelectByNodeFullPath(string nodetext)
         {
-            if (searchText == "")
-                return;
+            FindNode f = new FindNode(treeView1);
+            f.SelectByNodeFullPath(nodetext);
 
-            if (LastSearchText != searchText)
-            {
-                CurrentNodeMatches.Clear();
-                LastSearchText = searchText;
-                LastNodeIndex = 0;
-                SearchNodes(searchText, treeView1.Nodes[0]);
-            }
+            //if (searchText == "")
+            //    return;
 
-            if (LastNodeIndex >= 0 && CurrentNodeMatches.Count > 0 && LastNodeIndex < CurrentNodeMatches.Count)
-            {
-                TreeNode selectedNode = CurrentNodeMatches[LastNodeIndex];
-                LastNodeIndex++;
-                this.treeView1.SelectedNode = selectedNode;
-                //this.treeView1.SelectedNode.Expand();
-                this.treeView1.Select();
-            }
+            //if (LastSearchText != searchText)
+            //{
+            //    CurrentNodeMatches.Clear();
+            //    LastSearchText = searchText;
+            //    LastNodeIndex = 0;
+            //    SearchNodes(searchText, treeView1.Nodes[0]);
+            //}
+
+            //if (LastNodeIndex >= 0 && CurrentNodeMatches.Count > 0 && LastNodeIndex < CurrentNodeMatches.Count)
+            //{
+            //    TreeNode selectedNode = CurrentNodeMatches[LastNodeIndex];
+            //    LastNodeIndex++;
+            //    this.treeView1.SelectedNode = selectedNode;
+            //    //this.treeView1.SelectedNode.Expand();
+            //    this.treeView1.Select();
+            //}
         }
         #endregion
 
@@ -420,6 +423,7 @@ namespace System.Windows.Forms
 
         private void treeView1_DrawNode(object sender, DrawTreeNodeEventArgs e)
         {
+            //treeView1.BeginUpdate();
             #region 1     选中的节点背景=========================================
             Rectangle nodeRect = new Rectangle(1,
                                                 e.Bounds.Top,
@@ -565,6 +569,7 @@ namespace System.Windows.Forms
             //             e.Bounds.Height - 2);
             //e.Graphics.DrawRectangle(new Pen(Color.Gray), nodeRect);
             #endregion
+            //treeView1.EndUpdate();
         }
 
         #endregion 
@@ -575,8 +580,7 @@ namespace System.Windows.Forms
         /// </summary>
         private TreeNode selNode = null;
         private void treeView1_ItemDrag(object sender, ItemDragEventArgs e)
-        {
-         
+        {   
             selNode = (TreeNode)e.Item;
             treeView1.SelectedNode = (TreeNode)e.Item;
             treeView1.DoDragDrop(e.Item, DragDropEffects.Move);
@@ -605,6 +609,7 @@ namespace System.Windows.Forms
             //目标节点 的名称 不能为空
             //拖拽节点 不能和 我的电脑这个节点 相同   (禁止手提我的电脑这个节点)
             //拖拽节点 不能和 回收站这个节点 相同
+
             #endregion
 
             TreeNode destNode = treeView1.GetNodeAt(treeView1.PointToClient(new Point(e.X, e.Y)));
@@ -792,6 +797,14 @@ namespace System.Windows.Forms
             重命名_Click(sender,e);
         }
 
+
+        private void 复制文件夹到剪切板_Click(object sender, EventArgs e)
+        {
+            StringCollection str1 = new StringCollection();
+            str1.Add(selpath);
+            Clipboard.SetFileDropList(str1);
+        }
+
         TreeNode renameSelNode = null;//重命名时的选中的节点
         string renameSelPath = "";
         private void 重命名_Click(object sender, EventArgs e)
@@ -805,15 +818,11 @@ namespace System.Windows.Forms
             winTextBox1.Focus();
             winTextBox1.Bounds = treeView1.SelectedNode.Bounds;
             winTextBox1.Width += 15;
+            Invalidate();
             //winTextBox1.Top -= 1 ;
         }
 
-        private void 复制文件夹到剪切板_Click(object sender, EventArgs e)
-        {
-            StringCollection str1 = new StringCollection();
-            str1.Add(selpath);
-            Clipboard.SetFileDropList(str1);
-        }
+    
 
 
         //实现重命名功能

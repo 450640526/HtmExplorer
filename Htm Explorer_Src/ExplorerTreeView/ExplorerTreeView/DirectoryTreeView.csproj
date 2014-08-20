@@ -46,6 +46,7 @@
     <Compile Include="DirectoryTreeView.Designer.cs">
       <DependentUpon>DirectoryTreeView.cs</DependentUpon>
     </Compile>
+    <Compile Include="FindNode.cs" />
     <Compile Include="TreeViewEx.cs">
       <SubType>Component</SubType>
     </Compile>

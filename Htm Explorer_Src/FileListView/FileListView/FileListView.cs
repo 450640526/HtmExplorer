@@ -19,7 +19,8 @@ using System.Data;
 using System.Text;
 using System.Runtime.InteropServices;
 using System.IO;
-
+using System.Diagnostics;
+using FileListView;
 
 namespace System.Windows.Forms
 {
@@ -29,8 +30,7 @@ namespace System.Windows.Forms
         {
             InitializeComponent();
         }
-         
-
+ 
         private void FileListView_Load(object sender, EventArgs e)
         {
             columnHeader2.Width = 0;
@@ -43,14 +43,24 @@ namespace System.Windows.Forms
         #region 事件
         //public delegate void EventHandler(object sender, EventArgs e);
         [Description("选中一个项目会触发事件")]
-        public event EventHandler ItemClick;
+        public event System.Windows.Forms.MouseEventHandler ItemClick;
         public event EventHandler SaveAsClick;
         public event EventHandler NewFileClick;
+        public event EventHandler OpenWithNewTab;
+
         public event EventHandler RenameFileClick;
 
         [Description("选中一个项目然后双击项目会触发事件")]
         public event EventHandler ItemActive;
         public event EventHandler CopyFile;
+        public event EventHandler DeleteFile;
+        protected void OnDeleteFile(object sender, EventArgs e)
+        {
+            if (DeleteFile != null)
+                DeleteFile(sender, e);
+        }
+
+
         protected void OnCopyFile(object sender, EventArgs e)
         {
             if (CopyFile != null)
@@ -68,14 +78,18 @@ namespace System.Windows.Forms
             if (NewFileClick != null)
                 NewFileClick(sender, e);
         }
-
+        protected void OnOpenWithNewTab(object sender, EventArgs e)
+        {
+            if (OpenWithNewTab != null)
+                OpenWithNewTab(sender, e);
+        }
         protected void OnSaveAsClick(object sender, EventArgs e)
         {
             if (SaveAsClick != null)
                 SaveAsClick(sender, e);
         }
 
-        protected void OnListViewItemClick(object sender, EventArgs e)
+        protected void OnListViewItemClick(object sender, MouseEventArgs e)
         {
             if (ItemClick != null)
                 ItemClick(sender, e);
@@ -138,6 +152,8 @@ namespace System.Windows.Forms
         }
         #endregion
 
+        #region AddItem
+
         /// <summary>
         /// 将一个文件的的名称添加到LISTVIEW中文件要存在的
         /// C:\123.html
@@ -159,12 +175,15 @@ namespace System.Windows.Forms
 
             //选中添加的ITEM
             int i = listView1.Items.IndexOf(lvi);
-            
+
             listView1.EnsureVisible(i);
             listView1.MultiSelect = false;
-            listView1.Items[ i ].Selected = true;
+            listView1.Items[i].Selected = true;
             //focusedListViewItem1 = listView1.Items[i];
             listView1.MultiSelect = true;
+            //lstCls1.AddItem(filename);
+            ///
+            selfilename = filename;
         }
 
         /// <summary>
@@ -172,7 +191,7 @@ namespace System.Windows.Forms
         /// C:\123.html
         /// </summary>
         /// <param name="filename"></param>
-        public void AddItem1(string filename)
+        public void AddSearchItem(string filename)
         {
             FileInfo file = new FileInfo(filename);
             //添加名称
@@ -186,11 +205,15 @@ namespace System.Windows.Forms
 
         public void LoadFilesFromDirecotry(string dirpath)
         {
+          
+            //lstCls1.LoadFilesFromDirecotry(dirpath);
+
             try
             {
                 listView1.BeginUpdate();
                 path = dirpath;
                 fileSystemWatcher1.Path = dirpath;
+
                 DirectoryInfo di = new DirectoryInfo(dirpath);
                 FileInfo[] fi = di.GetFiles("*.htm");
                 listView1.Items.Clear();
@@ -201,9 +224,9 @@ namespace System.Windows.Forms
                     ListViewItem lvi = new ListViewItem(Path.GetFileNameWithoutExtension(fi[i].Name));
                     lvi.SubItems.Add(dirpath + "\\" + fi[i].Name);
                     lvi.SubItems.Add(fi[i].CreationTime.ToShortDateString() + " " + fi[i].CreationTime.ToShortTimeString());
-                    lvi.SubItems.Add(fi[i].LastWriteTime.ToShortDateString() + " " + fi[i].LastWriteTime.ToShortTimeString());                   
+                    lvi.SubItems.Add(fi[i].LastWriteTime.ToShortDateString() + " " + fi[i].LastWriteTime.ToShortTimeString());
                     lvi.SubItems.Add(FileCore.BytesToString(fi[i].Length));
-                    lvi.SubItems.Add( fi[i].Length.ToString() );
+                    lvi.SubItems.Add(fi[i].Length.ToString());
 
                     listView1.Items.Add(lvi);
                     listView1.Items[i].SubItems[4].Tag = "Number";
@@ -216,6 +239,8 @@ namespace System.Windows.Forms
                 MessageBox.Show(ex.Message, "FileListView");
             }
         }
+        #endregion
+
 
         bool firstRun = true;
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
@@ -225,12 +250,17 @@ namespace System.Windows.Forms
 
             if (firstRun)
             {
-                listView1_MouseClick(sender, null);
+                updateFileName(); 
                 firstRun = false;
             }
         }
- 
-        private void listView1_MouseClick(object sender, MouseEventArgs e)
+
+        private void listView1_ItemDrag(object sender, ItemDragEventArgs e)
+        {
+            listView1.DoDragDrop(listView1.SelectedItems, DragDropEffects.Move);
+        }
+
+        private void updateFileName()
         {
             if (listView1.SelectedItems.Count == 1)
             {
@@ -243,35 +273,32 @@ namespace System.Windows.Forms
                     int Index = listView1.SelectedItems[0].Index;
                     __filename = listView1.Items[Index].SubItems[1].Text;
                 }
-
-                
             }
-           OnListViewItemClick(sender, e);
+        }
+
+        private void listView1_MouseClick(object sender, MouseEventArgs e)
+        {
+            updateFileName();
+            if (e.Button == MouseButtons.Left)
+            {
+                OnListViewItemClick(sender, e);
+            } 
         }
 
         private void fileSystemWatcher1_Changed(object sender, FileSystemEventArgs e)
         {
             if (path != "" && recylebin != "" && path.IndexOf(recylebin) != -1)
-                    刷新_Click(sender, e);
+                LoadFilesFromDirecotry(path); 
             listView1.Refresh();
         }
         
         private void fileSystemWatcher1_Renamed(object sender, RenamedEventArgs e)
         {
             if (path != "" && recylebin != "" && path.IndexOf(recylebin) != -1)
-                刷新_Click(sender, e);
+                LoadFilesFromDirecotry(path); 
             listView1.Refresh();
         }
-
-        #region listView1
-
-        private void listView1_ItemDrag(object sender, ItemDragEventArgs e)
-        {
-            listView1.DoDragDrop(listView1.SelectedItems, DragDropEffects.Move);
-        }
-
-
-        #endregion
+ 
 
         #region listView1_DrawItem
         /*1节点被选中 ,TreeView有焦点*/
@@ -495,19 +522,7 @@ namespace System.Windows.Forms
                     break;
             }
         }
-
-        private void 新建文件ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            OnNewFileClick(sender, e);
-        }
-        private void 另存为_MenuItem_Click(object sender, EventArgs e)
-        {
-            OnSaveAsClick(sender, e);
-        }
-        private void 重命名MenuItem_Click(object sender, EventArgs e)
-        {
-            OnRenameFileClick(sender, e);
-        }
+ 
 
         private void listView1_KeyDown(object sender, KeyEventArgs e)
         {
@@ -519,131 +534,168 @@ namespace System.Windows.Forms
             }
         }
 
-        //复制选中的标题
-        private void 复制选中的标题_Click(object sender, EventArgs e)
-        {
-            string s = "";
-            for (int i = 0; i < listView1.SelectedItems.Count; i++)
-                s +=  listView1.SelectedItems[i].Text + "\r\n";
-
-            Clipboard.SetDataObject(s, true);
-        }
-
-        private void 复制文件_MenuItem_Click(object sender, EventArgs e)
-        {
-            if(File.Exists(selfilename))
-            {
-                string dest =FileCore.NewFileName(selfilename);
-                File.Copy(selfilename,dest);
-               
-                AddItem(dest);
-                selfilename = dest;
-                OnCopyFile(sender, e);
-                //MessageBox.Show(selfilename);
-            }
-        }
-
-        private void 复制完整路径_Click(object sender, EventArgs e)
-        {
-            string s = "";
-            for (int i = 0; i < listView1.SelectedItems.Count; i++)
-            {
-                //if (listView1.SelectedIndices != null)
-                {
-                    s += listView1.Items[i].SubItems[1].Text + "\r\n";
-                }
-            }
-            Clipboard.SetDataObject(s, true);
-        }
-        
-        private void 在资源管理器中打开_Click(object sender, EventArgs e)
-        {
-            System.Diagnostics.Process.Start("explorer.exe", @"/select," + selfilename);
-        }
-
-        private void 在浏览器中打开ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            System.Diagnostics.Process.Start("iexplore.exe", selfilename);
-        }
-
         private void ListViewMenuStrip_Opening(object sender, CancelEventArgs e)
         {
-            用资源管理器打开_MenuItem.Enabled = listView1.SelectedItems.Count == 1 && File.Exists(selfilename);
-            删除选中的文件MenuItem.Enabled = listView1.SelectedItems.Count > 0 && File.Exists(selfilename); 
-            另存为_MenuItem.Enabled = listView1.SelectedItems.Count == 1 && File.Exists(selfilename);
-            复制文件标题_MenuItem.Enabled = listView1.SelectedItems.Count >= 1;
-            复制文件路径_MenuItem.Enabled = listView1.SelectedItems.Count >= 1;//&& File.Exists(selfilename);
-            在浏览器中打开ToolStripMenuItem.Enabled = listView1.SelectedItems.Count == 1 && File.Exists(selfilename);
-            复制文件_MenuItem.Enabled = listView1.SelectedItems.Count == 1 && File.Exists(selfilename) && selfilename.IndexOf(recylebin)==-1;
-            新建文件ToolStripMenuItem.Enabled = path.IndexOf(recylebin) == -1 && Directory.Exists(path);
+            OpenWithNewTab1.Enabled = listView1.SelectedItems.Count == 1 && File.Exists(selfilename);
+            OpenWithExplorer.Enabled = listView1.SelectedItems.Count == 1 && File.Exists(selfilename);
+            DeleteFiles.Enabled = listView1.SelectedItems.Count > 0 && File.Exists(selfilename); 
+            SaveAs.Enabled = listView1.SelectedItems.Count == 1 && File.Exists(selfilename);
+            CopyTitle.Enabled = listView1.SelectedItems.Count >= 1;
+            CopyFileName.Enabled = listView1.SelectedItems.Count >= 1;//&& File.Exists(selfilename);
+            OpenWithInternet.Enabled = listView1.SelectedItems.Count == 1 && File.Exists(selfilename);
+            CopyAFile.Enabled = listView1.SelectedItems.Count == 1 && File.Exists(selfilename) && selfilename.IndexOf(recylebin)==-1;
+            NewFile.Enabled = path.IndexOf(recylebin) == -1 && Directory.Exists(path);
+            RenameFile.Enabled = listView1.SelectedItems.Count == 1 && File.Exists(selfilename);
         }
 
-        #region 删除文件
-        private void 删除选中的文件_Click(object sender, EventArgs e)
+        private void ToolStripMenuItems_Click(object sender, EventArgs e)
         {
-            if (selfilename.IndexOf(recylebin) != -1)
+            switch (((ToolStripMenuItem)sender).Name)
             {
-                DialogResult d = MessageBox.Show("彻底删除 " + listView1.SelectedItems.Count + " 个的文件 ", "删除文件", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (DialogResult.Yes == d)
-                {
-                    foreach (ListViewItem listItem in listView1.SelectedItems)
+                case "OpenWithNewTab1":
+                    OnOpenWithNewTab(sender, e);
+                    break;
+
+                case "OpenWithInternet":
+                     Process.Start("iexplore.exe", selfilename);
+                    break;
+
+                case "OpenWithExplorer":
+                     Process.Start("explorer.exe", @"/select," + selfilename);
+                    break;
+
+                case "SaveAs":
+                    OnSaveAsClick(sender, e);
+                    break;
+
+                case "NewFile":
+                    OnNewFileClick(sender, e);
+                    break;
+
+                //复制文件
+                case "CopyAFile":
                     {
-                        string filename = path + "\\" + listItem.Text + fileExt;
-                        File.Delete(filename);
-                         
-                        string source_attachments = DirectoryCore.Get_AttachmentsDirectory(filename);
+                        if (File.Exists(selfilename))
+                        {
+                            string dest = FileCore.NewFileName(selfilename);
+                            File.Copy(selfilename, dest);
 
-                        if (Directory.Exists(source_attachments))
-                            Directory.Delete(source_attachments, true);
-
-                        listItem.Remove();
+                            AddItem(dest);
+                            //selfilename = dest;
+                            OnCopyFile(sender, e);
+                            //MessageBox.Show(selfilename);
+                        }
+                        break;
                     }
-                }
-            }
-            else
-            {
-                foreach (ListViewItem listItem in listView1.SelectedItems)
-                {
-                    string source = path + "\\" + listItem.Text + fileExt;
-                    string dest = recylebin + "\\" + listItem.Text + fileExt;
 
-                    #region 移动文件 _attachments
-                    dest = FileCore.NewFileName(dest);
 
-                    string html = File.ReadAllText(source, Encoding.UTF8);
+                case "DeleteFiles":
+                    {
+                        if (selfilename.IndexOf(recylebin) != -1)
+                        {
+                            DialogResult d = MessageBox.Show("彻底删除 " + listView1.SelectedItems.Count + " 个的文件 ", "删除文件", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                            if (DialogResult.Yes == d)
+                            {
+                                foreach (ListViewItem listItem in listView1.SelectedItems)
+                                {
+                                    string filename = path + "\\" + listItem.Text + fileExt;
+                                    File.Delete(filename);
+
+                                    string source_attachments = DirectoryCore.Get_AttachmentsDirectory(filename);
+
+                                    if (Directory.Exists(source_attachments))
+                                        Directory.Delete(source_attachments, true);
+
+                                    listItem.Remove();
+                                }
+                            }
+                        }
+                        else
+                        {
+                            foreach (ListViewItem listItem in listView1.SelectedItems)
+                            {
+                                string source = path + "\\" + listItem.Text + fileExt;
+                                string dest = recylebin + "\\" + listItem.Text + fileExt;
+
+                                #region 移动文件 _attachments
+                                dest = FileCore.NewFileName(dest);
+
+                                string html = File.ReadAllText(source, Encoding.UTF8);
+
+                                string title = HtmlClass.GetHTMLTitleTag(html);
+                                if (title != "")
+                                    html = html.Replace(title, listItem.Text);
+
+                                File.WriteAllText(source, html, Encoding.UTF8);
+                                File.Move(source, dest);
+
+                                //移动_attachments
+                                string source_attachments = DirectoryCore.Get_AttachmentsDirectory(source);
+                                string dest_attachments = DirectoryCore.Get_AttachmentsDirectory(dest);
+
+                                if (Directory.Exists(dest_attachments))
+                                    Directory.Delete(dest_attachments);
+
+                                if (Directory.Exists(source_attachments))
+                                    Directory.Move(source_attachments, dest_attachments);
+
+                                #endregion
+
+                                listItem.Remove();
+                            }
+                        }
+                        listView1.Refresh();
+                        OnDeleteFile(sender, e);
+                        break;
+                    }
                    
-                    string title = HtmlClass.GetHTMLTitleTag(html);
-                    if (title != "")
-                        html = html.Replace(title, listItem.Text);
 
-                    File.WriteAllText(source, html, Encoding.UTF8);
-                    File.Move(source, dest);
+                case "RenameFile":
+                    OnRenameFileClick(sender, e);
+                    break;
 
-                    //移动_attachments
-                    string source_attachments = DirectoryCore.Get_AttachmentsDirectory(source);
-                    string dest_attachments = DirectoryCore.Get_AttachmentsDirectory(dest);
+                case "Refresh":
+                    Refresh2();
+                    break;
 
-                    if (Directory.Exists(dest_attachments))
-                        Directory.Delete(dest_attachments);
+                // 复制选中的标题
+                case "CopyTitle":
+                    {
+                        string s = "";
+                        for (int i = 0; i < listView1.SelectedItems.Count; i++)
+                            s += listView1.SelectedItems[i].Text + "\r\n";
 
-                    if (Directory.Exists(source_attachments))
-                        Directory.Move(source_attachments, dest_attachments);
+                        Clipboard.SetDataObject(s, true);
+                        break;
+                    }
+                   
 
-                    #endregion
-
-                    listItem.Remove();
-                }
+                //复制完整路径
+                case "CopyFileName":
+                    {
+                        string s = "";
+                        for (int i = 0; i < listView1.SelectedItems.Count; i++)
+                        {
+                            //if (listView1.SelectedIndices != null)
+                            {
+                                s += listView1.Items[i].SubItems[1].Text + "\r\n";
+                            }
+                        }
+                        Clipboard.SetDataObject(s, true);
+                        break;
+                    }       
             }
-            listView1.Refresh();
         }
 
-        #endregion
 
-        private void 刷新_Click(object sender, EventArgs e)
+
+        public void Refresh2()
         {
-            //MessageBox.Show(path);
+            //int index = SelectedIndex();
             LoadFilesFromDirecotry(path);
+            //Select(index);
         }
+
 
         private void listView1Sort(int coulumn)
         {
@@ -663,40 +715,25 @@ namespace System.Windows.Forms
             {
                 case "名称MenuItem":
                     listView1Sort(0);
-                    //sortByName1.Checked = true;
-                    //sortByDate1.Checked = false;
-                    //sortBySize.Checked = false;
                     break;
 
                 case "修改日期MenuItem":
                     listView1Sort(3);
-                    //sortByDate1.Checked = true;
-                    //sortByName1.Checked = false;
-                    //sortBySize.Checked = false;
                     break;
 
                 case "大小MenuItem":
                     listView1Sort(4);
-                    //sortBySize.Checked = true;
-                    //sortByName1.Checked = false;
-                    //sortByDate1.Checked = false;
                     break;
 
 
                 case "递增MenuItem":
                     listView1.Sorting = SortOrder.None;
                     listView1.Sorting = SortOrder.Ascending;
-
-                    //sortBydesending1.Checked = true;
-                    //sortByAsending1.Checked = false;
                     break;
 
                 case "递减MenuItem":
                     listView1.Sorting = SortOrder.None;
                     listView1.Sorting = SortOrder.Descending;
-
-                    //sortByAsending1.Checked = true;
-                    //sortBydesending1.Checked = false;
                     break;
             }
         }
@@ -741,6 +778,6 @@ namespace System.Windows.Forms
         public string recylebin = "";  //初始化的时候要先赋值
         public string fileExt = ".htm";
 
- 
+
     }
 }

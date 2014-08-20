@@ -36,8 +36,8 @@
             this.imageList2 = new System.Windows.Forms.ImageList(this.components);
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.foward1 = new System.Windows.Forms.ImageButton();
-            this.back1 = new System.Windows.Forms.ImageButton();
+            this.foward1 = new System.Windows.Forms.LabelButton();
+            this.back1 = new System.Windows.Forms.LabelButton();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -170,8 +170,8 @@
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.ToolTip toolTip1;
         private PictureBox pictureBox1;
-        private ImageButton back1;
-        private ImageButton foward1;
+        private LabelButton back1;
+        private LabelButton foward1;
         private ImageList imageList2;
         private ComboBox comboBox1;
         private Label label1;

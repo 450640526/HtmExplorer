@@ -201,8 +201,8 @@ namespace System.Windows.Forms
         public string workpath = "";
         public string btnsPath = "";
         public string currentPath = "";
-        private ImageButton[] btns;
-        private ImageButton btn;
+        private LabelButton[] btns;
+        private LabelButton btn;
         public string CreateButtons(string s)
         {
             currentPath = s;
@@ -211,7 +211,7 @@ namespace System.Windows.Forms
             string[] arr = s.Split(new string[] { "\\", }, StringSplitOptions.None);
             string s1 = "";
 
-            btns = new ImageButton[arr.Length];
+            btns = new LabelButton[arr.Length];
             //  释放按钮
             DisposeButtons();
 
@@ -225,7 +225,7 @@ namespace System.Windows.Forms
                 string path = string.Format("\\{0}", arr[i]);
                 s1 += path;
 
-                btn = new ImageButton();
+                btn = new LabelButton();
                 btn.Font = new Drawing.Font("微软雅黑", 9F);
                 btn.Text = name;
                 btn.Tag = s1.Remove(0, 1) + "\\";
@@ -301,7 +301,7 @@ namespace System.Windows.Forms
                     comboBox1.SelectedItem = comboBox1.Items[index];
             }
         }
-        private bool IsUserPath(ImageButton imageButton)
+        private bool IsUserPath(LabelButton imageButton)
         {
             return (workpath.IndexOf(imageButton.Tag.ToString()) != -1);
         }
@@ -313,7 +313,7 @@ namespace System.Windows.Forms
         #region Label Events
         private void btn_Click(object sender, EventArgs e)
         {
-            ImageButton btn = ((ImageButton)sender);
+            LabelButton btn = ((LabelButton)sender);
             btnsPath = btn.Tag.ToString();
 
             if (!IsUserPath(btn))
@@ -327,7 +327,7 @@ namespace System.Windows.Forms
         
         private void btn_MouseEnter(object sender, EventArgs e)
         {
-            ImageButton btn = ((ImageButton)sender);
+            LabelButton btn = ((LabelButton)sender);
 
             if (!IsUserPath(btn))
                  btn.BorderColor = Color.FromArgb(102, 167, 232);
@@ -337,7 +337,7 @@ namespace System.Windows.Forms
 
         private void btn_MouseLeave(object sender, EventArgs e)
         {
-            ImageButton btn = ((ImageButton)sender);
+            LabelButton btn = ((LabelButton)sender);
             btn.BorderColor = Color.Transparent;
         }
 
