@@ -43,7 +43,7 @@ namespace System.Windows.Forms
         #region 事件
         //public delegate void EventHandler(object sender, EventArgs e);
         [Description("选中一个项目会触发事件")]
-        public event System.Windows.Forms.MouseEventHandler ItemClick;
+        public event EventHandler ItemClick;
         public event EventHandler SaveAsClick;
         public event EventHandler NewFileClick;
         public event EventHandler OpenWithNewTab;
@@ -89,7 +89,7 @@ namespace System.Windows.Forms
                 SaveAsClick(sender, e);
         }
 
-        protected void OnListViewItemClick(object sender, MouseEventArgs e)
+        protected void OnListViewItemClick(object sender, EventArgs e)
         {
             if (ItemClick != null)
                 ItemClick(sender, e);
@@ -203,12 +203,9 @@ namespace System.Windows.Forms
             listView1.Items.Add(lvi);
         }
 
-        public void LoadFilesFromDirecotry(string dirpath)
+        public void LoadFiles(string dirpath)
         {
-          
-            //lstCls1.LoadFilesFromDirecotry(dirpath);
-
-            try
+            if(Directory.Exists(dirpath))
             {
                 listView1.BeginUpdate();
                 path = dirpath;
@@ -234,10 +231,7 @@ namespace System.Windows.Forms
                 listView1.EndUpdate();
 
             }
-            catch (System.Exception ex)
-            {
-                MessageBox.Show(ex.Message, "FileListView");
-            }
+ 
         }
         #endregion
 
@@ -288,14 +282,14 @@ namespace System.Windows.Forms
         private void fileSystemWatcher1_Changed(object sender, FileSystemEventArgs e)
         {
             if (path != "" && recylebin != "" && path.IndexOf(recylebin) != -1)
-                LoadFilesFromDirecotry(path); 
+                LoadFiles(path); 
             listView1.Refresh();
         }
         
         private void fileSystemWatcher1_Renamed(object sender, RenamedEventArgs e)
         {
             if (path != "" && recylebin != "" && path.IndexOf(recylebin) != -1)
-                LoadFilesFromDirecotry(path); 
+                LoadFiles(path); 
             listView1.Refresh();
         }
  
@@ -476,17 +470,6 @@ namespace System.Windows.Forms
                 e.Graphics.DrawImage(pictureBox2.Image, attachRect);
                 //e.Graphics.DrawRectangle(new Pen(new SolidBrush(Color.Black)), attachRect);
             }
-           
-
-            //tooltips
-            e.Item.ToolTipText = string.Format("名称: {0}\r\n路径: {1}\r\n创建: {2}\r\n修改: {3}\r\n大小:{4}",
-                e.Item.Text,
-                e.Item.SubItems[1].Text,
-                e.Item.SubItems[2].Text,
-                e.Item.SubItems[3].Text,
-                e.Item.SubItems[4].Text
-
-                );
 
         }
 
@@ -544,7 +527,8 @@ namespace System.Windows.Forms
             CopyFileName.Enabled = listView1.SelectedItems.Count >= 1;//&& File.Exists(selfilename);
             OpenWithInternet.Enabled = listView1.SelectedItems.Count == 1 && File.Exists(selfilename);
             CopyAFile.Enabled = listView1.SelectedItems.Count == 1 && File.Exists(selfilename) && selfilename.IndexOf(recylebin)==-1;
-            NewFile.Enabled = path.IndexOf(recylebin) == -1 && Directory.Exists(path);
+            
+            NewFile1.Enabled = path.IndexOf(recylebin) == -1 && Directory.Exists(path);
             RenameFile.Enabled = listView1.SelectedItems.Count == 1 && File.Exists(selfilename);
         }
 
@@ -577,7 +561,7 @@ namespace System.Windows.Forms
                     {
                         if (File.Exists(selfilename))
                         {
-                            string dest = FileCore.NewFileName(selfilename);
+                            string dest = FileCore.NewName(selfilename);
                             File.Copy(selfilename, dest);
 
                             AddItem(dest);
@@ -618,7 +602,7 @@ namespace System.Windows.Forms
                                 string dest = recylebin + "\\" + listItem.Text + fileExt;
 
                                 #region 移动文件 _attachments
-                                dest = FileCore.NewFileName(dest);
+                                dest = FileCore.NewName(dest);
 
                                 string html = File.ReadAllText(source, Encoding.UTF8);
 
@@ -692,7 +676,7 @@ namespace System.Windows.Forms
         public void Refresh2()
         {
             //int index = SelectedIndex();
-            LoadFilesFromDirecotry(path);
+            LoadFiles(path);
             //Select(index);
         }
 
@@ -777,6 +761,25 @@ namespace System.Windows.Forms
         public string path = "";
         public string recylebin = "";  //初始化的时候要先赋值
         public string fileExt = ".htm";
+
+        private void listView1_MouseEnter(object sender, EventArgs e)
+        {
+
+            for (int i = 0; i < listView1.Items.Count; i++)
+            {
+                listView1.Items[i].ToolTipText = 
+               string.Format("名称: {0}\r\n路径: {1}\r\n创建: {2}\r\n修改: {3}\r\n大小:{4}",
+                                                       listView1.Items[i].Text,
+                                                       listView1.Items[i].SubItems[1].Text,
+                                                       listView1.Items[i].SubItems[2].Text,
+                                                       listView1.Items[i].SubItems[3].Text,
+                                                       listView1.Items[i].SubItems[4].Text
+
+                                                       );
+            }
+
+           
+        }
 
 
     }

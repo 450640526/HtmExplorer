@@ -32,8 +32,10 @@ namespace System.Windows.Forms
 
         private void HtmlEdit_Load(object sender, EventArgs e)
         {
-            Color c = Color.FromArgb(238, 238, 242);
-            SetupToolStripRender(Color.White, c);
+            //Color c = Color.FromArgb(204, 204, 204);
+            //SetupToolStripRender(Color.White, c);
+ 
+            toolStrip1.Renderer = new System.Drawing.CustomToolStripRenderer();
 
             #region ToolStripDropDown
             host1 = new ToolStripControlHost(foreColorForm1);
@@ -1660,6 +1662,10 @@ namespace System.Windows.Forms
         /// </summary>
         public string htmlfilename = "";
 
+        private void webBrowser1_Resize(object sender, EventArgs e)
+        {
+            //if (Win32API.IsHorizontalScrollBarVisible(webBrowser1))
+        }
 
 
        

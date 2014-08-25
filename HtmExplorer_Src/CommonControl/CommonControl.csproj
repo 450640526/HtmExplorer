@@ -40,10 +40,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ColorPickerForm\ColorPickerForm.cs">
+    <Compile Include="ColorPickerForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ColorPickerForm\ColorPickerForm.designer.cs">
+    <Compile Include="ColorPickerForm.designer.cs">
       <DependentUpon>ColorPickerForm.cs</DependentUpon>
     </Compile>
     <Compile Include="CustomMenuStrip\ClassicContextMenuStrip.cs">
@@ -54,10 +54,10 @@
     </Compile>
     <Compile Include="CustomMenuStrip\CustomMenuStripRenderer.cs" />
     <Compile Include="CustomMenuStrip\CustomToolStripRenderer.cs" />
-    <Compile Include="LabelButton\LabelButton.cs">
+    <Compile Include="LabelButton.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="FontComboBox\FontComboBox.cs">
+    <Compile Include="FontComboBox.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -66,36 +66,40 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="SearchBox\SearchBox.cs">
+    <Compile Include="SearchBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="SearchBox\SearchBox.designer.cs">
+    <Compile Include="SearchBox.designer.cs">
       <DependentUpon>SearchBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="TABControl\TabControlContextMenuStrip.cs" />
-    <Compile Include="TABControl\TabControlDragDrop.cs" />
-    <Compile Include="TABControl\TabControlExt.cs">
+    <Compile Include="TABControl\TabListContextMenuStrip.cs" />
+    <Compile Include="TABControl\TabPageContextMenuStrip.cs" />
+    <Compile Include="TABControl\TabControlEx.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="TABControl\TabDragDrop.cs" />
+    <Compile Include="TABControl\TabDraw.cs" />
+    <Compile Include="TABControl\TabXButton.cs" />
+    <Compile Include="Win32AddressBar\FindNode.cs" />
     <Compile Include="Win32AddressBar\Win32AddressBar.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Win32AddressBar\Win32AddressBar.designer.cs">
       <DependentUpon>Win32AddressBar.cs</DependentUpon>
     </Compile>
-    <Compile Include="WinTextBox\WinTextBox.cs">
+    <Compile Include="WinTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="ColorPickerForm\ColorPickerForm.resx">
+    <EmbeddedResource Include="ColorPickerForm.resx">
       <DependentUpon>ColorPickerForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="SearchBox\SearchBox.resx">
+    <EmbeddedResource Include="SearchBox.resx">
       <DependentUpon>SearchBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Win32AddressBar\Win32AddressBar.resx">

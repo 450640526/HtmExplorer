@@ -11,6 +11,7 @@ namespace htmExplorer
         /// 应用程序的主入口点。
         /// </summary>
         [STAThread]
+        //[STAThreadAttribute]
         static void Main()
         {
             Application.EnableVisualStyles();

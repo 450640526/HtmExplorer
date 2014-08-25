@@ -17,7 +17,7 @@ namespace htmExplorer
             InitializeComponent();
         }
 
-        private IniFile INI = new IniFile(IniFile.AppIniName);
+        private IniFile ini = new IniFile(IniFile.AppIniName);
 
         /// <summary>
         /// 加载LISTbOX
@@ -27,30 +27,30 @@ namespace htmExplorer
         /// <returns></returns>
         public object[] LoadItems(string section, string LengthName)
         {
-            int length = INI.ReadInteger(section, LengthName, 0);   
+            int length = ini.ReadInteger(section, LengthName, 0);   
             object[] obj = new object[length];
 
             comboBox1.Items.Clear();
             for (int i = 0; i < length; i++)
-             obj[i] = INI.ReadString(section, i.ToString(), "0");
+             obj[i] = ini.ReadString(section, i.ToString(), "0");
 
             return obj;
         }
 
         public void WriteItems(string section, string LengthName)
         {
-            INI.EraseSection(section);
-            INI.WriteInteger(section, "Count", comboBox1.Items.Count);
+            ini.EraseSection(section);
+            ini.WriteInteger(section, "Count", comboBox1.Items.Count);
             for (int i = 0; i < comboBox1.Items.Count; i++)
-                INI.WriteString(section, i.ToString(), comboBox1.Items[i].ToString());
+                ini.WriteString(section, i.ToString(), comboBox1.Items[i].ToString());
         }
 
 
         private void OptionsForm_Load(object sender, EventArgs e)
         {
-            string workSpacePath = AppDomain.CurrentDomain.BaseDirectory + "我的文件夹";
-            comboBox1.Items.AddRange( LoadItems("文件夹列表", "Count") );
-            comboBox1.Text = INI.ReadString("文件夹", "地址", workSpacePath);  
+            string workSpacePath = AppDomain.CurrentDomain.BaseDirectory + "Data";
+            comboBox1.Items.AddRange( LoadItems("List", "Count") );
+            comboBox1.Text = ini.ReadString("DataBase", "Path", workSpacePath);  
         }
 
 
@@ -65,7 +65,7 @@ namespace htmExplorer
 
                 if (comboBox1.Items.IndexOf(comboBox1.Text) == -1)
                     comboBox1.Items.Add(comboBox1.Text);
-                WriteItems("文件夹列表", "Count");
+                WriteItems("List", "Count");
             }
         }
 
@@ -73,7 +73,7 @@ namespace htmExplorer
 
         private void OK1_Click(object sender, EventArgs e)
         {
-            INI.WriteString("文件夹", "地址", comboBox1.Text);  
+            ini.WriteString("DataBase", "Path", comboBox1.Text);  
 
             MessageBox.Show("请手动将数据库文件夹移动到修改的目录,程序将立即重启","数据库",MessageBoxButtons.OK,MessageBoxIcon.Information);
             Application.Restart();
@@ -83,7 +83,7 @@ namespace htmExplorer
         private void button1_Click(object sender, EventArgs e)
         {
             comboBox1.Items.Remove(comboBox1.SelectedItem);
-            WriteItems("文件夹列表", "Count");
+            WriteItems("List", "Count");
         }
 
     

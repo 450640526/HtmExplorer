@@ -55,7 +55,14 @@ namespace System
 
 
 
-
+        public static Cursor Hand
+        {
+            get
+            {
+                IntPtr h = LoadCursor(IntPtr.Zero, CursorType.IDC_HAND);
+                return new Cursor(h);
+            }
+        }
 
 
 

@@ -105,7 +105,7 @@ namespace htmExplorer
                  tmpWinTextBox1.Text = tmpRichTextBox1.Lines[0];
 
                  string filename = Path.GetDirectoryName(FullFileName) + "\\" + tmpWinTextBox1.Text + ".htm";
-                 filename = FileCore.NewFileName(filename);
+                 filename = FileCore.NewName(filename);
                  if (!File.Exists(filename))
                  {
                      string name1 = Path.GetFileNameWithoutExtension(filename);

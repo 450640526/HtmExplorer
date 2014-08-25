@@ -99,6 +99,7 @@
             this.webBrowser1.WebBrowserShortcutsEnabled = false;
             this.webBrowser1.Navigating += new System.Windows.Forms.WebBrowserNavigatingEventHandler(this.webBrowser1_Navigating);
             this.webBrowser1.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.webBrowser1_PreviewKeyDown);
+            this.webBrowser1.Resize += new System.EventHandler(this.webBrowser1_Resize);
             // 
             // contextMenuStrip1
             // 

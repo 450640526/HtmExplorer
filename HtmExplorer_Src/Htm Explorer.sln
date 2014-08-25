@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IOUnity", "System.IO\IOUnit
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommonControl", "CommonControl\CommonControl.csproj", "{807C02BF-DB5F-44A9-A70A-A5F1594FF5E8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CheckUpdate", "CheckUpdate\CheckUpdate.csproj", "{4D6D482C-B812-4C4D-9D51-309B2282FFBC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{807C02BF-DB5F-44A9-A70A-A5F1594FF5E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{807C02BF-DB5F-44A9-A70A-A5F1594FF5E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{807C02BF-DB5F-44A9-A70A-A5F1594FF5E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D6D482C-B812-4C4D-9D51-309B2282FFBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D6D482C-B812-4C4D-9D51-309B2282FFBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D6D482C-B812-4C4D-9D51-309B2282FFBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D6D482C-B812-4C4D-9D51-309B2282FFBC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

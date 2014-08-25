@@ -24,92 +24,292 @@ namespace System.Windows.Forms
 
         private void DirectoryTreeView_Load(object sender, EventArgs e)
         {
-            Initialize();
-            myPcNode.Expand();
-            //selNodeIcon = ImageToIcon(imageList1.Images[0], 16, 16);
-            selImage = imageList1.Images[0];
-            treeView1.SelectedNode = myPcNode;
-            winTextBox1.Parent = treeView1;
+            treeView1.DrawMode = TreeViewDrawMode.OwnerDrawAll;
+ 
+            if(!DesignMode)
+            {
+                textBox1.Parent = treeView1;
+                BlankNode bn = new BlankNode(treeView1);
 
+                //if(File.Exists(rootpath))
+                //    LoadData(rootpath, ContainHtmFile);
+            }
         }
 
+        #region 属性
+
+
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public TreeNode computerNode
+        {
+            get
+            {
+                return treeView1.Nodes[1];//我的电脑
+            }
+        }
+
+        public TreeNode documentNode
+        {
+            get
+            {
+                return treeView1.Nodes[1].Nodes[0];//文档
+            }
+        }
+
+        public TreeNode recyclebinNode
+        {
+            get
+            {
+                return treeView1.Nodes[3];//回收站 
+            }
+        }
+
+
+
+        /// rootpath后面不要加  \
+        /// 
+        /// 所有HTML文件都存放在这个目录下
+        /// 一般为和程序相对路径  
+        /// D:\Administrator\Desktop\我的文件夹
+        /// </summary>
+        public string rootpath { get; set; }
+
+
+
+        /// <summary>
+        /// 当前选中的文件夹 或文件名
+        /// </summary>
+        public string filename
+        {
+            get
+            {
+                string s;
+                if (treeView1.SelectedNode == null)
+                    s = "NULL Name";
+                else
+                    s = treeView1.SelectedNode.FullPath;
+
+                return rootpath + "\\" + s;
+            }
+        }
+
+
+        /// <summary>
+        /// 回收站所存放的目录
+        /// D:\Administrator\Desktop\我的文件夹\这台电脑
+        /// </summary>
+        public string pcpath
+        {
+            get
+            {
+                return rootpath + "\\这台电脑";
+            }
+        }
+
+        /// <summary>
+        /// 回收站所存放的目录
+        /// D:\Administrator\Desktop\我的文件夹\回收站
+        /// </summary>
+        public string recyclepath
+        {
+            get
+            {
+                return rootpath + "\\回收站";
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string documentpath
+        {
+            get
+            {
+                return rootpath + "\\这台电脑\\文档";
+            }
+        }
+
+        /// <summary>
+        /// 用来保存TREEVIEW的展开和关闭的状态 和最后一次选中的节点的位置
+        /// ExplorerTreeView.Xml 文件不存在 则用程序 重新加载目录
+        /// </summary>
+        public string xmlfile
+        {
+            get
+            {
+                return rootpath + "\\Content.db";
+            }
+        }
+
+        [DefaultValue(false)]
+        public bool ContainHtmFile { get; set; }
+
+
+        #endregion
+
+
+        #region 文件夹操作
+        public void CreateDirectory(string path)
+        {
+            if (!Directory.Exists(path))
+                Directory.CreateDirectory(path);
+        }
+
+        public void LoadDirectoryContainHtmFile(string path)
+        {
+            bLoadFromDir = true;
+             rootpath = path;
+            Initialize();
+
+
+            treeView1.BeginUpdate();
+
+            dTree.LoadSubDirectoryWithHtmFile(documentpath, documentNode);
+            dTree.LoadSubDirectoryWithHtmFile(recyclepath, recyclebinNode);
+            documentNode.Expand();
+            treeView1.EndUpdate();
+        }
+
+
+        public void LoadData(string path, bool withHtmFile)
+        {
+            bLoadFromDir = true;
+            rootpath = path;
+
+            Initialize();
+
+            treeView1.BeginUpdate();
+
+            if (withHtmFile == false)
+            {
+                dTree.LoadSubDirectory(documentpath, documentNode);
+                dTree.LoadSubDirectory(recyclepath, recyclebinNode);
+            }
+
+            if (withHtmFile == true)
+            {
+                dTree.LoadSubDirectoryWithHtmFile(documentpath, documentNode);
+                dTree.LoadSubDirectoryWithHtmFile(recyclepath, recyclebinNode);
+            }
+            treeView1.EndUpdate();
+
+            documentNode.Expand();
+            computerNode.Expand();
+            //treeView1.SelectedNode = computerNode;
+        }
+
+
+        //为选中的节点加载目录
+        public void SelNodeLoadFromDirectory(string dirpath)
+        {
+            //try
+            //{
+            //    treeView1.BeginUpdate();
+            //    TreeNode selnode = treeView1.SelectedNode;
+
+            //    selnode.Nodes.Clear();
+
+            //    DirectoryInfo di = new DirectoryInfo(dirpath);
+            //    string tmp = Guid.NewGuid().ToString();
+
+            //    TreeNode node1 = new TreeNode(tmp);
+            //    TreeDir.GetSubDirectories(di.GetDirectories(), selnode);
+            //    selnode.Nodes.Add(node1);
+
+            //    //删除 tmp
+            //    if (selnode.LastNode.Text == tmp)
+            //        selnode.LastNode.Remove();
+
+            //    treeView1.EndUpdate();
+            //    selnode.Expand();
+            //    //MessageBox.Show(selnode.Text);
+            //    //MessageBox.Show("selpath\t" + selpath);
+            //    //MessageBox.Show("root\t" + root);
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show(ex.Message, "Directorytreeview");
+            //}
+        }
+
+
+        private void fileSystemWatcher1_Changed(object sender, FileSystemEventArgs e)
+        {
+            
+
+            string[] filelist = Directory.GetFiles(recyclepath, "*.*");
+            if (filelist.Length > 0 || recyclebinNode.Nodes.Count>0)
+            {
+                recyclebinNode.ImageIndex =6;
+                recyclebinNode.SelectedImageIndex = 6;
+                treeView1.Refresh();
+            }
+            else
+            {
+                recyclebinNode.ImageIndex = 5;
+                recyclebinNode.SelectedImageIndex = 5;
+                treeView1.Refresh();
+            }
+        }
+        #endregion
+
+
+        public void LoadTreeContent()
+        {
+            try
+            {
+                if (File.Exists(xmlfile))
+                    LoadXml();
+                else
+                    LoadData(rootpath, ContainHtmFile);
+                //LoadDirectory(AppDomain.CurrentDomain.BaseDirectory + "Data");
+            }
+            catch
+            {
+                //LoadData(rootpath, ContainHtmFile);
+            }
+        }
+
+        /// <summary>
+        /// LOAD XML
+        /// </summary>
         private void Initialize()
         {
-            treeView1.DrawMode = TreeViewDrawMode.OwnerDrawAll;
-            selpath = root + "\\这台电脑";
-
-            myPcNode = treeView1.Nodes[1];//我的电脑
-            documentNode = treeView1.Nodes[1].Nodes[0];//文档
-            recyclebinNode = treeView1.Nodes[3];//回收站 
-            myPcNode.ContextMenuStrip = 这台电脑contextMenuStrip1;
+            computerNode.ContextMenuStrip = 这台电脑contextMenuStrip1;
             documentNode.ContextMenuStrip = 文档contextMenuStrip;
             recyclebinNode.ContextMenuStrip = 回收站contextMenuStrip;
+            fileSystemWatcher1.Path = rootpath;
 
-            recyclepath = root + "\\回收站";
-            selpath = root + "\\这台电脑";
-            documentpath = root + "\\这台电脑\\文档";
-            fileSystemWatcher1.Path = root;
+            CreateDirectory(rootpath);
+            CreateDirectory(recyclepath);
+            CreateDirectory(pcpath);
+            CreateDirectory(documentpath);
+
         }
 
         public void SelectMainNode()
         {
             treeView1.Focus();
-            treeView1.SelectedNode = myPcNode;
+            treeView1.SelectedNode = computerNode;
         }
 
-        #region TreeView查获节点并选中节点
-        //private List<TreeNode> CurrentNodeMatches = new List<TreeNode>();
-        //private int LastNodeIndex = 0;
-        //private string LastSearchText;
-
-        //private void SearchNodes(string SearchText, TreeNode node)
-        //{
-        //    while (node != null)
-        //    {
-        //        if (node.FullPath.ToLower() == SearchText.ToLower())
-        //        {
-        //            CurrentNodeMatches.Add(node);
-        //        }
-
-        //        if (node.Nodes.Count != 0)
-        //        {
-        //            SearchNodes(SearchText, node.Nodes[0]);//Recursive Search 
-        //        }
-        //        node = node.NextNode;
-        //    }
-        //}
-
-        /// <summary>
-        /// TreeNode.FullPath
-        /// </summary>
-        /// <param name="searchText">TreeNode.FullPath</param>
         public void SelectByNodeFullPath(string nodetext)
         {
             FindNode f = new FindNode(treeView1);
-            f.SelectByNodeFullPath(nodetext);
-
-            //if (searchText == "")
-            //    return;
-
-            //if (LastSearchText != searchText)
-            //{
-            //    CurrentNodeMatches.Clear();
-            //    LastSearchText = searchText;
-            //    LastNodeIndex = 0;
-            //    SearchNodes(searchText, treeView1.Nodes[0]);
-            //}
-
-            //if (LastNodeIndex >= 0 && CurrentNodeMatches.Count > 0 && LastNodeIndex < CurrentNodeMatches.Count)
-            //{
-            //    TreeNode selectedNode = CurrentNodeMatches[LastNodeIndex];
-            //    LastNodeIndex++;
-            //    this.treeView1.SelectedNode = selectedNode;
-            //    //this.treeView1.SelectedNode.Expand();
-            //    this.treeView1.Select();
-            //}
+            bool b = f.SelectByNodeFullPath(nodetext);
+            if(!b)
+            {
+                if(computerNode!=null)
+                {
+                    treeView1.SelectedNode = computerNode;
+                }
+            }
         }
-        #endregion
-
+        
         #region 事件
         public delegate void EventHandler(object sender, EventArgs e);
         public event EventHandler SelectedIndexChanged;
@@ -127,167 +327,38 @@ namespace System.Windows.Forms
 
         bool bLoadingXml = true;
         bool bLoadFromDir = true;
-        public void LoadXml(string filename)
+        public void LoadXml()
         {
             bLoadFromDir = false;
-            bLoadingXml = XmlTreeView.LoadXml(treeView1, filename);
+            bLoadingXml = XmlTreeView.LoadXml(treeView1, xmlfile);
             Initialize();
         }
 
 
-        public void SaveXml(string filename)
+
+
+
+        public void SaveXml()
         {
-            XmlTreeView.SaveXml(treeView1, filename);
+            if (File.Exists(xmlfile))
+                XmlTreeView.SaveXml(treeView1, xmlfile);
         }
 
 
         #endregion
 
-        #region 文件夹操作
-        public void LoadDirectory(string dirpath)
-        {
-            try
-            {
-                bLoadFromDir = true;
-                //treeView1.Hide();
-                root = dirpath;
-                Initialize();
-
-                #region 创建文件夹
-
-                if (!Directory.Exists(root))
-                    Directory.CreateDirectory(root);
-
-                if (!Directory.Exists(recyclepath))
-                    Directory.CreateDirectory(recyclepath);
-
-                if (!Directory.Exists(documentpath))
-                    Directory.CreateDirectory(documentpath);
-
-
-                #endregion
-
-                treeView1.BeginUpdate();
-                documentNode.Nodes.Clear();
-
-                DirectoryInfo di = new DirectoryInfo(documentpath);
-                string tmp = Guid.NewGuid().ToString();
-
-
-                TreeNode node1 = new TreeNode(tmp);
-                GetSubDirectories(di.GetDirectories(), documentNode);
-                documentNode.Nodes.Add(node1);
-
-                //删除 tmp
-                if (documentNode.LastNode.Text == tmp)
-                    documentNode.LastNode.Remove();
-
-                recyclebinNode.Nodes.Clear();
-
-                //加载回收站
-                if (Directory.Exists(recyclepath))
-                {
-                    DirectoryInfo di1 = new DirectoryInfo(recyclepath);
-
-                    TreeNode rootNode1 = new TreeNode(tmp);
-                    GetSubDirectories(di1.GetDirectories(), recyclebinNode);
-                    recyclebinNode.Nodes.Add(rootNode1);
-
-                    //删除 tmp
-                    if (recyclebinNode.LastNode.Text == tmp)
-                        recyclebinNode.LastNode.Remove();
-                }
-
-                treeView1.EndUpdate();
-                documentNode.Expand();
-                //treeView1.Show();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Directorytreeview");
-            }
-        }
-
-        //为选中的节点加载目录
-        public void SelNodeLoadFromDirectory(string dirpath)
-        {
-            try
-            {
-                treeView1.BeginUpdate();
-                TreeNode selnode = treeView1.SelectedNode;
-
-                selnode.Nodes.Clear();
-
-                DirectoryInfo di = new DirectoryInfo(dirpath);
-                string tmp = Guid.NewGuid().ToString();
-
-                TreeNode node1 = new TreeNode(tmp);
-                GetSubDirectories(di.GetDirectories(), selnode);
-                selnode.Nodes.Add(node1);
-
-                //删除 tmp
-                if (selnode.LastNode.Text == tmp)
-                    selnode.LastNode.Remove();
-
-                treeView1.EndUpdate();
-                selnode.Expand();
-                //MessageBox.Show(selnode.Text);
-                //MessageBox.Show("selpath\t" + selpath);
-                //MessageBox.Show("root\t" + root);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Directorytreeview");
-            }
-        }
-
-
-        public void GetSubDirectories(DirectoryInfo[] subDirs, TreeNode treeNode)
-        {
-            foreach (DirectoryInfo d in subDirs)
-            {
-                //不添加最后12个字符为_attachments的文件夹和_files
-                if (
-                    !d.Name.ToLower().EndsWith("_files") &&
-                    !d.Name.ToLower().EndsWith("_attachments") &&
-                     d.Name != ""
-                   )
-                {
-                    TreeNode node = new TreeNode(d.Name);
-                    DirectoryInfo[] subSubDirs = d.GetDirectories();
-                    GetSubDirectories(subSubDirs, node);
-                    treeNode.Nodes.Add(node);
-                }
-            }
-        }
-
-        private void fileSystemWatcher1_Changed(object sender, FileSystemEventArgs e)
-        {
-            treeView1.Refresh();
-
-            string[] filelist = Directory.GetFiles(recyclepath, "*.*");
-            if (filelist.Length > 0 || recyclebinNode.Nodes.Count>0)
-            {
-                recyclebinNode.ImageIndex =6;
-                recyclebinNode.SelectedImageIndex = 6;
-            }
-            else
-            {
-                recyclebinNode.ImageIndex = 5;
-                recyclebinNode.SelectedImageIndex = 5;
-            }
-        }
-        #endregion
 
         #region  treeView1
 
-
+         /// //
+ 
         private void treeView1_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Right)
             {
                 TreeNode tn = treeView1.GetNodeAt(e.X, e.Y);
-                if (tn != null) treeView1.SelectedNode = tn;
+                if (tn != null)
+                    treeView1.SelectedNode = tn;
             }
         }
 
@@ -316,55 +387,31 @@ namespace System.Windows.Forms
                 //selNodeIcon = ImageToIcon(imageList1.Images[index], 16, 16);
                 selImage = imageList1.Images[index];
             }
+
+
+
+
             //MessageBox.Show(root);
-            selpath = root + "\\" + e.Node.FullPath;
+            //selpath = root + "\\" + e.Node.FullPath;
 
            if(bLoadingXml==false)
             OnSeletedIndexChaned(sender, e);
 
             if(bLoadFromDir==true)
                 OnSeletedIndexChaned(sender, e);
+
+            //能吸响应按上下键
+            treeView1.Select();
         }
-
-        private void treeView1_BeforeSelect(object sender, TreeViewCancelEventArgs e)
-        {
-            if (e.Node != null)
-            {
-                //禁止选中空白项
-                if (e.Node.Text == "")
-                {
-                    //响应上下键
-                    if (ArrowKeyUp)
-                    {
-                        if (e.Node.PrevNode != null && e.Node.PrevNode.Text != "")
-                            treeView1.SelectedNode = e.Node.PrevNode;
-                    }
-
-                    if (ArrowKeyDown)
-                    {
-                        if (e.Node.NextNode != null && e.Node.NextNode.Text != "")
-                            treeView1.SelectedNode = e.Node.NextNode;
-                    }
-
-                    e.Cancel = true;
-                }
-            }
-        }
-
-        private void treeView1_KeyDown(object sender, KeyEventArgs e)
-        {
-            ArrowKeyUp = (e.KeyCode == Keys.Up);
-            ArrowKeyDown = (e.KeyCode == Keys.Down);
-        }
-
+ 
         private void treeView1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             TreeNode td = treeView1.GetNodeAt(e.X, e.Y);
-            selpath = root + "\\" + e.Node.FullPath;
+            //selpath = root + "\\" + e.Node.FullPath;
 
             if ((td != null) &&
                 (td.Text != "") &&
-                (td != myPcNode) &&
+                (td != computerNode) &&
                 (td != documentNode) &&
                 (td != recyclebinNode)
                 )
@@ -384,23 +431,28 @@ namespace System.Windows.Forms
             pt = e.Location;
             treeNode1 = treeView1.GetNodeAt(e.Location);
 
-            //改变光标成小手
-            TreeViewHitTestInfo info = treeView1.HitTest(e.Location);
-            if (info.Location == TreeViewHitTestLocations.Image || info.Location == TreeViewHitTestLocations.Label)
-            {
-                treeView1.Cursor = new Cursor(  Win32API.LoadCursor(IntPtr.Zero, CursorType.IDC_HAND) 
-                                            );
-            }
-            else
+
+
+
+            if (treeNode1==null ||treeNode1.Text == "")
             {
                 treeView1.Cursor = Cursors.Arrow;
+                return;
             }
-        }
+                
+                //改变光标成小手
+                TreeViewHitTestInfo info = treeView1.HitTest(e.Location);
+                if (info.Location == TreeViewHitTestLocations.Image || info.Location == TreeViewHitTestLocations.Label)
+                {
+                    treeView1.Cursor = Win32API.Hand;
+                }
+                else
+                {
+                    treeView1.Cursor = Cursors.Arrow;
+                }
+         }
 
-        private void treeView1_MouseLeave(object sender, EventArgs e)
-        {
-            
-        }
+  
 
         #endregion
        
@@ -433,7 +485,7 @@ namespace System.Windows.Forms
             if (e.Node.IsSelected)
             {
                 //TreeView有焦点的时候 画选中的节点
-                if (treeView1.Focused || winTextBox1.Visible)
+                if (treeView1.Focused || textBox1.Visible)
                 {
                     e.Graphics.FillRectangle(brush1, nodeRect);
                     e.Graphics.DrawRectangle(pen1, nodeRect);
@@ -506,9 +558,9 @@ namespace System.Windows.Forms
 
 
             ////画子节点上文件的个数 (111)
-            if (Directory.Exists(root + "\\" + e.Node.FullPath))
+            if (Directory.Exists(rootpath + "\\" + e.Node.FullPath))
             {
-                string[] filelist = Directory.GetFiles(root + "\\" + e.Node.FullPath, "*.htm");
+                string[] filelist = Directory.GetFiles(rootpath + "\\" + e.Node.FullPath, "*.htm");
                 nodeTextRect.Width += 4;
                 nodeTextRect.Height -= 4;
                 //画子节点个数 (111)
@@ -580,21 +632,19 @@ namespace System.Windows.Forms
         /// </summary>
         private TreeNode selNode = null;
         private void treeView1_ItemDrag(object sender, ItemDragEventArgs e)
-        {   
+        {
             selNode = (TreeNode)e.Item;
             treeView1.SelectedNode = (TreeNode)e.Item;
-            treeView1.DoDragDrop(e.Item, DragDropEffects.Move);
+
+            if (selNode.Text != "" &&
+                selNode != computerNode &&
+                selNode != recyclebinNode &&
+                selNode != documentNode)
+
+                treeView1.DoDragDrop(e.Item, DragDropEffects.Move);
         }
       
-        private void treeView1_NodeMouseHover(object sender, TreeNodeMouseHoverEventArgs e)
-        {
-            
-        }
-
-        private void treeView1_DragEnter(object sender, DragEventArgs e)
-        {
-           
-        }
+ 
         private void treeView1_DragOver(object sender, DragEventArgs e)
         {
             #region 容许拖拽的条件
@@ -613,6 +663,7 @@ namespace System.Windows.Forms
             #endregion
 
             TreeNode destNode = treeView1.GetNodeAt(treeView1.PointToClient(new Point(e.X, e.Y)));
+            string destNodeText = rootpath + "\\" + destNode.FullPath;
 
             ////闪烁有点厉害
             Graphics g = treeView1.CreateGraphics();
@@ -637,12 +688,14 @@ namespace System.Windows.Forms
 
             if ((e.Data.GetDataPresent(typeof(ListView.SelectedListViewItemCollection)) && destNode.Text != ""))
             {
-                 Point loc = ((TreeView)sender).PointToClient(new Point(e.X, e.Y));
-              
-                
+                Point loc = ((TreeView)sender).PointToClient(new Point(e.X, e.Y));
+
+
                 TreeNode destNode1 = ((TreeView)sender).GetNodeAt(loc);
-                 //if (destNode1.Nodes.Count > 0 && !destNode1.IsExpanded)
-                 //    destNode1.Expand();
+                string destNode1Text = rootpath + "\\" + destNode1.FullPath;
+
+                //if (destNode1.Nodes.Count > 0 && !destNode1.IsExpanded)
+                //    destNode1.Expand();
 
 
 
@@ -650,16 +703,17 @@ namespace System.Windows.Forms
                     (ListView.SelectedListViewItemCollection)e.Data.GetData(typeof(ListView.SelectedListViewItemCollection));
 
                 foreach (ListViewItem lvItem in lstViewColl)
-                {
-                    if (selpath == root + "\\" + destNode.FullPath)
+                {                        
+                    //源文件和目标不能是同一个文件
+                    if (filename == rootpath + "\\" + destNode.FullPath)
                     {
-                        //源文件和目标不能是同一个文件
                         e.Effect = DragDropEffects.None;
                         return;
                     }
-                  else
+                    else
                     {
-                        e.Effect = DragDropEffects.Move;
+                        if (Directory.Exists(destNode1Text))
+                            e.Effect = DragDropEffects.Move;
                     }
                 }
             }
@@ -668,69 +722,69 @@ namespace System.Windows.Forms
                 if ((destNode != null &&
                     selNode != destNode &&
                     selNode.Parent != destNode &&
-                    selNode.Text != "" &&
                     destNode.Text != "" &&
-                    selNode != myPcNode &&
-                    selNode != recyclebinNode &&
-                    selNode != documentNode &&
-                    destNode != myPcNode
+                    destNode != computerNode
                     ))
                 {
-                
-                    e.Effect = DragDropEffects.Move;
-
-                    //当一个父节点往它的子节点中拖拽时
-                    while (destNode.Parent != null)
+                    //文件 拖拽 到文件夹中
+                    //文件夹 拖拽 到文件夹中
+                    if (File.Exists(filename) && Directory.Exists(destNodeText)
+                       || Directory.Exists(filename) && Directory.Exists(destNodeText))
                     {
-                        if (destNode.Parent == selNode)
+                        e.Effect = DragDropEffects.Move;
+
+                        //当一个父节点往它的子节点中拖拽时
+                        while (destNode.Parent != null)
                         {
-                            e.Effect = DragDropEffects.None;
-                            return;
+                            if (destNode.Parent == selNode)
+                            {
+                                e.Effect = DragDropEffects.None;
+                                return;
+                            }
+                            destNode = destNode.Parent;
                         }
-                        destNode = destNode.Parent;
                     }
                 }
                 else
                 {
                     e.Effect = DragDropEffects.None;
                 }
+                
             }
         }
 
         /// <summary>
         /// 拖拽到上的那个目标节点
         /// </summary>
-        TreeNode destinationNode;
+        TreeNode destNode;
         private void treeView1_DragDrop(object sender, DragEventArgs e)
         {
-            destinationNode = treeView1.GetNodeAt(treeView1.PointToClient(new Point(e.X, e.Y)));
-
-            //LISTVIEW
+            #region LISTVIEW 拖拽到TREEVIEW上
             if (e.Data.GetDataPresent(typeof(ListView.SelectedListViewItemCollection).ToString(), false))
             {
                 Point loc = ((TreeView)sender).PointToClient(new Point(e.X, e.Y));
-                TreeNode destNode = ((TreeView)sender).GetNodeAt(loc);
+                TreeNode destNode1 = ((TreeView)sender).GetNodeAt(loc);
 
                 ListView.SelectedListViewItemCollection lstViewColl =
                     (ListView.SelectedListViewItemCollection)e.Data.GetData(typeof(ListView.SelectedListViewItemCollection));
 
                 foreach (ListViewItem lvItem in lstViewColl)
                 {
-                    string source = selpath + "\\" + lvItem.Text;
+                    string source = filename + "\\" + lvItem.Text;
                     if (!source.EndsWith(".htm"))
                         source += ".htm";
 
-                    string dest = root + "\\" + destNode.FullPath + "\\" + lvItem.Text;
+                    string dest = rootpath + "\\" + destNode1.FullPath + "\\" + lvItem.Text;
                     if (!dest.EndsWith(".htm"))
                         dest += ".htm";
 
-                    if (selpath == root + "\\" + destNode.FullPath)
+                    if (filename == rootpath + "\\" + destNode1.FullPath)
                     {
                         MessageBox.Show("源文件和目标不能是同一个文件");
                         return;
                     }
 
-                    dest = FileCore.NewFileName(dest);
+                    dest = FileCore.NewName(dest);
 
                     string html = File.ReadAllText(source, Encoding.UTF8);
                     string title = HtmlClass.GetHTMLTitleTag(html);
@@ -743,8 +797,8 @@ namespace System.Windows.Forms
                     File.Move(source, dest);
 
                     //移动_attachments
-                    string source_attachments = DirectoryCore.Get_AttachmentsDirectory(source);// Path.GetDirectoryName(source) + "\\" + Path.GetFileNameWithoutExtension(source) + "_attachments";
-                    string dest_attachments = DirectoryCore.Get_AttachmentsDirectory(dest);//Path.GetDirectoryName(dest) + "\\" + Path.GetFileNameWithoutExtension(dest) + "_attachments";
+                    string source_attachments = DirectoryCore.Get_AttachmentsDirectory(source);
+                    string dest_attachments = DirectoryCore.Get_AttachmentsDirectory(dest);
 
                     if (Directory.Exists(dest_attachments.ToLower()))
                         Directory.Delete(dest_attachments);
@@ -755,17 +809,71 @@ namespace System.Windows.Forms
                     lvItem.Remove();
                 }
             }
-            //TREEVIEW SELF
-            else if (selNode != destinationNode
-                 && (selNode.Parent != destinationNode))
-            {
-                if (selpath != "")
-                {
-                    string dir1 = root + "\\" + selNode.FullPath;
-                    string destpath = DirectoryCore.NewDirectoryName(root + "\\" + destinationNode.FullPath + "\\" + selNode.Text);
 
-                    DirectoryInfo di = new DirectoryInfo(destpath);
-                    Directory.Move(selpath, destpath);
+         
+            
+            #endregion
+
+
+
+
+
+            #region TreeView自己的拖拽
+
+            destNode = treeView1.GetNodeAt(treeView1.PointToClient(new Point(e.X, e.Y)));
+            string destNodeText = rootpath + "\\" + destNode.FullPath;
+ 
+            if (selNode != destNode && (selNode.Parent != destNode))
+            {
+
+                 //文件 拖拽 到文件夹中
+
+                if (File.Exists(filename) && Directory.Exists(destNodeText))
+                {
+                    string destfile = FileCore.NewName(rootpath + "\\" + destNode.FullPath + "\\" + selNode.Text);
+                    if (filename == destfile)
+                    {
+                        MessageBox.Show("源文件和目标不能是同一个文件");
+                        return;
+                    }
+
+
+                    string html = File.ReadAllText(filename, Encoding.UTF8);
+                    string title = HtmlClass.GetHTMLTitleTag(html);
+                    if (title != "")
+                        html = html.Replace(title, Path.GetFileNameWithoutExtension(destfile));
+                    File.WriteAllText(filename, html, Encoding.UTF8);
+
+
+                    File.Move(filename, destfile);
+
+
+                    TreeNode selnode = (TreeNode)treeView1.SelectedNode.Clone();
+                    destNode.Nodes.Add(selnode);
+
+                    DirectoryInfo di = new DirectoryInfo(destfile);
+                    selnode.Text = Path.GetFileName(di.Name);
+
+                    treeView1.SelectedNode.Remove();
+                    destNode.Expand();
+
+
+                    //移动_attachments
+                    string source_attachments = DirectoryCore.Get_AttachmentsDirectory(filename);
+                    string dest_attachments = DirectoryCore.Get_AttachmentsDirectory(destfile);
+
+                    if (Directory.Exists(dest_attachments.ToLower()))
+                        Directory.Delete(dest_attachments);
+
+                    if (Directory.Exists(source_attachments.ToLower()))
+                        Directory.Move(source_attachments, dest_attachments);
+                }
+
+                  //文件夹 拖拽 到文件夹中
+                if (Directory.Exists(filename) && Directory.Exists(destNodeText))
+                {
+                    string destpath = DirectoryCore.NewName(rootpath + "\\" + destNode.FullPath + "\\" + selNode.Text);
+                    Directory.Move(filename, destpath);
 
                     //if (selNode.Parent == null)
                     //    treeView1.Nodes.Remove(selNode);
@@ -773,21 +881,29 @@ namespace System.Windows.Forms
                     //    selNode.Parent.Nodes.Remove(selNode);
 
                     TreeNode selnode = (TreeNode)treeView1.SelectedNode.Clone();
-                    destinationNode.Nodes.Add(selnode);
+                    destNode.Nodes.Add(selnode);
+                    DirectoryInfo di = new DirectoryInfo(destpath);
                     selnode.Text = Path.GetFileNameWithoutExtension(di.Name);
-                   
+
                     treeView1.SelectedNode.Remove();
-                    destinationNode.Expand();
+                    destNode.Expand();
                 }
             }
+            #endregion
         }
 
         #endregion
 
+
+
+
+
+
+
         #region 右键菜单 10
         private void 新键_Click(object sender, EventArgs e)
         {
-            string newdir = DirectoryCore.NewDirectoryName(selpath + "\\" + "新建文件夹"); 
+            string newdir = DirectoryCore.NewName(filename + "\\" + "新建文件夹"); 
             //MessageBox.Show(newdir);
             Directory.CreateDirectory(newdir);
             TreeNode node = new TreeNode(Path.GetFileNameWithoutExtension(newdir));
@@ -801,51 +917,74 @@ namespace System.Windows.Forms
         private void 复制文件夹到剪切板_Click(object sender, EventArgs e)
         {
             StringCollection str1 = new StringCollection();
-            str1.Add(selpath);
+            str1.Add(filename);
             Clipboard.SetFileDropList(str1);
         }
 
-        TreeNode renameSelNode = null;//重命名时的选中的节点
+        TreeNode renameNode = null;//重命名时的选中的节点
         string renameSelPath = "";
         private void 重命名_Click(object sender, EventArgs e)
         {
-            renameSelNode = treeView1.SelectedNode;
-            renameSelPath = root +"\\"+renameSelNode.FullPath;
-            winTextBox1.Text = treeView1.SelectedNode.Text;
-            winTextBox1.Show();
-            winTextBox1.SelectAll();
-            winTextBox1.SelectionStart = 0;
-            winTextBox1.Focus();
-            winTextBox1.Bounds = treeView1.SelectedNode.Bounds;
-            winTextBox1.Width += 15;
+            renameNode = treeView1.SelectedNode;
+            renameSelPath = rootpath +"\\"+renameNode.FullPath;
+            textBox1.Text = treeView1.SelectedNode.Text;
+            textBox1.Show();
+            //textBox1.SelectAll();
+
+            if (File.Exists(filename))
+            {
+                textBox1.SelectionStart = 0;
+                textBox1.SelectionLength = treeView1.SelectedNode.Text.Length - 4;
+            }
+            else
+            {
+                textBox1.SelectAll();
+            }
+
+            textBox1.Focus();
+            textBox1.Bounds = treeView1.SelectedNode.Bounds;
+            textBox1.Width += 15;
             Invalidate();
-            //winTextBox1.Top -= 1 ;
+            textBox1.Top -= 2 ;
         }
-
-    
-
-
+ 
         //实现重命名功能
-        private void winTextBox1__LostFocus(object sender, EventArgs e)
+        private void winTextBox1_LostFocus(object sender, EventArgs e)
         {
-            winTextBox1.Hide();
+            textBox1.Hide();
             treeView1.Refresh();
 
-            string sourcedir = renameSelPath ;
-            string destdir = Directory.GetParent(renameSelPath) +"\\"+ winTextBox1.Text;
+            string destpath = Directory.GetParent(filename) + "\\" + textBox1.Text;
            
-            if (sourcedir == destdir||      //文件夹名不能相同
-                destdir.EndsWith("_attachments"))//文件结尾不能出现 _FILES _ATTACHMENTS
+            if (filename == destpath||      //文件夹名不能相同
+                destpath.EndsWith("_attachments"))//文件结尾不能出现 _FILES _ATTACHMENTS
             {
                 return;
             }
 
-            if (!Directory.Exists(destdir))
+
+            string dest = Directory.GetParent(filename) + "\\" + textBox1.Text;
+            if (File.Exists(filename))
             {
-                Directory.Move(sourcedir, destdir);
-                renameSelNode.Text = winTextBox1.Text;
-                selpath = destdir;
-                //selpath = root + "\\" + e.Node.FullPath;
+                if (!File.Exists(dest))
+                {
+                    if (!dest.EndsWith(".htm"))
+                        dest += ".htm";
+
+                    File.Move(filename, dest);
+
+                    //richTextBox1.filename = dest;
+                    renameNode.Text = textBox1.Text;// Path.GetFileName(dest);
+                }
+            }
+
+            if (Directory.Exists(filename))
+            {
+                if (!Directory.Exists(destpath))
+                {
+                    Directory.Move(filename, destpath);
+                    renameNode.Text = textBox1.Text;
+                }
             }
             //MessageBox.Show(renameSelPath + "\r\n" + destdir);
             OnSeletedIndexChaned(sender, e);
@@ -854,27 +993,42 @@ namespace System.Windows.Forms
 
         private void winTextBox1_TextChanged(object sender, EventArgs e)
         {
-            Size size = TextRenderer.MeasureText(winTextBox1.Text, winTextBox1.Font);
-            Size size1 = TextRenderer.MeasureText(treeView1.SelectedNode.Text, winTextBox1.Font);
+            Size size = TextRenderer.MeasureText(textBox1.Text, textBox1.Font);
+            Size size1 = TextRenderer.MeasureText(treeView1.SelectedNode.Text, textBox1.Font);
 
             if (size.Width > size1.Width)
             {
-                winTextBox1.Width = size.Width + 15;
-                winTextBox1.Height = size.Height;
+                textBox1.Width = size.Width + 15;
+                textBox1.Height = size.Height;
             }
         }
 
         private void treeView1_WMScroll(object sender, EventArgs e)
         {
-            winTextBox1.Hide();
+            textBox1.Hide();
         }
 
-        private void MoveDirectoryToRecylebin()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        private void MoveToRecylebin()
         {
-            string recyclePath1 = DirectoryCore.NewDirectoryName(recyclepath + "\\" + treeView1.SelectedNode.Text);
+            string recyclePath1 = DirectoryCore.NewName(recyclepath + "\\" + treeView1.SelectedNode.Text);
             DirectoryInfo di = new DirectoryInfo(recyclePath1);
 
-            Directory.Move(selpath, recyclePath1);
+            Directory.Move(filename, recyclePath1);
 
             //只保证移到回收站也有右键菜单
             TreeNode selnode = (TreeNode)treeView1.SelectedNode.Clone();
@@ -883,57 +1037,52 @@ namespace System.Windows.Forms
             selnode.Text = Path.GetFileNameWithoutExtension(recyclePath1);
         }
       
+
+
+
+
+
+
+
+
+
+
+
+
+
         private void 删除_Click(object sender, EventArgs e)
         {
             //D:\Administrator\Desktop\MySpace\我的文件夹\回收站       
             //1在文件里
             //2在回车站里
 
-            if (selpath.IndexOf(recyclepath) != -1)
+            if (filename.IndexOf(recyclepath) != -1)
             {
                 DialogResult d = MessageBox.Show("彻底删除文件夹: " + treeView1.SelectedNode.Text, "回收站", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (DialogResult.Yes == d)
                 {
-                    Directory.Delete(selpath, true);
+                    Directory.Delete(filename, true);
                     treeView1.SelectedNode.Remove();
                 }
             }
             else
             {
-                if (!DirectoryCore.IsEmpty(selpath))
+                if (!DirectoryCore.IsEmpty(filename))
                 {
                     DialogResult d1 = MessageBox.Show("文件夹移到回收站: " + treeView1.SelectedNode.Text, "回收站", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (DialogResult.Yes == d1)
-                        MoveDirectoryToRecylebin();
+                        MoveToRecylebin();
                 }
                 else
-                    MoveDirectoryToRecylebin();
+                    MoveToRecylebin();
             }
         }
 
-        /// <summary>
-        /// 取消目录下的所有文件夹及子文件的只读属性
-        /// </summary>
-        /// <param name="dirPath"></param>
-        private static void DirectorySubFileCancelReadOnly(string dirPath)
-        {
-            string[] dirPathes = Directory.GetDirectories(dirPath, "*.*", SearchOption.AllDirectories);
-            string[] filePathes = Directory.GetFiles(dirPath, "*.*", SearchOption.AllDirectories);
 
-            foreach (var dp in dirPathes)
-            {
-                DirectoryInfo dir = new DirectoryInfo(dirPath);
-                dir.Attributes = FileAttributes.Normal & FileAttributes.Directory;
-            }
-            foreach (var fp in filePathes)
-            {
-                File.SetAttributes(fp, System.IO.FileAttributes.Normal);
-            }
-        } 
 
         private void 在文件资源管理器中打开_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("explorer.exe", selpath);
+            System.Diagnostics.Process.Start("explorer.exe", filename);
         }
 
         private void 清空回收站_Click(object sender, EventArgs e)
@@ -967,92 +1116,43 @@ namespace System.Windows.Forms
 
         private void 刷新_Click(object sender, EventArgs e)
         {
-            LoadDirectory(root);
+            LoadData(rootpath, ContainHtmFile);
+
+            //LoadDirectory(rootpath);
         }
 
         private void 上移_Click(object sender, EventArgs e)
         {
-            if (treeView1.SelectedNode != null)
-            {
-                TreeNode treeNode = new TreeNode();
-                if (treeView1.SelectedNode.Index != 0)
-                {
-                    if (treeView1.SelectedNode.Index != 0)
-                    {
-                        treeNode = (TreeNode)treeView1.SelectedNode.Clone();
-                        if (treeView1.SelectedNode.Level == 0)
-                        {
-                            treeView1.Nodes.Insert(treeView1.SelectedNode.PrevNode.Index, treeNode);
-                        }
-                        else
-                        {
-                            if (treeView1.SelectedNode.Level != 0)
-                            {
-                                treeView1.SelectedNode.Parent.Nodes.Insert(treeView1.SelectedNode.PrevNode.Index, treeNode);
-                            }
-                        }
-                        treeView1.SelectedNode.Remove();
-                        treeView1.SelectedNode = treeNode;
-                    }
-                }
-            }
+            MoveNode md = new MoveNode(treeView1);
+            md.MoveUp();
         }
 
         private void 下移_Click(object sender, EventArgs e)
         {
-            if (treeView1.SelectedNode != null)
-            {
-                TreeNode treeNode = new TreeNode();
-                if (treeView1.SelectedNode.Level == 0)
-                {
-                    if (treeView1.SelectedNode.Index != treeView1.Nodes.Count - 1)
-                    {
-                        treeNode = (TreeNode)treeView1.SelectedNode.Clone();
-                        treeView1.Nodes.Insert(treeView1.SelectedNode.NextNode.Index + 1, treeNode);
-                        treeView1.SelectedNode.Remove();
-                        treeView1.SelectedNode = treeNode;
-                    }
-                }
-                else
-                {
-                    if (treeView1.SelectedNode.Level != 0)
-                    {
-                        if (treeView1.SelectedNode.Index != treeView1.SelectedNode.Parent.Nodes.Count - 1)
-                        {
-                            treeNode = (TreeNode)treeView1.SelectedNode.Clone();
-                            treeView1.SelectedNode.Parent.Nodes.Insert(treeView1.SelectedNode.NextNode.Index + 1, treeNode);
-                            treeView1.SelectedNode.Remove();
-                            treeView1.SelectedNode = treeNode;
-                        }
-                    }
-                }
-            }
+            MoveNode md = new MoveNode(treeView1);
+            md.MoveDown();
         }
+
         private void 文件夹_Opening(object sender, CancelEventArgs e)
         {
-            在文件资源管理器中打开ToolStrip1.Enabled = Directory.Exists(selpath);
-            删除ToolStripMenuItem.Enabled = Directory.Exists(selpath);
-            剪切ToolStripMenuItem.Enabled = Directory.Exists(selpath);
-            复制ToolStripMenuItem.Enabled = Directory.Exists(selpath);
-            复制ToolStripMenuItem.Enabled = Directory.Exists(selpath);
-            粘贴ToolStripMenuItem.Enabled = Directory.Exists(selpath);
-            重命名ToolStripMenuItem.Enabled = Directory.Exists(selpath);
-            属性RToolStripMenuItem.Enabled = Directory.Exists(selpath);
-           
-            上移MenuItem.Enabled = treeView1.SelectedNode != null && treeView1.SelectedNode.Index != 0;
+            在文件资源管理器中打开ToolStrip1.Enabled = Directory.Exists(filename);
+            删除ToolStripMenuItem.Enabled = Directory.Exists(filename);
+            剪切ToolStripMenuItem.Enabled = Directory.Exists(filename);
+            复制ToolStripMenuItem.Enabled = Directory.Exists(filename);
+            复制ToolStripMenuItem.Enabled = Directory.Exists(filename);
+            粘贴ToolStripMenuItem.Enabled = Directory.Exists(filename);
+            重命名ToolStripMenuItem.Enabled = Directory.Exists(filename);
+            属性RToolStripMenuItem.Enabled = Directory.Exists(filename);
 
-            if (treeView1.SelectedNode.Level == 0)
-                下移MenuItem.Enabled = treeView1.SelectedNode != null && (treeView1.SelectedNode.Index != treeView1.Nodes.Count - 1);
-
-            if (treeView1.SelectedNode.Level != 0)
-                下移MenuItem.Enabled = (treeView1.SelectedNode.Index != treeView1.SelectedNode.Parent.Nodes.Count - 1);
-
+            MoveNode md = new MoveNode(treeView1);
+            moveup1.Enabled =  md.CanMoveUp;
+            movedown1.Enabled = md.CanMoveDown;
         }
 
         private void 这台电脑_Opening(object sender, CancelEventArgs e)
         {
-            在文件资源管理器中打开ToolStrip.Enabled = Directory.Exists(selpath);
-            新建文件夹ToolStrip.Enabled = Directory.Exists(selpath);
+            在文件资源管理器中打开ToolStrip.Enabled = Directory.Exists(filename);
+            新建文件夹ToolStrip.Enabled = Directory.Exists(filename);
         }
 
         private void 回收站_Opening(object sender, CancelEventArgs e)
@@ -1063,45 +1163,32 @@ namespace System.Windows.Forms
 
         private void 空白_Opening(object sender, CancelEventArgs e)
         {
-            刷新MenuItem.Enabled = Directory.Exists(root);
+            刷新MenuItem.Enabled = Directory.Exists(rootpath);
         }
 
 
         #endregion
 
-        /// <summary>
-        /// rootpath后面不要加  \
-        /// D:\我的文件夹
-        /// </summary>
-        public string root = "";
-        public int ItemsCount = 0;
-       
-        /// <summary>
-        /// 当前选中的文件夹
-        /// </summary
-        public string selpath = "";
-        private string recyclepath = "";
-        private string documentpath = "";
-        private bool ArrowKeyUp = false;
-        private bool ArrowKeyDown = false;
+
+
+
+
+
+
+
         /// <summary>
         /// 返回当前文件夹下 文件个数
         /// </summary>
 
-        private TreeNode myPcNode;
-        private TreeNode documentNode;
-        private TreeNode recyclebinNode;
-        public string selNodeText
-        {
-            get {
-                if (treeView1.SelectedNode != null)
-                    return treeView1.SelectedNode.Text;
-                else
-                    return "";
-            }
-        }
+        public int ItemsCount = 0;
+
         //public Icon selNodeIcon;
         public Image selImage;
+
+    
+
+ 
+ 
 
     }
 }

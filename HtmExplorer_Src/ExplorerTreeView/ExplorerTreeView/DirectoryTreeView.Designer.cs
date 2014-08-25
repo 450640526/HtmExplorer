@@ -38,6 +38,14 @@
             System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("回收站", 5, 5);
             System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("", 1, 1);
             System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("", 1, 1);
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.arrowImageList = new System.Windows.Forms.ImageList(this.components);
+            this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
+            this.minusPictureBox1 = new System.Windows.Forms.PictureBox();
+            this.plusPictureBox1 = new System.Windows.Forms.PictureBox();
+            this.minusPictureBox2 = new System.Windows.Forms.PictureBox();
+            this.plusPictureBox2 = new System.Windows.Forms.PictureBox();
+            this.textBox1 = new System.Windows.Forms.WinTextBox();
             this.文档contextMenuStrip = new System.Windows.Forms.ClassicContextMenuStrip(this.components);
             this.新建文件夹ToolStrip = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
@@ -53,8 +61,6 @@
             this.toolStripMenuItem7 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
             this.文件夹contextMenuStrip = new System.Windows.Forms.ClassicContextMenuStrip(this.components);
-            this.新键文件夹WToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
             this.在文件资源管理器中打开ToolStrip1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripSeparator();
             this.剪切ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -62,33 +68,115 @@
             this.复制ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.删除ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.重命名ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
             this.移动ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.上移MenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.下移MenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.moveup1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.movedown1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem8 = new System.Windows.Forms.ToolStripSeparator();
+            this.新建WToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.newfolder1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
             this.属性RToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.空白contextMenuStrip = new System.Windows.Forms.ClassicContextMenuStrip(this.components);
             this.刷新MenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.arrowImageList = new System.Windows.Forms.ImageList(this.components);
-            this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
-            this.minusPictureBox1 = new System.Windows.Forms.PictureBox();
-            this.plusPictureBox1 = new System.Windows.Forms.PictureBox();
-            this.minusPictureBox2 = new System.Windows.Forms.PictureBox();
-            this.plusPictureBox2 = new System.Windows.Forms.PictureBox();
-            this.winTextBox1 = new System.Windows.Forms.WinTextBox();
             this.treeView1 = new System.Windows.Forms.TreeViewEx();
-            this.文档contextMenuStrip.SuspendLayout();
-            this.这台电脑contextMenuStrip1.SuspendLayout();
-            this.回收站contextMenuStrip.SuspendLayout();
-            this.文件夹contextMenuStrip.SuspendLayout();
-            this.空白contextMenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.minusPictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.plusPictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.minusPictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.plusPictureBox2)).BeginInit();
+            this.文档contextMenuStrip.SuspendLayout();
+            this.这台电脑contextMenuStrip1.SuspendLayout();
+            this.回收站contextMenuStrip.SuspendLayout();
+            this.文件夹contextMenuStrip.SuspendLayout();
+            this.空白contextMenuStrip.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // imageList1
+            // 
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList1.Images.SetKeyName(0, "folder.png");
+            this.imageList1.Images.SetKeyName(1, "空.png");
+            this.imageList1.Images.SetKeyName(2, "我的电脑.png");
+            this.imageList1.Images.SetKeyName(3, "文档.png");
+            this.imageList1.Images.SetKeyName(4, "桌面1.png");
+            this.imageList1.Images.SetKeyName(5, "null.ico");
+            this.imageList1.Images.SetKeyName(6, "回收站.png");
+            this.imageList1.Images.SetKeyName(7, "txt1.png");
+            // 
+            // arrowImageList
+            // 
+            this.arrowImageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("arrowImageList.ImageStream")));
+            this.arrowImageList.TransparentColor = System.Drawing.Color.Transparent;
+            this.arrowImageList.Images.SetKeyName(0, "1.png");
+            this.arrowImageList.Images.SetKeyName(1, "2.png");
+            this.arrowImageList.Images.SetKeyName(2, "3.png");
+            this.arrowImageList.Images.SetKeyName(3, "4.png");
+            // 
+            // fileSystemWatcher1
+            // 
+            this.fileSystemWatcher1.EnableRaisingEvents = true;
+            this.fileSystemWatcher1.IncludeSubdirectories = true;
+            this.fileSystemWatcher1.SynchronizingObject = this;
+            this.fileSystemWatcher1.Created += new System.IO.FileSystemEventHandler(this.fileSystemWatcher1_Changed);
+            this.fileSystemWatcher1.Deleted += new System.IO.FileSystemEventHandler(this.fileSystemWatcher1_Changed);
+            // 
+            // minusPictureBox1
+            // 
+            this.minusPictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("minusPictureBox1.Image")));
+            this.minusPictureBox1.Location = new System.Drawing.Point(168, 42);
+            this.minusPictureBox1.Name = "minusPictureBox1";
+            this.minusPictureBox1.Size = new System.Drawing.Size(9, 9);
+            this.minusPictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.minusPictureBox1.TabIndex = 8;
+            this.minusPictureBox1.TabStop = false;
+            this.minusPictureBox1.Visible = false;
+            // 
+            // plusPictureBox1
+            // 
+            this.plusPictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("plusPictureBox1.Image")));
+            this.plusPictureBox1.Location = new System.Drawing.Point(168, 27);
+            this.plusPictureBox1.Name = "plusPictureBox1";
+            this.plusPictureBox1.Size = new System.Drawing.Size(9, 9);
+            this.plusPictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.plusPictureBox1.TabIndex = 9;
+            this.plusPictureBox1.TabStop = false;
+            this.plusPictureBox1.Visible = false;
+            // 
+            // minusPictureBox2
+            // 
+            this.minusPictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("minusPictureBox2.Image")));
+            this.minusPictureBox2.Location = new System.Drawing.Point(194, 42);
+            this.minusPictureBox2.Name = "minusPictureBox2";
+            this.minusPictureBox2.Size = new System.Drawing.Size(9, 9);
+            this.minusPictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.minusPictureBox2.TabIndex = 8;
+            this.minusPictureBox2.TabStop = false;
+            this.minusPictureBox2.Visible = false;
+            // 
+            // plusPictureBox2
+            // 
+            this.plusPictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("plusPictureBox2.Image")));
+            this.plusPictureBox2.Location = new System.Drawing.Point(194, 27);
+            this.plusPictureBox2.Name = "plusPictureBox2";
+            this.plusPictureBox2.Size = new System.Drawing.Size(9, 9);
+            this.plusPictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.plusPictureBox2.TabIndex = 8;
+            this.plusPictureBox2.TabStop = false;
+            this.plusPictureBox2.Visible = false;
+            // 
+            // textBox1
+            // 
+            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBox1.Font = new System.Drawing.Font("微软雅黑", 9.7F);
+            this.textBox1.Location = new System.Drawing.Point(117, 143);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 25);
+            this.textBox1.TabIndex = 10;
+            this.textBox1.Visible = false;
+            this.textBox1._LostFocus += new System.Windows.Forms.WinTextBox.EventHandler(this.winTextBox1_LostFocus);
+            this.textBox1.TextChanged += new System.EventHandler(this.winTextBox1_TextChanged);
             // 
             // 文档contextMenuStrip
             // 
@@ -192,8 +280,6 @@
             // 文件夹contextMenuStrip
             // 
             this.文件夹contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.新键文件夹WToolStripMenuItem,
-            this.toolStripMenuItem3,
             this.在文件资源管理器中打开ToolStrip1,
             this.toolStripMenuItem5,
             this.剪切ToolStripMenuItem,
@@ -201,25 +287,15 @@
             this.复制ToolStripMenuItem,
             this.删除ToolStripMenuItem,
             this.重命名ToolStripMenuItem,
+            this.toolStripMenuItem3,
             this.移动ToolStripMenuItem,
+            this.toolStripMenuItem8,
+            this.新建WToolStripMenuItem,
             this.toolStripMenuItem4,
             this.属性RToolStripMenuItem});
             this.文件夹contextMenuStrip.Name = "文件夹contextMenuStrip";
-            this.文件夹contextMenuStrip.Size = new System.Drawing.Size(225, 220);
+            this.文件夹contextMenuStrip.Size = new System.Drawing.Size(225, 226);
             this.文件夹contextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.文件夹_Opening);
-            // 
-            // 新键文件夹WToolStripMenuItem
-            // 
-            this.新键文件夹WToolStripMenuItem.Name = "新键文件夹WToolStripMenuItem";
-            this.新键文件夹WToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.新键文件夹WToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
-            this.新键文件夹WToolStripMenuItem.Text = "新键文件夹(&F)";
-            this.新键文件夹WToolStripMenuItem.Click += new System.EventHandler(this.新键_Click);
-            // 
-            // toolStripMenuItem3
-            // 
-            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(221, 6);
             // 
             // 在文件资源管理器中打开ToolStrip1
             // 
@@ -273,30 +349,56 @@
             this.重命名ToolStripMenuItem.Text = "重命名(&M)";
             this.重命名ToolStripMenuItem.Click += new System.EventHandler(this.重命名_Click);
             // 
+            // toolStripMenuItem3
+            // 
+            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(221, 6);
+            // 
             // 移动ToolStripMenuItem
             // 
             this.移动ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.上移MenuItem,
-            this.下移MenuItem});
+            this.moveup1,
+            this.movedown1});
             this.移动ToolStripMenuItem.Name = "移动ToolStripMenuItem";
             this.移动ToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
             this.移动ToolStripMenuItem.Text = "移动";
             // 
-            // 上移MenuItem
+            // moveup1
             // 
-            this.上移MenuItem.Name = "上移MenuItem";
-            this.上移MenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Up)));
-            this.上移MenuItem.Size = new System.Drawing.Size(187, 22);
-            this.上移MenuItem.Text = "上移(&U)";
-            this.上移MenuItem.Click += new System.EventHandler(this.上移_Click);
+            this.moveup1.Name = "moveup1";
+            this.moveup1.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Up)));
+            this.moveup1.Size = new System.Drawing.Size(187, 22);
+            this.moveup1.Text = "上移(&U)";
+            this.moveup1.Click += new System.EventHandler(this.上移_Click);
             // 
-            // 下移MenuItem
+            // movedown1
             // 
-            this.下移MenuItem.Name = "下移MenuItem";
-            this.下移MenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Down)));
-            this.下移MenuItem.Size = new System.Drawing.Size(187, 22);
-            this.下移MenuItem.Text = "下移(&D)";
-            this.下移MenuItem.Click += new System.EventHandler(this.下移_Click);
+            this.movedown1.Name = "movedown1";
+            this.movedown1.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Down)));
+            this.movedown1.Size = new System.Drawing.Size(187, 22);
+            this.movedown1.Text = "下移(&D)";
+            this.movedown1.Click += new System.EventHandler(this.下移_Click);
+            // 
+            // toolStripMenuItem8
+            // 
+            this.toolStripMenuItem8.Name = "toolStripMenuItem8";
+            this.toolStripMenuItem8.Size = new System.Drawing.Size(221, 6);
+            // 
+            // 新建WToolStripMenuItem
+            // 
+            this.新建WToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.newfolder1});
+            this.新建WToolStripMenuItem.Name = "新建WToolStripMenuItem";
+            this.新建WToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
+            this.新建WToolStripMenuItem.Text = "新建(&W)";
+            // 
+            // newfolder1
+            // 
+            this.newfolder1.Name = "newfolder1";
+            this.newfolder1.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
+            this.newfolder1.Size = new System.Drawing.Size(173, 22);
+            this.newfolder1.Text = "文件夹(&F)";
+            this.newfolder1.Click += new System.EventHandler(this.新键_Click);
             // 
             // toolStripMenuItem4
             // 
@@ -308,18 +410,6 @@
             this.属性RToolStripMenuItem.Name = "属性RToolStripMenuItem";
             this.属性RToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
             this.属性RToolStripMenuItem.Text = "属性(&R)";
-            // 
-            // imageList1
-            // 
-            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList1.Images.SetKeyName(0, "folder.png");
-            this.imageList1.Images.SetKeyName(1, "空.png");
-            this.imageList1.Images.SetKeyName(2, "我的电脑.png");
-            this.imageList1.Images.SetKeyName(3, "文档.png");
-            this.imageList1.Images.SetKeyName(4, "桌面1.png");
-            this.imageList1.Images.SetKeyName(5, "null.ico");
-            this.imageList1.Images.SetKeyName(6, "回收站.png");
             // 
             // 空白contextMenuStrip
             // 
@@ -336,79 +426,6 @@
             this.刷新MenuItem.Size = new System.Drawing.Size(137, 22);
             this.刷新MenuItem.Text = "刷新(&R)";
             this.刷新MenuItem.Click += new System.EventHandler(this.刷新_Click);
-            // 
-            // arrowImageList
-            // 
-            this.arrowImageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("arrowImageList.ImageStream")));
-            this.arrowImageList.TransparentColor = System.Drawing.Color.Transparent;
-            this.arrowImageList.Images.SetKeyName(0, "1.png");
-            this.arrowImageList.Images.SetKeyName(1, "2.png");
-            this.arrowImageList.Images.SetKeyName(2, "3.png");
-            this.arrowImageList.Images.SetKeyName(3, "4.png");
-            // 
-            // fileSystemWatcher1
-            // 
-            this.fileSystemWatcher1.EnableRaisingEvents = true;
-            this.fileSystemWatcher1.IncludeSubdirectories = true;
-            this.fileSystemWatcher1.SynchronizingObject = this;
-            this.fileSystemWatcher1.Created += new System.IO.FileSystemEventHandler(this.fileSystemWatcher1_Changed);
-            this.fileSystemWatcher1.Deleted += new System.IO.FileSystemEventHandler(this.fileSystemWatcher1_Changed);
-            // 
-            // minusPictureBox1
-            // 
-            this.minusPictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("minusPictureBox1.Image")));
-            this.minusPictureBox1.Location = new System.Drawing.Point(168, 42);
-            this.minusPictureBox1.Name = "minusPictureBox1";
-            this.minusPictureBox1.Size = new System.Drawing.Size(9, 9);
-            this.minusPictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.minusPictureBox1.TabIndex = 8;
-            this.minusPictureBox1.TabStop = false;
-            this.minusPictureBox1.Visible = false;
-            // 
-            // plusPictureBox1
-            // 
-            this.plusPictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("plusPictureBox1.Image")));
-            this.plusPictureBox1.Location = new System.Drawing.Point(168, 27);
-            this.plusPictureBox1.Name = "plusPictureBox1";
-            this.plusPictureBox1.Size = new System.Drawing.Size(9, 9);
-            this.plusPictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.plusPictureBox1.TabIndex = 9;
-            this.plusPictureBox1.TabStop = false;
-            this.plusPictureBox1.Visible = false;
-            // 
-            // minusPictureBox2
-            // 
-            this.minusPictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("minusPictureBox2.Image")));
-            this.minusPictureBox2.Location = new System.Drawing.Point(194, 42);
-            this.minusPictureBox2.Name = "minusPictureBox2";
-            this.minusPictureBox2.Size = new System.Drawing.Size(9, 9);
-            this.minusPictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.minusPictureBox2.TabIndex = 8;
-            this.minusPictureBox2.TabStop = false;
-            this.minusPictureBox2.Visible = false;
-            // 
-            // plusPictureBox2
-            // 
-            this.plusPictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("plusPictureBox2.Image")));
-            this.plusPictureBox2.Location = new System.Drawing.Point(194, 27);
-            this.plusPictureBox2.Name = "plusPictureBox2";
-            this.plusPictureBox2.Size = new System.Drawing.Size(9, 9);
-            this.plusPictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.plusPictureBox2.TabIndex = 8;
-            this.plusPictureBox2.TabStop = false;
-            this.plusPictureBox2.Visible = false;
-            // 
-            // winTextBox1
-            // 
-            this.winTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.winTextBox1.Font = new System.Drawing.Font("微软雅黑", 9F);
-            this.winTextBox1.Location = new System.Drawing.Point(117, 143);
-            this.winTextBox1.Name = "winTextBox1";
-            this.winTextBox1.Size = new System.Drawing.Size(100, 23);
-            this.winTextBox1.TabIndex = 10;
-            this.winTextBox1.Visible = false;
-            this.winTextBox1._LostFocus += new System.Windows.Forms.WinTextBox.EventHandler(this.winTextBox1__LostFocus);
-            this.winTextBox1.TextChanged += new System.EventHandler(this.winTextBox1_TextChanged);
             // 
             // treeView1
             // 
@@ -465,21 +482,17 @@
             treeNode7});
             this.treeView1.SelectedImageIndex = 0;
             this.treeView1.ShowLines = false;
+            this.treeView1.ShowNodeToolTips = true;
             this.treeView1.Size = new System.Drawing.Size(307, 325);
             this.treeView1.TabIndex = 4;
             this.treeView1.WMScroll += new System.Windows.Forms.TreeViewEx.EventHandler(this.treeView1_WMScroll);
             this.treeView1.DrawNode += new System.Windows.Forms.DrawTreeNodeEventHandler(this.treeView1_DrawNode);
             this.treeView1.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.treeView1_ItemDrag);
-            this.treeView1.NodeMouseHover += new System.Windows.Forms.TreeNodeMouseHoverEventHandler(this.treeView1_NodeMouseHover);
-            this.treeView1.BeforeSelect += new System.Windows.Forms.TreeViewCancelEventHandler(this.treeView1_BeforeSelect);
             this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
             this.treeView1.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseClick);
             this.treeView1.DragDrop += new System.Windows.Forms.DragEventHandler(this.treeView1_DragDrop);
-            this.treeView1.DragEnter += new System.Windows.Forms.DragEventHandler(this.treeView1_DragEnter);
             this.treeView1.DragOver += new System.Windows.Forms.DragEventHandler(this.treeView1_DragOver);
-            this.treeView1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.treeView1_KeyDown);
             this.treeView1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.treeView1_MouseDown);
-            this.treeView1.MouseLeave += new System.EventHandler(this.treeView1_MouseLeave);
             this.treeView1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.treeView1_MouseMove);
             // 
             // DirectoryTreeView
@@ -487,7 +500,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Transparent;
-            this.Controls.Add(this.winTextBox1);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.plusPictureBox2);
             this.Controls.Add(this.minusPictureBox2);
             this.Controls.Add(this.minusPictureBox1);
@@ -496,16 +509,16 @@
             this.Name = "DirectoryTreeView";
             this.Size = new System.Drawing.Size(307, 325);
             this.Load += new System.EventHandler(this.DirectoryTreeView_Load);
-            this.文档contextMenuStrip.ResumeLayout(false);
-            this.这台电脑contextMenuStrip1.ResumeLayout(false);
-            this.回收站contextMenuStrip.ResumeLayout(false);
-            this.文件夹contextMenuStrip.ResumeLayout(false);
-            this.空白contextMenuStrip.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.minusPictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.plusPictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.minusPictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.plusPictureBox2)).EndInit();
+            this.文档contextMenuStrip.ResumeLayout(false);
+            this.这台电脑contextMenuStrip1.ResumeLayout(false);
+            this.回收站contextMenuStrip.ResumeLayout(false);
+            this.文件夹contextMenuStrip.ResumeLayout(false);
+            this.空白contextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -522,8 +535,6 @@
         private System.Windows.Forms.ClassicContextMenuStrip 回收站contextMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem 清空回收站MenuItem;
         private System.Windows.Forms.ClassicContextMenuStrip 文件夹contextMenuStrip;
-        private System.Windows.Forms.ToolStripMenuItem 新键文件夹WToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem3;
         private System.Windows.Forms.ToolStripMenuItem 在文件资源管理器中打开ToolStrip1;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem5;
         private System.Windows.Forms.ToolStripMenuItem 剪切ToolStripMenuItem;
@@ -546,12 +557,16 @@
         private System.IO.FileSystemWatcher fileSystemWatcher1;
         private System.Windows.Forms.PictureBox minusPictureBox1;
         private System.Windows.Forms.PictureBox plusPictureBox1;
-        private System.Windows.Forms.WinTextBox winTextBox1;
+        private System.Windows.Forms.WinTextBox textBox1;
         private System.Windows.Forms.ToolStripMenuItem 移动ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 上移MenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 下移MenuItem;
+        private System.Windows.Forms.ToolStripMenuItem moveup1;
+        private System.Windows.Forms.ToolStripMenuItem movedown1;
         private System.Windows.Forms.PictureBox plusPictureBox2;
         private System.Windows.Forms.PictureBox minusPictureBox2;
         public TreeViewEx treeView1;
+        private ToolStripSeparator toolStripMenuItem8;
+        private ToolStripMenuItem 新建WToolStripMenuItem;
+        private ToolStripMenuItem newfolder1;
+        private ToolStripSeparator toolStripMenuItem3;
     }
 }

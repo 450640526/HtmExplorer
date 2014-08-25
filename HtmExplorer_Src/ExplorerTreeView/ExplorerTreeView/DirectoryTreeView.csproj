@@ -40,12 +40,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ItemDraw.cs" />
+    <Compile Include="TreeDragDrop.cs" />
+    <Compile Include="Dir.cs" />
     <Compile Include="DirectoryTreeView.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="DirectoryTreeView.Designer.cs">
       <DependentUpon>DirectoryTreeView.cs</DependentUpon>
     </Compile>
+    <Compile Include="BlankNode.cs" />
+    <Compile Include="MoveNode.cs" />
     <Compile Include="FindNode.cs" />
     <Compile Include="TreeViewEx.cs">
       <SubType>Component</SubType>

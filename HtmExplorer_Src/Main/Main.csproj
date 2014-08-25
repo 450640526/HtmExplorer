@@ -57,7 +57,6 @@
     <Compile Include="Document\Document.Designer.cs">
       <DependentUpon>Document.cs</DependentUpon>
     </Compile>
-    <Compile Include="Document\TabContextMenuStrip.cs" />
     <Compile Include="Thread.cs" />
     <Compile Include="Forms\AboutForm.cs">
       <SubType>Form</SubType>
@@ -165,6 +164,10 @@
     <None Include="Resources\关于.htm" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CheckUpdate\CheckUpdate.csproj">
+      <Project>{4d6d482c-b812-4c4d-9d51-309b2282ffbc}</Project>
+      <Name>CheckUpdate</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CommonControl\CommonControl.csproj">
       <Project>{807c02bf-db5f-44a9-a70a-a5f1594ff5e8}</Project>
       <Name>CommonControl</Name>

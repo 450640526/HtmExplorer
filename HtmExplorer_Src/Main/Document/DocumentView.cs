@@ -15,6 +15,7 @@ namespace htmExplorer
         public DocumentView()
         {
             InitializeComponent();
+            tabControl1.BackColor = Color.White;
         }
 
         #region 属性
@@ -53,7 +54,7 @@ namespace htmExplorer
             string tabText = Path.GetFileName(filename);
 
             TabPage tabPage1 = new TabPage(tabText);
-
+           
             Document doc = new Document();
             doc.Name = "document1";
             doc.Parent = tabPage1;
@@ -62,8 +63,10 @@ namespace htmExplorer
             doc.htmEdit1.NewDocument(filename);
             doc.btnReadMode1.Text = "阅读";
             doc.winTextBox1.Modified = false;
-            
-            tabPage1.BackColor = Color.White;
+
+
+            tabPage1.ToolTipText = filename;
+            //tabPage1.BackColor = Color.White;
             tabControl1.TabPages.Add(tabPage1);
             tabControl1.SelectedTab = tabControl1.TabPages[tabControl1.TabCount - 1];
 
@@ -118,6 +121,8 @@ namespace htmExplorer
                 tabControl1.SelectedTab = tabControl1.TabPages[index];
                 Open(filename);
             }
+
+            tabControl1.SelectedTab.ToolTipText = filename;
         }
 
         public void OpenDocumentWithNewTab(string filename)
@@ -146,7 +151,9 @@ namespace htmExplorer
                 doc.Dock = DockStyle.Fill;
                 doc.Name = "document1";
                 doc.FullFileName = filename;
-                tabPage1.BackColor = Color.White;
+                //tabPage1.BackColor = Color.White;
+
+                tabPage1.ToolTipText = filename;
                 tabControl1.TabPages.Add(tabPage1);
                 tabControl1.SelectedTab = tabControl1.TabPages[tabControl1.TabCount - 1];
 
@@ -167,6 +174,7 @@ namespace htmExplorer
         private void wintextbox1_TextChanged(object sender, EventArgs e)
         {
             SelectedPage.Text = wintextbox1.Text + ".htm";
+            filelistview1.selfilename = Filename;
         }
 
         protected override void OnHandleCreated(EventArgs e)
@@ -174,15 +182,48 @@ namespace htmExplorer
             base.OnHandleCreated(e);
             if (!DesignMode)
             {
-                TabContextMenuStrip t1 =
-                    new TabContextMenuStrip(tabControl1, labelButton2);
+                PageListContextMenuStrip t1 =
+                    new PageListContextMenuStrip(tabControl1, labelButton2);
             }
         }
 
-
+        /// <summary>
+        /// 关闭已经不存在的文件 的PAGE
+        /// </summary>
+        public void RemoveInvalidTab()
+        {
+            try
+            {
+                if (document1 != null && !DesignMode && tabControl1.TabCount > 0)
+                {
+                    for (int i = 0; i < tabControl1.TabCount; i++)
+                    {
+                        Document doc = ((Document)WinForm.FindControl(tabControl1.TabPages[i], "document1"));
+                        if (doc != null)
+                        {
+                            string file = doc.FullFileName;
+                            if (!File.Exists(file))
+                            {
+                                tabControl1.TabPages.RemoveAt(i);
+                            }
+                        }
+                    }
+                }
+            }
+            catch { }
+        }
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            labelButton2.Visible = tabControl1.TabCount > 0;
+            RemoveInvalidTab();
+        }
         #endregion
 
         public System.Windows.Forms.FileListView filelistview1;
         public System.Windows.Forms.WinTextBox wintextbox1;
+
+
+ 
+
     }
 }

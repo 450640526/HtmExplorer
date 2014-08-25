@@ -95,7 +95,7 @@ namespace System.Windows.Forms
                 {
                     Win32API.DragQueryFile((int)Msg.WParam, i, FileName, 1024);
                     source[i] = FileName.ToString();
-                    dest[i] = FileCore.NewFileName(workpath + "\\" + Path.GetFileName(FileName.ToString()));                
+                    dest[i] = FileCore.NewName(workpath + "\\" + Path.GetFileName(FileName.ToString()));                
                 }
                 Win32API.DragFinish((int)Msg.WParam);
 
@@ -359,7 +359,7 @@ namespace System.Windows.Forms
                 String[] dest = new String[openFileDialog1.FileNames.Length];
 
                 for(int i=0;i<openFileDialog1.FileNames.Length;i++)
-                     dest[i] = FileCore.NewFileName(workpath + "\\" + Path.GetFileName(openFileDialog1.FileNames[i]));
+                     dest[i] = FileCore.NewName(workpath + "\\" + Path.GetFileName(openFileDialog1.FileNames[i]));
 
                 fo.Operation = FileOperations.FO_COPY;
                 fo.OwnerWindow = this.Handle;

@@ -44,6 +44,7 @@
             this.searchKeyWord1 = new System.Windows.Forms.RadioMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripMenuItem15 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem14 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem13 = new System.Windows.Forms.ToolStripMenuItem();
@@ -70,8 +71,8 @@
             this.toolStripMenuItem18 = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.directoryTreeView1 = new System.Windows.Forms.DirectoryTreeView();
-            this.fileListView1 = new System.Windows.Forms.FileListView();
+            this.tree1 = new System.Windows.Forms.DirectoryTreeView();
+            this.fileList1 = new System.Windows.Forms.FileListView();
             this.documentView1 = new htmExplorer.DocumentView();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -83,6 +84,10 @@
             this.toolStripMenuItem26 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem27 = new System.Windows.Forms.ToolStripMenuItem();
             this.最大化ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
+            this.showTree1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.threeLine1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.showStatus1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem29 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem30 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem31 = new System.Windows.Forms.ToolStripMenuItem();
@@ -141,12 +146,12 @@
             this.header1.Dock = System.Windows.Forms.DockStyle.Top;
             this.header1.Location = new System.Drawing.Point(0, 25);
             this.header1.Name = "header1";
-            this.header1.Size = new System.Drawing.Size(955, 28);
+            this.header1.Size = new System.Drawing.Size(955, 30);
             this.header1.TabIndex = 20;
             // 
             // splitContainer3
             // 
-            this.splitContainer3.BackColor = System.Drawing.Color.Transparent;
+            this.splitContainer3.BackColor = System.Drawing.Color.White;
             this.splitContainer3.Cursor = System.Windows.Forms.Cursors.SizeWE;
             this.splitContainer3.Dock = System.Windows.Forms.DockStyle.Top;
             this.splitContainer3.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
@@ -180,15 +185,13 @@
             this.win32AddressBar1.BackColor = System.Drawing.Color.Transparent;
             this.win32AddressBar1.Location = new System.Drawing.Point(3, 2);
             this.win32AddressBar1.Name = "win32AddressBar1";
+            this.win32AddressBar1.path = null;
             this.win32AddressBar1.progressBarBackColor = System.Drawing.Color.White;
             this.win32AddressBar1.ProgressBarMax = 100;
             this.win32AddressBar1.ProgressBarValue = 0;
             this.win32AddressBar1.Size = new System.Drawing.Size(774, 26);
             this.win32AddressBar1.TabIndex = 2;
-            this.win32AddressBar1.ButtonsClick += new System.Windows.Forms.Win32AddressBar.EventHandler(this.win32AddressBar1_ButtonsClick);
-            this.win32AddressBar1.LeftClick += new System.Windows.Forms.Win32AddressBar.EventHandler(this.win32AddressBar1_BackClick);
-            this.win32AddressBar1.RightClick += new System.Windows.Forms.Win32AddressBar.EventHandler(this.win32AddressBar1_BackClick);
-            this.win32AddressBar1.DropDownClosed += new System.Windows.Forms.Win32AddressBar.EventHandler(this.win32AddressBar1_DropDownClosed);
+            this.win32AddressBar1.treeView1 = null;
             // 
             // searchBox1
             // 
@@ -250,9 +253,10 @@
             // statusStrip1
             // 
             this.statusStrip1.AutoSize = false;
-            this.statusStrip1.BackColor = System.Drawing.SystemColors.Control;
+            this.statusStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1});
+            this.toolStripStatusLabel1,
+            this.toolStripStatusLabel2});
             this.statusStrip1.Location = new System.Drawing.Point(0, 393);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(955, 20);
@@ -262,10 +266,16 @@
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(940, 15);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(824, 15);
             this.toolStripStatusLabel1.Spring = true;
             this.toolStripStatusLabel1.Text = "0 个文件";
             this.toolStripStatusLabel1.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
+            // 
+            // toolStripStatusLabel2
+            // 
+            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(116, 15);
+            this.toolStripStatusLabel2.Text = "                           ";
             // 
             // toolStripMenuItem15
             // 
@@ -429,7 +439,7 @@
             this.splitContainer1.Cursor = System.Windows.Forms.Cursors.SizeWE;
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 53);
+            this.splitContainer1.Location = new System.Drawing.Point(0, 55);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -444,7 +454,7 @@
             this.splitContainer1.Panel2.Controls.Add(this.documentView1);
             this.splitContainer1.Panel2.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.splitContainer1.Panel2MinSize = 0;
-            this.splitContainer1.Size = new System.Drawing.Size(955, 340);
+            this.splitContainer1.Size = new System.Drawing.Size(955, 338);
             this.splitContainer1.SplitterDistance = 500;
             this.splitContainer1.SplitterWidth = 2;
             this.splitContainer1.TabIndex = 18;
@@ -462,71 +472,75 @@
             // splitContainer2.Panel1
             // 
             this.splitContainer2.Panel1.BackColor = System.Drawing.Color.Transparent;
-            this.splitContainer2.Panel1.Controls.Add(this.directoryTreeView1);
+            this.splitContainer2.Panel1.Controls.Add(this.tree1);
             this.splitContainer2.Panel1.Cursor = System.Windows.Forms.Cursors.Default;
             this.splitContainer2.Panel1MinSize = 50;
             // 
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.BackColor = System.Drawing.Color.Transparent;
-            this.splitContainer2.Panel2.Controls.Add(this.fileListView1);
+            this.splitContainer2.Panel2.Controls.Add(this.fileList1);
             this.splitContainer2.Panel2.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.splitContainer2.Panel2MinSize = 50;
-            this.splitContainer2.Size = new System.Drawing.Size(500, 340);
-            this.splitContainer2.SplitterDistance = 208;
+            this.splitContainer2.Size = new System.Drawing.Size(500, 338);
+            this.splitContainer2.SplitterDistance = 241;
             this.splitContainer2.SplitterWidth = 2;
             this.splitContainer2.TabIndex = 0;
             this.splitContainer2.TabStop = false;
             this.splitContainer2.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainer2_SplitterMoved);
             // 
-            // directoryTreeView1
+            // tree1
             // 
-            this.directoryTreeView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.tree1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.directoryTreeView1.BackColor = System.Drawing.Color.White;
-            this.directoryTreeView1.Location = new System.Drawing.Point(3, 3);
-            this.directoryTreeView1.MinimumSize = new System.Drawing.Size(50, 50);
-            this.directoryTreeView1.Name = "directoryTreeView1";
-            this.directoryTreeView1.Size = new System.Drawing.Size(202, 334);
-            this.directoryTreeView1.TabIndex = 0;
-            this.directoryTreeView1.TabStop = false;
-            this.directoryTreeView1.SelectedIndexChanged += new System.Windows.Forms.DirectoryTreeView.EventHandler(this.directoryTreeView1_SelectedIndexChanged);
+            this.tree1.BackColor = System.Drawing.Color.White;
+            this.tree1.Location = new System.Drawing.Point(3, 0);
+            this.tree1.MinimumSize = new System.Drawing.Size(50, 50);
+            this.tree1.Name = "tree1";
+            this.tree1.rootpath = null;
+            this.tree1.Size = new System.Drawing.Size(235, 335);
+            this.tree1.TabIndex = 0;
+            this.tree1.TabStop = false;
+            this.tree1.SelectedIndexChanged += new System.Windows.Forms.DirectoryTreeView.EventHandler(this.directoryTreeView1_SelectedIndexChanged);
             // 
-            // fileListView1
+            // fileList1
             // 
-            this.fileListView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.fileList1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.fileListView1.AutoSize = true;
-            this.fileListView1.BackColor = System.Drawing.Color.White;
-            this.fileListView1.Location = new System.Drawing.Point(3, 3);
-            this.fileListView1.Name = "fileListView1";
-            this.fileListView1.selfilename = "";
-            this.fileListView1.Size = new System.Drawing.Size(283, 334);
-            this.fileListView1.TabIndex = 0;
-            this.fileListView1.TabStop = false;
-            this.fileListView1.ItemClick += new System.Windows.Forms.MouseEventHandler(this.fileListView1_ItemClick);
-            this.fileListView1.SaveAsClick += new System.EventHandler(this.另存为_Click);
-            this.fileListView1.NewFileClick += new System.EventHandler(this.新建_Click);
-            this.fileListView1.OpenWithNewTab += new System.EventHandler(this.fileListView1_OpenWithNewTab);
-            this.fileListView1.RenameFileClick += new System.EventHandler(this.重命名_Click);
-            this.fileListView1.ItemActive += new System.EventHandler(this.fileListView1_ItemActive);
-            this.fileListView1.CopyFile += new System.EventHandler(this.fileListView1_OpenWithNewTab);
+            this.fileList1.AutoSize = true;
+            this.fileList1.BackColor = System.Drawing.Color.White;
+            this.fileList1.Location = new System.Drawing.Point(3, 3);
+            this.fileList1.Name = "fileList1";
+            this.fileList1.selfilename = "";
+            this.fileList1.Size = new System.Drawing.Size(251, 329);
+            this.fileList1.TabIndex = 0;
+            this.fileList1.TabStop = false;
+            this.fileList1.ItemClick += new System.EventHandler(this.fileListView1_ItemClick);
+            this.fileList1.SaveAsClick += new System.EventHandler(this.另存为_Click);
+            this.fileList1.NewFileClick += new System.EventHandler(this.新建_Click);
+            this.fileList1.OpenWithNewTab += new System.EventHandler(this.fileListView1_OpenWithNewTab);
+            this.fileList1.RenameFileClick += new System.EventHandler(this.重命名_Click);
+            this.fileList1.ItemActive += new System.EventHandler(this.fileListView1_ItemActive);
+            this.fileList1.CopyFile += new System.EventHandler(this.fileListView1_OpenWithNewTab);
             // 
             // documentView1
             // 
+            this.documentView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.documentView1.BackColor = System.Drawing.Color.White;
-            this.documentView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.documentView1.Filename = null;
-            this.documentView1.Location = new System.Drawing.Point(0, 0);
+            this.documentView1.Location = new System.Drawing.Point(1, 0);
+            this.documentView1.Margin = new System.Windows.Forms.Padding(0);
             this.documentView1.Name = "documentView1";
-            this.documentView1.Size = new System.Drawing.Size(453, 340);
+            this.documentView1.Size = new System.Drawing.Size(452, 341);
             this.documentView1.TabIndex = 42;
             // 
             // menuStrip1
             // 
-            this.menuStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(246)))), ((int)(((byte)(247)))));
+            this.menuStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
             this.menuStrip1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem1,
@@ -595,7 +609,11 @@
             // toolStripMenuItem27
             // 
             this.toolStripMenuItem27.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.最大化ToolStripMenuItem});
+            this.最大化ToolStripMenuItem,
+            this.toolStripMenuItem2,
+            this.showTree1,
+            this.threeLine1,
+            this.showStatus1});
             this.toolStripMenuItem27.Name = "toolStripMenuItem27";
             this.toolStripMenuItem27.Size = new System.Drawing.Size(60, 21);
             this.toolStripMenuItem27.Text = "查看(&V)";
@@ -603,9 +621,43 @@
             // 最大化ToolStripMenuItem
             // 
             this.最大化ToolStripMenuItem.Name = "最大化ToolStripMenuItem";
-            this.最大化ToolStripMenuItem.Size = new System.Drawing.Size(132, 22);
+            this.最大化ToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F11;
+            this.最大化ToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.最大化ToolStripMenuItem.Text = "最大化(&M)";
             this.最大化ToolStripMenuItem.Click += new System.EventHandler(this.最大化显示_Click);
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(157, 6);
+            // 
+            // showTree1
+            // 
+            this.showTree1.Checked = true;
+            this.showTree1.CheckOnClick = true;
+            this.showTree1.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.showTree1.Name = "showTree1";
+            this.showTree1.Size = new System.Drawing.Size(160, 22);
+            this.showTree1.Text = "显示目录(&C)";
+            this.showTree1.Click += new System.EventHandler(this.showTree1_Click);
+            // 
+            // threeLine1
+            // 
+            this.threeLine1.CheckOnClick = true;
+            this.threeLine1.Name = "threeLine1";
+            this.threeLine1.Size = new System.Drawing.Size(160, 22);
+            this.threeLine1.Text = "三列(&T)";
+            this.threeLine1.Click += new System.EventHandler(this.threeLine1_Click);
+            // 
+            // showStatus1
+            // 
+            this.showStatus1.Checked = true;
+            this.showStatus1.CheckOnClick = true;
+            this.showStatus1.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.showStatus1.Name = "showStatus1";
+            this.showStatus1.Size = new System.Drawing.Size(160, 22);
+            this.showStatus1.Text = "状态栏(&S)";
+            this.showStatus1.Click += new System.EventHandler(this.showStatus1_Click);
             // 
             // toolStripMenuItem29
             // 
@@ -710,8 +762,8 @@
             this.Name = "FormMain";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Html Explorer";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormMain_FormClosed);
+            this.Text = "Htm Explorer";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);
             this.Load += new System.EventHandler(this.FormMain_Load);
             this.LocationChanged += new System.EventHandler(this.splitContainer3_Resize);
             this.header1.ResumeLayout(false);
@@ -754,11 +806,11 @@
         private System.Windows.Forms.RadioMenuItem searchKeyWord1;
         public System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.SplitContainer splitContainer2;
-        private System.Windows.Forms.DirectoryTreeView directoryTreeView1;
-        private System.Windows.Forms.FileListView fileListView1;
+        private System.Windows.Forms.DirectoryTreeView tree1;
+        private System.Windows.Forms.FileListView fileList1;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
-        private System.Windows.Forms.ToolStripSplitButton toolStripSplitButton1;
+        //private System.Windows.Forms.ToolStripSplitButton toolStripSplitButton1;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem15;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem14;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem13;
@@ -808,6 +860,11 @@
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem23;
         private System.Windows.Forms.ToolStripMenuItem 最大化ToolStripMenuItem;
         private DocumentView documentView1;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem threeLine1;
+        private System.Windows.Forms.ToolStripMenuItem showTree1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
+        private System.Windows.Forms.ToolStripMenuItem showStatus1;
  
        
  

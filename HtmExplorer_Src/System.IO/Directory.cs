@@ -7,6 +7,26 @@ namespace System.IO
     public class DirectoryCore
     {
 
+        /// <summary>
+        /// 取消目录下的所有文件夹及子文件的只读属性
+        /// </summary>
+        /// <param name="dirPath"></param>
+        public static void DirectorySubFileCancelReadOnly(string dirPath)
+        {
+            string[] dirPathes = Directory.GetDirectories(dirPath, "*.*", SearchOption.AllDirectories);
+            string[] filePathes = Directory.GetFiles(dirPath, "*.*", SearchOption.AllDirectories);
+
+            foreach (var dp in dirPathes)
+            {
+                DirectoryInfo dir = new DirectoryInfo(dirPath);
+                dir.Attributes = FileAttributes.Normal & FileAttributes.Directory;
+            }
+            foreach (var fp in filePathes)
+            {
+                File.SetAttributes(fp, System.IO.FileAttributes.Normal);
+            }
+        } 
+
         public static bool IsEmpty(string path)
         {
             try
@@ -97,7 +117,7 @@ namespace System.IO
         /// </summary>
         /// <param name="path"></param>
         /// <returns></returns>
-        public static string NewDirectoryName(string path)
+        public static string NewName(string path)
         {
             int j = 2;
             if (Directory.Exists(path))

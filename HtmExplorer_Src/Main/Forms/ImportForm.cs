@@ -168,7 +168,7 @@ namespace System.Windows.Forms
                     dest = dest.Remove(dest.Length - 4, 4);//remove .txt
 
                     dest += ".htm";
-                    dest = FileCore.NewFileName(dest);
+                    dest = FileCore.NewName(dest);
 
                     string path = Path.GetDirectoryName(dest);
                     if (!Directory.Exists(path))
@@ -218,7 +218,7 @@ namespace System.Windows.Forms
                     if (dest.EndsWith(".html"))
                         dest = dest.Remove(dest.Length - 1, 1);//remove .html 的L
 
-                    dest = FileCore.NewFileName(dest);
+                    dest = FileCore.NewName(dest);
 
                     string path = Path.GetDirectoryName(dest);
                     if (!Directory.Exists(path))

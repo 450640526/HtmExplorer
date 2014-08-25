@@ -23,7 +23,10 @@ namespace htmExplorer
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            System.Diagnostics.Process.Start("https://github.com/450640526/HtmExplorer");
+            UpdateForm ud = new UpdateForm();
+            ud.MainForm = this;
+            ud.ShowDialog();
+            ///System.Diagnostics.Process.Start("https://github.com/450640526/HtmExplorer");
         }
     }
 }

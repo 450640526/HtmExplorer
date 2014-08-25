@@ -33,9 +33,9 @@
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.imageList2 = new System.Windows.Forms.ImageList(this.components);
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.imageList2 = new System.Windows.Forms.ImageList(this.components);
             this.foward1 = new System.Windows.Forms.LabelButton();
             this.back1 = new System.Windows.Forms.LabelButton();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -63,22 +63,13 @@
             this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox1.Location = new System.Drawing.Point(59, 2);
+            this.pictureBox1.Location = new System.Drawing.Point(58, 2);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(604, 22);
+            this.pictureBox1.Size = new System.Drawing.Size(287, 22);
             this.pictureBox1.TabIndex = 23;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
-            // 
-            // imageList2
-            // 
-            this.imageList2.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList2.ImageStream")));
-            this.imageList2.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList2.Images.SetKeyName(0, "文件夹.png");
-            this.imageList2.Images.SetKeyName(1, "我的电脑.png");
-            this.imageList2.Images.SetKeyName(2, "文档.png");
-            this.imageList2.Images.SetKeyName(3, "null.ico");
-            this.imageList2.Images.SetKeyName(4, "回收站.png");
             // 
             // comboBox1
             // 
@@ -87,25 +78,42 @@
             this.comboBox1.BackColor = System.Drawing.Color.White;
             this.comboBox1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox1.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.comboBox1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(58, 1);
+            this.comboBox1.Location = new System.Drawing.Point(57, 1);
+            this.comboBox1.Margin = new System.Windows.Forms.Padding(0);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(621, 24);
+            this.comboBox1.Size = new System.Drawing.Size(304, 24);
             this.comboBox1.TabIndex = 27;
             this.comboBox1.TabStop = false;
             this.comboBox1.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.comboBox1_DrawItem);
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedValueChanged);
+            this.comboBox1.Leave += new System.EventHandler(this.comboBox1_Leave);
+            this.comboBox1.MouseLeave += new System.EventHandler(this.comboBox1_Leave);
             // 
             // label1
             // 
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.ImageIndex = 0;
             this.label1.ImageList = this.imageList2;
-            this.label1.Location = new System.Drawing.Point(61, 3);
+            this.label1.Location = new System.Drawing.Point(60, 3);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(22, 20);
             this.label1.TabIndex = 28;
+            // 
+            // imageList2
+            // 
+            this.imageList2.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList2.ImageStream")));
+            this.imageList2.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList2.Images.SetKeyName(0, "folder.png");
+            this.imageList2.Images.SetKeyName(1, "空.png");
+            this.imageList2.Images.SetKeyName(2, "我的电脑.png");
+            this.imageList2.Images.SetKeyName(3, "文档.png");
+            this.imageList2.Images.SetKeyName(4, "桌面1.png");
+            this.imageList2.Images.SetKeyName(5, "null.ico");
+            this.imageList2.Images.SetKeyName(6, "回收站.png");
+            this.imageList2.Images.SetKeyName(7, "txt1.png");
             // 
             // foward1
             // 
@@ -114,7 +122,7 @@
             this.foward1.DefautColor = System.Drawing.Color.Transparent;
             this.foward1.DefautImage = ((System.Drawing.Image)(resources.GetObject("foward1.DefautImage")));
             this.foward1.Image = ((System.Drawing.Image)(resources.GetObject("foward1.Image")));
-            this.foward1.Location = new System.Drawing.Point(30, 1);
+            this.foward1.Location = new System.Drawing.Point(29, 1);
             this.foward1.MouseDownColor = System.Drawing.Color.Transparent;
             this.foward1.MouseDownImage = ((System.Drawing.Image)(resources.GetObject("foward1.MouseDownImage")));
             this.foward1.MouseEnterColor = System.Drawing.Color.Transparent;
@@ -134,7 +142,7 @@
             this.back1.DefautColor = System.Drawing.Color.Transparent;
             this.back1.DefautImage = ((System.Drawing.Image)(resources.GetObject("back1.DefautImage")));
             this.back1.Image = ((System.Drawing.Image)(resources.GetObject("back1.Image")));
-            this.back1.Location = new System.Drawing.Point(4, 1);
+            this.back1.Location = new System.Drawing.Point(3, 1);
             this.back1.MouseDownColor = System.Drawing.Color.Transparent;
             this.back1.MouseDownImage = ((System.Drawing.Image)(resources.GetObject("back1.MouseDownImage")));
             this.back1.MouseEnterColor = System.Drawing.Color.Transparent;
@@ -158,7 +166,7 @@
             this.Controls.Add(this.comboBox1);
             this.DoubleBuffered = true;
             this.Name = "Win32AddressBar";
-            this.Size = new System.Drawing.Size(683, 35);
+            this.Size = new System.Drawing.Size(373, 29);
             this.Resize += new System.EventHandler(this.Win32AddressBar_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
@@ -172,8 +180,8 @@
         private PictureBox pictureBox1;
         private LabelButton back1;
         private LabelButton foward1;
-        private ImageList imageList2;
         private ComboBox comboBox1;
         private Label label1;
+        private ImageList imageList2;
     }
 }

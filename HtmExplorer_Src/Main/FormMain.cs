@@ -7,8 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.IO;
-
-namespace htmExplorer
+using System.Threading.Tasks;
+ namespace htmExplorer
 {
     public partial class FormMain : Form
     {
@@ -17,68 +17,49 @@ namespace htmExplorer
             InitializeComponent();
             Thread.ExecuteRunOnceThread();
             menuStrip1.Renderer = new CustomMenuStripRenderer();
-            documentView1.filelistview1 = fileListView1;
+
+           InitializeData();
         }
+
 
         #region FormMain_Load FormMain_FormClosed
 
         private void FormMain_Load(object sender, EventArgs e)
         {
             Thread.ExecuteRunOnceThread();
-
-            #region 1 加载工作目录
-            //配置文件存在则加载配置文件中的
-            //不存在则自动创建相对程序的 我的文件夹
-
-            workSpacePath = AppDomain.CurrentDomain.BaseDirectory + "我的文件夹";
-    
-            try
-            {
-                workSpacePath = INI.ReadString("文件夹", "地址", workSpacePath);
-                Initialize();
-            }
-            catch (System.Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-
-                workSpacePath = AppDomain.CurrentDomain.BaseDirectory + "我的文件夹";
-                INI.WriteString("文件夹", "地址", workSpacePath);
-                Initialize();
-            }
-
-
-            directoryTreeView1.root = workSpacePath;
-            try
-            {
-                if (File.Exists(treeViewXml))
-                    directoryTreeView1.LoadXml(treeViewXml);
-                else
-                    directoryTreeView1.LoadDirectory(AppDomain.CurrentDomain.BaseDirectory + "我的文件夹");
-            }
-            catch
-            {
-                directoryTreeView1.LoadDirectory(AppDomain.CurrentDomain.BaseDirectory + "我的文件夹");
-            }
-
-
-            #endregion
-
-            fileListView1.path = directoryTreeView1.selpath;
-            fileListView1.recylebin = recyleBinDirecoty;
-            
-            LoadIniFiles(); 
+            LoadIniFiles();
         }
 
-        private void FormMain_FormClosed(object sender, FormClosedEventArgs e)
+        private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
         {
-            //htmEdit1.CheckFileSave();
-            SaveIniFiles();
-            directoryTreeView1.SaveXml(treeViewXml);
+            Close1();
 
+        }
+ 
+        private void Close1()
+        {
+            SaveIniFiles();
+            RemoveNotifyIcon();
+  
+            Environment.Exit(1);
+        }
+        private void RemoveNotifyIcon()
+        {
             if (notifyIcon1 != null)
             {
                 notifyIcon1.Visible = false;
                 notifyIcon1.Dispose();
+            }
+        }
+
+        /// <summary>
+        ///AppDomain.CurrentDomain.BaseDirectory + "Data";
+        /// </summary>
+        public string path
+        {
+            get
+            {
+                return ini.ReadString("DataBase", "Path", "Data");
             }
         }
 
@@ -90,46 +71,75 @@ namespace htmExplorer
                 Win32API.SetProcessWorkingSetSize(System.Diagnostics.Process.GetCurrentProcess().Handle, -1, -1);
         }
 
-        private void Initialize()
+        private void InitializeData()
         {
-            //D:\Administrator\Desktop\我的文件夹\这台电脑
-            myPcDirecotry = workSpacePath + "\\这台电脑";
-            recyleBinDirecoty = workSpacePath + "\\回收站";
-            win32AddressBar1.workpath = myPcDirecotry;
+            try
+            {
+                Directory.CreateDirectory(path);
+            }
+            catch 
+            {
+                string s = "致命错误:\r\n\t创建数据库文件夹失败！\"" + path + "\" 机器中没有那个路径\r\n" +
+                           "\r\n\r\n\r\n解决方法 \r\n" +
+                           "\t方法1: 请手动删除 Htm Explorer.ini 中的[DataBase]的 Path= 这行\r\n" +
+                           "\t方法2: 设置[DataBase] Path=你的路径 \r\n\r\nINI路径：\r\n\t" + IniFile.AppIniName;
 
-            if (!Directory.Exists(workSpacePath))
-                Directory.CreateDirectory(workSpacePath);
+                ExceptDialog.Show(s);
+                RemoveNotifyIcon();
+                Environment.Exit(1);
+            }
 
-            if (!Directory.Exists(myPcDirecotry))
-                Directory.CreateDirectory(myPcDirecotry);
+            //win32AddressBar1
+            win32AddressBar1.treeView1 = tree1.treeView1;
 
-            if (!Directory.Exists(recyleBinDirecoty))
-                Directory.CreateDirectory(recyleBinDirecoty);
+            //tree
+            tree1.rootpath = path;
+            tree1.LoadData(path, false);
 
-            treeViewXml = workSpacePath + "\\Content.db";
-            searchBox1.IndexFile = workSpacePath + "\\Index.db";
+            //file
+            fileList1.path = tree1.filename;
+            fileList1.recylebin = tree1.recyclepath;
+
+            //doc
+            documentView1.filelistview1 = fileList1;
+
+            //searchBox1
+            searchBox1.IndexFile = path + "\\Index.db";
             if (!File.Exists(searchBox1.IndexFile))
                 File.Create(searchBox1.IndexFile);
 
+            //更新版本号
+            System.Diagnostics.FileVersionInfo fi = 
+                System.Diagnostics.FileVersionInfo.GetVersionInfo(Application.ExecutablePath);
+
+            File.WriteAllText("version.ini", "[update]\r\n" +
+                                             "version=" + fi.FileBuildPart.ToString()
+                              );
         }
 
-        
+        protected override void OnResizeBegin(EventArgs e)
+        {
+            SuspendLayout();
+            base.OnResizeBegin(e);
+        }
+        protected override void OnResizeEnd(EventArgs e)
+        {
+            ResumeLayout();
+            base.OnResizeEnd(e);
+        }
         #endregion
 
         #region directoryTreeView1
         private void directoryTreeView1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string path = directoryTreeView1.selpath;
-         
-            //customForm1.Caption =  directoryTreeView1.selNodeText;
-            if (Directory.Exists(path))
-            {
-                fileListView1.LoadFilesFromDirecotry(path);
-                win32AddressBar1.DisposeButtons();
-                win32AddressBar1.CreateButtons(path);
-                win32AddressBar1.AddPathToListBox(path);
-            }
-            toolStripStatusLabel1.Text = string.Format("     {0} 个文件     ", fileListView1.listView1.Items.Count); 
+            fileList1.LoadFiles(tree1.filename);
+
+            toolStripStatusLabel1.Text = tree1.treeView1.SelectedNode.FullPath;
+
+            string s = "";
+            if (fileList1.listView1.SelectedItems.Count > 0)
+                s = fileList1.listView1.SelectedItems.Count.ToString();
+            toolStripStatusLabel2.Text = string.Format(" {0} 个文件  {1}", fileList1.listView1.Items.Count, s); 
         }
 
         #endregion
@@ -137,28 +147,30 @@ namespace htmExplorer
         #region fileListView1
         private void fileListView1_OpenWithNewTab(object sender, EventArgs e)
         {
-            documentView1.OpenDocumentWithNewTab(fileListView1.selfilename);
-          
+            documentView1.OpenDocumentWithNewTab(fileList1.selfilename);
         }
 
-        private void fileListView1_ItemClick(object sender, MouseEventArgs e)
+        private void listViewItemClick()
         {
             //选中的文件路径存在 打开
             //选中文件数量==1 打开
             //选中的文件是不是当前已经打开的文件， 打开
 
-            int SelCount = fileListView1.SelItemsCount;
+            int SelCount = fileList1.SelItemsCount;
 
-            if (File.Exists(fileListView1.selfilename)
+            if (File.Exists(fileList1.selfilename)
                 && SelCount == 1
-                && fileListView1.selfilename != documentView1.Filename)
+                && fileList1.selfilename != documentView1.Filename)
             {
-                documentView1.OpenDocument(fileListView1.selfilename);
+                documentView1.OpenDocument(fileList1.selfilename);
                 documentView1.document1.ShowEditor();
 
                 if (searchBox1.Text != "" && searchBox1.Text != searchBox1.DisplayText)
                     documentView1.document1.htmEdit1.Search(searchBox1.Text, true, false, false);
             }
+
+            if (tree1.treeView1.SelectedNode != null)
+                toolStripStatusLabel1.Text = tree1.treeView1.SelectedNode.FullPath + "\\" + Path.GetFileName(fileList1.selfilename);
 
             string s = "";
             if (SelCount == 1)
@@ -167,13 +179,17 @@ namespace htmExplorer
             if (SelCount > 1)
                 s = string.Format("已选择 {0} 个 ", SelCount);
 
-            toolStripStatusLabel1.Text = string.Format("     {0} 个文件   {1}", fileListView1.listView1.Items.Count, s);
-            
+            toolStripStatusLabel2.Text = string.Format(" {0} 个文件  {1}", fileList1.listView1.Items.Count, s);
+        }
+        private void fileListView1_ItemClick(object sender, EventArgs e)
+        {
+            listViewItemClick();
+
         }
 
         private void fileListView1_ItemActive(object sender, EventArgs e)
         {
-            fileListView1_ItemClick(null, null);
+            listViewItemClick();
             documentView1.document1.ToggleReadMode();
         }
 
@@ -184,9 +200,9 @@ namespace htmExplorer
 
         private void 新建_Click(object sender, EventArgs e)
         {
-            string s = FileCore.NewFileName(fileListView1.path + "\\新建HTML文档.htm");
+            string s = FileCore.NewName(fileList1.path + "\\新建HTML文档.htm");
             documentView1.NewDocument(s);
-            fileListView1.AddItem(s);
+            fileList1.AddItem(s);
         }
 
         private void 重命名_Click(object sender, EventArgs e)
@@ -204,44 +220,51 @@ namespace htmExplorer
             if (searchBox1.Text.Trim() == "" || searchBox1.Text == searchBox1.DisplayText)
                 return;
 
-            fileListView1.listView1.Sorting = SortOrder.None;
-            directoryTreeView1.SelectMainNode();
+            fileList1.listView1.Sorting = SortOrder.None;
+            tree1.SelectMainNode();
 
             //关键字搜
             HtmlConverter h = new HtmlConverter();
 
-            fileListView1.listView1.Items.Clear();
+            fileList1.listView1.Items.Clear();
 
-            string[] filelist = Directory.GetFiles(workSpacePath, "*.htm", SearchOption.AllDirectories);
+            string[] files = Directory.GetFiles(path, "*.htm", SearchOption.AllDirectories);
 
-            win32AddressBar1.ProgressBarMax = filelist.Length;
-            fileListView1.listView1.Items.Clear();
-            for (int i = 0; i < filelist.Length; i++)
+            win32AddressBar1.ProgressBarMax = files.Length;
+            fileList1.listView1.Items.Clear();
+            for (int i = 0; i < files.Length; i++)
             {
                 Application.DoEvents();
 
                 //列出所有HTM文件
                 if (searchBox1.Text.Trim() == "*")
                 {
-                    fileListView1.AddSearchItem(filelist[i]);
+                    fileList1.AddSearchItem(files[i]);
                 }
                 else
                 {
                     //文件名搜索
                     if (searchAll1.Checked || searchFileName1.Checked)
                     {
-                        if (Path.GetFileName(filelist[i]).Contains(searchBox1.Text.ToUpper()))
-                            fileListView1.AddSearchItem(filelist[i]);
+                        if (Path.GetFileName(files[i]).Contains(searchBox1.Text.ToUpper()))
+                        {
+                            if (files[i].ToLower().IndexOf("_files")==-1 &&
+                                files[i].ToLower().IndexOf("_attachments") == -1
+                                )
+                            {
+                                fileList1.AddSearchItem(files[i]);
+                            }
+                        }
                     }
 
                     //关键字搜索
                     if (searchAll1.Checked || searchKeyWord1.Checked)
                     {
-                        string s = File.ReadAllText(filelist[i], Encoding.UTF8);
+                        string s = File.ReadAllText(files[i], Encoding.UTF8);
                         s = h.HtmlToText(s).ToUpper();
 
                         if (s.Contains(searchBox1.Text.ToUpper()))
-                            fileListView1.AddSearchItem(filelist[i]);
+                            fileList1.AddSearchItem(files[i]);
                     }
                 }
 
@@ -254,7 +277,7 @@ namespace htmExplorer
                 }
 
                 win32AddressBar1.ProgressBarValue = i;
-                toolStripStatusLabel1.Text = string.Format("{0} 个文件   ", fileListView1.listView1.Items.Count);
+                toolStripStatusLabel2.Text = string.Format("{0} 个文件   ", fileList1.listView1.Items.Count);
             }
 
             win32AddressBar1.ProgressBarValue = 0;
@@ -263,63 +286,46 @@ namespace htmExplorer
 
         #endregion
 
-        #region win32AddressBar1 
-
-        private void win32AddressBar1_ButtonsClick(object sender, EventArgs e)
-        {
-            string path = win32AddressBar1.btnsPath;
-            if (Directory.Exists(path))
-            {
-                DirectoryInfo di = new DirectoryInfo(workSpacePath+"\\这台电脑");
-
-                path = path.Remove(0, di.Parent.FullName.Length + 1);
-                if (path.EndsWith("\\"))
-                    path = path.Remove(path.Length - 1, 1);
-
-                directoryTreeView1.SelectByNodeFullPath(path);
-            }
-        }
-
-        private void win32AddressBar1_DropDownClosed(object sender, EventArgs e)
-        {
-            string path = win32AddressBar1.currentPath;
-            if (Directory.Exists(path))
-            {
-                DirectoryInfo di = new DirectoryInfo(workSpacePath + "\\这台电脑");
-
-                path = path.Remove(0, di.Parent.FullName.Length + 1);
-                if (path.EndsWith("\\"))
-                    path = path.Remove(path.Length - 1, 1);
-
-                directoryTreeView1.SelectByNodeFullPath(path);
-            }
-        }
-
-        private void win32AddressBar1_BackClick(object sender, EventArgs e)
-        {
-            string path = win32AddressBar1.currentPath;
-            if (Directory.Exists(path))
-            {
-                DirectoryInfo di = new DirectoryInfo(workSpacePath + "\\这台电脑");
-
-                path = path.Remove(0, di.Parent.FullName.Length + 1);
-                if (path.EndsWith("\\"))
-                    path = path.Remove(path.Length - 1, 1);
-
-                directoryTreeView1.SelectByNodeFullPath(path);
-            }
-        }
-        #endregion
-
         #region splitContainer
         private void splitContainer2_SplitterMoved(object sender, SplitterEventArgs e)
         {
             WinForm.RemoveFocus(this);
         }
-  
+        private void showTree1_Click(object sender, EventArgs e)
+        {
+            splitContainer2.Panel1Collapsed =
+                !splitContainer2.Panel1Collapsed;
+        }
+
+        private void ThreeLineClick(bool chk)
+        {
+            if (chk)
+            {
+                splitContainer2.Orientation = Orientation.Vertical;
+                splitContainer2.Cursor = Cursors.SizeWE;
+            }
+            else
+            {
+                splitContainer2.Orientation = Orientation.Horizontal;
+                splitContainer2.Cursor = Cursors.SizeNS;
+            }
+            //threeLine1.Checked = chk;
+        }
+
+ 
+        private void threeLine1_Click(object sender, EventArgs e)
+        {
+             ThreeLineClick(threeLine1.Checked);
+        } 
+
         #endregion
 
         #region  菜单
+
+        private void showStatus1_Click(object sender, EventArgs e)
+        {
+            statusStrip1.Visible = showStatus1.Checked;
+        }
 
         private void 最大化显示_Click(object sender, EventArgs e)
         {
@@ -335,13 +341,15 @@ namespace htmExplorer
 
         private void 退出_Click(object sender, EventArgs e)
         {
-            Close();
+            Close1();
+
         }
+
 
         private void 备份_Click(object sender, EventArgs e)
         {
             BackupForm backup = new BackupForm();
-            backup.textBox2.Text = workSpacePath;
+            backup.textBox2.Text = path;
             backup.ShowDialog();
         }
 
@@ -353,11 +361,11 @@ namespace htmExplorer
         private void 导入_Click(object sender, EventArgs e)
         {
             ImportForm imt = new ImportForm();
-            imt.textBox2.Text = directoryTreeView1.selpath;
+            imt.textBox2.Text = tree1.filename;
             if (imt.ShowDialog() == DialogResult.OK)
             {
-                directoryTreeView1.SelNodeLoadFromDirectory(imt.textBox2.Text);
-                fileListView1.LoadFilesFromDirecotry(imt.textBox2.Text);
+                tree1.SelNodeLoadFromDirectory(imt.textBox2.Text);
+                fileList1.LoadFiles(imt.textBox2.Text);
             }
 
         }
@@ -391,84 +399,76 @@ namespace htmExplorer
         /// <summary>
         /// 保存和读取splitContainer1.SplitterDistance
         /// </summary>
-        private IniFile INI = new IniFile(IniFile.AppIniName);
+        private IniFile ini = new IniFile(IniFile.AppIniName);
         private void LoadIniFiles()
         {
-            INI.ReadWindowStateIni(this);
-            splitContainer1.SplitterDistance = INI.ReadInteger("splitContainer", "splitContainer1.SplitterDistance", splitContainer1.SplitterDistance);
-            splitContainer2.SplitterDistance = INI.ReadInteger("splitContainer", "splitContainer2.SplitterDistance", splitContainer2.SplitterDistance);
-            splitContainer3.SplitterDistance = INI.ReadInteger("splitContainer", "splitContainer3.SplitterDistance", splitContainer3.SplitterDistance);
- 
-            directoryTreeView1_SelectedIndexChanged(new object(),new EventArgs());
-           
-            string path = INI.ReadString("TreeView", "最后选择", directoryTreeView1.selpath);
-            directoryTreeView1.selpath = path;
+            ini.ReadWindowStateIni(this);
 
-            if (path.IndexOf(workSpacePath) != -1)
-            {
-                win32AddressBar1.DisposeButtons();
-                win32AddressBar1.CreateButtons(path);
-                fileListView1.LoadFilesFromDirecotry(path);
+            //splitContainer1
+            splitContainer1.SplitterDistance = ini.ReadInteger("splitContainer", "splitContainer1.SplitterDistance", splitContainer1.SplitterDistance);
+            splitContainer2.SplitterDistance = ini.ReadInteger("splitContainer", "splitContainer2.SplitterDistance", splitContainer2.SplitterDistance);
+            splitContainer3.SplitterDistance = ini.ReadInteger("splitContainer", "splitContainer3.SplitterDistance", splitContainer3.SplitterDistance);
 
-                int index = INI.ReadInteger("ListView", "SelectedIndex", 0);
-                fileListView1.Select(index);
-                fileListView1_ItemClick(null, null);
-            }
-            else
-            {
-                directoryTreeView1.SelectMainNode();
-            }
+            bool bchk = ini.ReadBool("splitContainer", "splitContainer2.Orientation.Vertical", true);
+            threeLine1.Checked = bchk;
+            ThreeLineClick(bchk);
+
+            //showStatus1
+            showStatus1.Checked = ini.ReadBool("MenuStrip", "showStatus1.Checked", true);
+            statusStrip1.Visible = showStatus1.Checked;
+
+
+            //treeview1
+            string path = ini.ReadString("TreeNode", "LastSel", "");
+            tree1.SelectByNodeFullPath(path);
+
+            bool IsExpanded = ini.ReadBool("TreeNode", "IsExpanded", false);
+            if (IsExpanded == true)
+                tree1.treeView1.SelectedNode.Expand();
+
+            //listview
+            int index = ini.ReadInteger("ListView", "SelectedIndex", 0);
+            fileList1.Select(index);
+            listViewItemClick();
           }
 
  
         private void SaveIniFiles()
         {
-            INI.SaveWindowStateIni(this);
+            ini.SaveWindowStateIni(this);
 
-            if (WindowState!=FormWindowState.Minimized && splitContainer1.SplitterDistance > splitContainer2.SplitterDistance)
+            if (WindowState != FormWindowState.Minimized &&
+                splitContainer1.SplitterDistance > splitContainer2.SplitterDistance)
             {
-                INI.WriteInteger("splitContainer", "splitContainer1.SplitterDistance", splitContainer1.SplitterDistance);
-                INI.WriteInteger("splitContainer", "splitContainer2.SplitterDistance", splitContainer2.SplitterDistance);
-                INI.WriteInteger("splitContainer", "splitContainer3.SplitterDistance", splitContainer3.SplitterDistance);
+                ini.WriteInteger("splitContainer", "splitContainer1.SplitterDistance", splitContainer1.SplitterDistance);
+                ini.WriteInteger("splitContainer", "splitContainer2.SplitterDistance", splitContainer2.SplitterDistance);
+                ini.WriteInteger("splitContainer", "splitContainer3.SplitterDistance", splitContainer3.SplitterDistance);
+               
             }
 
-            INI.WriteInteger("ListView", "SelectedIndex", fileListView1.SelectedIndex());
-          
-            if(directoryTreeView1.selpath!="")
-                INI.WriteString("TreeView", "最后选择", directoryTreeView1.selpath);
+            if (splitContainer2.Orientation == Orientation.Vertical)
+                ini.WriteBool("splitContainer", "splitContainer2.Orientation.Vertical", true);
+            else
+                ini.WriteBool("splitContainer", "splitContainer2.Orientation.Vertical", false);
 
+
+
+            ini.WriteBool("MenuStrip", "showStatus1.Checked", showStatus1.Checked);
+
+            //tree
+            if (tree1.treeView1.SelectedNode != null)
+            {
+                ini.WriteString("TreeNode", "LastSel", tree1.treeView1.SelectedNode.FullPath);
+                ini.WriteBool("TreeNode", "IsExpanded", tree1.treeView1.SelectedNode.IsExpanded);
+            }
+            
+            //listview
+            ini.WriteInteger("ListView", "SelectedIndex", fileList1.SelectedIndex());
          }
 
         #endregion
 
-        #region 变量
-        
-      
  
-        /// <summary>
-        /// 所有HTML文件都存放在这个目录下
-        /// 一般为和程序相对路径  
-        /// D:\Administrator\Desktop\我的文件夹
-        /// </summary>
-        string workSpacePath = "";
-       
-        /// <summary>
-        /// D:\Administrator\Desktop\我的文件夹\这台电脑
-        /// </summary>
-        string myPcDirecotry ="";
-
-        /// <summary>
-        /// 回收站所存放的目录
-        /// D:\Administrator\Desktop\我的文件夹\回收站
-        /// </summary>
-        string recyleBinDirecoty =""; 
-
-        /// <summary>
-        /// 用来保存TREEVIEW的展开和关闭的状态 和最后一次选中的节点的位置
-        /// ExplorerTreeView.Xml 文件不存在 则用程序 重新加载目录
-        /// </summary>
-        string treeViewXml ="";
-        private string _htm = ".htm";
-        #endregion
     }
+
 }

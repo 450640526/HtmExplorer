@@ -75,7 +75,7 @@ namespace System.IO
         /// </summary>
         /// <param name="filename">文件的完整名称</param>
         /// <returns></returns>
-        public static string NewFileName(string filename)
+        public static string NewName(string filename)
         {
             int j = 2;
             if (File.Exists(filename))
