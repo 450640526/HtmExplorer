@@ -96,6 +96,8 @@ namespace System
             g.FillRectangle(new SolidBrush(c), r);
         }
 
+
+ 
         public void DrawSelectedTab(Graphics g)
         {
             if (tabControl1.SelectedIndex > -1)

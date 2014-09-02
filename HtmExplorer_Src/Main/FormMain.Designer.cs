@@ -514,7 +514,7 @@
             this.fileList1.Location = new System.Drawing.Point(3, 3);
             this.fileList1.Name = "fileList1";
             this.fileList1.selfilename = "";
-            this.fileList1.Size = new System.Drawing.Size(251, 329);
+            this.fileList1.Size = new System.Drawing.Size(253, 329);
             this.fileList1.TabIndex = 0;
             this.fileList1.TabStop = false;
             this.fileList1.ItemClick += new System.EventHandler(this.fileListView1_ItemClick);

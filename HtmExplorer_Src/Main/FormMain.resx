@@ -124,14 +124,14 @@
     <value>21, 16</value>
   </metadata>
   <metadata name="imageList1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>873, 16</value>
+    <value>17, 54</value>
   </metadata>
   <data name="imageList1.ImageStream" mimetype="application/x-microsoft.net.object.binary.base64">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAACY
-        CQAAAk1TRnQBSQFMAgEBAgEAAdgBDwHYAQ8BEAEAARABAAT/ASEBAAj/AUIBTQE2BwABNgMAASgDAAFA
+        CQAAAk1TRnQBSQFMAgEBAgEAAfABDwHwAQ8BEAEAARABAAT/ASEBAAj/AUIBTQE2BwABNgMAASgDAAFA
         AwABEAMAAQEBAAEgBgABEP8AEwADiwH/A4oB/wOJAf8DiAH/A4YB/wOFAf8DhAH/A4MB/wOCAf8BvgGO
         AQAB/wHqAZcBAAH/AeoBlwEAAf8B6gGXAQAB/wHqAZcBAAH/AeoBlwEAAf8BvAGLAQAB/wGoAYwBAAH/
         AaQBiQEAAf8BoQGGAQAB/wGeAYQBAAH/AZkBgAEAAf8BlQIAAf8BlAIAAf8BkgIAAf8BjwIAAf8BjgIA
@@ -182,7 +182,7 @@
     <value>752, 16</value>
   </metadata>
   <metadata name="menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>991, 20</value>
+    <value>132, 54</value>
   </metadata>
   <metadata name="notifyIcon1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>212, 16</value>

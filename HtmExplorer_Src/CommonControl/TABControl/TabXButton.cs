@@ -45,15 +45,22 @@ namespace System
             {
                 Pen pen1 = new Pen(new SolidBrush(Color.Red), 1);
                 Brush brush1 = new SolidBrush(SystemColors.Control);
+              
+            
 
                 if (i == tabControl1.SelectedIndex)
-                    brush1 = new SolidBrush(Color.FromArgb(0, 122, 204));
+                    brush1 = new SolidBrush(Color.FromArgb(0, 122, 204));//
 
-                Rectangle r = XRect(i);
-                r.Inflate(-2, -2);
-                DrawXButton(g, r, SystemColors.Control);
+                //else
+                //{
+                //    Rectangle r = XRect(i);
+                //    r.Inflate(-2, -2);
+                //    DrawXButton(g, r, Color.Gray);
+                //}
 
             }
+
+
         }
 
 

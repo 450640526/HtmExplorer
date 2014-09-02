@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DirectoryTreeView));
             System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("", 1, 1);
             System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("文档", 3, 3);
@@ -38,29 +37,29 @@
             System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("回收站", 5, 5);
             System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("", 1, 1);
             System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("", 1, 1);
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.arrowImageList = new System.Windows.Forms.ImageList(this.components);
+            this.文档contextMenuStrip = new System.Windows.Forms.ClassicContextMenuStrip();
+            this.新建文件夹ToolStrip = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
+            this.在文件资源管理器中打开ToolStrip = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.属性PToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.这台电脑contextMenuStrip1 = new System.Windows.Forms.ClassicContextMenuStrip();
+            this.toolStripMenuItem9 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripMenuItem10 = new System.Windows.Forms.ToolStripMenuItem();
+            this.回收站contextMenuStrip = new System.Windows.Forms.ClassicContextMenuStrip();
+            this.清空回收站MenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem7 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
+            this.imageList1 = new System.Windows.Forms.ImageList();
+            this.arrowImageList = new System.Windows.Forms.ImageList();
             this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
             this.minusPictureBox1 = new System.Windows.Forms.PictureBox();
             this.plusPictureBox1 = new System.Windows.Forms.PictureBox();
             this.minusPictureBox2 = new System.Windows.Forms.PictureBox();
             this.plusPictureBox2 = new System.Windows.Forms.PictureBox();
             this.textBox1 = new System.Windows.Forms.WinTextBox();
-            this.文档contextMenuStrip = new System.Windows.Forms.ClassicContextMenuStrip(this.components);
-            this.新建文件夹ToolStrip = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
-            this.在文件资源管理器中打开ToolStrip = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
-            this.属性PToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.这台电脑contextMenuStrip1 = new System.Windows.Forms.ClassicContextMenuStrip(this.components);
-            this.toolStripMenuItem9 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripMenuItem10 = new System.Windows.Forms.ToolStripMenuItem();
-            this.回收站contextMenuStrip = new System.Windows.Forms.ClassicContextMenuStrip(this.components);
-            this.清空回收站MenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem7 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
-            this.文件夹contextMenuStrip = new System.Windows.Forms.ClassicContextMenuStrip(this.components);
+            this.文件夹contextMenuStrip = new System.Windows.Forms.ClassicContextMenuStrip();
             this.在文件资源管理器中打开ToolStrip1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripSeparator();
             this.剪切ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -77,106 +76,20 @@
             this.newfolder1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
             this.属性RToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.空白contextMenuStrip = new System.Windows.Forms.ClassicContextMenuStrip(this.components);
+            this.空白contextMenuStrip = new System.Windows.Forms.ClassicContextMenuStrip();
             this.刷新MenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.treeView1 = new System.Windows.Forms.TreeViewEx();
+            this.文档contextMenuStrip.SuspendLayout();
+            this.这台电脑contextMenuStrip1.SuspendLayout();
+            this.回收站contextMenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.minusPictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.plusPictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.minusPictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.plusPictureBox2)).BeginInit();
-            this.文档contextMenuStrip.SuspendLayout();
-            this.这台电脑contextMenuStrip1.SuspendLayout();
-            this.回收站contextMenuStrip.SuspendLayout();
             this.文件夹contextMenuStrip.SuspendLayout();
             this.空白contextMenuStrip.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // imageList1
-            // 
-            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList1.Images.SetKeyName(0, "folder.png");
-            this.imageList1.Images.SetKeyName(1, "空.png");
-            this.imageList1.Images.SetKeyName(2, "我的电脑.png");
-            this.imageList1.Images.SetKeyName(3, "文档.png");
-            this.imageList1.Images.SetKeyName(4, "桌面1.png");
-            this.imageList1.Images.SetKeyName(5, "null.ico");
-            this.imageList1.Images.SetKeyName(6, "回收站.png");
-            this.imageList1.Images.SetKeyName(7, "txt1.png");
-            // 
-            // arrowImageList
-            // 
-            this.arrowImageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("arrowImageList.ImageStream")));
-            this.arrowImageList.TransparentColor = System.Drawing.Color.Transparent;
-            this.arrowImageList.Images.SetKeyName(0, "1.png");
-            this.arrowImageList.Images.SetKeyName(1, "2.png");
-            this.arrowImageList.Images.SetKeyName(2, "3.png");
-            this.arrowImageList.Images.SetKeyName(3, "4.png");
-            // 
-            // fileSystemWatcher1
-            // 
-            this.fileSystemWatcher1.EnableRaisingEvents = true;
-            this.fileSystemWatcher1.IncludeSubdirectories = true;
-            this.fileSystemWatcher1.SynchronizingObject = this;
-            this.fileSystemWatcher1.Created += new System.IO.FileSystemEventHandler(this.fileSystemWatcher1_Changed);
-            this.fileSystemWatcher1.Deleted += new System.IO.FileSystemEventHandler(this.fileSystemWatcher1_Changed);
-            // 
-            // minusPictureBox1
-            // 
-            this.minusPictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("minusPictureBox1.Image")));
-            this.minusPictureBox1.Location = new System.Drawing.Point(168, 42);
-            this.minusPictureBox1.Name = "minusPictureBox1";
-            this.minusPictureBox1.Size = new System.Drawing.Size(9, 9);
-            this.minusPictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.minusPictureBox1.TabIndex = 8;
-            this.minusPictureBox1.TabStop = false;
-            this.minusPictureBox1.Visible = false;
-            // 
-            // plusPictureBox1
-            // 
-            this.plusPictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("plusPictureBox1.Image")));
-            this.plusPictureBox1.Location = new System.Drawing.Point(168, 27);
-            this.plusPictureBox1.Name = "plusPictureBox1";
-            this.plusPictureBox1.Size = new System.Drawing.Size(9, 9);
-            this.plusPictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.plusPictureBox1.TabIndex = 9;
-            this.plusPictureBox1.TabStop = false;
-            this.plusPictureBox1.Visible = false;
-            // 
-            // minusPictureBox2
-            // 
-            this.minusPictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("minusPictureBox2.Image")));
-            this.minusPictureBox2.Location = new System.Drawing.Point(194, 42);
-            this.minusPictureBox2.Name = "minusPictureBox2";
-            this.minusPictureBox2.Size = new System.Drawing.Size(9, 9);
-            this.minusPictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.minusPictureBox2.TabIndex = 8;
-            this.minusPictureBox2.TabStop = false;
-            this.minusPictureBox2.Visible = false;
-            // 
-            // plusPictureBox2
-            // 
-            this.plusPictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("plusPictureBox2.Image")));
-            this.plusPictureBox2.Location = new System.Drawing.Point(194, 27);
-            this.plusPictureBox2.Name = "plusPictureBox2";
-            this.plusPictureBox2.Size = new System.Drawing.Size(9, 9);
-            this.plusPictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.plusPictureBox2.TabIndex = 8;
-            this.plusPictureBox2.TabStop = false;
-            this.plusPictureBox2.Visible = false;
-            // 
-            // textBox1
-            // 
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox1.Font = new System.Drawing.Font("微软雅黑", 9.7F);
-            this.textBox1.Location = new System.Drawing.Point(117, 143);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 25);
-            this.textBox1.TabIndex = 10;
-            this.textBox1.Visible = false;
-            this.textBox1._LostFocus += new System.Windows.Forms.WinTextBox.EventHandler(this.winTextBox1_LostFocus);
-            this.textBox1.TextChanged += new System.EventHandler(this.winTextBox1_TextChanged);
             // 
             // 文档contextMenuStrip
             // 
@@ -276,6 +189,92 @@
             this.toolStripMenuItem6.Size = new System.Drawing.Size(224, 22);
             this.toolStripMenuItem6.Text = "在文件资源管理器中打开(&X)";
             this.toolStripMenuItem6.Click += new System.EventHandler(this.在文件资源管理器中打开_Click);
+            // 
+            // imageList1
+            // 
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList1.Images.SetKeyName(0, "folder.png");
+            this.imageList1.Images.SetKeyName(1, "空.png");
+            this.imageList1.Images.SetKeyName(2, "我的电脑.png");
+            this.imageList1.Images.SetKeyName(3, "文档.png");
+            this.imageList1.Images.SetKeyName(4, "桌面1.png");
+            this.imageList1.Images.SetKeyName(5, "null.ico");
+            this.imageList1.Images.SetKeyName(6, "回收站.png");
+            this.imageList1.Images.SetKeyName(7, "txt1.png");
+            // 
+            // arrowImageList
+            // 
+            this.arrowImageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("arrowImageList.ImageStream")));
+            this.arrowImageList.TransparentColor = System.Drawing.Color.Transparent;
+            this.arrowImageList.Images.SetKeyName(0, "1.png");
+            this.arrowImageList.Images.SetKeyName(1, "2.png");
+            this.arrowImageList.Images.SetKeyName(2, "3.png");
+            this.arrowImageList.Images.SetKeyName(3, "4.png");
+            // 
+            // fileSystemWatcher1
+            // 
+            this.fileSystemWatcher1.EnableRaisingEvents = true;
+            this.fileSystemWatcher1.IncludeSubdirectories = true;
+            this.fileSystemWatcher1.SynchronizingObject = this;
+            this.fileSystemWatcher1.Created += new System.IO.FileSystemEventHandler(this.fileSystemWatcher1_Changed);
+            this.fileSystemWatcher1.Deleted += new System.IO.FileSystemEventHandler(this.fileSystemWatcher1_Changed);
+            // 
+            // minusPictureBox1
+            // 
+            this.minusPictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("minusPictureBox1.Image")));
+            this.minusPictureBox1.Location = new System.Drawing.Point(168, 42);
+            this.minusPictureBox1.Name = "minusPictureBox1";
+            this.minusPictureBox1.Size = new System.Drawing.Size(9, 9);
+            this.minusPictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.minusPictureBox1.TabIndex = 8;
+            this.minusPictureBox1.TabStop = false;
+            this.minusPictureBox1.Visible = false;
+            // 
+            // plusPictureBox1
+            // 
+            this.plusPictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("plusPictureBox1.Image")));
+            this.plusPictureBox1.Location = new System.Drawing.Point(168, 27);
+            this.plusPictureBox1.Name = "plusPictureBox1";
+            this.plusPictureBox1.Size = new System.Drawing.Size(9, 9);
+            this.plusPictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.plusPictureBox1.TabIndex = 9;
+            this.plusPictureBox1.TabStop = false;
+            this.plusPictureBox1.Visible = false;
+            // 
+            // minusPictureBox2
+            // 
+            this.minusPictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("minusPictureBox2.Image")));
+            this.minusPictureBox2.Location = new System.Drawing.Point(194, 42);
+            this.minusPictureBox2.Name = "minusPictureBox2";
+            this.minusPictureBox2.Size = new System.Drawing.Size(9, 9);
+            this.minusPictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.minusPictureBox2.TabIndex = 8;
+            this.minusPictureBox2.TabStop = false;
+            this.minusPictureBox2.Visible = false;
+            // 
+            // plusPictureBox2
+            // 
+            this.plusPictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("plusPictureBox2.Image")));
+            this.plusPictureBox2.Location = new System.Drawing.Point(194, 27);
+            this.plusPictureBox2.Name = "plusPictureBox2";
+            this.plusPictureBox2.Size = new System.Drawing.Size(9, 9);
+            this.plusPictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.plusPictureBox2.TabIndex = 8;
+            this.plusPictureBox2.TabStop = false;
+            this.plusPictureBox2.Visible = false;
+            // 
+            // textBox1
+            // 
+            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBox1.Font = new System.Drawing.Font("微软雅黑", 9.7F);
+            this.textBox1.Location = new System.Drawing.Point(117, 143);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 25);
+            this.textBox1.TabIndex = 10;
+            this.textBox1.Visible = false;
+            this.textBox1._LostFocus += new System.Windows.Forms.WinTextBox.EventHandler(this.winTextBox1_LostFocus);
+            this.textBox1.TextChanged += new System.EventHandler(this.winTextBox1_TextChanged);
             // 
             // 文件夹contextMenuStrip
             // 
@@ -486,6 +485,7 @@
             this.treeView1.Size = new System.Drawing.Size(307, 325);
             this.treeView1.TabIndex = 4;
             this.treeView1.WMScroll += new System.Windows.Forms.TreeViewEx.EventHandler(this.treeView1_WMScroll);
+            this.treeView1.AfterExpand += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterExpand);
             this.treeView1.DrawNode += new System.Windows.Forms.DrawTreeNodeEventHandler(this.treeView1_DrawNode);
             this.treeView1.ItemDrag += new System.Windows.Forms.ItemDragEventHandler(this.treeView1_ItemDrag);
             this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
@@ -509,14 +509,14 @@
             this.Name = "DirectoryTreeView";
             this.Size = new System.Drawing.Size(307, 325);
             this.Load += new System.EventHandler(this.DirectoryTreeView_Load);
+            this.文档contextMenuStrip.ResumeLayout(false);
+            this.这台电脑contextMenuStrip1.ResumeLayout(false);
+            this.回收站contextMenuStrip.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.minusPictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.plusPictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.minusPictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.plusPictureBox2)).EndInit();
-            this.文档contextMenuStrip.ResumeLayout(false);
-            this.这台电脑contextMenuStrip1.ResumeLayout(false);
-            this.回收站contextMenuStrip.ResumeLayout(false);
             this.文件夹contextMenuStrip.ResumeLayout(false);
             this.空白contextMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);

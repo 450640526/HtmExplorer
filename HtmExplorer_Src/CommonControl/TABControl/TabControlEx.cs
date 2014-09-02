@@ -60,9 +60,23 @@ namespace System.Windows.Forms
             tdraw.DrawPageGround(e.Graphics);
 
             tdraw.DrawAllTabText(e.Graphics);
-            tdraw.DrawSelectedTab(e.Graphics);
+            drawSelectedTab(e.Graphics);
+            //tdraw.DrawSelectedTab(e.Graphics);
             xbtn.DrawAllXButton(e.Graphics);
         }
+
+
+        private void drawSelectedTab(Graphics g)
+        {
+            tdraw.DrawSelectedTab(g);
+            if (this.SelectedIndex > -1)
+            {
+                Rectangle r = xbtn.XRect(SelectedIndex);
+                r.Inflate(-2, -2);
+                xbtn.DrawXButton(g, r, Color.White);
+            }
+        }
+
 
         private int GetTabPageIndex(Point pt)
         {
@@ -107,7 +121,7 @@ namespace System.Windows.Forms
                     xbtn.DrawXButton(this.CreateGraphics(), r, Color.Red);
                 }
                 else
-                    xbtn.DrawXButton(this.CreateGraphics(), r, MainBackColor);
+                    xbtn.DrawXButton(this.CreateGraphics(), r, Color.White/*MainBackColor*/);
             }
 
             

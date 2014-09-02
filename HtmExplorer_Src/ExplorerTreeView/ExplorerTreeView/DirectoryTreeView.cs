@@ -204,36 +204,9 @@ namespace System.Windows.Forms
 
 
         //为选中的节点加载目录
-        public void SelNodeLoadFromDirectory(string dirpath)
+        public void SelNodeLoadFromDirectory(string path)
         {
-            //try
-            //{
-            //    treeView1.BeginUpdate();
-            //    TreeNode selnode = treeView1.SelectedNode;
-
-            //    selnode.Nodes.Clear();
-
-            //    DirectoryInfo di = new DirectoryInfo(dirpath);
-            //    string tmp = Guid.NewGuid().ToString();
-
-            //    TreeNode node1 = new TreeNode(tmp);
-            //    TreeDir.GetSubDirectories(di.GetDirectories(), selnode);
-            //    selnode.Nodes.Add(node1);
-
-            //    //删除 tmp
-            //    if (selnode.LastNode.Text == tmp)
-            //        selnode.LastNode.Remove();
-
-            //    treeView1.EndUpdate();
-            //    selnode.Expand();
-            //    //MessageBox.Show(selnode.Text);
-            //    //MessageBox.Show("selpath\t" + selpath);
-            //    //MessageBox.Show("root\t" + root);
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show(ex.Message, "Directorytreeview");
-            //}
+            dTree.LoadSubDirectory(path, treeView1.SelectedNode);
         }
 
 
@@ -349,8 +322,11 @@ namespace System.Windows.Forms
 
 
         #region  treeView1
+        private void treeView1_AfterExpand(object sender, TreeViewEventArgs e)
+        {
 
-         /// //
+            treeView1.Refresh();
+         }
  
         private void treeView1_MouseDown(object sender, MouseEventArgs e)
         {
@@ -434,23 +410,23 @@ namespace System.Windows.Forms
 
 
 
-            if (treeNode1==null ||treeNode1.Text == "")
+            if (treeNode1 == null || treeNode1.Text == "")
             {
                 treeView1.Cursor = Cursors.Arrow;
                 return;
             }
-                
-                //改变光标成小手
-                TreeViewHitTestInfo info = treeView1.HitTest(e.Location);
-                if (info.Location == TreeViewHitTestLocations.Image || info.Location == TreeViewHitTestLocations.Label)
-                {
-                    treeView1.Cursor = Win32API.Hand;
-                }
-                else
-                {
-                    treeView1.Cursor = Cursors.Arrow;
-                }
-         }
+
+            //改变光标成小手
+            TreeViewHitTestInfo info = treeView1.HitTest(e.Location);
+            if (info.Location == TreeViewHitTestLocations.Image || info.Location == TreeViewHitTestLocations.Label)
+            {
+                treeView1.Cursor = Win32API.Hand;
+            }
+            else
+            {
+                treeView1.Cursor = Cursors.Arrow;
+            }
+        }
 
   
 
@@ -558,7 +534,8 @@ namespace System.Windows.Forms
 
 
             ////画子节点上文件的个数 (111)
-            if (Directory.Exists(rootpath + "\\" + e.Node.FullPath))
+            if (e.Node.Text!="" && 
+                Directory.Exists(rootpath + "\\" + e.Node.FullPath))
             {
                 string[] filelist = Directory.GetFiles(rootpath + "\\" + e.Node.FullPath, "*.htm");
                 nodeTextRect.Width += 4;
@@ -1184,6 +1161,8 @@ namespace System.Windows.Forms
 
         //public Icon selNodeIcon;
         public Image selImage;
+
+
 
     
 

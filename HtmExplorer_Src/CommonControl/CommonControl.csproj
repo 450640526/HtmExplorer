@@ -49,6 +49,7 @@
     <Compile Include="CustomMenuStrip\ClassicContextMenuStrip.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="CustomMenuStrip\CustomStatusStripRenderer.cs" />
     <Compile Include="CustomMenuStrip\RadioMenuItem.cs">
       <SubType>Component</SubType>
     </Compile>

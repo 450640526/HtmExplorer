@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Document));
-            this.btnAttch1 = new System.Windows.Forms.CheckBox();
             this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
             this.toolStripSplitButton1 = new System.Windows.Forms.ToolStripSplitButton();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
@@ -46,50 +45,30 @@
             this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolStripSplitButton7 = new System.Windows.Forms.ToolStripSplitButton();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem16 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem17 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem18 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem19 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem20 = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnReadMode1 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
+            this.zoomBtn1 = new System.Windows.Forms.ToolStripSplitButton();
+            this.toolStripMenuItem1 = new System.Windows.Forms.RadioMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.RadioMenuItem();
+            this.toolStripMenuItem3 = new System.Windows.Forms.RadioMenuItem();
+            this.toolStripMenuItem4 = new System.Windows.Forms.RadioMenuItem();
+            this.toolStripMenuItem5 = new System.Windows.Forms.RadioMenuItem();
+            this.toolStripMenuItem16 = new System.Windows.Forms.RadioMenuItem();
+            this.toolStripMenuItem17 = new System.Windows.Forms.RadioMenuItem();
+            this.toolStripMenuItem18 = new System.Windows.Forms.RadioMenuItem();
+            this.toolStripMenuItem19 = new System.Windows.Forms.RadioMenuItem();
+            this.toolStripMenuItem20 = new System.Windows.Forms.RadioMenuItem();
+            this.btnAttch1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSplitButton2 = new System.Windows.Forms.ToolStripSplitButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripSplitButton4 = new System.Windows.Forms.ToolStripSplitButton();
-            this.btnReadMode1 = new System.Windows.Forms.LabelButton();
             this.winTextBox1 = new System.Windows.Forms.WinTextBox();
-            this.htmEdit1 = new System.Windows.Forms.HtmEdit();
             this.label1 = new System.Windows.Forms.Label();
+            this.htmEdit1 = new System.Windows.Forms.HtmEdit();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // btnAttch1
-            // 
-            this.btnAttch1.Appearance = System.Windows.Forms.Appearance.Button;
-            this.btnAttch1.BackColor = System.Drawing.Color.Transparent;
-            this.btnAttch1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnAttch1.FlatAppearance.BorderSize = 0;
-            this.btnAttch1.FlatAppearance.CheckedBackColor = System.Drawing.Color.DodgerBlue;
-            this.btnAttch1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAttch1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnAttch1.ForeColor = System.Drawing.Color.Black;
-            this.btnAttch1.Image = ((System.Drawing.Image)(resources.GetObject("btnAttch1.Image")));
-            this.btnAttch1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAttch1.Location = new System.Drawing.Point(70, 0);
-            this.btnAttch1.Name = "btnAttch1";
-            this.btnAttch1.Size = new System.Drawing.Size(62, 23);
-            this.btnAttch1.TabIndex = 37;
-            this.btnAttch1.TabStop = false;
-            this.btnAttch1.Text = "   附件";
-            this.btnAttch1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.btnAttch1.UseVisualStyleBackColor = false;
-            this.btnAttch1.Click += new System.EventHandler(this.btnAttach1_CheckedChanged);
             // 
             // fileSystemWatcher1
             // 
@@ -195,22 +174,52 @@
             // 
             // toolStrip1
             // 
+            this.toolStrip1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.toolStrip1.AutoSize = false;
+            this.toolStrip1.BackColor = System.Drawing.Color.Transparent;
             this.toolStrip1.Dock = System.Windows.Forms.DockStyle.None;
+            this.toolStrip1.GripMargin = new System.Windows.Forms.Padding(0);
             this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripSplitButton7});
-            this.toolStrip1.Location = new System.Drawing.Point(414, 0);
+            this.btnReadMode1,
+            this.toolStripButton3,
+            this.zoomBtn1,
+            this.btnAttch1});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 2);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.toolStrip1.Size = new System.Drawing.Size(91, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(505, 28);
             this.toolStrip1.TabIndex = 40;
             this.toolStrip1.Text = "toolStrip1";
-            this.toolStrip1.Visible = false;
             // 
-            // toolStripSplitButton7
+            // btnReadMode1
             // 
-            this.toolStripSplitButton7.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnReadMode1.AutoSize = false;
+            this.btnReadMode1.Image = ((System.Drawing.Image)(resources.GetObject("btnReadMode1.Image")));
+            this.btnReadMode1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnReadMode1.Margin = new System.Windows.Forms.Padding(3, 1, 0, 2);
+            this.btnReadMode1.Name = "btnReadMode1";
+            this.btnReadMode1.Size = new System.Drawing.Size(52, 22);
+            this.btnReadMode1.Text = "编辑";
+            this.btnReadMode1.Click += new System.EventHandler(this.btnEditMode_Click);
+            // 
+            // toolStripButton3
+            // 
+            this.toolStripButton3.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolStripButton3.AutoSize = false;
+            this.toolStripButton3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton3.Image")));
+            this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton3.Margin = new System.Windows.Forms.Padding(1, 1, 0, 2);
+            this.toolStripButton3.Name = "toolStripButton3";
+            this.toolStripButton3.Size = new System.Drawing.Size(52, 22);
+            this.toolStripButton3.Text = "定位";
+            this.toolStripButton3.Visible = false;
+            // 
+            // zoomBtn1
+            // 
+            this.zoomBtn1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.zoomBtn1.AutoSize = false;
+            this.zoomBtn1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem1,
             this.toolStripMenuItem2,
             this.toolStripMenuItem3,
@@ -221,19 +230,22 @@
             this.toolStripMenuItem18,
             this.toolStripMenuItem19,
             this.toolStripMenuItem20});
-            this.toolStripSplitButton7.Image = ((System.Drawing.Image)(resources.GetObject("toolStripSplitButton7.Image")));
-            this.toolStripSplitButton7.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.toolStripSplitButton7.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripSplitButton7.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripSplitButton7.Name = "toolStripSplitButton7";
-            this.toolStripSplitButton7.Size = new System.Drawing.Size(72, 22);
-            this.toolStripSplitButton7.Tag = "100";
-            this.toolStripSplitButton7.Text = "100%";
-            this.toolStripSplitButton7.ToolTipText = "更改缩放级别";
-            this.toolStripSplitButton7.Click += new System.EventHandler(this.网页缩放按钮_Click);
+            this.zoomBtn1.Image = ((System.Drawing.Image)(resources.GetObject("zoomBtn1.Image")));
+            this.zoomBtn1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.zoomBtn1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.zoomBtn1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.zoomBtn1.Margin = new System.Windows.Forms.Padding(1, 1, 3, 2);
+            this.zoomBtn1.Name = "zoomBtn1";
+            this.zoomBtn1.Size = new System.Drawing.Size(72, 22);
+            this.zoomBtn1.Tag = "100";
+            this.zoomBtn1.Text = "100%";
+            this.zoomBtn1.ToolTipText = "更改缩放级别";
+            this.zoomBtn1.ButtonClick += new System.EventHandler(this.网页缩放按钮_Click);
             // 
             // toolStripMenuItem1
             // 
+            this.toolStripMenuItem1.CheckOnClick = true;
+            this.toolStripMenuItem1.GroupIndex = 0;
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
             this.toolStripMenuItem1.Size = new System.Drawing.Size(154, 22);
             this.toolStripMenuItem1.Text = "400%";
@@ -241,6 +253,8 @@
             // 
             // toolStripMenuItem2
             // 
+            this.toolStripMenuItem2.CheckOnClick = true;
+            this.toolStripMenuItem2.GroupIndex = 0;
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
             this.toolStripMenuItem2.Size = new System.Drawing.Size(154, 22);
             this.toolStripMenuItem2.Text = "300%";
@@ -248,6 +262,8 @@
             // 
             // toolStripMenuItem3
             // 
+            this.toolStripMenuItem3.CheckOnClick = true;
+            this.toolStripMenuItem3.GroupIndex = 0;
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
             this.toolStripMenuItem3.Size = new System.Drawing.Size(154, 22);
             this.toolStripMenuItem3.Text = "250%";
@@ -255,6 +271,8 @@
             // 
             // toolStripMenuItem4
             // 
+            this.toolStripMenuItem4.CheckOnClick = true;
+            this.toolStripMenuItem4.GroupIndex = 0;
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
             this.toolStripMenuItem4.Size = new System.Drawing.Size(154, 22);
             this.toolStripMenuItem4.Text = "200%";
@@ -262,6 +280,8 @@
             // 
             // toolStripMenuItem5
             // 
+            this.toolStripMenuItem5.CheckOnClick = true;
+            this.toolStripMenuItem5.GroupIndex = 0;
             this.toolStripMenuItem5.Name = "toolStripMenuItem5";
             this.toolStripMenuItem5.Size = new System.Drawing.Size(154, 22);
             this.toolStripMenuItem5.Text = "175%";
@@ -269,6 +289,8 @@
             // 
             // toolStripMenuItem16
             // 
+            this.toolStripMenuItem16.CheckOnClick = true;
+            this.toolStripMenuItem16.GroupIndex = 0;
             this.toolStripMenuItem16.Name = "toolStripMenuItem16";
             this.toolStripMenuItem16.Size = new System.Drawing.Size(154, 22);
             this.toolStripMenuItem16.Text = "150%";
@@ -276,6 +298,8 @@
             // 
             // toolStripMenuItem17
             // 
+            this.toolStripMenuItem17.CheckOnClick = true;
+            this.toolStripMenuItem17.GroupIndex = 0;
             this.toolStripMenuItem17.Name = "toolStripMenuItem17";
             this.toolStripMenuItem17.Size = new System.Drawing.Size(154, 22);
             this.toolStripMenuItem17.Text = "125%";
@@ -283,7 +307,9 @@
             // 
             // toolStripMenuItem18
             // 
+            this.toolStripMenuItem18.CheckOnClick = true;
             this.toolStripMenuItem18.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Bold);
+            this.toolStripMenuItem18.GroupIndex = 0;
             this.toolStripMenuItem18.Name = "toolStripMenuItem18";
             this.toolStripMenuItem18.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D0)));
             this.toolStripMenuItem18.Size = new System.Drawing.Size(154, 22);
@@ -292,6 +318,8 @@
             // 
             // toolStripMenuItem19
             // 
+            this.toolStripMenuItem19.CheckOnClick = true;
+            this.toolStripMenuItem19.GroupIndex = 0;
             this.toolStripMenuItem19.Name = "toolStripMenuItem19";
             this.toolStripMenuItem19.Size = new System.Drawing.Size(154, 22);
             this.toolStripMenuItem19.Text = "75%";
@@ -299,10 +327,25 @@
             // 
             // toolStripMenuItem20
             // 
+            this.toolStripMenuItem20.CheckOnClick = true;
+            this.toolStripMenuItem20.GroupIndex = 0;
             this.toolStripMenuItem20.Name = "toolStripMenuItem20";
             this.toolStripMenuItem20.Size = new System.Drawing.Size(154, 22);
             this.toolStripMenuItem20.Text = "50%";
             this.toolStripMenuItem20.Click += new System.EventHandler(this.网页缩放菜单_Click);
+            // 
+            // btnAttch1
+            // 
+            this.btnAttch1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.btnAttch1.AutoSize = false;
+            this.btnAttch1.CheckOnClick = true;
+            this.btnAttch1.Image = ((System.Drawing.Image)(resources.GetObject("btnAttch1.Image")));
+            this.btnAttch1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnAttch1.Margin = new System.Windows.Forms.Padding(16, 1, 0, 2);
+            this.btnAttch1.Name = "btnAttch1";
+            this.btnAttch1.Size = new System.Drawing.Size(52, 22);
+            this.btnAttch1.Text = "附件";
+            this.btnAttch1.Click += new System.EventHandler(this.btnAttach1_CheckedChanged);
             // 
             // toolStripButton2
             // 
@@ -336,37 +379,14 @@
             this.toolStripSplitButton4.Size = new System.Drawing.Size(32, 22);
             this.toolStripSplitButton4.Text = "toolStripSplitButton4";
             // 
-            // btnReadMode1
-            // 
-            this.btnReadMode1.BackColor = System.Drawing.Color.Transparent;
-            this.btnReadMode1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btnReadMode1.BorderColor = System.Drawing.Color.Transparent;
-            this.btnReadMode1.DefautColor = System.Drawing.Color.Transparent;
-            this.btnReadMode1.DefautImage = null;
-            this.btnReadMode1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnReadMode1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnReadMode1.Image = ((System.Drawing.Image)(resources.GetObject("btnReadMode1.Image")));
-            this.btnReadMode1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnReadMode1.Location = new System.Drawing.Point(3, 1);
-            this.btnReadMode1.MouseDownColor = System.Drawing.SystemColors.ActiveCaption;
-            this.btnReadMode1.MouseDownImage = null;
-            this.btnReadMode1.MouseEnterColor = System.Drawing.Color.LightGray;
-            this.btnReadMode1.MouseEnterImage = null;
-            this.btnReadMode1.Name = "btnReadMode1";
-            this.btnReadMode1.Size = new System.Drawing.Size(62, 23);
-            this.btnReadMode1.TabIndex = 38;
-            this.btnReadMode1.Text = "编辑";
-            this.btnReadMode1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnReadMode1.Click += new System.EventHandler(this.btnReadMode1_Click);
-            // 
             // winTextBox1
             // 
             this.winTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.winTextBox1.BackColor = System.Drawing.Color.White;
             this.winTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.winTextBox1.Font = new System.Drawing.Font("Times New Roman", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.winTextBox1.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.winTextBox1.Font = new System.Drawing.Font("Times New Roman", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.winTextBox1.ForeColor = System.Drawing.Color.Black;
             this.winTextBox1.Location = new System.Drawing.Point(2, 34);
             this.winTextBox1.MaxLength = 250;
             this.winTextBox1.Name = "winTextBox1";
@@ -374,6 +394,17 @@
             this.winTextBox1.TabIndex = 39;
             this.winTextBox1.TabStop = false;
             this.winTextBox1._LostFocus += new System.Windows.Forms.WinTextBox.EventHandler(this.winTextBox1_LostFocus);
+            // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(204)))), ((int)(((byte)(204)))));
+            this.label1.Location = new System.Drawing.Point(2, 55);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(501, 1);
+            this.label1.TabIndex = 41;
+            this.label1.Text = "label1";
             // 
             // htmEdit1
             // 
@@ -393,18 +424,6 @@
             this.htmEdit1.ViewSourceChecked += new System.EventHandler(this.htmEdit1_ViewSourceChecked);
             this.htmEdit1.OnNewDocument += new System.EventHandler(this.htmEdit1_OnNewDocument);
             // 
-            // label1
-            // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.label1.BackColor = System.Drawing.SystemColors.Control;
-            this.label1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label1.Location = new System.Drawing.Point(-2, 55);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(560, 1);
-            this.label1.TabIndex = 41;
-            this.label1.Text = "label1";
-            // 
             // Document
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -412,8 +431,6 @@
             this.BackColor = System.Drawing.Color.White;
             this.Controls.Add(this.label1);
             this.Controls.Add(this.htmEdit1);
-            this.Controls.Add(this.btnReadMode1);
-            this.Controls.Add(this.btnAttch1);
             this.Controls.Add(this.winTextBox1);
             this.Controls.Add(this.toolStrip1);
             this.Name = "Document";
@@ -429,8 +446,6 @@
 
         #endregion
 
-        public System.Windows.Forms.LabelButton btnReadMode1;
-        public System.Windows.Forms.CheckBox btnAttch1;
         public System.Windows.Forms.WinTextBox winTextBox1;
         private System.IO.FileSystemWatcher fileSystemWatcher1;
         private System.Windows.Forms.ToolStripSplitButton toolStripSplitButton1;
@@ -452,18 +467,21 @@
         private System.Windows.Forms.ToolStripSplitButton toolStripSplitButton2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripSplitButton toolStripSplitButton4;
-        private System.Windows.Forms.ToolStripSplitButton toolStripSplitButton7;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem4;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem5;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem16;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem17;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem18;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem19;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem20;
         public System.Windows.Forms.HtmEdit htmEdit1;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.RadioMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.RadioMenuItem toolStripMenuItem2;
+        private System.Windows.Forms.RadioMenuItem toolStripMenuItem3;
+        private System.Windows.Forms.RadioMenuItem toolStripMenuItem4;
+        private System.Windows.Forms.RadioMenuItem toolStripMenuItem5;
+        private System.Windows.Forms.RadioMenuItem toolStripMenuItem16;
+        private System.Windows.Forms.RadioMenuItem toolStripMenuItem17;
+        private System.Windows.Forms.RadioMenuItem toolStripMenuItem18;
+        private System.Windows.Forms.RadioMenuItem toolStripMenuItem19;
+        private System.Windows.Forms.RadioMenuItem toolStripMenuItem20;
+        public System.Windows.Forms.ToolStripButton btnAttch1;
+        public System.Windows.Forms.ToolStripButton btnReadMode1;
+        public System.Windows.Forms.ToolStripSplitButton zoomBtn1;
+        private System.Windows.Forms.ToolStripButton toolStripButton3;
     }
 }

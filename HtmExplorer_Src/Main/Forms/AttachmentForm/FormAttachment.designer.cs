@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("");
             System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("");
             System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("");
@@ -42,7 +41,7 @@
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.contextMenuStrip1 = new System.Windows.Forms.ClassicContextMenuStrip(this.components);
+            this.contextMenuStrip1 = new System.Windows.Forms.ClassicContextMenuStrip();
             this.ts_OpenFile = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.OpenWithNotePad = new System.Windows.Forms.ToolStripMenuItem();
@@ -52,9 +51,9 @@
             this.复制ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cms_DeleteFile = new System.Windows.Forms.ToolStripMenuItem();
             this.cms_ReNameFile = new System.Windows.Forms.ToolStripMenuItem();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.contextMenuStrip2 = new System.Windows.Forms.ClassicContextMenuStrip(this.components);
+            this.imageList1 = new System.Windows.Forms.ImageList();
+            this.toolTip1 = new System.Windows.Forms.ToolTip();
+            this.contextMenuStrip2 = new System.Windows.Forms.ClassicContextMenuStrip();
             this.查看VToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.largeIcon1 = new System.Windows.Forms.RadioMenuItem();
             this.smallIcon1 = new System.Windows.Forms.RadioMenuItem();
@@ -77,7 +76,7 @@
             // listView1
             // 
             this.listView1.AllowDrop = true;
-            this.listView1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.listView1.BackColor = System.Drawing.Color.White;
             this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader2,
@@ -114,27 +113,27 @@
             // columnHeader1
             // 
             this.columnHeader1.Text = "文件名";
-            this.columnHeader1.Width = 252;
+            this.columnHeader1.Width = 189;
             // 
             // columnHeader2
             // 
             this.columnHeader2.Text = "修改时间";
-            this.columnHeader2.Width = 140;
+            this.columnHeader2.Width = 100;
             // 
             // columnHeader3
             // 
             this.columnHeader3.Text = "大小";
-            this.columnHeader3.Width = 100;
+            this.columnHeader3.Width = 99;
             // 
             // columnHeader4
             // 
             this.columnHeader4.Text = "路径";
-            this.columnHeader4.Width = 0;
+            this.columnHeader4.Width = 170;
             // 
             // columnHeader5
             // 
             this.columnHeader5.Text = "类型";
-            this.columnHeader5.Width = 118;
+            this.columnHeader5.Width = 93;
             // 
             // contextMenuStrip1
             // 
@@ -241,7 +240,7 @@
             this.toolStripSeparator5,
             this.cms_SelectAll});
             this.contextMenuStrip2.Name = "contextMenuStrip_ListView";
-             this.contextMenuStrip2.Size = new System.Drawing.Size(177, 132);
+            this.contextMenuStrip2.Size = new System.Drawing.Size(177, 132);
             // 
             // 查看VToolStripMenuItem
             // 
@@ -258,6 +257,7 @@
             // largeIcon1
             // 
             this.largeIcon1.CheckOnClick = true;
+            this.largeIcon1.GroupIndex = 0;
             this.largeIcon1.Name = "largeIcon1";
             this.largeIcon1.Size = new System.Drawing.Size(141, 22);
             this.largeIcon1.Text = "大图标(&R)";
@@ -266,6 +266,7 @@
             // smallIcon1
             // 
             this.smallIcon1.CheckOnClick = true;
+            this.smallIcon1.GroupIndex = 0;
             this.smallIcon1.Name = "smallIcon1";
             this.smallIcon1.Size = new System.Drawing.Size(141, 22);
             this.smallIcon1.Text = "小图标(&N)";
@@ -274,6 +275,7 @@
             // list1
             // 
             this.list1.CheckOnClick = true;
+            this.list1.GroupIndex = 0;
             this.list1.Name = "list1";
             this.list1.Size = new System.Drawing.Size(141, 22);
             this.list1.Text = "列表(&T)";
@@ -282,6 +284,7 @@
             // tile1
             // 
             this.tile1.CheckOnClick = true;
+            this.tile1.GroupIndex = 0;
             this.tile1.Name = "tile1";
             this.tile1.Size = new System.Drawing.Size(141, 22);
             this.tile1.Text = "平铺(&S)";
@@ -292,6 +295,7 @@
             this.details1.Checked = true;
             this.details1.CheckOnClick = true;
             this.details1.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.details1.GroupIndex = 0;
             this.details1.Name = "details1";
             this.details1.Size = new System.Drawing.Size(141, 22);
             this.details1.Text = "详细信息(&D)";
@@ -393,12 +397,6 @@
         private ToolStripSeparator toolStripSeparator5;
         private ToolStripMenuItem cms_SelectAll;
         private ToolStripMenuItem 查看VToolStripMenuItem;
-        private ToolStripMenuItem largeIcon1;
-        private ToolStripMenuItem smallIcon1;
-        private ToolStripMenuItem list1;
-        private ToolStripMenuItem tile1;
-        private ToolStripMenuItem details1;
-        private ContextMenuStrip contextMenuStrip1;
         private ToolStripMenuItem ts_OpenFile;
         private ToolStripSeparator toolStripMenuItem1;
         private ToolStripMenuItem OpenWithNotePad;
@@ -409,6 +407,12 @@
         private ToolStripMenuItem cms_DeleteFile;
         private ToolStripMenuItem cms_ReNameFile;
         private IO.FileSystemWatcher fileSystemWatcher1;
+        private RadioMenuItem largeIcon1;
+        private RadioMenuItem smallIcon1;
+        private RadioMenuItem list1;
+        private RadioMenuItem tile1;
+        private RadioMenuItem details1;
+        private ClassicContextMenuStrip contextMenuStrip1;
     }
 }
 

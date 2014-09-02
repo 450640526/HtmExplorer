@@ -20,6 +20,8 @@ namespace htmExplorer
         #region 方法
          public void Initialize()
          {
+             toolStrip1.Renderer = new System.Drawing.CustomStatusStripRenderer();
+
              htmEdit1.viewsource1.Checked = false;
              if (File.Exists(FullFileName))
              {
@@ -34,7 +36,7 @@ namespace htmExplorer
          {
              btnAttch1.Checked = false;
              btnReadMode1.Enabled = true;
-             btnReadMode1_Click(null, null);
+             btnEditMode_Click(null, null);
        
          }
 
@@ -56,7 +58,7 @@ namespace htmExplorer
              Initialize();
          }
 
-         public void btnReadMode1_Click(object sender, EventArgs e)
+         public void btnEditMode_Click(object sender, EventArgs e)
          {
              if (!File.Exists(FullFileName))
                  return;
@@ -256,20 +258,25 @@ namespace htmExplorer
                      value = 50;
                      break;
              }
+
              htmEdit1.Zoom(value);
-             toolStripSplitButton1.Text = ((ToolStripMenuItem)sender).Text;
              string s = ((ToolStripMenuItem)sender).Text;
-             toolStripSplitButton1.Tag = Convert.ToInt32(s.Remove(s.Length - 1, 1));
+             zoomBtn1.Text = s;
+             zoomBtn1.Tag = Convert.ToInt32(s.Remove(s.Length - 1, 1));
          }
 
          private void 网页缩放按钮_Click(object sender, EventArgs e)
          {
-             htmEdit1.Zoom(Convert.ToInt32(toolStripSplitButton1.Tag));
+             htmEdit1.Zoom(Convert.ToInt32(zoomBtn1.Tag));
          }
+ 
+
         #endregion
 
  
         public System.Windows.Forms.FileListView filelistview1;
+
+  
 
     }
 }

@@ -237,7 +237,6 @@ namespace System
 
         private void UpdateForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-//            AddMsg()
             if (Directory.Exists(updateFolder))
                 Directory.Delete(updateFolder, true);
         }
