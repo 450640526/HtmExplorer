@@ -28,12 +28,12 @@ using System.Threading.Tasks;
         {
             Thread.ExecuteRunOnceThread();
             LoadIniFiles();
+            notifyIcon1.Visible = true;
         }
 
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
         {
             Close1();
-
         }
  
         private void Close1()

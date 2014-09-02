@@ -35,13 +35,6 @@
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.header1 = new System.Windows.Forms.Panel();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
-            this.win32AddressBar1 = new System.Windows.Forms.Win32AddressBar();
-            this.searchBox1 = new System.Windows.Forms.SearchBox();
-            this.searchContextMenuStrip = new System.Windows.Forms.ClassicContextMenuStrip(this.components);
-            this.searchAll1 = new System.Windows.Forms.RadioMenuItem();
-            this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripSeparator();
-            this.searchFileName1 = new System.Windows.Forms.RadioMenuItem();
-            this.searchKeyWord1 = new System.Windows.Forms.RadioMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -71,9 +64,6 @@
             this.toolStripMenuItem18 = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.tree1 = new System.Windows.Forms.DirectoryTreeView();
-            this.fileList1 = new System.Windows.Forms.FileListView();
-            this.documentView1 = new htmExplorer.DocumentView();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem19 = new System.Windows.Forms.ToolStripMenuItem();
@@ -92,6 +82,13 @@
             this.toolStripMenuItem30 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem31 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem32 = new System.Windows.Forms.ToolStripMenuItem();
+            this.win32AddressBar1 = new System.Windows.Forms.Win32AddressBar();
+            this.searchBox1 = new System.Windows.Forms.SearchBox();
+            this.searchContextMenuStrip = new System.Windows.Forms.ClassicContextMenuStrip(this.components);
+            this.searchAll1 = new System.Windows.Forms.RadioMenuItem();
+            this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripSeparator();
+            this.searchFileName1 = new System.Windows.Forms.RadioMenuItem();
+            this.searchKeyWord1 = new System.Windows.Forms.RadioMenuItem();
             this.graySkin = new System.Windows.Forms.RadioMenuItem();
             this.graySkin1 = new System.Windows.Forms.RadioMenuItem();
             this.whiteSmokeSkin = new System.Windows.Forms.RadioMenuItem();
@@ -100,12 +97,14 @@
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.notifyIconcontextMenuStrip1 = new System.Windows.Forms.ClassicContextMenuStrip(this.components);
             this.退出ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tree1 = new System.Windows.Forms.DirectoryTreeView();
+            this.fileList1 = new System.Windows.Forms.FileListView();
+            this.documentView1 = new htmExplorer.DocumentView();
             this.header1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
             this.splitContainer3.Panel1.SuspendLayout();
             this.splitContainer3.Panel2.SuspendLayout();
             this.splitContainer3.SuspendLayout();
-            this.searchContextMenuStrip.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -116,6 +115,7 @@
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            this.searchContextMenuStrip.SuspendLayout();
             this.notifyIconcontextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -177,78 +177,6 @@
             this.splitContainer3.TabStop = false;
             this.splitContainer3.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainer2_SplitterMoved);
             this.splitContainer3.Resize += new System.EventHandler(this.splitContainer3_Resize);
-            // 
-            // win32AddressBar1
-            // 
-            this.win32AddressBar1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.win32AddressBar1.BackColor = System.Drawing.Color.Transparent;
-            this.win32AddressBar1.Location = new System.Drawing.Point(3, 2);
-            this.win32AddressBar1.Name = "win32AddressBar1";
-            this.win32AddressBar1.path = null;
-            this.win32AddressBar1.progressBarBackColor = System.Drawing.Color.White;
-            this.win32AddressBar1.ProgressBarMax = 100;
-            this.win32AddressBar1.ProgressBarValue = 0;
-            this.win32AddressBar1.Size = new System.Drawing.Size(774, 26);
-            this.win32AddressBar1.TabIndex = 2;
-            this.win32AddressBar1.treeView1 = null;
-            // 
-            // searchBox1
-            // 
-            this.searchBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.searchBox1.DelayedTextChangedTimeout = 1500;
-            this.searchBox1.DisplayText = " 搜索 \"这台电脑\" ";
-            this.searchBox1.IndexFile = null;
-            this.searchBox1.Location = new System.Drawing.Point(6, 3);
-            this.searchBox1.MinimumSize = new System.Drawing.Size(100, 22);
-            this.searchBox1.Name = "searchBox1";
-            this.searchBox1.SearchContextMenuStrip = this.searchContextMenuStrip;
-            this.searchBox1.Size = new System.Drawing.Size(158, 24);
-            this.searchBox1.TabIndex = 0;
-            this.searchBox1.TabStop = false;
-            this.searchBox1.TypingFinished += new System.EventHandler(this.searchBox1_TypingFinished);
-            // 
-            // searchContextMenuStrip
-            // 
-            this.searchContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.searchAll1,
-            this.toolStripMenuItem5,
-            this.searchFileName1,
-            this.searchKeyWord1});
-            this.searchContextMenuStrip.Name = "searchContextMenuStrip";
-            this.searchContextMenuStrip.Size = new System.Drawing.Size(129, 76);
-            // 
-            // searchAll1
-            // 
-            this.searchAll1.Checked = true;
-            this.searchAll1.CheckOnClick = true;
-            this.searchAll1.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.searchAll1.GroupIndex = 0;
-            this.searchAll1.Name = "searchAll1";
-            this.searchAll1.Size = new System.Drawing.Size(128, 22);
-            this.searchAll1.Text = "所有(&A)";
-            // 
-            // toolStripMenuItem5
-            // 
-            this.toolStripMenuItem5.Name = "toolStripMenuItem5";
-            this.toolStripMenuItem5.Size = new System.Drawing.Size(125, 6);
-            // 
-            // searchFileName1
-            // 
-            this.searchFileName1.CheckOnClick = true;
-            this.searchFileName1.GroupIndex = 0;
-            this.searchFileName1.Name = "searchFileName1";
-            this.searchFileName1.Size = new System.Drawing.Size(128, 22);
-            this.searchFileName1.Text = "文件名(&F)";
-            // 
-            // searchKeyWord1
-            // 
-            this.searchKeyWord1.CheckOnClick = true;
-            this.searchKeyWord1.GroupIndex = 0;
-            this.searchKeyWord1.Name = "searchKeyWord1";
-            this.searchKeyWord1.Size = new System.Drawing.Size(128, 22);
-            this.searchKeyWord1.Text = "关键字(&K)";
             // 
             // statusStrip1
             // 
@@ -489,55 +417,6 @@
             this.splitContainer2.TabStop = false;
             this.splitContainer2.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainer2_SplitterMoved);
             // 
-            // tree1
-            // 
-            this.tree1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tree1.BackColor = System.Drawing.Color.White;
-            this.tree1.Location = new System.Drawing.Point(3, 0);
-            this.tree1.MinimumSize = new System.Drawing.Size(50, 50);
-            this.tree1.Name = "tree1";
-            this.tree1.rootpath = null;
-            this.tree1.Size = new System.Drawing.Size(235, 335);
-            this.tree1.TabIndex = 0;
-            this.tree1.TabStop = false;
-            this.tree1.SelectedIndexChanged += new System.Windows.Forms.DirectoryTreeView.EventHandler(this.directoryTreeView1_SelectedIndexChanged);
-            // 
-            // fileList1
-            // 
-            this.fileList1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.fileList1.AutoSize = true;
-            this.fileList1.BackColor = System.Drawing.Color.White;
-            this.fileList1.Location = new System.Drawing.Point(3, 3);
-            this.fileList1.Name = "fileList1";
-            this.fileList1.selfilename = "";
-            this.fileList1.Size = new System.Drawing.Size(255, 329);
-            this.fileList1.TabIndex = 0;
-            this.fileList1.TabStop = false;
-            this.fileList1.ItemClick += new System.EventHandler(this.fileListView1_ItemClick);
-            this.fileList1.SaveAsClick += new System.EventHandler(this.另存为_Click);
-            this.fileList1.NewFileClick += new System.EventHandler(this.新建_Click);
-            this.fileList1.OpenWithNewTab += new System.EventHandler(this.fileListView1_OpenWithNewTab);
-            this.fileList1.RenameFileClick += new System.EventHandler(this.重命名_Click);
-            this.fileList1.ItemActive += new System.EventHandler(this.fileListView1_ItemActive);
-            this.fileList1.CopyFile += new System.EventHandler(this.fileListView1_OpenWithNewTab);
-            // 
-            // documentView1
-            // 
-            this.documentView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.documentView1.BackColor = System.Drawing.Color.White;
-            this.documentView1.Filename = null;
-            this.documentView1.Location = new System.Drawing.Point(1, 0);
-            this.documentView1.Margin = new System.Windows.Forms.Padding(0);
-            this.documentView1.Name = "documentView1";
-            this.documentView1.Size = new System.Drawing.Size(454, 341);
-            this.documentView1.TabIndex = 42;
-            // 
             // menuStrip1
             // 
             this.menuStrip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
@@ -691,6 +570,78 @@
             this.toolStripMenuItem32.Text = "关于(&A)";
             this.toolStripMenuItem32.Click += new System.EventHandler(this.help1_Click);
             // 
+            // win32AddressBar1
+            // 
+            this.win32AddressBar1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.win32AddressBar1.BackColor = System.Drawing.Color.Transparent;
+            this.win32AddressBar1.Location = new System.Drawing.Point(3, 2);
+            this.win32AddressBar1.Name = "win32AddressBar1";
+            this.win32AddressBar1.path = null;
+            this.win32AddressBar1.progressBarBackColor = System.Drawing.Color.White;
+            this.win32AddressBar1.ProgressBarMax = 100;
+            this.win32AddressBar1.ProgressBarValue = 0;
+            this.win32AddressBar1.Size = new System.Drawing.Size(774, 26);
+            this.win32AddressBar1.TabIndex = 2;
+            this.win32AddressBar1.treeView1 = null;
+            // 
+            // searchBox1
+            // 
+            this.searchBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.searchBox1.DelayedTextChangedTimeout = 1500;
+            this.searchBox1.DisplayText = " 搜索 \"这台电脑\" ";
+            this.searchBox1.IndexFile = null;
+            this.searchBox1.Location = new System.Drawing.Point(6, 3);
+            this.searchBox1.MinimumSize = new System.Drawing.Size(100, 22);
+            this.searchBox1.Name = "searchBox1";
+            this.searchBox1.SearchContextMenuStrip = this.searchContextMenuStrip;
+            this.searchBox1.Size = new System.Drawing.Size(158, 24);
+            this.searchBox1.TabIndex = 0;
+            this.searchBox1.TabStop = false;
+            this.searchBox1.TypingFinished += new System.EventHandler(this.searchBox1_TypingFinished);
+            // 
+            // searchContextMenuStrip
+            // 
+            this.searchContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.searchAll1,
+            this.toolStripMenuItem5,
+            this.searchFileName1,
+            this.searchKeyWord1});
+            this.searchContextMenuStrip.Name = "searchContextMenuStrip";
+            this.searchContextMenuStrip.Size = new System.Drawing.Size(129, 76);
+            // 
+            // searchAll1
+            // 
+            this.searchAll1.Checked = true;
+            this.searchAll1.CheckOnClick = true;
+            this.searchAll1.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.searchAll1.GroupIndex = 0;
+            this.searchAll1.Name = "searchAll1";
+            this.searchAll1.Size = new System.Drawing.Size(128, 22);
+            this.searchAll1.Text = "所有(&A)";
+            // 
+            // toolStripMenuItem5
+            // 
+            this.toolStripMenuItem5.Name = "toolStripMenuItem5";
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(125, 6);
+            // 
+            // searchFileName1
+            // 
+            this.searchFileName1.CheckOnClick = true;
+            this.searchFileName1.GroupIndex = 0;
+            this.searchFileName1.Name = "searchFileName1";
+            this.searchFileName1.Size = new System.Drawing.Size(128, 22);
+            this.searchFileName1.Text = "文件名(&F)";
+            // 
+            // searchKeyWord1
+            // 
+            this.searchKeyWord1.CheckOnClick = true;
+            this.searchKeyWord1.GroupIndex = 0;
+            this.searchKeyWord1.Name = "searchKeyWord1";
+            this.searchKeyWord1.Size = new System.Drawing.Size(128, 22);
+            this.searchKeyWord1.Text = "关键字(&K)";
+            // 
             // graySkin
             // 
             this.graySkin.CheckOnClick = true;
@@ -730,7 +681,6 @@
             // 
             this.notifyIcon1.ContextMenuStrip = this.notifyIconcontextMenuStrip1;
             this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
-            this.notifyIcon1.Visible = true;
             this.notifyIcon1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.托盘_MouseClick);
             // 
             // notifyIconcontextMenuStrip1
@@ -746,6 +696,55 @@
             this.退出ToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.退出ToolStripMenuItem.Text = "退出(&X)";
             this.退出ToolStripMenuItem.Click += new System.EventHandler(this.退出_Click);
+            // 
+            // tree1
+            // 
+            this.tree1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tree1.BackColor = System.Drawing.Color.White;
+            this.tree1.Location = new System.Drawing.Point(3, 0);
+            this.tree1.MinimumSize = new System.Drawing.Size(50, 50);
+            this.tree1.Name = "tree1";
+            this.tree1.rootpath = null;
+            this.tree1.Size = new System.Drawing.Size(235, 335);
+            this.tree1.TabIndex = 0;
+            this.tree1.TabStop = false;
+            this.tree1.SelectedIndexChanged += new System.Windows.Forms.DirectoryTreeView.EventHandler(this.directoryTreeView1_SelectedIndexChanged);
+            // 
+            // fileList1
+            // 
+            this.fileList1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.fileList1.AutoSize = true;
+            this.fileList1.BackColor = System.Drawing.Color.White;
+            this.fileList1.Location = new System.Drawing.Point(3, 3);
+            this.fileList1.Name = "fileList1";
+            this.fileList1.selfilename = "";
+            this.fileList1.Size = new System.Drawing.Size(255, 329);
+            this.fileList1.TabIndex = 0;
+            this.fileList1.TabStop = false;
+            this.fileList1.ItemClick += new System.EventHandler(this.fileListView1_ItemClick);
+            this.fileList1.SaveAsClick += new System.EventHandler(this.另存为_Click);
+            this.fileList1.NewFileClick += new System.EventHandler(this.新建_Click);
+            this.fileList1.OpenWithNewTab += new System.EventHandler(this.fileListView1_OpenWithNewTab);
+            this.fileList1.RenameFileClick += new System.EventHandler(this.重命名_Click);
+            this.fileList1.ItemActive += new System.EventHandler(this.fileListView1_ItemActive);
+            this.fileList1.CopyFile += new System.EventHandler(this.fileListView1_OpenWithNewTab);
+            // 
+            // documentView1
+            // 
+            this.documentView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.documentView1.BackColor = System.Drawing.Color.White;
+            this.documentView1.Filename = null;
+            this.documentView1.Location = new System.Drawing.Point(1, 0);
+            this.documentView1.Margin = new System.Windows.Forms.Padding(0);
+            this.documentView1.Name = "documentView1";
+            this.documentView1.Size = new System.Drawing.Size(454, 341);
+            this.documentView1.TabIndex = 42;
             // 
             // FormMain
             // 
@@ -771,7 +770,6 @@
             this.splitContainer3.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
             this.splitContainer3.ResumeLayout(false);
-            this.searchContextMenuStrip.ResumeLayout(false);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.splitContainer1.Panel1.ResumeLayout(false);
@@ -785,6 +783,7 @@
             this.splitContainer2.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.searchContextMenuStrip.ResumeLayout(false);
             this.notifyIconcontextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();

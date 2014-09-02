@@ -114,11 +114,32 @@ namespace System
                 AddMsg("下载 " + filename + "\t\tX");
             return b1;
         }
-              
+
 
         public bool Download(string urlfile)
         {
             return Download(GetUrl(urlfile), GetUpdateFile(urlfile));
+        }
+
+        public bool Download(string urlfile, string saveto, int min, int max)
+        {
+            string filename = urlfile.Replace("?raw=true", "");
+            filename = Path.GetFileName(filename);
+
+            AddMsg("[" + min.ToString() + "/" + max.ToString() + "]  下载 " + filename);
+            bool b1 = HttpClass.DownloadFile(urlfile, saveto, progressBar1);
+            if (b1)
+            {
+                AddMsg("\t下载 " + filename + "\t\t√");
+            }
+            else
+                AddMsg("\t下载 " + filename + "\t\tX");
+            return b1;
+        }
+
+        public bool Download(string urlfile, int min, int max)
+        {
+            return Download(GetUrl(urlfile), GetUpdateFile(urlfile), min,max);
         }
 
 
@@ -193,7 +214,7 @@ namespace System
 
             for (int i = 0; i < filelist.Length; i++)
             {
-                Download(filelist[i]);
+                Download(filelist[i], i, filelist.Length);
             }
 
             AddMsg("下载完毕...");
@@ -220,11 +241,12 @@ namespace System
             bat += "del %0";
             bat += "\r\n";
             bat += "exit";
-
+            //bat += "pause";
             File.WriteAllText(batfilename, bat, Encoding.Default);
-          
+
             Process.Start(batfilename);
-            MainForm.Close();
+            Environment.Exit(0);
+            //MainForm.Close();
         }
 
  
