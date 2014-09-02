@@ -20,7 +20,7 @@ namespace htmExplorer
         #region 方法
          public void Initialize()
          {
-             toolStrip1.Renderer = new System.Drawing.CustomStatusStripRenderer();
+            
 
              htmEdit1.viewsource1.Checked = false;
              if (File.Exists(FullFileName))
@@ -30,6 +30,7 @@ namespace htmExplorer
                  btnAttch1.CheckState = CheckState.Unchecked;
                  fileSystemWatcher1.Path = Path.GetDirectoryName(FullFileName);
              }
+             toolStrip1.Renderer = new CustomStatusStripRenderer();
          }
 
          public void ToggleReadMode()

@@ -514,7 +514,7 @@
             this.fileList1.Location = new System.Drawing.Point(3, 3);
             this.fileList1.Name = "fileList1";
             this.fileList1.selfilename = "";
-            this.fileList1.Size = new System.Drawing.Size(253, 329);
+            this.fileList1.Size = new System.Drawing.Size(255, 329);
             this.fileList1.TabIndex = 0;
             this.fileList1.TabStop = false;
             this.fileList1.ItemClick += new System.EventHandler(this.fileListView1_ItemClick);
@@ -535,7 +535,7 @@
             this.documentView1.Location = new System.Drawing.Point(1, 0);
             this.documentView1.Margin = new System.Windows.Forms.Padding(0);
             this.documentView1.Name = "documentView1";
-            this.documentView1.Size = new System.Drawing.Size(452, 341);
+            this.documentView1.Size = new System.Drawing.Size(454, 341);
             this.documentView1.TabIndex = 42;
             // 
             // menuStrip1
