@@ -1,0 +1,46 @@
+﻿//http://www.codeproject.com/Articles/3590/C-does-Shell-Part
+//Arik Poznanski,  12 Jan 2010 
+
+
+	ShellFileOperation fo = new ShellFileOperation();
+
+	String[] source = new String[1];
+	String[] dest = new String[1];
+
+	source[0] = @"D:\Administrator\Desktop\1.ISO" ;
+	//source[1] = Environment.SystemDirectory + @"\freecell.exe";
+	//source[2] = Environment.SystemDirectory + @"\mshearts.exe";
+	dest[0] = @"D:\Administrator\Desktop\1.ISO";
+	//dest[1] = Environment.SystemDirectory.Substring(0,2) + @"\freecell.exe";
+	//dest[2] = Environment.SystemDirectory.Substring(0,2) + @"\mshearts.exe";
+
+	fo.Operation = ShellFileOperation.FileOperations.FO_COPY;
+	fo.OwnerWindow = this.Handle;
+	fo.SourceFiles = source;
+	fo.DestFiles = dest;
+
+	if (! fo.DoOperation() )
+	MessageBox.Show("复制过程中出现错误");
+
+
+	// 
+	ListView.SelectedListViewItemCollection SelectedItem = new ListView.SelectedListViewItemCollection(listView1);
+            DialogResult d = MessageBox.Show("删除选中的 " + SelectedItem.Count + " 项?", "附件", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            String[] source = new string[SelectedItem.Count];
+            ShellFileOperation fo = new ShellFileOperation();
+            fo.Operation = FileOperations.FO_DELETE;
+            fo.OwnerWindow = this.Handle;
+            fo.SourceFiles = source;
+
+            if (d == DialogResult.Yes)
+            {
+                for (int i = 0; i < SelectedItem.Count; i++)
+                    source[i] = workpath + "\\" + SelectedItem[i].Text;
+
+                if (!fo.DoOperation())
+                    MessageBox.Show("删除文件过程中出错！", "附件", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                for (int i = 0; i < SelectedItem.Count; )
+                    listView1.Items.Remove(SelectedItem[i]);
+            }         
