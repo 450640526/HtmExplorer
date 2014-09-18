@@ -74,9 +74,9 @@ namespace htmExplorer
         private void OK1_Click(object sender, EventArgs e)
         {
             ini.WriteString("DataBase", "Path", comboBox1.Text);  
-
-            MessageBox.Show("请手动将数据库文件夹移动到修改的目录,程序将立即重启","数据库",MessageBoxButtons.OK,MessageBoxIcon.Information);
-            Application.Restart();
+        
+            //MessageBox.Show("请手动将数据库文件夹移动到修改的目录,程序将立即重启","数据库",MessageBoxButtons.OK,MessageBoxIcon.Information);
+            //Application.Restart();
         }
 
  

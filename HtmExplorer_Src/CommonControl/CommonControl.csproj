@@ -33,6 +33,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -55,12 +56,30 @@
     </Compile>
     <Compile Include="CustomMenuStrip\CustomMenuStripRenderer.cs" />
     <Compile Include="CustomMenuStrip\CustomToolStripRenderer.cs" />
+    <Compile Include="FILE\IniFile.cs" />
     <Compile Include="LabelButton.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="FontComboBox.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="ListView\FileListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ListView\FileListView.Designer.cs">
+      <DependentUpon>FileListView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ListView\ListViewColumnSorter.cs" />
+    <Compile Include="ListView\ListViewEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="FILE\Directory.cs" />
+    <Compile Include="FILE\ExceptDialog.cs" />
+    <Compile Include="FILE\File.cs" />
+    <Compile Include="FILE\HtmlConverter.cs" />
+    <Compile Include="FILE\NativeInterop.cs" />
+    <Compile Include="FILE\System.cs" />
+    <Compile Include="FILE\Win32API.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -81,11 +100,25 @@
     <Compile Include="TABControl\TabDragDrop.cs" />
     <Compile Include="TABControl\TabDraw.cs" />
     <Compile Include="TABControl\TabXButton.cs" />
-    <Compile Include="Win32AddressBar\FindNode.cs" />
-    <Compile Include="Win32AddressBar\Win32AddressBar.cs">
+    <Compile Include="TreeView\BlankNode.cs" />
+    <Compile Include="TreeView\Dir.cs" />
+    <Compile Include="TreeView\DirectoryTreeView.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Win32AddressBar\Win32AddressBar.designer.cs">
+    <Compile Include="TreeView\DirectoryTreeView.Designer.cs">
+      <DependentUpon>DirectoryTreeView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TreeView\FindNode.cs" />
+    <Compile Include="TreeView\ItemDraw.cs" />
+    <Compile Include="TreeView\MoveNode.cs" />
+    <Compile Include="TreeView\TreeViewEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="TreeView\XmlTreeView.cs" />
+    <Compile Include="Win32AddressBar.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Win32AddressBar.designer.cs">
       <DependentUpon>Win32AddressBar.cs</DependentUpon>
     </Compile>
     <Compile Include="WinTextBox.cs">
@@ -96,6 +129,9 @@
     <EmbeddedResource Include="ColorPickerForm.resx">
       <DependentUpon>ColorPickerForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ListView\FileListView.resx">
+      <DependentUpon>FileListView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -103,18 +139,18 @@
     <EmbeddedResource Include="SearchBox.resx">
       <DependentUpon>SearchBox.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Win32AddressBar\Win32AddressBar.resx">
+    <EmbeddedResource Include="TreeView\DirectoryTreeView.resx">
+      <DependentUpon>DirectoryTreeView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Win32AddressBar.resx">
       <DependentUpon>Win32AddressBar.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\System.IO\IOUnity.csproj">
-      <Project>{344004df-9629-4610-bccd-08ff9026797a}</Project>
-      <Name>IOUnity</Name>
-    </ProjectReference>
-  </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>IncBuildNo "$(ProjectDir)Properties\AssemblyInfo.cs" "\[assembly: AssemblyFileVersion\(\"\d+\.\d+\.(\d+)" 1</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

@@ -163,8 +163,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button browser1;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
-        private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Button button1;
+        public System.Windows.Forms.ComboBox comboBox1;
 
     }
 }

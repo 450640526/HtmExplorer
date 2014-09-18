@@ -1,4 +1,14 @@
-﻿using System;
+﻿/*
+ * 
+ * 2014年8月22日 19:38:25
+ * + 可以复制
+ * + 优化了大量代码
+ 
+ */
+
+
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
@@ -17,6 +27,7 @@ namespace System.Windows.Forms
         public Win32AddressBar()
         {
             InitializeComponent();
+
             progressBarBackColor = Color.White;
 
             pictureBox1.Parent = comboBox1;
@@ -30,41 +41,60 @@ namespace System.Windows.Forms
             label1.Top = 1;
         }
 
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+            if(!DesignMode)
+            {
+                if (treeView1 != null)
+                {
+                    this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
+                }
+                    label1.Visible = treeView1 != null;
+
+            }
+        }
+
+        public TreeView treeView1 { get; set; }
+
 
         #region 事件
-        public delegate void EventHandler(object sender, EventArgs e);
-        public event EventHandler ButtonsClick;
-        public event EventHandler LeftClick;
-        public event EventHandler RightClick;
-        public event EventHandler DropDownClosed;
+        //public delegate void EventHandler(object sender, EventArgs e);
+        //public event EventHandler ButtonsClick;
+        //public event EventHandler LeftClick;
+        //public event EventHandler RightClick;
+        //public event EventHandler DropDownClosed;
 
-        protected void OnButtonsClick(object sender, EventArgs e)
-        {
-            if (ButtonsClick != null)
-                ButtonsClick(sender, e);
-        }
+        //protected void OnButtonsClick(object sender, EventArgs e)
+        //{
+        //    if (ButtonsClick != null)
+        //        ButtonsClick(sender, e);
+        //}
 
-        protected void OnLeftClick(object sender, EventArgs e)
-        {
-            if (LeftClick != null)
-                LeftClick(sender, e);
-        }
+        //protected void OnLeftClick(object sender, EventArgs e)
+        //{
+        //    if (LeftClick != null)
+        //        LeftClick(sender, e);
+        //}
 
-        protected void OnRightClick(object sender, EventArgs e)
-        {
-            if (RightClick != null)
-                RightClick(sender, e);
-        }
+        //protected void OnRightClick(object sender, EventArgs e)
+        //{
+        //    if (RightClick != null)
+        //        RightClick(sender, e);
+        //}
 
-        protected void OnDropDownClosed(object sender, EventArgs e)
-        {
-            if (DropDownClosed != null)
-                DropDownClosed(sender, e);
-        }
+        //protected void OnDropDownClosed(object sender, EventArgs e)
+        //{
+        //    if (DropDownClosed != null)
+        //        DropDownClosed(sender, e);
+        //}
 
         #endregion
 
         #region 属性
+
+        public string path { get; set; }
+
         public Color progressBarBackColor
         {
             get { return bgbBkColor; }
@@ -107,31 +137,33 @@ namespace System.Windows.Forms
 
 
 
+
+
         #region ImageButton
         private void back1_EnabledChanged(object sender, EventArgs e)
         {
-            OnLeftClick(sender, e);
+            //OnLeftClick(sender, e);
         }
 
         private void foward1_EnabledChanged(object sender, EventArgs e)
         {
-            OnRightClick(sender, e);
+            //OnRightClick(sender, e);
         }
 
         private void 向左_Click(object sender, EventArgs e)
         {
             返回_MouseEnter(sender, e);
-            OnLeftClick(sender, e);
+            //OnLeftClick(sender, e);
             DisposeButtons();
-            CreateButtons(currentPath );
+            CreateButtons(path );
         }
 
         private void 向右_Click(object sender, EventArgs e)
         {
             前进_MouseEnter(sender, e);
-            OnRightClick(sender, e);
+            //OnRightClick(sender, e);
             DisposeButtons();
-            CreateButtons(currentPath );
+            CreateButtons(path );
         }
 
         private void 返回_MouseEnter(object sender, EventArgs e)
@@ -146,15 +178,11 @@ namespace System.Windows.Forms
 
         private void 返回_MouseDown(object sender, MouseEventArgs e)
         {
-
             int index = comboBox1.SelectedIndex - 1;
             if (index >= 0)
             {
                 comboBox1.SelectedItem = comboBox1.Items[index];
-                currentPath = comboBox1.Items[index].ToString();
-
-                if (workpath.IndexOf(currentPath) != -1)
-                    return;
+                path = comboBox1.Items[index].ToString();
 
                 DisposeButtons();
                 CreateButtons(comboBox1.SelectedItem.ToString());
@@ -177,15 +205,12 @@ namespace System.Windows.Forms
 
         private void 前进_MouseDown(object sender, MouseEventArgs e)
         {
-
+           
             int index = comboBox1.SelectedIndex + 1;
             if (index < comboBox1.Items.Count)
             {
                 comboBox1.SelectedItem = comboBox1.Items[index];
-                currentPath = comboBox1.Items[index].ToString();
-
-                if (workpath.IndexOf(currentPath) != -1)
-                    return;
+                path = comboBox1.Items[index].ToString();
 
                 DisposeButtons();
                 CreateButtons(comboBox1.SelectedItem.ToString());
@@ -195,17 +220,40 @@ namespace System.Windows.Forms
 
         #endregion
 
+
+
+
+
+
+
+        //treeView1
+        private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            DisposeButtons();
+            CreateButtons(e.Node.FullPath);
+            AddPathToListBox(e.Node.FullPath);
+        }
+
+
+
+
+
+
+      
+ 
+
         #region CreateButtons
 
 
-        public string workpath = "";
-        public string btnsPath = "";
-        public string currentPath = "";
+
+      
+
+
         private LabelButton[] btns;
         private LabelButton btn;
         public string CreateButtons(string s)
         {
-            currentPath = s;
+            path = s;
             //buttons
             //ICON1.Visible = true;
             string[] arr = s.Split(new string[] { "\\", }, StringSplitOptions.None);
@@ -213,7 +261,7 @@ namespace System.Windows.Forms
 
             btns = new LabelButton[arr.Length];
             //  释放按钮
-            DisposeButtons();
+            //DisposeButtons();
 
 
             int LEFT = 24;
@@ -222,8 +270,8 @@ namespace System.Windows.Forms
             for (int i = 0; i < arr.Length; i++)
             {
                 string name = string.Format("{0}", arr[i]);
-                string path = string.Format("\\{0}", arr[i]);
-                s1 += path;
+                string path1 = string.Format("\\{0}", arr[i]);
+                s1 += path1;
 
                 btn = new LabelButton();
                 btn.Font = new Drawing.Font("微软雅黑", 9F);
@@ -235,19 +283,8 @@ namespace System.Windows.Forms
                 btn.Parent = pictureBox1;
                 btn.Height = pictureBox1.ClientRectangle.Height;
 
-                if (IsUserPath(btn))
-                {
-                    btn.BorderColor = Color.Transparent;
-                    btn.MouseDownColor = Color.Transparent;
-                    btn.MouseEnterColor = Color.Transparent;
-                }
-                else
-                {
-                    //label.BorderColor = Color.FromArgb(102, 167, 232);
-                    btn.MouseDownColor = Color.FromArgb(209, 232, 255);
-                    btn.MouseEnterColor = Color.FromArgb(229, 243, 251);
-                }
-
+                btn.MouseDownColor = Color.FromArgb(209, 232, 255);
+                btn.MouseEnterColor = Color.FromArgb(229, 243, 251);
 
                 Size size = TextRenderer.MeasureText(name, btn.Font);
 
@@ -258,7 +295,7 @@ namespace System.Windows.Forms
                 LEFT += size.Width;
 
                 btn.BringToFront();
-                btn.Click += new System.EventHandler(btn_Click);
+                btn.Click += new System.EventHandler(btns_Click);
                 btn.MouseLeave += new System.EventHandler(btn_MouseLeave);
                 btn.MouseEnter += new System.EventHandler(btn_MouseEnter);
 
@@ -282,7 +319,6 @@ namespace System.Windows.Forms
                 }
             }
             catch { }
-
         }
 
         public void AddPathToListBox(string path)
@@ -301,39 +337,48 @@ namespace System.Windows.Forms
                     comboBox1.SelectedItem = comboBox1.Items[index];
             }
         }
-        private bool IsUserPath(LabelButton imageButton)
-        {
-            return (workpath.IndexOf(imageButton.Tag.ToString()) != -1);
-        }
-
-   
-
+  
         #endregion
 
         #region Label Events
-        private void btn_Click(object sender, EventArgs e)
+        private void btns_Click(object sender, EventArgs e)
         {
+            //OnButtonsClick(sender, e);
+
             LabelButton btn = ((LabelButton)sender);
-            btnsPath = btn.Tag.ToString();
+          string s = btn.Tag.ToString();
 
-            if (!IsUserPath(btn))
-            {
-                OnButtonsClick(sender, e);
-
-                DisposeButtons();
-                CreateButtons(btn.Tag.ToString() );
-            }
+            BtnsClick(s);
         }
-        
+
+        private void BtnsClick(string s)
+        {
+            if (s.EndsWith("\\"))
+                s = s.Remove(s.Length - 1, 1);//移除  字符 /
+
+            FindNode fd = new FindNode(treeView1);
+            fd.SelectByNodeFullPath(s);
+
+            DisposeButtons();
+            CreateButtons(s);
+        }
+
+        private void comboBox1_SelectedValueChanged(object sender, EventArgs e)
+        {
+            back1.Enabled = comboBox1.SelectedIndex - 1 >= 0;
+            foward1.Enabled = comboBox1.SelectedIndex + 1 < comboBox1.Items.Count;
+
+            string s = comboBox1.SelectedItem.ToString();
+            BtnsClick(s);
+            //OnDropDownClosed(sender, e);
+            RemoveFocus();
+        }
+
         private void btn_MouseEnter(object sender, EventArgs e)
         {
             LabelButton btn = ((LabelButton)sender);
-
-            if (!IsUserPath(btn))
-                 btn.BorderColor = Color.FromArgb(102, 167, 232);
-             else
-                 btn.BorderColor = Color.Transparent;
-         } 
+            btn.BorderColor = Color.FromArgb(102, 167, 232);
+        } 
 
         private void btn_MouseLeave(object sender, EventArgs e)
         {
@@ -346,10 +391,55 @@ namespace System.Windows.Forms
 
         #endregion
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         private void Win32AddressBar_Resize(object sender, EventArgs e)
         {
            //this.Refresh();
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
         #region pictureBox1_Paint
@@ -389,46 +479,7 @@ namespace System.Windows.Forms
             btn.Dispose();
         }
 
-        private void comboBox1_SelectedValueChanged(object sender, EventArgs e)
-        {
-            back1.Enabled = comboBox1.SelectedIndex - 1 >= 0;
-            foward1.Enabled = comboBox1.SelectedIndex + 1 < comboBox1.Items.Count;
-
-            string path = comboBox1.SelectedItem.ToString();
-            if (Directory.Exists(path))
-            {
-                DisposeButtons();
-                CreateButtons(path);
-                currentPath = path;
-            }
-            OnDropDownClosed(sender, e);
-            RemoveFocus();
-        }
-
-        private bool IsMyPcPath(string path)
-        {
-            return (workpath.IndexOf(path) != -1);
-        }
-
-        private bool IsDocumentPath(string path)
-        {
-            string doucment = workpath + "\\文档";
-            return (doucment.IndexOf(path) != -1);
-        }
-
-        private bool IsRecyleBinPath(string path)
-        { 
-            //try{
-                DirectoryInfo di = new DirectoryInfo(workpath);
-                string recycle = di.Parent.FullName + "\\回收站";
-                return (recycle.IndexOf(path) != -1);
-            //}
-            //catch{
-            //    return false;
-            //}
-         
-        }
-
+        
         private void comboBox1_DrawItem(object sender, DrawItemEventArgs e)
         {
             Rectangle r = e.Bounds;
@@ -440,24 +491,24 @@ namespace System.Windows.Forms
 
                 int index = 0;
 
-                if (IsMyPcPath(comboBox1.Items[e.Index].ToString()))
-                {
-                    index = 1;
-                }
-                else if (IsDocumentPath(comboBox1.Items[e.Index].ToString()))
-                {
-                     index = 2;   
-                }
-                else if (IsRecyleBinPath(comboBox1.Items[e.Index].ToString()))
-                {
-                    string[] f = Directory.GetFiles(comboBox1.Items[e.Index].ToString());
-                    if (f.Length > 0)
-                    {
-                        index = 4;
-                    }
-                    else
-                        index = 3;
-                }
+                //if (IsMyPcPath(comboBox1.Items[e.Index].ToString()))
+                //{
+                //    index = 1;
+                //}
+                //else if (IsDocumentPath(comboBox1.Items[e.Index].ToString()))
+                //{
+                //     index = 2;   
+                //}
+                //else if (IsRecyleBinPath(comboBox1.Items[e.Index].ToString()))
+                //{
+                //    string[] f = Directory.GetFiles(comboBox1.Items[e.Index].ToString());
+                //    if (f.Length > 0)
+                //    {
+                //        index = 4;
+                //    }
+                //    else
+                //        index = 3;
+                //}
 
                 e.Graphics.DrawImage(imageList2.Images[index], r.Left + 4, r.Top);
                 label1.ImageIndex = index;
@@ -470,6 +521,23 @@ namespace System.Windows.Forms
                 
             }
         }
-  
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            pictureBox1.Visible = false;
+            comboBox1.DropDownStyle = ComboBoxStyle.DropDown;
+            comboBox1.Text = path;
+            comboBox1.SelectAll();
+        }
+
+        private void comboBox1_Leave(object sender, EventArgs e)
+        {
+            //if (!comboBox1.Focused)
+            {
+                comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
+                pictureBox1.Visible = true;
+                this.Invalidate();
+            } 
+        }
     }
 }

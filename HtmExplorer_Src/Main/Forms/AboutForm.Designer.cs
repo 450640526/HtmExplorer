@@ -28,15 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AboutForm));
             this.ok1 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.mainapp1 = new System.Windows.Forms.Label();
-            this.toolTip1 = new System.Windows.Forms.ToolTip();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
-            this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.label3 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // ok1
@@ -49,11 +50,11 @@
             this.ok1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.ok1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ok1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.ok1.Location = new System.Drawing.Point(683, 360);
+            this.ok1.Location = new System.Drawing.Point(330, 360);
             this.ok1.Name = "ok1";
             this.ok1.Size = new System.Drawing.Size(75, 23);
             this.ok1.TabIndex = 1;
-            this.ok1.Text = "确定(&O)";
+            this.ok1.Text = "确定";
             this.ok1.UseVisualStyleBackColor = false;
             // 
             // label1
@@ -68,8 +69,6 @@
             // 
             // label2
             // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Font = new System.Drawing.Font("微软雅黑", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.label2.Location = new System.Drawing.Point(74, 1);
@@ -106,17 +105,6 @@
             this.linkLabel1.Text = "检测更新";
             this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
-            // webBrowser1
-            // 
-            this.webBrowser1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.webBrowser1.Location = new System.Drawing.Point(2, 65);
-            this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
-            this.webBrowser1.Name = "webBrowser1";
-            this.webBrowser1.Size = new System.Drawing.Size(768, 289);
-            this.webBrowser1.TabIndex = 7;
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -127,13 +115,27 @@
             this.label3.TabIndex = 4;
             this.label3.Text = "CopyRight By Roman @ 2014";
             // 
+            // textBox1
+            // 
+            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox1.Location = new System.Drawing.Point(15, 72);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
+            this.textBox1.Size = new System.Drawing.Size(390, 273);
+            this.textBox1.TabIndex = 8;
+            this.textBox1.Text = "开源项目      https://github.com/450640526/HtmExplorer\r\nCnblog       http://www.cnblo" +
+    "gs.com/xe2011/p/3859801.html";
+            // 
             // AboutForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(770, 395);
-            this.Controls.Add(this.webBrowser1);
+            this.ClientSize = new System.Drawing.Size(417, 395);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.mainapp1);
@@ -141,8 +143,10 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.ok1);
             this.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.MinimumSize = new System.Drawing.Size(460, 434);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "AboutForm";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
@@ -163,7 +167,7 @@
         private System.Windows.Forms.Label mainapp1;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.LinkLabel linkLabel1;
-        private System.Windows.Forms.WebBrowser webBrowser1;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }

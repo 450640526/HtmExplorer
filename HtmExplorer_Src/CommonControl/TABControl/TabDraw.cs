@@ -74,12 +74,14 @@ namespace System
         }
         public void DrawBackGround(Graphics g)
         {
-            int heigth = tabControl1.ItemSize.Height;
-            Rectangle r = tabControl1.ClientRectangle;
+            g.FillRectangle(new SolidBrush(BackColor), tabControl1.ClientRectangle);
+
+            //int heigth = tabControl1.ItemSize.Height;
+            //Rectangle r = tabControl1.ClientRectangle;
             //r.Height -= tabControl1.ItemSize.Height;
             //r = new Rectangle(r.Left, r.Top + heigth + 4, r.Width, r.Height);
 
-            g.FillRectangle(new SolidBrush(BackColor), r);
+            //g.FillRectangle(new SolidBrush(BackColor), r);
         }
 
         public void DrawPageGround(Graphics g)

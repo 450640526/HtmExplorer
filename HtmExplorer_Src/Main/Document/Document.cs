@@ -145,7 +145,7 @@ namespace htmExplorer
                      string dest_attachments = DirectoryCore.Get_AttachmentsDirectory(dest);
 
                      string html = htmEdit1.DocumentText;
-                     string title = HtmlClass.GetHTMLTitleTag(html);
+                     string title = FileCore.GetHTMLTitleTag(html);
                      if (title != "")
                          html = html.Replace(title, winTextBox1.Text);
 

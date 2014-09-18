@@ -57,7 +57,7 @@
             // 
             this.browser1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.browser1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.browser1.Location = new System.Drawing.Point(938, 12);
+            this.browser1.Location = new System.Drawing.Point(748, 12);
             this.browser1.Name = "browser1";
             this.browser1.Size = new System.Drawing.Size(31, 23);
             this.browser1.TabIndex = 9;
@@ -72,7 +72,7 @@
             this.textBox1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBox1.Location = new System.Drawing.Point(65, 12);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(867, 23);
+            this.textBox1.Size = new System.Drawing.Size(677, 23);
             this.textBox1.TabIndex = 8;
             // 
             // label1
@@ -129,7 +129,7 @@
             this.listView1.Location = new System.Drawing.Point(12, 90);
             this.listView1.Name = "listView1";
             this.listView1.ShowItemToolTips = true;
-            this.listView1.Size = new System.Drawing.Size(959, 299);
+            this.listView1.Size = new System.Drawing.Size(769, 257);
             this.listView1.SmallImageList = this.imageList1;
             this.listView1.TabIndex = 12;
             this.listView1.UseCompatibleStateImageBehavior = false;
@@ -182,7 +182,7 @@
             this.Ok1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.Ok1.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.Ok1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.Ok1.Location = new System.Drawing.Point(815, 395);
+            this.Ok1.Location = new System.Drawing.Point(625, 353);
             this.Ok1.Name = "Ok1";
             this.Ok1.Size = new System.Drawing.Size(75, 23);
             this.Ok1.TabIndex = 13;
@@ -195,7 +195,7 @@
             this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.button2.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.button2.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button2.Location = new System.Drawing.Point(896, 394);
+            this.button2.Location = new System.Drawing.Point(706, 352);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 13;
@@ -207,9 +207,9 @@
             // 
             this.progressBar1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.progressBar1.Location = new System.Drawing.Point(12, 394);
+            this.progressBar1.Location = new System.Drawing.Point(12, 352);
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(785, 23);
+            this.progressBar1.Size = new System.Drawing.Size(595, 23);
             this.progressBar1.TabIndex = 15;
             this.progressBar1.Visible = false;
             // 
@@ -230,7 +230,7 @@
             this.textBox2.Location = new System.Drawing.Point(65, 63);
             this.textBox2.Name = "textBox2";
             this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(904, 23);
+            this.textBox2.Size = new System.Drawing.Size(714, 23);
             this.textBox2.TabIndex = 8;
             this.textBox2.Text = "D:\\Administrator\\Desktop\\新建文件夹";
             // 
@@ -246,7 +246,7 @@
             // 
             // 刷新button
             // 
-            this.刷新button.Location = new System.Drawing.Point(687, 39);
+            this.刷新button.Location = new System.Drawing.Point(704, 39);
             this.刷新button.Name = "刷新button";
             this.刷新button.Size = new System.Drawing.Size(75, 23);
             this.刷新button.TabIndex = 17;
@@ -260,7 +260,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.button2;
-            this.ClientSize = new System.Drawing.Size(981, 429);
+            this.ClientSize = new System.Drawing.Size(791, 387);
             this.Controls.Add(this.刷新button);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.button2);

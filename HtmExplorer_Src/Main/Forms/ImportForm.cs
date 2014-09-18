@@ -271,6 +271,39 @@ namespace System.Windows.Forms
         
         #region 转换过程实现
 
+
+        /// <summary>
+        /// 将IMG SCR相对的路径转换成绝对的路径
+        /// </summary>
+        /// <param name="filename">为HTML文件如 c:\123.HTML</param>
+        /// <returns>返回转换后的HTML源码</returns>
+        public static string HtmlImgSrcFullPath(string filename)
+        {
+            //<IMG src="新建 HTMLClass 文档_files/20140705100023.png">
+            //
+            //将    src="新建 HTMLClass 文档_files       替换 成
+            // src="D:\Desktop\新建 HTMLClass 文档_files
+
+            //  src="   新建 HTMLClass 文档     _files
+            string s = "src=\"" + Path.GetFileNameWithoutExtension(filename) + "_files";
+
+            // "src=" "   "D:\Desktop"  "\"   "新建 HTMLClass 文档"  "_files"
+            string s1 = "src=\"" + Path.GetDirectoryName(filename) + "\\" + Path.GetFileNameWithoutExtension(filename) + "_files";
+
+
+            //合并成一行
+            string[] arr = File.ReadAllLines(filename, Encoding.UTF8);
+            string html = "";
+            foreach (var line in arr)
+                html += line;
+
+            html = html.Replace(s, s1);
+            html = html.Replace("_files/", "_files\\");
+            return html;
+        }
+
+
+
         public void AddItem(string filename,int imageIndex)
         {
             //listView1.HideSelection = false;
@@ -294,7 +327,7 @@ namespace System.Windows.Forms
         {
             try
             {
-                string htm = FileCore.HtmlImgSrcFullPath(filename);
+                string htm = HtmlImgSrcFullPath(filename);
 
                 //返回 <img src="123_files/ss.gif" border="0">
                 //中的 123_files/ss.gif
@@ -332,7 +365,7 @@ namespace System.Windows.Forms
             try
             {
                 string text = HtmlClass.TextToHtml(File.ReadAllText(textfile, Encoding.Default));
-                string title = HtmlClass.GetHTMLTitleTag(text);
+                string title = FileCore.GetHTMLTitleTag(text);
                 if (title != "")
                     text = text.Replace(title, Path.GetFileNameWithoutExtension(textfile));
 

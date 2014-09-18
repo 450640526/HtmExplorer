@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{DA25FF4F-9FF6-433F-BC87-217DB0A064D6}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>System.Windows.Forms</RootNamespace>
+    <AssemblyName>HtmlCompiler</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="HtmCompileForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HtmCompileForm.Designer.cs">
+      <DependentUpon>HtmCompileForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <DependentUpon>Resources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <DependentUpon>Settings.settings</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Dir.cs" />
+    <Compile Include="MoveNode.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="HtmCompileForm.resx">
+      <DependentUpon>HtmCompileForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\___dtree_css.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\___dtree_js.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\___left_htm.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\base.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\empty.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\folder.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\folderopen.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\join.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\joinbottom.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\line.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MainPage_htm.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\minus.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\minusbottom.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\nolines_minus.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\nolines_plus.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\page.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\plus.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\plusbottom.gif" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>IncBuildNo "$(ProjectDir)Properties\AssemblyInfo.cs" "\[assembly: AssemblyFileVersion\(\"\d+\.\d+\.(\d+)" 1</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

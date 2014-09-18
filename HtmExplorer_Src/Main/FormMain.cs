@@ -8,7 +8,9 @@ using System.Text;
 using System.Windows.Forms;
 using System.IO;
 using System.Threading.Tasks;
- namespace htmExplorer
+
+
+namespace htmExplorer
 {
     public partial class FormMain : Form
     {
@@ -26,9 +28,12 @@ using System.Threading.Tasks;
 
         private void FormMain_Load(object sender, EventArgs e)
         {
+            Text = "Htm Explorer " + Application.ProductVersion;
             Thread.ExecuteRunOnceThread();
             LoadIniFiles();
             notifyIcon1.Visible = true;
+
+            InitialDataBaseMenuStrip();
         }
 
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
@@ -43,6 +48,7 @@ using System.Threading.Tasks;
   
             Environment.Exit(1);
         }
+
         private void RemoveNotifyIcon()
         {
             if (notifyIcon1 != null)
@@ -109,24 +115,24 @@ using System.Threading.Tasks;
                 File.Create(searchBox1.IndexFile);
 
             //更新版本号
-            System.Diagnostics.FileVersionInfo fi = 
-                System.Diagnostics.FileVersionInfo.GetVersionInfo(Application.ExecutablePath);
+            //System.Diagnostics.FileVersionInfo fi = 
+            //    System.Diagnostics.FileVersionInfo.GetVersionInfo(Application.ExecutablePath);
 
-            File.WriteAllText("version.ini", "[update]\r\n" +
-                                             "version=" + fi.FileBuildPart.ToString()
-                              );
+            //File.WriteAllText("version.ini", "[update]\r\n" +
+            //                                 "version=" + fi.FileBuildPart.ToString()
+            //                  );
         }
 
-        protected override void OnResizeBegin(EventArgs e)
-        {
-            SuspendLayout();
-            base.OnResizeBegin(e);
-        }
-        protected override void OnResizeEnd(EventArgs e)
-        {
-            ResumeLayout();
-            base.OnResizeEnd(e);
-        }
+        //protected override void OnResizeBegin(EventArgs e)
+        //{
+        //    SuspendLayout();
+        //    base.OnResizeBegin(e);
+        //}
+        //protected override void OnResizeEnd(EventArgs e)
+        //{
+        //    ResumeLayout();
+        //    base.OnResizeEnd(e);
+        //}
         #endregion
 
         #region directoryTreeView1
@@ -201,6 +207,8 @@ using System.Threading.Tasks;
         private void 新建_Click(object sender, EventArgs e)
         {
             string s = FileCore.NewName(fileList1.path + "\\新建HTML文档.htm");
+            //MessageBox.Show(s);
+
             documentView1.NewDocument(s);
             fileList1.AddItem(s);
         }
@@ -321,7 +329,61 @@ using System.Threading.Tasks;
         #endregion
 
         #region  菜单
+        #region 动态创建菜单 目录
 
+        RadioMenuItem[] DataBaseMenuItem;
+        private void InitialDataBaseMenuStrip()
+        {
+            DataBaseList1.DropDownItems.Clear();
+
+            string[] arr = LoadItems("List", "Count");
+            int length = arr.Length;
+
+            //toolStripMenuItem3.Visible = length > 1;
+            //DataBaseList1.Visible = length > 1;
+
+
+
+            DataBaseMenuItem = new RadioMenuItem[length];
+
+            for (int i = 0; i < length; i++)
+            {
+                if (Directory.Exists(arr[i]))
+                {
+                    DataBaseMenuItem[i] = new RadioMenuItem();
+                    DataBaseMenuItem[i].Text = Path.GetFileNameWithoutExtension(arr[i]);
+                    DataBaseMenuItem[i].Tag = arr[i];
+                    DataBaseMenuItem[i].Click += new System.EventHandler(ToolStripMenuItem_Click);
+                    DataBaseList1.DropDownItems.Add(DataBaseMenuItem[i]);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 加载LISTbOX
+        /// </summary>
+        /// <param name="section"></param>
+        /// <param name="LengthName"></param>
+        /// <returns></returns>
+        public string[] LoadItems(string section, string LengthName)
+        {
+            int length = ini.ReadInteger(section, LengthName, 0);
+            string[] obj = new string[length];
+
+            for (int i = 0; i < length; i++)
+                obj[i] = ini.ReadString(section, i.ToString(), "0");
+
+            return obj;
+        }
+
+        private void ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string path1 = path;
+            string path2 = ((RadioMenuItem)sender).Tag.ToString();
+            //if (path1 != path2)
+            Reload(path2);
+        }
+        #endregion
         private void showStatus1_Click(object sender, EventArgs e)
         {
             statusStrip1.Visible = showStatus1.Checked;
@@ -336,19 +398,42 @@ using System.Threading.Tasks;
         private void 选项_Click(object sender, EventArgs e)
         {
             OptionsForm opt = new OptionsForm();
-            opt.ShowDialog();
+            string s1 = opt.comboBox1.Text;
+            if( opt.ShowDialog()==DialogResult.OK)
+            {
+                string s2 = opt.comboBox1.Text;
+
+                if(s1!=s2 && Directory.Exists(s2))
+                {
+                    Reload(s2);
+                }
+            }
         }
+
+        private void Reload(string path)
+        {
+            tree1.rootpath = path;
+            tree1.LoadData(path, false);
+            ini.WriteString("DataBase", "Path", path);
+            InitializeData();
+            fileList1.path = path;
+            fileList1.LoadFiles(path);
+            documentView1.Clear(); 
+        }
+
+
+
 
         private void 退出_Click(object sender, EventArgs e)
         {
             Close1();
-
         }
 
 
         private void 备份_Click(object sender, EventArgs e)
         {
             BackupForm backup = new BackupForm();
+            
             backup.textBox2.Text = path;
             backup.ShowDialog();
         }
@@ -387,8 +472,10 @@ using System.Threading.Tasks;
 
         private void help1_Click(object sender, EventArgs e)
         {
+            notifyIcon1.Visible = false;
             AboutForm abt = new AboutForm();
             abt.ShowDialog();
+            notifyIcon1.Visible = true;
         }
 
         #endregion
@@ -467,6 +554,28 @@ using System.Threading.Tasks;
          }
 
         #endregion
+
+        private void BuildHtml1_Click(object sender, EventArgs e)
+        {
+            HtmCompileForm h1 = new HtmCompileForm();
+            h1.textBox2.Text = tree1.rootpath;
+            h1.ShowDialog();
+            //tree1.ShowHtmCompile();
+        }
+
+        private void 显示ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Visible = true;
+        }
+
+        private void colorPicker1_Click(object sender, EventArgs e)
+        {
+            DesktopColorPickerForm f = new DesktopColorPickerForm();
+             
+            f.Show();
+        }
+
+      
 
  
     }

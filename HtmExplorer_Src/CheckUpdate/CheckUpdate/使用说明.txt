@@ -1,0 +1,20 @@
+
+
+
+这3个参数一定要先初始化
+MainAppFileName = @"D:\Administrator\Visual Studio 2013\Projects\WindowsFormsApplication2\WindowsFormsApplication2\bin\Debug\WindowsFormsApplication2.exe";
+VersionFileUrl = @"https://github.com/450640526/HtmExplorer/blob/master/HtmExplorer_Release/version.txt?raw=true";
+UpdateFileUrl = @"https://github.com/450640526/HtmExplorer/blob/master/HtmExplorer_Release/HtmExplorer.rar?raw=true";
+
+
+、、、、、、、、、、、、、、、、、、、、
+version.txt
+1234
+说明第1行为程序版本号
+从第二行开始到最后都是更新信息
+更新历史
+[2014年9月18日]
+1 
+2 
+3 
+4 

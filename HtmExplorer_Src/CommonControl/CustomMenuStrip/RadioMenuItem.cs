@@ -17,6 +17,11 @@ namespace System.Windows.Forms
             CheckOnClick = true;
         }
 
+        //public RadioMenuItem(string text)
+        //{
+
+        //}
+
         private int groupIndex1 = 0;
  
   

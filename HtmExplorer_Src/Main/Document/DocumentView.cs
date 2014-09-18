@@ -168,6 +168,11 @@ namespace htmExplorer
             }
         }
 
+        public void Clear()
+        {
+            tabControl1.TabPages.Clear();
+        }
+
         #endregion
 
         #region 其他

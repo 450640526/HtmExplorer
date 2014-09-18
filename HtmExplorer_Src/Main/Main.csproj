@@ -33,15 +33,34 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>1.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\MAIN.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CheckUpdate">
+      <HintPath>..\CheckUpdate\CheckUpdate\bin\Release\CheckUpdate.dll</HintPath>
+    </Reference>
+    <Reference Include="CommonControl">
+      <HintPath>..\CommonControl\bin\Release\CommonControl.dll</HintPath>
+    </Reference>
+    <Reference Include="DatabaseBackup">
+      <HintPath>..\DatabaseBackup\bin\Release\DatabaseBackup.dll</HintPath>
+    </Reference>
+    <Reference Include="DesktopColorPicker">
+      <HintPath>..\ColorPicker\ColorPicker\bin\Release\DesktopColorPicker.dll</HintPath>
+    </Reference>
+    <Reference Include="HtmlCompiler">
+      <HintPath>..\HtmlCompiler\HtmlCompiler\bin\Release\HtmlCompiler.dll</HintPath>
+    </Reference>
+    <Reference Include="HtmlEditView, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\HtmlEditView\HtmlEditView\bin\Release\HtmlEditView.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.mshtml, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
-    <Reference Include="SevenZipSharp">
-      <HintPath>.\SevenZipSharp.dll</HintPath>
+    <Reference Include="ShellFile">
+      <HintPath>..\ShellFile\ShellFile\bin\Release\ShellFile.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -63,12 +82,6 @@
     </Compile>
     <Compile Include="Forms\AboutForm.Designer.cs">
       <DependentUpon>AboutForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\BackupForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\BackupForm.designer.cs">
-      <DependentUpon>BackupForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\ImportForm.cs">
       <SubType>Form</SubType>
@@ -119,9 +132,6 @@
     <EmbeddedResource Include="Forms\AboutForm.resx">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\BackupForm.resx">
-      <DependentUpon>BackupForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\ImportForm.resx">
       <DependentUpon>ImportForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -159,35 +169,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="1.ico" />
-    <Content Include="Document\TextFile1.txt" />
-    <None Include="Resources\关于.htm" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\CheckUpdate\CheckUpdate.csproj">
-      <Project>{4d6d482c-b812-4c4d-9d51-309b2282ffbc}</Project>
-      <Name>CheckUpdate</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CommonControl\CommonControl.csproj">
-      <Project>{807c02bf-db5f-44a9-a70a-a5f1594ff5e8}</Project>
-      <Name>CommonControl</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ExplorerTreeView\ExplorerTreeView\DirectoryTreeView.csproj">
-      <Project>{da25ff4f-9ff6-433f-bc87-217db0a064d6}</Project>
-      <Name>DirectoryTreeView</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\FileListView\FileListView\FileListView.csproj">
-      <Project>{964f69f5-e6ee-4a01-bae8-520234d8e8d5}</Project>
-      <Name>FileListView</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\HtmlViewEdit\HtmlViewEdit\HtmlEditView.csproj">
-      <Project>{539968e2-1478-4aeb-b7b0-60f25cda74b3}</Project>
-      <Name>HtmlEditView</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\System.IO\IOUnity.csproj">
-      <Project>{344004df-9629-4610-bccd-08ff9026797a}</Project>
-      <Name>IOUnity</Name>
-    </ProjectReference>
+    <None Include="Resources\MAIN.ico" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
