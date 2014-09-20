@@ -13,17 +13,7 @@ namespace System.Windows.Forms
         public DesktopColorPickerForm()
         {
             InitializeComponent();
-        }
-
-
-        internal static Cursor GetCursor(string cursorName)
-        {
-            var buffer = Properties.Resources.ResourceManager.GetObject(cursorName) as byte[];
-
-            using (var m = new System.IO.MemoryStream(buffer))
-            {
-                return new Cursor(m);
-            }
+           
         }
 
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
@@ -31,8 +21,8 @@ namespace System.Windows.Forms
             pictureBox1.Focus();
             pictureBox1.Image = Properties.Resources.BeginDrag;
             timer1.Enabled = true;
-            Cursor = Cursors.Cross;
-            //Cursor = new Cursor(new System.IO.MemoryStream(Properties.Resources.XiGuan));
+            //Cursor = Cursors.Cross;
+            Cursor = new Cursor(new System.IO.MemoryStream(Properties.Resources.XiGuan));
         }
 
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
@@ -62,6 +52,7 @@ namespace System.Windows.Forms
 
             Color1.BackColor = color1;
             pos1.Text = string.Format("{0},{1}", Cursor.Position.X, Cursor.Position.Y);
+           
         }
 
  
@@ -93,6 +84,11 @@ namespace System.Windows.Forms
             Invalidate(pictureBox2.Bounds,false);
             InitialColor();
 
+        }
+
+        private void DesktopColorPickerForm_Shown(object sender, EventArgs e)
+        {
+            Color1.Focus();
         }
  
 

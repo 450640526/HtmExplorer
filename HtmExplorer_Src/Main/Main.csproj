@@ -55,12 +55,19 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\HtmlEditView\HtmlEditView\bin\Release\HtmlEditView.dll</HintPath>
     </Reference>
+    <Reference Include="IconPack">
+      <HintPath>..\IconPack\bin\Release\IconPack.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.mshtml, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="ShellFile">
       <HintPath>..\ShellFile\ShellFile\bin\Release\ShellFile.dll</HintPath>
+    </Reference>
+    <Reference Include="Spy++, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Spy++\bin\Release\Spy++.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -75,6 +82,12 @@
     </Compile>
     <Compile Include="Document\Document.Designer.cs">
       <DependentUpon>Document.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Document\DocumentView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Document\DocumentView.Designer.cs">
+      <DependentUpon>DocumentView.cs</DependentUpon>
     </Compile>
     <Compile Include="Thread.cs" />
     <Compile Include="Forms\AboutForm.cs">
@@ -117,12 +130,6 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Forms\AttachmentForm\win32SHGetFile.cs" />
-    <Compile Include="Document\DocumentView.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Document\DocumentView.Designer.cs">
-      <DependentUpon>DocumentView.cs</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="Document\Document.resx">
       <DependentUpon>Document.cs</DependentUpon>
     </EmbeddedResource>

@@ -80,8 +80,8 @@
             // 
             // Color1
             // 
-            this.Color1.BackColor = System.Drawing.Color.White;
-            this.Color1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Color1.BackColor = System.Drawing.SystemColors.Control;
+            this.Color1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.Color1.Location = new System.Drawing.Point(174, 14);
             this.Color1.Name = "Color1";
             this.Color1.Size = new System.Drawing.Size(86, 23);
@@ -218,7 +218,7 @@
             this.pictureBox2.TabStop = false;
             this.pictureBox2.Visible = false;
             // 
-            // Form1
+            // DesktopColorPickerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -228,10 +228,12 @@
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
-            this.Name = "Form1";
+            this.Name = "DesktopColorPickerForm";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "颜色探测器";
             this.TopMost = true;
+            this.Shown += new System.EventHandler(this.DesktopColorPickerForm_Shown);
             this.Click += new System.EventHandler(this.Form1_Click);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
             this.groupBox1.ResumeLayout(false);

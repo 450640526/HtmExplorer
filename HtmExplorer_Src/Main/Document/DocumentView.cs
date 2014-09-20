@@ -189,6 +189,7 @@ namespace htmExplorer
             {
                 PageListContextMenuStrip t1 =
                     new PageListContextMenuStrip(tabControl1, labelButton2);
+ 
             }
         }
 

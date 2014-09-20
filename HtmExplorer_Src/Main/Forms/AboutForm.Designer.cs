@@ -35,7 +35,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.mainapp1 = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.label3 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
@@ -46,11 +45,9 @@
             this.ok1.BackColor = System.Drawing.Color.Transparent;
             this.ok1.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.ok1.FlatAppearance.BorderSize = 0;
-            this.ok1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.ok1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.ok1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ok1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.ok1.Location = new System.Drawing.Point(330, 360);
+            this.ok1.Location = new System.Drawing.Point(333, 190);
             this.ok1.Name = "ok1";
             this.ok1.Size = new System.Drawing.Size(75, 23);
             this.ok1.TabIndex = 1;
@@ -92,28 +89,16 @@
             // 
             this.toolTip1.ShowAlways = true;
             // 
-            // linkLabel1
-            // 
-            this.linkLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.BackColor = System.Drawing.Color.Transparent;
-            this.linkLabel1.Location = new System.Drawing.Point(12, 369);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(56, 17);
-            this.linkLabel1.TabIndex = 6;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "检测更新";
-            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
-            // 
             // label3
             // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.Color.Transparent;
-            this.label3.Location = new System.Drawing.Point(83, 369);
+            this.label3.Location = new System.Drawing.Point(12, 196);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(179, 17);
+            this.label3.Size = new System.Drawing.Size(262, 17);
             this.label3.TabIndex = 4;
-            this.label3.Text = "CopyRight By Roman @ 2014";
+            this.label3.Text = "CopyRight By Roman qq450640526 @ 2014";
             // 
             // textBox1
             // 
@@ -124,7 +109,7 @@
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(390, 273);
+            this.textBox1.Size = new System.Drawing.Size(393, 106);
             this.textBox1.TabIndex = 8;
             this.textBox1.Text = "开源项目      https://github.com/450640526/HtmExplorer\r\nCnblog       http://www.cnblo" +
     "gs.com/xe2011/p/3859801.html";
@@ -134,9 +119,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(417, 395);
+            this.ClientSize = new System.Drawing.Size(420, 220);
             this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.mainapp1);
             this.Controls.Add(this.label2);
@@ -166,7 +150,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label mainapp1;
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox textBox1;
     }

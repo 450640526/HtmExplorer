@@ -23,11 +23,7 @@ namespace htmExplorer
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            UpdateForm ud = new UpdateForm();
-            ud.MainAppFileName =  Application.ExecutablePath;
-            ud.VersionFileUrl = @"https://github.com/450640526/HtmExplorer/blob/master/HtmExplorer_Release/version.txt?raw=true";
-            ud.UpdateFileUrl = @"https://github.com/450640526/HtmExplorer/blob/master/HtmExplorer_Release/HtmExplorer.rar?raw=true";
-            ud.ShowDialog();
+          
         }
     }
 }

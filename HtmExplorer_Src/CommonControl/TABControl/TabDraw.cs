@@ -60,8 +60,9 @@ namespace System
 
 
         public Color BackColor {
-            get { 
-                return Color.FromArgb(240, 240, 240); 
+            get {
+                //return Color.White;
+                 return Color.FromArgb(240, 240, 240); 
             }
         }
 
@@ -74,6 +75,7 @@ namespace System
         }
         public void DrawBackGround(Graphics g)
         {
+            g.FillRectangle(new SolidBrush(Color.White), 0, 0, tabControl1.Width, tabControl1.Height);
             g.FillRectangle(new SolidBrush(BackColor), tabControl1.ClientRectangle);
 
             //int heigth = tabControl1.ItemSize.Height;
@@ -135,7 +137,7 @@ namespace System
             {
                 Rectangle rect = tabControl1.TabPages[0].Bounds;
                 rect.Inflate(1, 1);
-                Pen pen1 = new Pen(new SolidBrush(Color.FromArgb(0, 122, 204)), 1);
+                Pen pen1 = new Pen(new SolidBrush(Color.Red), 1);//Color.FromArgb(0, 122, 204)
                 g.DrawRectangle(pen1, rect);
             }
         }

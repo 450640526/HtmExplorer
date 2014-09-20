@@ -203,7 +203,7 @@
             this.imageList1.Images.SetKeyName(5, "null.ico");
             this.imageList1.Images.SetKeyName(6, "回收站.png");
             this.imageList1.Images.SetKeyName(7, "txt1.png");
-            this.imageList1.Images.SetKeyName(8, "exclamation.png");
+            this.imageList1.Images.SetKeyName(8, "ii.png");
             // 
             // arrowImageList
             // 

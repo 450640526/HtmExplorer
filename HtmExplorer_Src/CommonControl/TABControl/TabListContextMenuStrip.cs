@@ -25,6 +25,8 @@ namespace System.Windows.Forms
             labelButton1.MouseClick += new System.Windows.Forms.MouseEventHandler(labelButton1_MouseClick);
         }
 
+        public ImageList imageList1 { get; set; }
+
         private void labelButton1_MouseClick(object sender, MouseEventArgs e)
         {
             contextMenuStrip1.Items.Clear();
@@ -33,9 +35,14 @@ namespace System.Windows.Forms
             for (int i = 0; i < length; i++)
             {
                 toolStripMenuItem[i] = new ToolStripMenuItem();
-                toolStripMenuItem[i].Text = tabControl1.TabPages[i].Text;
+                toolStripMenuItem[i].Text = tabControl1.TabPages[i].Text;                
                 toolStripMenuItem[i].Tag = i;
                 toolStripMenuItem[i].Click += new System.EventHandler(toolStripMenuItem_Click);
+
+                if(imageList1!=null)
+                {               
+                    //toolStripMenuItem[i].Image = imageList1.Images[i];
+                }
             }
             contextMenuStrip1.Items.AddRange(toolStripMenuItem);
 

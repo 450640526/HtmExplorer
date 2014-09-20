@@ -477,7 +477,29 @@ namespace htmExplorer
             abt.ShowDialog();
             notifyIcon1.Visible = true;
         }
+        private void BuildHtml1_Click(object sender, EventArgs e)
+        {
+            HtmCompileForm h1 = new HtmCompileForm();
+            h1.textBox2.Text = tree1.rootpath;
+            h1.ShowDialog();
+            //tree1.ShowHtmCompile();
+        }
 
+        private void 检测更新ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            UpdateForm ud = new UpdateForm();
+            ud.MainAppFileName = Application.ExecutablePath;
+            ud.VersionFileUrl = @"https://github.com/450640526/HtmExplorer/blob/master/HtmExplorer_Release/version.txt?raw=true";
+            ud.UpdateFileUrl = @"https://github.com/450640526/HtmExplorer/blob/master/HtmExplorer_Release/HtmExplorer.rar?raw=true";
+            ud.Show();
+        }
+
+        private void colorPicker1_Click(object sender, EventArgs e)
+        {
+            DesktopColorPickerForm f = new DesktopColorPickerForm();
+
+            f.Show();
+        }
         #endregion
 
         #region 保存和读取INI
@@ -524,14 +546,14 @@ namespace htmExplorer
         {
             ini.SaveWindowStateIni(this);
 
-            if (WindowState != FormWindowState.Minimized &&
-                splitContainer1.SplitterDistance > splitContainer2.SplitterDistance)
-            {
+            //if (/*WindowState != FormWindowState.Minimized &&*/
+            //    //splitContainer1.SplitterDistance > splitContainer2.SplitterDistance)
+            //{
                 ini.WriteInteger("splitContainer", "splitContainer1.SplitterDistance", splitContainer1.SplitterDistance);
                 ini.WriteInteger("splitContainer", "splitContainer2.SplitterDistance", splitContainer2.SplitterDistance);
                 ini.WriteInteger("splitContainer", "splitContainer3.SplitterDistance", splitContainer3.SplitterDistance);
                
-            }
+            //}
 
             if (splitContainer2.Orientation == Orientation.Vertical)
                 ini.WriteBool("splitContainer", "splitContainer2.Orientation.Vertical", true);
@@ -555,25 +577,25 @@ namespace htmExplorer
 
         #endregion
 
-        private void BuildHtml1_Click(object sender, EventArgs e)
+        private void 截图CToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            HtmCompileForm h1 = new HtmCompileForm();
-            h1.textBox2.Text = tree1.rootpath;
-            h1.ShowDialog();
-            //tree1.ShowHtmCompile();
+            CaptureForm c = new CaptureForm();
+            c.ShowDialog();
         }
 
-        private void 显示ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void spyToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Visible = true;
+            SpyForm spy = new SpyForm();
+            spy.Show();
         }
 
-        private void colorPicker1_Click(object sender, EventArgs e)
+        private void 图标提取器EToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DesktopColorPickerForm f = new DesktopColorPickerForm();
-             
-            f.Show();
+            IconPackForm ip = new IconPackForm();
+            ip.Show();
         }
+
+
 
       
 

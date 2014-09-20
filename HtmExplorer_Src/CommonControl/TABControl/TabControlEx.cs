@@ -26,7 +26,8 @@ namespace System.Windows.Forms
             base.OnHandleCreated(e);
             if (!DesignMode)
             {
-                TabPageContextMenuStrip tab1 = new TabPageContextMenuStrip(this);
+                TabPageContextMenuStrip tabMenu1 = new TabPageContextMenuStrip(this);
+             
                 TabDragDrop tab2 = new TabDragDrop(this);
             }
 
@@ -38,7 +39,8 @@ namespace System.Windows.Forms
         {
             get
             {
-                return Color.FromArgb(240, 240, 240);
+                return Color.White;
+                //return Color.FromArgb(240, 240, 240);
             }
         }
 
@@ -58,7 +60,6 @@ namespace System.Windows.Forms
         {
             tdraw.DrawBackGround(e.Graphics);
             tdraw.DrawPageGround(e.Graphics);
-
             tdraw.DrawAllTabText(e.Graphics);
             drawSelectedTab(e.Graphics);
             //tdraw.DrawSelectedTab(e.Graphics);
@@ -111,25 +112,64 @@ namespace System.Windows.Forms
         protected override void OnMouseMove(MouseEventArgs e)
         {
             base.OnMouseMove(e);
+            Color defaultXColor = Color.FromArgb(208, 230, 245);
+
             if (TabCount > 0)
             {
                 Rectangle r = xbtn.XRect(this.SelectedIndex);
                 r.Inflate(-2, -2);
 
-                if (xbtn.XRect(this.SelectedIndex).Contains(e.Location))
-                {
-                    xbtn.DrawXButton(this.CreateGraphics(), r, Color.Red);
-                }
-                else
-                    xbtn.DrawXButton(this.CreateGraphics(), r, Color.White/*MainBackColor*/);
-            }
-
-            
-
-   
-            
-        }
+                Graphics g = CreateGraphics();
 
  
+                if (xbtn.XRect(this.SelectedIndex).Contains(e.Location))
+                {
+                    //DrawSel XBtnBackGround
+                    Brush b4 = new SolidBrush(Color.FromArgb(28, 151, 234));
+                    Rectangle r4 = xbtn.XRect(SelectedIndex);
+                    r4.Inflate(2, 2);
+
+                    g.FillRectangle(b4, r4);
+                  }
+ 
+
+
+                #region 非选中TAB的X按钮
+
+              
+
+                for (int i = 0; i < this.TabPages.Count; i++)
+                {
+                    Brush b1 = new SolidBrush(Color.Gray);
+                    Rectangle r1 = xbtn.XRect(i);
+
+                    Rectangle r2 = xbtn.XRect(i);
+                    r2.Inflate(-2, -2);
+
+                    if (i != SelectedIndex && this.GetTabRect(i).Contains(e.Location))
+                    {
+                        if (r2.Contains(e.Location))
+                        {                          
+                            r1.Inflate(2, 2);
+                            g.FillRectangle(b1, r1);
+                            xbtn.DrawXButton(g, r2, defaultXColor);
+                         }
+                        else
+                        {
+                            Invalidate();
+                         }
+                        break;
+                    }
+
+                    b1.Dispose();
+                }
+
+                #endregion
+
+                xbtn.DrawXButton(g, r, defaultXColor);
+                g.Dispose();
+            }
+        }
+
     }
 }

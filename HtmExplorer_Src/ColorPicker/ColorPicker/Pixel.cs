@@ -74,7 +74,7 @@ namespace System
             Rectangle rec = new Rectangle(Cursor.Position, new Size(8, 8));
             Bitmap bmp = new Bitmap(rec.Width, rec.Height);
             Graphics g = Graphics.FromImage(bmp);
-            g.CopyFromScreen(rec.X, rec.Y, 0, 0, rec.Size);
+            g.CopyFromScreen(rec.X, rec.Y , 0, 0, rec.Size);  
             return bmp;
         }
  
